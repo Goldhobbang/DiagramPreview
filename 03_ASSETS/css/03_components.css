@@ -1,0 +1,108 @@
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }

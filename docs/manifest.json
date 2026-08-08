@@ -1,0 +1,807 @@
+{
+  "sections": [
+    {
+      "id": "slides",
+      "label": "슬라이드 템플릿",
+      "kind": "html",
+      "groups": [
+        {
+          "id": "01_CORPORATE_BLUE",
+          "label": "Corporate Blue",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/01_cover.html",
+              "file": "01_cover.html",
+              "title": "표지",
+              "desc": "제목 · 부제 · 발표자 · 날짜",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/02_agenda.html",
+              "file": "02_agenda.html",
+              "title": "목차",
+              "desc": "섹션 목록 + 번호",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/03_section_divider.html",
+              "file": "03_section_divider.html",
+              "title": "섹션 구분",
+              "desc": "장 표지. 큰 번호 + 섹션명",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/04_content_1col.html",
+              "file": "04_content_1col.html",
+              "title": "본문 1단",
+              "desc": "텍스트 중심 단일 컬럼",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/05_content_2col.html",
+              "file": "05_content_2col.html",
+              "title": "본문 2단",
+              "desc": "텍스트 + 이미지/도표",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/06_content_3col.html",
+              "file": "06_content_3col.html",
+              "title": "본문 3단",
+              "desc": "카드 3개 나열",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/07_full_image.html",
+              "file": "07_full_image.html",
+              "title": "전면 이미지",
+              "desc": "배경 이미지 + 오버레이 텍스트",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/08_quote.html",
+              "file": "08_quote.html",
+              "title": "인용",
+              "desc": "인용문 / 핵심 메시지",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/09_data_dashboard.html",
+              "file": "09_data_dashboard.html",
+              "title": "데이터 대시보드",
+              "desc": "KPI + 차트 조합",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/10_closing.html",
+              "file": "10_closing.html",
+              "title": "마무리",
+              "desc": "Q&A / 연락처",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "02_MINIMAL_MONO",
+          "label": "Minimal Mono",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/01_cover.html",
+              "file": "01_cover.html",
+              "title": "표지",
+              "desc": "제목 · 부제 · 발표자 · 날짜",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/02_agenda.html",
+              "file": "02_agenda.html",
+              "title": "목차",
+              "desc": "섹션 목록 + 번호",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/03_section_divider.html",
+              "file": "03_section_divider.html",
+              "title": "섹션 구분",
+              "desc": "장 표지. 큰 번호 + 섹션명",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/04_content_1col.html",
+              "file": "04_content_1col.html",
+              "title": "본문 1단",
+              "desc": "텍스트 중심 단일 컬럼",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/05_content_2col.html",
+              "file": "05_content_2col.html",
+              "title": "본문 2단",
+              "desc": "텍스트 + 이미지/도표",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/06_content_3col.html",
+              "file": "06_content_3col.html",
+              "title": "본문 3단",
+              "desc": "카드 3개 나열",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/07_full_image.html",
+              "file": "07_full_image.html",
+              "title": "전면 이미지",
+              "desc": "배경 이미지 + 오버레이 텍스트",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/08_quote.html",
+              "file": "08_quote.html",
+              "title": "인용",
+              "desc": "인용문 / 핵심 메시지",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/09_data_dashboard.html",
+              "file": "09_data_dashboard.html",
+              "title": "데이터 대시보드",
+              "desc": "KPI + 차트 조합",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/10_closing.html",
+              "file": "10_closing.html",
+              "title": "마무리",
+              "desc": "Q&A / 연락처",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "03_VIVID_GRADIENT",
+          "label": "Vivid Gradient",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/01_cover.html",
+              "file": "01_cover.html",
+              "title": "표지",
+              "desc": "제목 · 부제 · 발표자 · 날짜",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/02_agenda.html",
+              "file": "02_agenda.html",
+              "title": "목차",
+              "desc": "섹션 목록 + 번호",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/03_section_divider.html",
+              "file": "03_section_divider.html",
+              "title": "섹션 구분",
+              "desc": "장 표지. 큰 번호 + 섹션명",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/04_content_1col.html",
+              "file": "04_content_1col.html",
+              "title": "본문 1단",
+              "desc": "텍스트 중심 단일 컬럼",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/05_content_2col.html",
+              "file": "05_content_2col.html",
+              "title": "본문 2단",
+              "desc": "텍스트 + 이미지/도표",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/06_content_3col.html",
+              "file": "06_content_3col.html",
+              "title": "본문 3단",
+              "desc": "카드 3개 나열",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/07_full_image.html",
+              "file": "07_full_image.html",
+              "title": "전면 이미지",
+              "desc": "배경 이미지 + 오버레이 텍스트",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/08_quote.html",
+              "file": "08_quote.html",
+              "title": "인용",
+              "desc": "인용문 / 핵심 메시지",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/09_data_dashboard.html",
+              "file": "09_data_dashboard.html",
+              "title": "데이터 대시보드",
+              "desc": "KPI + 차트 조합",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/10_closing.html",
+              "file": "10_closing.html",
+              "title": "마무리",
+              "desc": "Q&A / 연락처",
+              "w": 1920,
+              "h": 1080,
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diagrams",
+      "label": "다이어그램",
+      "kind": "html",
+      "groups": [
+        {
+          "id": "01_PROCESS_FLOW",
+          "label": "프로세스 · 흐름",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/01_linear_steps_horizontal.html",
+              "file": "01_linear_steps_horizontal.html",
+              "title": "가로 단계 흐름",
+              "desc": "4~6단계 절차 설명. 번호 원 + 제목 + 화살표",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/02_timeline_milestone.html",
+              "file": "02_timeline_milestone.html",
+              "title": "타임라인 마일스톤",
+              "desc": "프로젝트 로드맵·연혁. 수평 축 + 상하 교차 카드",
+              "w": 1600,
+              "h": 600,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/03_conversion_funnel.html",
+              "file": "03_conversion_funnel.html",
+              "title": "전환 퍼널",
+              "desc": "마케팅 퍼널·이탈률. 사다리꼴 5단 + 전환율",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/04_swimlane_process.html",
+              "file": "04_swimlane_process.html",
+              "title": "스윔레인 프로세스",
+              "desc": "부서별 R&R 프로세스. 3~4 레인 × 단계 그리드",
+              "w": 1600,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/05_decision_flowchart.html",
+              "file": "05_decision_flowchart.html",
+              "title": "의사결정 플로우차트",
+              "desc": "조건 분기 로직. 마름모 판단 노드 + Yes/No",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/06_gantt_roadmap.html",
+              "file": "06_gantt_roadmap.html",
+              "title": "간트 로드맵",
+              "desc": "분기별 과제 일정. 과제명 + 기간 바",
+              "w": 1600,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/07_before_after_arrow.html",
+              "file": "07_before_after_arrow.html",
+              "title": "개선 전후 비교",
+              "desc": "좌우 2블록 + 중앙 대형 변환 화살표",
+              "w": 1400,
+              "h": 600,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "02_HIERARCHY_TREE",
+          "label": "계층 · 관계",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/01_org_chart_vertical.html",
+              "file": "01_org_chart_vertical.html",
+              "title": "수직 조직도",
+              "desc": "3계층 조직도. 직선 커넥터",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/02_mindmap_radial.html",
+              "file": "02_mindmap_radial.html",
+              "title": "방사형 마인드맵",
+              "desc": "브레인스토밍·개념 확장. 중앙 노드 + 곡선 브랜치",
+              "w": 1400,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/03_tree_breakdown_wbs.html",
+              "file": "03_tree_breakdown_wbs.html",
+              "title": "WBS 분해 트리",
+              "desc": "제품·업무 구성 분해. 좌→우 들여쓰기 트리",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/04_logic_tree_issue.html",
+              "file": "04_logic_tree_issue.html",
+              "title": "이슈 로직트리",
+              "desc": "MECE 이슈 분해·원인 분석. 좌측 질문 + 2단 분기",
+              "w": 1400,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/05_sitemap_structure.html",
+              "file": "05_sitemap_structure.html",
+              "title": "사이트맵 구조도",
+              "desc": "서비스 IA·메뉴 구조. 뎁스별 테두리 구분",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/06_stakeholder_map.html",
+              "file": "06_stakeholder_map.html",
+              "title": "이해관계자 맵",
+              "desc": "중심 조직 + 위성 노드 + 관계선 굵기 차등",
+              "w": 1200,
+              "h": 900,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "03_MATRIX_SWOT",
+          "label": "매트릭스 · 4분면",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/01_swot_2x2.html",
+              "file": "01_swot_2x2.html",
+              "title": "SWOT 4분면",
+              "desc": "4분면 + 분면별 색상 코드 + 불릿 리스트",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/02_positioning_map.html",
+              "file": "02_positioning_map.html",
+              "title": "포지셔닝 맵",
+              "desc": "경쟁사 포지셔닝. X/Y축 + 산점 버블 + 자사 강조",
+              "w": 1000,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/03_priority_matrix.html",
+              "file": "03_priority_matrix.html",
+              "title": "우선순위 매트릭스",
+              "desc": "중요도-긴급도 / ICE. 4분면 + 항목 태그",
+              "w": 1000,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/04_comparison_matrix.html",
+              "file": "04_comparison_matrix.html",
+              "title": "비교 매트릭스",
+              "desc": "다항목 비교. 셀에 ●◐○ 평가 심볼",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/05_bcg_growth_share.html",
+              "file": "05_bcg_growth_share.html",
+              "title": "BCG 매트릭스",
+              "desc": "사업 포트폴리오. 사분면명 + 버블 크기=매출",
+              "w": 1000,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/06_raci_matrix.html",
+              "file": "06_raci_matrix.html",
+              "title": "RACI 매트릭스",
+              "desc": "역할·책임 분담. 업무 × 담당자 + R/A/C/I 배지",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "04_VENN_CYCLE",
+          "label": "교집합 · 순환",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/01_venn_3circle.html",
+              "file": "01_venn_3circle.html",
+              "title": "3원 벤다이어그램",
+              "desc": "3요소 교집합·핵심 가치. 교집합 라벨 + 중앙 결론",
+              "w": 1100,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/02_venn_2circle_overlap.html",
+              "file": "02_venn_2circle_overlap.html",
+              "title": "2원 교집합",
+              "desc": "두 영역의 시너지. 중앙 교집합 강조",
+              "w": 1200,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/03_cycle_arrow_loop.html",
+              "file": "03_cycle_arrow_loop.html",
+              "title": "순환 화살표 루프",
+              "desc": "PDCA·선순환. 4~6 아크 화살표 + 중앙 제목",
+              "w": 1000,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/04_infinity_continuous.html",
+              "file": "04_infinity_continuous.html",
+              "title": "무한 루프",
+              "desc": "DevOps·지속 개선. 8자 형태 + 양쪽 단계 노드",
+              "w": 1400,
+              "h": 600,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/05_hub_spoke_radial.html",
+              "file": "05_hub_spoke_radial.html",
+              "title": "허브앤스포크",
+              "desc": "플랫폼 중심 생태계. 중앙 허브 + 6~8 스포크",
+              "w": 1200,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/06_gear_interlock.html",
+              "file": "06_gear_interlock.html",
+              "title": "맞물린 기어",
+              "desc": "상호 연동 요소. 기어 3개 + 각 라벨",
+              "w": 1200,
+              "h": 700,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "05_PYRAMID_LAYER",
+          "label": "피라미드 · 레이어",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/01_pyramid_3layer.html",
+              "file": "01_pyramid_3layer.html",
+              "title": "3단 피라미드",
+              "desc": "계층 구조·매슬로우형. 삼각 분할 + 우측 설명",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/02_inverted_funnel.html",
+              "file": "02_inverted_funnel.html",
+              "title": "역깔때기",
+              "desc": "필터링·선별 과정. 역삼각 단계 + 잔존 수치",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/03_stacked_layers_tech.html",
+              "file": "03_stacked_layers_tech.html",
+              "title": "기술 스택 레이어",
+              "desc": "아키텍처 레이어. 수평 스택 + 좌측 레이어명",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/04_maturity_stairs.html",
+              "file": "04_maturity_stairs.html",
+              "title": "성숙도 계단",
+              "desc": "단계별 성장 모델. 계단형 블록 + 기준 설명",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/05_iceberg_visible.html",
+              "file": "05_iceberg_visible.html",
+              "title": "빙산 모델",
+              "desc": "표면 vs 이면. 수면선 기준 상단 소 / 하단 대",
+              "w": 1100,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/06_building_blocks.html",
+              "file": "06_building_blocks.html",
+              "title": "전략 체계도",
+              "desc": "비전-전략-과제. 비전 바 + 기둥 N + 기반 바",
+              "w": 1400,
+              "h": 800,
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "components",
+      "label": "컴포넌트",
+      "kind": "html",
+      "groups": [
+        {
+          "id": "01_TYPOGRAPHY",
+          "label": "타이포그래피",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/01_TYPOGRAPHY/body_text_blocks.html",
+              "file": "body_text_blocks.html",
+              "title": "본문 블록",
+              "desc": "단락 · 강조 · 인용 · 각주",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/01_TYPOGRAPHY/heading_scale.html",
+              "file": "heading_scale.html",
+              "title": "제목 스케일",
+              "desc": "Display~Caption 7단계 견본",
+              "w": 1400,
+              "h": 900,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/01_TYPOGRAPHY/list_styles.html",
+              "file": "list_styles.html",
+              "title": "리스트 스타일",
+              "desc": "불릿 · 번호 · 체크 · 아이콘 리스트",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "02_CHARTS",
+          "label": "차트",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/bar_horizontal.html",
+              "file": "bar_horizontal.html",
+              "title": "가로 막대",
+              "desc": "항목명이 긴 경우의 순위 비교",
+              "w": 1200,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/bar_vertical.html",
+              "file": "bar_vertical.html",
+              "title": "세로 막대",
+              "desc": "카테고리 비교. 값 라벨 + 축",
+              "w": 1200,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/donut_share.html",
+              "file": "donut_share.html",
+              "title": "도넛 점유율",
+              "desc": "구성비. 중앙 총합 + 범례",
+              "w": 1000,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/kpi_number_cards.html",
+              "file": "kpi_number_cards.html",
+              "title": "KPI 숫자 카드",
+              "desc": "핵심 지표 4개. 값 + 증감률",
+              "w": 1400,
+              "h": 400,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/line_trend.html",
+              "file": "line_trend.html",
+              "title": "추세선",
+              "desc": "시계열 추이. 다계열 + 범례",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/stacked_composition.html",
+              "file": "stacked_composition.html",
+              "title": "누적 구성",
+              "desc": "기간별 구성 변화. 누적 막대",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "04_TABLES",
+          "label": "표",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/04_TABLES/comparison_table.html",
+              "file": "comparison_table.html",
+              "title": "비교표",
+              "desc": "다중 옵션 비교. 헤더 강조 + 줄무늬",
+              "w": 1400,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/04_TABLES/pricing_table.html",
+              "file": "pricing_table.html",
+              "title": "가격표",
+              "desc": "요금제 3단. 추천 플랜 강조",
+              "w": 1400,
+              "h": 800,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/04_TABLES/spec_sheet.html",
+              "file": "spec_sheet.html",
+              "title": "사양표",
+              "desc": "2열 라벨-값 나열. 구분선 중심",
+              "w": 1200,
+              "h": 800,
+              "status": "todo"
+            }
+          ]
+        },
+        {
+          "id": "05_UI_PARTS",
+          "label": "UI 부품",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/badges_tags.html",
+              "file": "badges_tags.html",
+              "title": "배지 · 태그",
+              "desc": "상태 배지 · 카테고리 태그 변형",
+              "w": 1200,
+              "h": 500,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/callout_boxes.html",
+              "file": "callout_boxes.html",
+              "title": "강조 박스",
+              "desc": "정보 · 주의 · 성공 · 경고 4종",
+              "w": 1200,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/icon_bullet_rows.html",
+              "file": "icon_bullet_rows.html",
+              "title": "아이콘 불릿",
+              "desc": "아이콘 + 제목 + 설명 행 반복",
+              "w": 1200,
+              "h": 700,
+              "status": "todo"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/progress_indicators.html",
+              "file": "progress_indicators.html",
+              "title": "진행 표시",
+              "desc": "진행 바 · 원형 게이지 · 단계 표시",
+              "w": 1200,
+              "h": 600,
+              "status": "todo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "label": "이미지 · 아이콘",
+      "kind": "image",
+      "groups": [
+        {
+          "id": "images",
+          "label": "이미지",
+          "items": []
+        },
+        {
+          "id": "icons",
+          "label": "아이콘",
+          "items": []
+        }
+      ]
+    }
+  ]
+}

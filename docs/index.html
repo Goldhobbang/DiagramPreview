@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preview — Figma PPT Template System</title>
+<link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <div>
+      <h1>Preview</h1>
+      <p class="sub">슬라이드 · 다이어그램 · 컴포넌트 · 디자인 토큰 전체 미리보기</p>
+    </div>
+    <div class="progress">
+      <span id="count-done">0</span><span class="slash">/</span><span id="count-total">0</span>
+      <span class="progress-label">완료</span>
+      <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="filters" id="filters"></div>
+
+    <div class="sizer" role="group" aria-label="썸네일 크기">
+      <button data-size="260">S</button>
+      <button data-size="380" aria-pressed="true">M</button>
+      <button data-size="520">L</button>
+    </div>
+
+    <input type="search" id="search" placeholder="이름 · 용도 검색…" autocomplete="off">
+  </div>
+</header>
+
+<main id="main"></main>
+
+<footer class="foot">
+  <p>
+    카드의 <strong>URL 복사</strong> → Figma <code>html.to.design</code> 실행 →
+    Viewport <strong>Custom 1920×1080</strong> → 붙여넣기.
+    자세한 절차는 <a href="../00_GUIDES/01_FIGMA_IMPORT_GUIDE.md">임포트 가이드</a> 참조.
+  </p>
+  <p>
+    목록은 <code>node tools/build-gallery.js</code>가 폴더를 스캔해 생성한다.
+    <code>manifest.json</code>을 손으로 고치지 말 것.
+  </p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="gallery.js"></script>
+</body>
+</html>

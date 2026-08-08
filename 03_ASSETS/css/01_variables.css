@@ -1,0 +1,95 @@
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 각 스타일 폴더의 _style.css가 이 변수들을 덮어쓰는 방식.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}

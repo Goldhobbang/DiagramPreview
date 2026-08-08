@@ -1,0 +1,72 @@
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → _style
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}

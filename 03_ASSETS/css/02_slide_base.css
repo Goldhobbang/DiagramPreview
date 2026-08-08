@@ -1,0 +1,130 @@
+/* ==========================================================================
+   02_slide_base.css — 슬라이드 캔버스 + 그리드 + 타이포 기본
+   ========================================================================== */
+
+/* --- 슬라이드 캔버스 ------------------------------------------------- */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;                /* ★ Figma와 동일하게 잘라 보여줘 오버플로우를 조기에 발견 */
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+}
+
+/* 세이프 영역이 적용된 콘텐츠 래퍼 */
+.slide-inner {
+  position: absolute;
+  inset: var(--slide-pad);
+  width: var(--content-w);
+  height: var(--content-h);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 컴포넌트 캔버스 (다이어그램 등 슬라이드보다 작은 단위) ---------- */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* --- 그리드 ---------------------------------------------------------- */
+/* Figma에서 Auto Layout으로 변환되지 않으므로, 다이어그램 내부보다는
+   슬라이드 최상위 레이아웃에만 쓴다. 내부는 .row / .col(flex)을 쓸 것. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--grid-gutter);
+}
+
+/* flex 기반 — 이쪽이 Figma Auto Layout으로 변환된다 (권장) */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--grid-gutter);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.row > .flex-1 { flex: 1; }
+.row > .flex-2 { flex: 2; }
+.row > .flex-3 { flex: 3; }
+
+/* --- 타이포 유틸 ----------------------------------------------------- */
+.t-display {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-body-l { font-size: var(--fs-body-l); }
+.t-body-m { font-size: var(--fs-body-m); }
+
+.t-caption {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.t-muted  { color: var(--color-text-muted); }
+.t-accent { color: var(--color-accent); }
+.t-center { text-align: center; }
+.t-right  { text-align: right; }
+
+/* --- 디버그 모드 ----------------------------------------------------- */
+/* <body class="debug"> 로 켠다. 모든 박스 경계를 표시해 오버플로우를 잡는다. */
+.debug .slide,
+.debug .component {
+  outline: 2px solid rgba(255, 0, 0, 0.6);
+}
+
+.debug .slide *,
+.debug .component * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/* 세이프 영역 시각화 */
+.debug .slide::after {
+  content: "";
+  position: absolute;
+  inset: var(--slide-pad);
+  outline: 1px dashed rgba(0, 128, 255, 0.8);
+  pointer-events: none;
+}
