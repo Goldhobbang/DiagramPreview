@@ -10,27 +10,44 @@
   <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
   <link rel="stylesheet" href="_style.css">
   <style>
-    /* 좌측 어깨의 얇은 액센트 바 — 파랑 면적은 최소로 */
-    .cover-edge {
+    /* 배경 장식: 연도 고스트 넘버 — 테마 텍스트색을 낮은 불투명도로 */
+    .ghost-year {
       position: absolute;
-      left: 0;
-      top: 0;
-      width: 24px;
-      height: 1080px;
-      background: var(--color-accent);
+      right: 64px;
+      top: 32px;
+      font-size: 320px;
+      font-weight: var(--fw-bold);
+      line-height: 1;
+      letter-spacing: var(--ls-tight);
+      color: var(--color-text);
+      opacity: 0.05;
     }
+
     .cover-inner { justify-content: space-between; }
-    .cover-head { display: flex; align-items: center; gap: var(--sp-3); }
+
+    .cover-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cover-brand { display: flex; align-items: center; gap: var(--sp-3); }
     .cover-org {
-      font-size: var(--fs-body-m);
+      font-size: var(--fs-caption);
       font-weight: var(--fw-semibold);
       letter-spacing: var(--ls-wide);
       color: var(--color-text-muted);
     }
+
     .cover-main {
       display: flex;
       flex-direction: column;
       gap: var(--sp-5);
+    }
+    /* 그라디언트 테마만 그라디언트, 나머지는 단색 폴백 */
+    .cover-rule {
+      width: 96px;
+      height: 8px;
+      background: var(--gradient-accent, var(--color-accent));
     }
     .cover-kicker {
       font-size: var(--fs-body-m);
@@ -45,15 +62,16 @@
       color: var(--color-text-muted);
       line-height: 1.5;
     }
+
     .cover-foot {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
       border-top: var(--border-w) solid var(--color-border);
-      padding-top: var(--sp-4);
+      padding-top: var(--sp-5);
     }
-    .cover-meta { display: flex; gap: var(--sp-7); }
-    .cover-meta-item { display: flex; flex-direction: column; gap: var(--sp-1); }
+    .cover-meta { display: flex; gap: var(--sp-8); }
+    .cover-meta-item { display: flex; flex-direction: column; gap: var(--sp-2); }
     .cover-meta-label {
       font-size: var(--fs-caption);
       color: var(--color-text-muted);
@@ -67,20 +85,24 @@
 </head>
 <body>
   <div class="slide">
-    <div class="cover-edge"></div>
+    <p class="ghost-year">26</p>
     <div class="slide-inner cover-inner">
 
       <div class="cover-head">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-          <rect x="2" y="2" width="16" height="16" rx="3" fill="var(--color-accent)"/>
-          <rect x="22" y="2" width="16" height="16" rx="3" fill="var(--color-accent-sub)"/>
-          <rect x="2" y="22" width="16" height="16" rx="3" fill="var(--color-accent-sub)"/>
-          <rect x="22" y="22" width="16" height="16" rx="3" fill="var(--color-accent)"/>
-        </svg>
-        <p class="cover-org">ACME CORPORATION</p>
+        <div class="cover-brand">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect x="2" y="2" width="14" height="14" rx="2" fill="var(--color-accent)"/>
+            <rect x="20" y="2" width="14" height="14" rx="2" fill="var(--color-accent)" fill-opacity="0.35"/>
+            <rect x="2" y="20" width="14" height="14" rx="2" fill="var(--color-accent)" fill-opacity="0.35"/>
+            <rect x="20" y="20" width="14" height="14" rx="2" fill="var(--color-accent)"/>
+          </svg>
+          <p class="cover-org">ACME CORPORATION</p>
+        </div>
+        <p class="cover-org">CONFIDENTIAL · INTERNAL</p>
       </div>
 
       <div class="cover-main">
+        <div class="cover-rule"></div>
         <p class="cover-kicker">2026 하반기 전략 보고</p>
         <h1 class="t-display cover-title">데이터 기반 성장 전략과<br>핵심 실행 과제</h1>
         <p class="cover-sub">시장 환경 진단 · 3대 전략 방향 · 분기별 실행 로드맵</p>
@@ -89,15 +111,19 @@
       <div class="cover-foot">
         <div class="cover-meta">
           <div class="cover-meta-item">
-            <p class="cover-meta-label">발표자</p>
-            <p class="cover-meta-value">전략기획팀 김민준 팀장</p>
+            <p class="cover-meta-label">PRESENTER</p>
+            <p class="cover-meta-value">김민준 · 전략기획팀장</p>
           </div>
           <div class="cover-meta-item">
-            <p class="cover-meta-label">일자</p>
+            <p class="cover-meta-label">DATE</p>
             <p class="cover-meta-value">2026. 08. 20</p>
           </div>
+          <div class="cover-meta-item">
+            <p class="cover-meta-label">AUDIENCE</p>
+            <p class="cover-meta-value">경영위원회</p>
+          </div>
         </div>
-        <p class="t-caption">대외비 · 사내 공유용</p>
+        <p class="cover-org">ver 1.2</p>
       </div>
 
     </div>

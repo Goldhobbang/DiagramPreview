@@ -79,6 +79,14 @@
   --color-negative: #dc2626;
   --color-neutral: #71717a;
 
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
   /* --- 라운드 --------------------------------------------------------- */
   --radius-sm: 8px;
   --radius-md: 16px;

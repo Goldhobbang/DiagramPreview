@@ -37,6 +37,14 @@
   --color-negative: #111111;
   --color-neutral: #8a8a8a;
 
+  /* 반전 슬라이드도 무채색으로 */
+  --color-bg-inverse: #111111;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #a3a3a3;
+
+  /* 구분은 선으로 — 카드에 1px 보더 */
+  --card-border-w: 1px;
+
   /* --- 타입: 여백이 크므로 본문을 살짝 줄여 균형을 맞춘다 -------------- */
   --fs-display: 88px;
   --fs-h1: 56px;

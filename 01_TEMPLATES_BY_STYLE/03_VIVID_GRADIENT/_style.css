@@ -31,6 +31,11 @@
   --color-negative: #fb7185;
   --color-neutral: #94a3b8;
 
+  /* 반전 슬라이드 — 기본 배경이 이미 어두우므로 같은 계열 유지 */
+  --color-bg-inverse: #0b1120;
+  --color-text-on-inverse: #f8fafc;
+  --color-text-on-inverse-muted: #94a3b8;
+
   /* --- 타입: 흰 글씨가 번져 보이므로 굵기를 한 단계씩 올린다 ----------- */
   --fw-regular: 400;               /* 300은 쓰지 않는다 */
   --fw-medium: 500;

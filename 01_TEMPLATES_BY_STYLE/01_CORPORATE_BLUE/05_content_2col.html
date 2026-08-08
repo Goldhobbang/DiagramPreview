@@ -12,60 +12,91 @@
   <style>
     .content-head {
       display: flex;
-      flex-direction: column;
-      gap: var(--sp-3);
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: var(--border-w) solid var(--color-border);
+      padding-bottom: var(--sp-4);
       margin-bottom: var(--sp-7);
     }
-    .two-col { flex: 1; align-items: stretch; }
+    .head-title { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .head-kicker {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      color: var(--color-accent);
+      letter-spacing: var(--ls-wide);
+    }
+    .head-page {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      letter-spacing: var(--ls-wide);
+    }
+
+    .two-col { flex: 1; align-items: stretch; gap: var(--sp-7); }
     .col-text {
-      flex: 1;
+      flex: 5;
       display: flex;
       flex-direction: column;
-      gap: var(--sp-5);
+      gap: var(--sp-6);
     }
     .col-text-lead {
       font-size: var(--fs-body-l);
       line-height: 1.6;
     }
-    .col-bullets { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .col-text-lead strong { color: var(--color-accent); font-weight: var(--fw-bold); }
+    .col-bullets { display: flex; flex-direction: column; }
     .col-bullets li {
       font-size: var(--fs-body-m);
       color: var(--color-text-muted);
       line-height: 1.6;
-      padding-left: var(--sp-4);
+      padding: var(--sp-3) 0 var(--sp-3) var(--sp-5);
+      border-bottom: var(--border-w) solid var(--color-border);
       position: relative;
     }
     .col-bullets li::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 15px;
-      width: 8px;
-      height: 8px;
-      border-radius: var(--radius-full);
+      top: 26px;
+      width: 10px;
+      height: 10px;
       background: var(--color-accent);
     }
+
     .col-visual {
-      flex: 1;
+      flex: 7;
       background: var(--color-surface);
+      border: var(--card-border-w) solid var(--color-border);
       border-radius: var(--radius-md);
       padding: var(--sp-5);
       display: flex;
       flex-direction: column;
       gap: var(--sp-4);
     }
+    .visual-head { display: flex; align-items: baseline; justify-content: space-between; }
     .visual-title {
       font-size: var(--fs-body-m);
       font-weight: var(--fw-semibold);
     }
+    .visual-delta {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      color: var(--color-positive);
+      letter-spacing: var(--ls-wide);
+    }
     .visual-chart { flex: 1; display: flex; align-items: flex-end; }
-    .slide-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: var(--border-w) solid var(--color-border);
-      padding-top: var(--sp-3);
-      margin-top: var(--sp-6);
+
+    /* 값을 막대 위에 직접 붙여 축 눈금을 없앤다 */
+    .chart-values,
+    .chart-labels { display: flex; }
+    .chart-values p,
+    .chart-labels p { flex: 1; text-align: center; }
+    .chart-values p {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+    }
+    .chart-labels p {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
     }
   </style>
 </head>
@@ -74,51 +105,50 @@
     <div class="slide-inner">
 
       <div class="content-head">
-        <h1 class="t-h1">구독 매출 성장 추이</h1>
-        <div class="divider-accent"></div>
+        <div class="head-title">
+          <p class="head-kicker">02 · 전략 방향</p>
+          <h1 class="t-h1">구독 매출 성장 추이</h1>
+        </div>
+        <p class="head-page">12</p>
       </div>
 
       <div class="row two-col">
         <div class="col-text">
           <p class="col-text-lead">
-            구독 매출은 8분기 연속 성장하며 전체 매출에서 차지하는 비중이
-            <strong>29%에서 47%</strong>로 확대됐다. 일회성 매출 의존도가 낮아지면서
-            분기 실적 변동성도 함께 줄었다.
+            구독 매출은 8분기 연속 성장하며 전체 매출 비중이
+            <strong>29% → 47%</strong>로 확대됐다. 일회성 매출 의존도가
+            낮아지면서 분기 실적 변동성도 함께 줄었다.
           </p>
           <ul class="col-bullets">
-            <li>연간 계약(Annual Plan) 비중 61% — 전년 대비 14%p 상승</li>
-            <li>고객당 평균 매출(ARPU) 월 8.7만 원, 전년 대비 12% 증가</li>
-            <li>구독 해지율 월 1.8%로 목표치(2.0%) 하회 유지</li>
+            <li>연간 계약 비중 61% — 전년 대비 14%p 상승</li>
+            <li>고객당 평균 매출 월 8.7만 원, 전년 대비 12% 증가</li>
+            <li>구독 해지율 월 1.8%로 목표치 2.0% 하회 유지</li>
           </ul>
         </div>
 
         <div class="col-visual">
-          <p class="visual-title">분기별 구독 매출 (억 원)</p>
+          <div class="visual-head">
+            <p class="visual-title">분기별 구독 매출 (억 원)</p>
+            <p class="visual-delta">+58% YoY</p>
+          </div>
+          <div class="chart-values t-nums">
+            <p>62</p><p>78</p><p>95</p><p>118</p><p>152</p><p>187</p>
+          </div>
           <div class="visual-chart">
-            <svg width="720" height="420" viewBox="0 0 720 420" fill="none">
-              <line x1="0" y1="380" x2="720" y2="380" stroke="var(--color-border)" stroke-width="2"/>
-              <rect x="30"  y="280" width="64" height="100" rx="6" fill="var(--color-data-1)" fill-opacity="0.35"/>
-              <rect x="145" y="250" width="64" height="130" rx="6" fill="var(--color-data-1)" fill-opacity="0.45"/>
-              <rect x="260" y="215" width="64" height="165" rx="6" fill="var(--color-data-1)" fill-opacity="0.55"/>
-              <rect x="375" y="175" width="64" height="205" rx="6" fill="var(--color-data-1)" fill-opacity="0.7"/>
-              <rect x="490" y="120" width="64" height="260" rx="6" fill="var(--color-data-1)" fill-opacity="0.85"/>
-              <rect x="605" y="60"  width="64" height="320" rx="6" fill="var(--color-data-1)"/>
+            <!-- x는 라벨 flex 컬럼 중심에 맞춘 값: 880*(i+0.5)/6 - 40 -->
+            <svg width="880" height="340" viewBox="0 0 880 340" fill="none">
+              <rect x="33"  y="227" width="80" height="113" rx="4" fill="var(--color-data-1)" fill-opacity="0.35"/>
+              <rect x="180" y="198" width="80" height="142" rx="4" fill="var(--color-data-1)" fill-opacity="0.48"/>
+              <rect x="327" y="167" width="80" height="173" rx="4" fill="var(--color-data-1)" fill-opacity="0.6"/>
+              <rect x="473" y="126" width="80" height="214" rx="4" fill="var(--color-data-1)" fill-opacity="0.72"/>
+              <rect x="620" y="64"  width="80" height="276" rx="4" fill="var(--color-data-1)" fill-opacity="0.86"/>
+              <rect x="767" y="0"   width="80" height="340" rx="4" fill="var(--color-data-1)"/>
             </svg>
           </div>
-          <div class="row justify-between">
-            <p class="t-caption">2025 Q1</p>
-            <p class="t-caption">Q2</p>
-            <p class="t-caption">Q3</p>
-            <p class="t-caption">Q4</p>
-            <p class="t-caption">2026 Q1</p>
-            <p class="t-caption">Q2</p>
+          <div class="chart-labels">
+            <p>25 Q1</p><p>Q2</p><p>Q3</p><p>Q4</p><p>26 Q1</p><p>Q2</p>
           </div>
         </div>
-      </div>
-
-      <div class="slide-footer">
-        <p class="t-caption">출처: 재무팀 분기 결산, 2026. 07</p>
-        <p class="t-caption">12</p>
       </div>
 
     </div>

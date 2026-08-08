@@ -108,6 +108,13 @@
 .t-center { text-align: center; }
 .t-right  { text-align: right; }
 
+/* 숫자 세로 정렬 — KPI를 나란히 놓으면 폭이 제각각인 숫자가 들쭉날쭉해 보인다.
+   1과 8의 폭을 같게 고정한다. 한글 폰트는 대개 이 기능을 지원한다. */
+.t-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
 /* --- 디버그 모드 ----------------------------------------------------- */
 /* <body class="debug"> 로 켠다. 모든 박스 경계를 표시해 오버플로우를 잡는다. */
 .debug .slide,

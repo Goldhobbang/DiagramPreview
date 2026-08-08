@@ -167,6 +167,23 @@ Figma는 프레임 밖 콘텐츠를 잘라서 가져온다. 브라우저에서 `
 | `--color-accent` | 주 강조색 (핵심 수치, CTA) |
 | `--color-accent-sub` | 보조 강조색 |
 | `--color-border` | 구분선, 테두리 |
+| `--color-bg-inverse` | 반전 슬라이드 배경 (전면 이미지 등) |
+| `--color-text-on-inverse` | 반전 배경 위 본문 |
+| `--color-text-on-inverse-muted` | 반전 배경 위 부가 설명 |
+| `--card-border-w` | 카드 테두리 두께. 면으로 구분하는 테마는 `0`, 선으로 구분하는 테마(Minimal Mono)만 `1px` |
+
+**반전 토큰이 따로 있는 이유**
+`--color-text`를 배경으로 뒤집어 쓰면 밝은 테마에서만 통한다. Vivid Gradient처럼
+배경이 이미 어두운 테마에서는 같은 트릭이 **흰 배경**을 만들어 버린다.
+반전이 필요한 슬라이드는 `--color-bg-inverse` 계열을 쓰고, 각 테마가 자기 값을 정한다.
+
+**테마 전용 토큰은 `var()` 폴백으로 받는다**
+`--gradient-accent`는 Vivid Gradient에만 있다. 공용 HTML에서 쓰려면 폴백을 준다.
+
+```css
+/* 그라디언트 테마면 그라디언트, 아니면 단색 */
+background: var(--gradient-accent, var(--color-accent));
+```
 
 ### 데이터 시각화 팔레트 (6색 고정 순서)
 
