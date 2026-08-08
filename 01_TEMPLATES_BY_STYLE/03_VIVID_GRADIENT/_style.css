@@ -1,1 +1,61 @@
-/* TODO: 03_VIVID_GRADIENT 테마 변수 오버라이드 */
+/* ==========================================================================
+   03_VIVID_GRADIENT — 에너지 · 속도
+   제품 소개 · 스타트업 IR · 채용
+
+   핵심: 배경은 짙은 남색 단색. 그라디언트는 강조 블록 1개에만 쓴다.
+   (배경 전체를 그라디언트로 덮지 않는다 — 05_VISUAL_GUIDE.md §3-1)
+   정체성 정의: 00_GUIDES/06_STYLE_IDENTITY.md
+   ========================================================================== */
+
+:root {
+  /* --- 색: 짙은 배경 + 시안 강조 --------------------------------------- */
+  --color-bg: #0b1120;
+  --color-surface: #16203a;        /* 카드 — 배경보다 밝게 띄운다 */
+  --color-surface-alt: #1e2b4d;
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;     /* 어두운 배경 대비 7.34:1 */
+  --color-text-invert: #0b1120;
+  --color-accent: #22d3ee;
+  --color-accent-sub: #a78bfa;
+  --color-border: #2e3d5f;
+
+  /* 어두운 배경에서는 채도를 낮추면 탁해진다. 밝고 선명한 값을 쓴다. */
+  --color-data-1: #22d3ee;
+  --color-data-2: #818cf8;
+  --color-data-3: #c084fc;
+  --color-data-4: #f472b6;
+  --color-data-5: #fbbf24;
+  --color-data-6: #4ade80;
+
+  --color-positive: #4ade80;
+  --color-negative: #fb7185;
+  --color-neutral: #94a3b8;
+
+  /* --- 타입: 흰 글씨가 번져 보이므로 굵기를 한 단계씩 올린다 ----------- */
+  --fw-regular: 400;               /* 300은 쓰지 않는다 */
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 800;
+
+  /* --- 형태: 둥글고 확실히 떠 보이게 ---------------------------------- */
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+
+  /* 어두운 배경에서 검은 그림자는 안 보인다. 짙게 넣어야 층이 생긴다. */
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 16px 48px rgba(0, 0, 0, 0.55);
+
+  --border-w: 1px;
+  --border-w-thick: 4px;
+
+  /* --- 이 스타일 전용 추가 토큰 ----------------------------------------
+     그라디언트는 "슬라이드당 1곳"이 규칙이다. 표지 배경 오브젝트 또는
+     핵심 KPI 블록 중 하나에만 쓴다. 인접색(시안→보라)만 섞는다.
+     텍스트 그라디언트(background-clip:text)는 Figma에서 깨지므로 금지. */
+  --gradient-accent: linear-gradient(135deg, #22d3ee 0%, #a78bfa 100%);
+  --gradient-surface: linear-gradient(135deg, #16203a 0%, #24193f 100%);
+
+  /* 발광 효과. 핵심 카드 1개까지만. */
+  --shadow-glow: 0 0 48px rgba(34, 211, 238, 0.28);
+}

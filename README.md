@@ -52,9 +52,17 @@ ppt_template/
 |---|---|
 | [00_GUIDES/_README.md](00_GUIDES/_README.md) | 읽는 순서 |
 | [01_FIGMA_IMPORT_GUIDE.md](00_GUIDES/01_FIGMA_IMPORT_GUIDE.md) | 임포트 절차 · 함정 · 미지원 CSS |
-| [02_DESIGN_SYSTEM.md](00_GUIDES/02_DESIGN_SYSTEM.md) | 폰트 스케일 · 간격 · CSS 변수 규칙 |
+| [02_DESIGN_SYSTEM.md](00_GUIDES/02_DESIGN_SYSTEM.md) | 폰트 스케일 · 간격 · CSS 변수 규칙 (**숫자**) |
 | [03_CHECKLIST.md](00_GUIDES/03_CHECKLIST.md) | 임포트 전/후 체크리스트 |
-| [04_DIAGRAM_CATALOG.md](00_GUIDES/04_DIAGRAM_CATALOG.md) | 다이어그램 31종 기획 + 진척 |
+| [04_DIAGRAM_CATALOG.md](00_GUIDES/04_DIAGRAM_CATALOG.md) | 다이어그램 31종 기획 + 우선순위 |
+| [05_VISUAL_GUIDE.md](00_GUIDES/05_VISUAL_GUIDE.md) | 정렬 · 여백 · 위계 · 강조 · 안티패턴 (**판단**) |
+| [06_STYLE_IDENTITY.md](00_GUIDES/06_STYLE_IDENTITY.md) | 3개 스타일의 시각 정체성 |
+| [07_PROMPTS.md](00_GUIDES/07_PROMPTS.md) | **제작 프롬프트** — 붙여넣어 바로 쓰는 형태 |
+
+### 만들기 시작할 때
+
+[07_PROMPTS.md](00_GUIDES/07_PROMPTS.md)의 `A. 마스터` + `B. 카테고리 블록` + `C. 항목 스펙`을
+이어 붙여 Claude Code에 넣는다. 공통 규칙은 A에만 있어서 규칙 변경 시 한 곳만 고치면 된다.
 
 ---
 
