@@ -68,9 +68,16 @@ ppt_template/
 
 ## 갤러리 배포 (GitHub Pages)
 
+**라이브: https://goldhobbang.github.io/DiagramPreview/**
+
 1. GitHub 레포 생성 후 push
-2. Settings → Pages → Source: `Deploy from a branch` → Branch `main`, Folder `/docs`
-3. `https://<user>.github.io/<repo>/` 접속
+2. Settings → Pages → Source: `Deploy from a branch` → Branch `main`, Folder **`/ (root)`**
+3. `https://<user>.github.io/<repo>/` 접속 (루트 `index.html`이 `docs/`로 넘긴다)
+
+> ⚠️ **Folder를 `/docs`로 두면 안 된다.**
+> 그러면 `docs/`만 사이트 루트가 되는데, 갤러리는 `../02_COMPONENTS_LIBRARY/`,
+> `../03_ASSETS/` 를 iframe으로 참조하므로 그 경로가 게시 범위 밖이 되어 전부 404가 난다.
+> 로컬에서는 레포 루트를 서빙하기 때문에 이 문제가 드러나지 않는다.
 
 갤러리는 원본 HTML을 **상대경로 iframe으로 직접 참조**한다.
 파일을 고치면 갤러리에 즉시 반영되며, 스크린샷 생성이나 파일 복사 단계가 없다.
