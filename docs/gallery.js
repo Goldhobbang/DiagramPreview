@@ -17,6 +17,7 @@ const $sizer = document.querySelector('.sizer');
 let manifest = null;
 let tokens = null;          // 01_variables.css에서 런타임에 추출
 let activeSection = 'ALL';
+let activeStyle = 'ALL';    // 슬라이드 템플릿 섹션 전용 — 스타일(그룹) 필터
 let thumbW = 380;
 
 init();
@@ -42,6 +43,7 @@ async function init() {
   $filters.addEventListener('click', onFilterClick);
   $sizer.addEventListener('click', onSizeClick);
   $search.addEventListener('input', render);
+  $main.addEventListener('click', onStyleClick);
 }
 
 /* --- 디자인 토큰: CSS를 직접 읽어 파싱 --------------------------------
@@ -118,9 +120,18 @@ function onFilterClick(e) {
   const btn = e.target.closest('button[data-sec]');
   if (!btn) return;
   activeSection = btn.dataset.sec;
+  activeStyle = 'ALL';   // 섹션을 바꾸면 스타일 필터는 초기화
   for (const b of $filters.querySelectorAll('button')) {
     b.setAttribute('aria-pressed', String(b.dataset.sec === activeSection));
   }
+  render();
+}
+
+/* 슬라이드 템플릿 섹션 안의 스타일(그룹) 탭 — 클릭 시 해당 스타일 그룹만 표시 */
+function onStyleClick(e) {
+  const btn = e.target.closest('button[data-style]');
+  if (!btn) return;
+  activeStyle = btn.dataset.style;
   render();
 }
 
@@ -143,9 +154,13 @@ function render() {
   for (const section of manifest.sections) {
     if (activeSection !== 'ALL' && activeSection !== section.id) continue;
 
+    const isSlides = section.id === 'slides';
+    if (isSlides) html.push(styleTabs(section));
+
     const groups = section.groups
       .map(g => ({ ...g, items: g.items.filter(i => matches(i, q)) }))
-      .filter(g => g.items.length);
+      .filter(g => g.items.length)
+      .filter(g => !isSlides || activeStyle === 'ALL' || g.id === activeStyle);
 
     // 검색 중에는 빈 섹션을 아예 숨긴다. 검색이 아니면 "여기 채우면 된다"고 알려준다.
     if (!groups.length) {
@@ -180,6 +195,17 @@ function matches(item, q) {
 function sectionHead(s) {
   const n = s.groups.reduce((a, g) => a + g.items.length, 0);
   return `<h2 class="section-head" id="sec-${s.id}">${esc(s.label)}<span class="n">${n}</span></h2>`;
+}
+
+/* 슬라이드 템플릿 섹션 전용 — 스타일(폴더) 탭. 그룹 순서 그대로 사용. */
+function styleTabs(section) {
+  const chips = [
+    `<button data-style="ALL" aria-pressed="${activeStyle === 'ALL'}">전체 스타일</button>`,
+    ...section.groups.map(g =>
+      `<button data-style="${esc(g.id)}" aria-pressed="${activeStyle === g.id}">${esc(g.label)}<span class="n">${g.items.length}</span></button>`
+    ),
+  ];
+  return `<div class="style-tabs">${chips.join('')}</div>`;
 }
 
 /* --- 카드 ------------------------------------------------------------- */
