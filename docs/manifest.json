@@ -16,7 +16,7 @@
               "desc": "제목 · 부제 · 발표자 · 날짜",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/02_agenda.html",
@@ -25,7 +25,7 @@
               "desc": "섹션 목록 + 번호",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/03_section_divider.html",
@@ -34,7 +34,7 @@
               "desc": "장 표지. 큰 번호 + 섹션명",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/04_content_1col.html",
@@ -43,7 +43,7 @@
               "desc": "텍스트 중심 단일 컬럼",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/05_content_2col.html",
@@ -52,7 +52,7 @@
               "desc": "텍스트 + 이미지/도표",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/06_content_3col.html",
@@ -61,7 +61,7 @@
               "desc": "카드 3개 나열",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/07_full_image.html",
@@ -70,7 +70,7 @@
               "desc": "배경 이미지 + 오버레이 텍스트",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/08_quote.html",
@@ -79,7 +79,7 @@
               "desc": "인용문 / 핵심 메시지",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/09_data_dashboard.html",
@@ -88,7 +88,7 @@
               "desc": "KPI + 차트 조합",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/10_closing.html",
@@ -97,7 +97,7 @@
               "desc": "Q&A / 연락처",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -311,7 +311,7 @@
               "desc": "4~6단계 절차 설명. 번호 원 + 제목 + 화살표",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/02_timeline_milestone.html",
@@ -320,7 +320,7 @@
               "desc": "프로젝트 로드맵·연혁. 수평 축 + 상하 교차 카드",
               "w": 1600,
               "h": 600,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/03_conversion_funnel.html",
@@ -380,7 +380,7 @@
               "desc": "3계층 조직도. 직선 커넥터",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/02_mindmap_radial.html",
@@ -440,7 +440,7 @@
               "desc": "4분면 + 분면별 색상 코드 + 불릿 리스트",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/02_positioning_map.html",
@@ -518,7 +518,7 @@
               "desc": "PDCA·선순환. 4~6 아크 화살표 + 중앙 제목",
               "w": 1000,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/04_infinity_continuous.html",
@@ -578,7 +578,7 @@
               "desc": "아키텍처 레이어. 수평 스택 + 좌측 레이어명",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/04_maturity_stairs.html",
