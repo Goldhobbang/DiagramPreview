@@ -1,1 +1,137 @@
 <!-- @card SWOT 4분면 | 4분면 + 분면별 색상 코드 + 불릿 리스트 | 1200x800 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>SWOT 4분면</title>
+  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <style>
+    .component { width: 1200px; height: 800px; }
+
+    .swot-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+      height: 704px;
+    }
+    .swot-row {
+      display: flex;
+      gap: var(--sp-4);
+      flex: 1;
+    }
+    .swot-cell {
+      flex: 1;
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border-top: var(--border-w-thick) solid var(--c, var(--color-data-1));
+      padding: var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .swot-head {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .swot-letter {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: var(--c, var(--color-data-1));
+      color: var(--color-text-invert);
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-bold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .swot-name {
+      font-size: var(--fs-body-l);
+      font-weight: var(--fw-semibold);
+    }
+    .swot-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    .swot-list li {
+      font-size: var(--fs-body-m);
+      line-height: 1.5;
+      padding-left: var(--sp-4);
+      position: relative;
+    }
+    .swot-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--c, var(--color-data-1));
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <div class="swot-grid">
+
+      <div class="swot-row">
+        <div class="swot-cell d1">
+          <div class="swot-head">
+            <div class="swot-letter">S</div>
+            <p class="swot-name">강점 Strengths</p>
+          </div>
+          <ul class="swot-list">
+            <li>업계 1위 브랜드 인지도와 충성 고객 기반</li>
+            <li>자체 물류망 보유로 배송 원가 20% 절감</li>
+            <li>데이터 기반 상품 추천 기술 내재화</li>
+          </ul>
+        </div>
+        <div class="swot-cell d5">
+          <div class="swot-head">
+            <div class="swot-letter">W</div>
+            <p class="swot-name">약점 Weaknesses</p>
+          </div>
+          <ul class="swot-list">
+            <li>해외 시장 진출 경험 부족</li>
+            <li>신규 카테고리의 낮은 상품 구색</li>
+            <li>개발 인력 대비 레거시 시스템 유지 부담</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="swot-row">
+        <div class="swot-cell d3">
+          <div class="swot-head">
+            <div class="swot-letter">O</div>
+            <p class="swot-name">기회 Opportunities</p>
+          </div>
+          <ul class="swot-list">
+            <li>구독 커머스 시장 연 30% 성장 지속</li>
+            <li>규제 완화로 신선식품 새벽배송 확대 가능</li>
+            <li>제휴사 멤버십 통합 논의 진행 중</li>
+          </ul>
+        </div>
+        <div class="swot-cell d4">
+          <div class="swot-head">
+            <div class="swot-letter">T</div>
+            <p class="swot-name">위협 Threats</p>
+          </div>
+          <ul class="swot-list">
+            <li>글로벌 플랫폼의 국내 직진출 가속</li>
+            <li>물류비 · 인건비 상승으로 마진 압박</li>
+            <li>개인정보 규제 강화에 따른 마케팅 제약</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -1,1 +1,99 @@
 <!-- @card 타임라인 마일스톤 | 프로젝트 로드맵·연혁. 수평 축 + 상하 교차 카드 | 1600x600 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>타임라인 마일스톤</title>
+  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <style>
+    .component { width: 1600px; height: 600px; }
+
+    .timeline { position: relative; width: 1504px; height: 504px; }
+
+    .timeline-svg { position: absolute; left: 0; top: 0; }
+
+    /* 마일스톤 카드: 축 위아래 교차 배치 (SVG 좌표에 맞춰 absolute) */
+    .ms-card {
+      position: absolute;
+      width: 256px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      text-align: center;
+    }
+    .ms-card.above { bottom: 320px; }
+    .ms-card.below { top: 320px; }
+
+    .ms-date {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      color: var(--color-accent);
+      letter-spacing: var(--ls-wide);
+    }
+    .ms-name {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+      line-height: 1.4;
+    }
+    .ms-desc {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <div class="timeline">
+
+      <svg class="timeline-svg" width="1504" height="504" viewBox="0 0 1504 504" fill="none">
+        <line x1="40" y1="252" x2="1464" y2="252" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round"/>
+        <line x1="128"  y1="252" x2="128"  y2="200" stroke="var(--color-data-1)" stroke-width="3"/>
+        <circle cx="128"  cy="252" r="14" fill="var(--color-data-1)"/>
+        <line x1="440"  y1="252" x2="440"  y2="304" stroke="var(--color-data-2)" stroke-width="3"/>
+        <circle cx="440"  cy="252" r="14" fill="var(--color-data-2)"/>
+        <line x1="752"  y1="252" x2="752"  y2="200" stroke="var(--color-data-3)" stroke-width="3"/>
+        <circle cx="752"  cy="252" r="14" fill="var(--color-data-3)"/>
+        <line x1="1064" y1="252" x2="1064" y2="304" stroke="var(--color-data-4)" stroke-width="3"/>
+        <circle cx="1064" cy="252" r="14" fill="var(--color-data-4)"/>
+        <line x1="1376" y1="252" x2="1376" y2="200" stroke="var(--color-data-5)" stroke-width="3"/>
+        <circle cx="1376" cy="252" r="14" fill="var(--color-data-5)"/>
+      </svg>
+
+      <div class="ms-card above" style="left: 0;">
+        <p class="ms-date">2026. 01</p>
+        <p class="ms-name">프로젝트 착수</p>
+        <p class="ms-desc">TF 구성 및 킥오프, 범위 확정</p>
+      </div>
+
+      <div class="ms-card below" style="left: 312px;">
+        <p class="ms-date">2026. 03</p>
+        <p class="ms-name">설계 완료</p>
+        <p class="ms-desc">아키텍처 확정, 상세 설계 검토 통과</p>
+      </div>
+
+      <div class="ms-card above" style="left: 624px;">
+        <p class="ms-date">2026. 06</p>
+        <p class="ms-name">베타 오픈</p>
+        <p class="ms-desc">사내 500명 대상 베타 테스트 시작</p>
+      </div>
+
+      <div class="ms-card below" style="left: 936px;">
+        <p class="ms-date">2026. 09</p>
+        <p class="ms-name">정식 출시</p>
+        <p class="ms-desc">전 고객 대상 서비스 오픈, 마케팅 개시</p>
+      </div>
+
+      <div class="ms-card above" style="left: 1248px;">
+        <p class="ms-date">2026. 12</p>
+        <p class="ms-name">확장 단계</p>
+        <p class="ms-desc">MAU 10만 달성, 2차 로드맵 착수</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

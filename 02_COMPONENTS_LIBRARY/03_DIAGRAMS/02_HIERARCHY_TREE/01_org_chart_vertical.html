@@ -1,1 +1,134 @@
 <!-- @card 수직 조직도 | 3계층 조직도. 직선 커넥터 | 1400x700 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>수직 조직도</title>
+  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <style>
+    /* 커넥터(SVG)와 노드 좌표를 맞추기 위해 이 다이어그램은 absolute 배치 사용 */
+    .org { position: relative; width: 1304px; height: 604px; }
+    .org-svg { position: absolute; left: 0; top: 0; }
+
+    .org-node {
+      position: absolute;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-1);
+      text-align: center;
+      padding: var(--sp-3);
+    }
+    .org-title {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+      line-height: 1.4;
+    }
+    .org-sub {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      line-height: 1.4;
+    }
+
+    .lvl-1 {
+      width: 320px; height: 104px;
+      left: 492px; top: 0;
+      background: var(--color-accent);
+    }
+    .lvl-1 .org-title, .lvl-1 .org-sub { color: var(--color-text-invert); }
+
+    .lvl-2 {
+      width: 360px; height: 96px;
+      top: 208px;
+      background: var(--color-surface);
+      border-top: var(--border-w-thick) solid var(--color-accent);
+    }
+
+    .lvl-3 {
+      width: 200px; height: 128px;
+      top: 476px;
+      background: var(--color-bg);
+      border: var(--border-w) solid var(--color-border);
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <div class="org">
+
+      <svg class="org-svg" width="1304" height="604" viewBox="0 0 1304 604" fill="none">
+        <!-- L1 → L2 -->
+        <line x1="652" y1="104" x2="652" y2="156" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="180" y1="156" x2="1124" y2="156" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="180"  y1="156" x2="180"  y2="208" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="652"  y1="156" x2="652"  y2="208" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="1124" y1="156" x2="1124" y2="208" stroke="var(--color-border)" stroke-width="2"/>
+        <!-- L2 → L3 (팀 2개씩) -->
+        <line x1="180" y1="304" x2="180" y2="424" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="104" y1="424" x2="320" y2="424" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="104" y1="424" x2="104" y2="476" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="320" y1="424" x2="320" y2="476" stroke="var(--color-border)" stroke-width="2"/>
+
+        <line x1="652" y1="304" x2="652" y2="424" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="536" y1="424" x2="752" y2="424" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="536" y1="424" x2="536" y2="476" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="752" y1="424" x2="752" y2="476" stroke="var(--color-border)" stroke-width="2"/>
+
+        <line x1="1124" y1="304" x2="1124" y2="424" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="968"  y1="424" x2="1184" y2="424" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="968"  y1="424" x2="968"  y2="476" stroke="var(--color-border)" stroke-width="2"/>
+        <line x1="1184" y1="424" x2="1184" y2="476" stroke="var(--color-border)" stroke-width="2"/>
+      </svg>
+
+      <div class="org-node lvl-1">
+        <p class="org-title">대표이사 CEO</p>
+        <p class="org-sub">경영총괄</p>
+      </div>
+
+      <div class="org-node lvl-2" style="left: 0;">
+        <p class="org-title">사업본부</p>
+        <p class="org-sub">본부장 김성훈 전무</p>
+      </div>
+      <div class="org-node lvl-2" style="left: 472px;">
+        <p class="org-title">기술본부</p>
+        <p class="org-sub">본부장 이지원 상무</p>
+      </div>
+      <div class="org-node lvl-2" style="left: 944px;">
+        <p class="org-title">경영지원본부</p>
+        <p class="org-sub">본부장 박찬영 상무</p>
+      </div>
+
+      <div class="org-node lvl-3" style="left: 4px;">
+        <p class="org-title">영업팀</p>
+        <p class="org-sub">B2B 영업 · 파트너 관리</p>
+      </div>
+      <div class="org-node lvl-3" style="left: 220px;">
+        <p class="org-title">마케팅팀</p>
+        <p class="org-sub">브랜드 · 퍼포먼스</p>
+      </div>
+      <div class="org-node lvl-3" style="left: 436px;">
+        <p class="org-title">개발팀</p>
+        <p class="org-sub">서비스 · 플랫폼 개발</p>
+      </div>
+      <div class="org-node lvl-3" style="left: 652px;">
+        <p class="org-title">데이터팀</p>
+        <p class="org-sub">분석 · ML 엔지니어링</p>
+      </div>
+      <div class="org-node lvl-3" style="left: 868px;">
+        <p class="org-title">인사팀</p>
+        <p class="org-sub">채용 · 조직문화</p>
+      </div>
+      <div class="org-node lvl-3" style="left: 1084px;">
+        <p class="org-title">재무팀</p>
+        <p class="org-sub">회계 · 자금 · IR</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

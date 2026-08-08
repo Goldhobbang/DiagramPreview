@@ -1,1 +1,105 @@
 <!-- @card 순환 화살표 루프 | PDCA·선순환. 4~6 아크 화살표 + 중앙 제목 | 1000x900 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>순환 화살표 루프</title>
+  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <style>
+    .component { width: 1000px; height: 900px; }
+
+    .cycle { position: relative; width: 904px; height: 804px; }
+    .cycle-svg { position: absolute; left: 0; top: 0; }
+
+    /* 라벨: SVG 좌표에 맞춰 absolute */
+    .cycle-label {
+      position: absolute;
+      width: 224px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-1);
+      text-align: center;
+    }
+    .cycle-step {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-bold);
+      color: var(--c, var(--color-data-1));
+    }
+    .cycle-desc {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .cycle-center {
+      position: absolute;
+      left: 292px;
+      top: 338px;
+      width: 320px;
+      height: 128px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-1);
+      text-align: center;
+    }
+    .cycle-title {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-bold);
+    }
+    .cycle-sub {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <div class="cycle">
+
+      <svg class="cycle-svg" width="904" height="804" viewBox="0 0 904 804" fill="none">
+        <!-- Plan: 우상단 아크 -->
+        <path d="M 500.6 126.3 A 280 280 0 0 1 727.7 353.4" stroke="var(--color-data-1)" stroke-width="56" stroke-linecap="butt"/>
+        <path d="M 0 -34 L 50 0 L 0 34 Z" fill="var(--color-data-1)" transform="translate(727.7 353.4) rotate(80)"/>
+        <!-- Do: 우하단 아크 -->
+        <path d="M 727.7 450.6 A 280 280 0 0 1 500.6 677.7" stroke="var(--color-data-2)" stroke-width="56" stroke-linecap="butt"/>
+        <path d="M 0 -34 L 50 0 L 0 34 Z" fill="var(--color-data-2)" transform="translate(500.6 677.7) rotate(170)"/>
+        <!-- Check: 좌하단 아크 -->
+        <path d="M 403.4 677.7 A 280 280 0 0 1 176.3 450.6" stroke="var(--color-data-3)" stroke-width="56" stroke-linecap="butt"/>
+        <path d="M 0 -34 L 50 0 L 0 34 Z" fill="var(--color-data-3)" transform="translate(176.3 450.6) rotate(260)"/>
+        <!-- Act: 좌상단 아크 -->
+        <path d="M 176.3 353.4 A 280 280 0 0 1 403.4 126.3" stroke="var(--color-data-4)" stroke-width="56" stroke-linecap="butt"/>
+        <path d="M 0 -34 L 50 0 L 0 34 Z" fill="var(--color-data-4)" transform="translate(403.4 126.3) rotate(350)"/>
+      </svg>
+
+      <div class="cycle-label d1" style="left: 596px; top: 96px;">
+        <p class="cycle-step">Plan</p>
+        <p class="cycle-desc">목표 설정과 실행 계획 수립</p>
+      </div>
+      <div class="cycle-label d2" style="left: 596px; top: 600px;">
+        <p class="cycle-step">Do</p>
+        <p class="cycle-desc">계획에 따른 실행과 기록</p>
+      </div>
+      <div class="cycle-label d3" style="left: 84px; top: 600px;">
+        <p class="cycle-step">Check</p>
+        <p class="cycle-desc">결과 측정과 목표 대비 평가</p>
+      </div>
+      <div class="cycle-label d4" style="left: 84px; top: 96px;">
+        <p class="cycle-step">Act</p>
+        <p class="cycle-desc">개선안 도출과 표준화 반영</p>
+      </div>
+
+      <div class="cycle-center">
+        <p class="cycle-title">지속 개선 사이클</p>
+        <p class="cycle-sub">분기 단위 반복 운영</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

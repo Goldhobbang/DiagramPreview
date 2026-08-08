@@ -1,1 +1,106 @@
 <!-- @card 기술 스택 레이어 | 아키텍처 레이어. 수평 스택 + 좌측 레이어명 | 1200x800 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>기술 스택 레이어</title>
+  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <style>
+    .component { width: 1200px; height: 800px; }
+
+    .stack-title {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--sp-5);
+    }
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .layer {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      background: var(--color-surface);
+      border-left: 12px solid var(--c, var(--color-data-1));
+      border-radius: var(--radius-sm);
+      padding: var(--sp-4) var(--sp-5);
+      min-height: 104px;
+    }
+    .layer-name {
+      width: 240px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-1);
+    }
+    .layer-ko {
+      font-size: var(--fs-body-l);
+      font-weight: var(--fw-semibold);
+    }
+    .layer-en {
+      font-size: var(--fs-caption);
+      color: var(--c, var(--color-data-1));
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide);
+    }
+    .layer-desc {
+      font-size: var(--fs-body-m);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <p class="stack-title">서비스 아키텍처 레이어</p>
+    <div class="stack">
+
+      <div class="layer d1">
+        <div class="layer-name">
+          <p class="layer-ko">사용자 인터페이스</p>
+          <p class="layer-en">PRESENTATION</p>
+        </div>
+        <p class="layer-desc">웹 · 모바일 앱 클라이언트. 디자인 시스템 기반 공통 UI 컴포넌트</p>
+      </div>
+
+      <div class="layer d2">
+        <div class="layer-name">
+          <p class="layer-ko">서비스</p>
+          <p class="layer-en">SERVICE</p>
+        </div>
+        <p class="layer-desc">주문 · 결제 · 회원 등 도메인별 비즈니스 로직. 마이크로서비스 단위 배포</p>
+      </div>
+
+      <div class="layer d3">
+        <div class="layer-name">
+          <p class="layer-ko">API 게이트웨이</p>
+          <p class="layer-en">API GATEWAY</p>
+        </div>
+        <p class="layer-desc">인증 · 라우팅 · 속도 제한. 외부 파트너 API 제공 창구 단일화</p>
+      </div>
+
+      <div class="layer d4">
+        <div class="layer-name">
+          <p class="layer-ko">데이터</p>
+          <p class="layer-en">DATA</p>
+        </div>
+        <p class="layer-desc">운영 DB · 데이터 웨어하우스 · 실시간 스트림. 분석 파이프라인 포함</p>
+      </div>
+
+      <div class="layer d5">
+        <div class="layer-name">
+          <p class="layer-ko">인프라</p>
+          <p class="layer-en">INFRASTRUCTURE</p>
+        </div>
+        <p class="layer-desc">클라우드 컴퓨팅 · 네트워크 · 모니터링. IaC 기반 운영 자동화</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

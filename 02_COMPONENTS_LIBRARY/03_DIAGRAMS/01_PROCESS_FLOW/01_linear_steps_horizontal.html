@@ -1,1 +1,111 @@
 <!-- @card 가로 단계 흐름 | 4~6단계 절차 설명. 번호 원 + 제목 + 화살표 | 1400x700 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>가로 단계 흐름</title>
+  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <style>
+    .steps-title {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--sp-6);
+    }
+    .steps-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+    }
+    .step-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-3);
+      text-align: center;
+    }
+    .step-item .step-num { background: var(--c, var(--color-data-1)); }
+    .step-name {
+      font-size: var(--fs-body-l);
+      font-weight: var(--fw-semibold);
+      line-height: 1.4;
+    }
+    .step-desc {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+    .step-arrow {
+      display: flex;
+      align-items: center;
+      height: 64px;   /* 번호 원 높이에 맞춰 수직 중앙 */
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <p class="steps-title">신규 서비스 도입 절차</p>
+    <div class="steps-row">
+
+      <div class="step-item">
+        <div class="step-num d1">1</div>
+        <p class="step-name">요구사항 정의</p>
+        <p class="step-desc">현업 인터뷰로 핵심 요구사항을 수집하고 우선순위를 확정</p>
+      </div>
+
+      <div class="step-arrow">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M14 8 L26 20 L14 32" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num d2">2</div>
+        <p class="step-name">솔루션 비교 평가</p>
+        <p class="step-desc">기능 · 비용 · 보안 3개 축으로 후보 솔루션을 정량 평가</p>
+      </div>
+
+      <div class="step-arrow">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M14 8 L26 20 L14 32" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num d3">3</div>
+        <p class="step-name">파일럿 운영</p>
+        <p class="step-desc">1개 팀 대상 4주 시범 운영으로 실사용 이슈를 검증</p>
+      </div>
+
+      <div class="step-arrow">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M14 8 L26 20 L14 32" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num d4">4</div>
+        <p class="step-name">전사 확산</p>
+        <p class="step-desc">부서별 교육과 함께 단계적으로 전 조직에 배포</p>
+      </div>
+
+      <div class="step-arrow">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M14 8 L26 20 L14 32" stroke="var(--color-border)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num d5">5</div>
+        <p class="step-name">정착 · 개선</p>
+        <p class="step-desc">분기별 사용률 점검과 피드백 반영으로 운영 고도화</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

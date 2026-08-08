@@ -1,1 +1,64 @@
 <!-- @card 인용 | 인용문 / 핵심 메시지 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>인용</title>
+  <link rel="stylesheet" href="../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
+  <link rel="stylesheet" href="_style.css">
+  <style>
+    .quote-inner {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: var(--sp-6);
+    }
+    .quote-text {
+      font-size: var(--fs-h1);
+      font-weight: var(--fw-semibold);
+      line-height: 1.4;
+      letter-spacing: var(--ls-tight);
+      max-width: 1400px;
+    }
+    .quote-text strong { color: var(--color-accent); font-weight: var(--fw-bold); }
+    .quote-attr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-1);
+    }
+    .quote-name {
+      font-size: var(--fs-body-l);
+      font-weight: var(--fw-semibold);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner quote-inner">
+
+      <svg width="96" height="72" viewBox="0 0 96 72" fill="none">
+        <path d="M8 72 C8 44 22 18 44 0 L54 12 C40 24 32 36 30 46 C32 45 35 44 38 44 C48 44 56 52 56 62 C56 72 48 80 38 80 C21 80 8 72 8 72 Z"
+              transform="translate(0 -6) scale(0.9)" fill="var(--color-accent)" fill-opacity="0.25"/>
+        <path d="M52 72 C52 44 66 18 88 0 L98 12 C84 24 76 36 74 46 C76 45 79 44 82 44 C92 44 100 52 100 62 C100 72 92 80 82 80 C65 80 52 72 52 72 Z"
+              transform="translate(-6 -6) scale(0.9)" fill="var(--color-accent)" fill-opacity="0.25"/>
+      </svg>
+
+      <p class="quote-text">
+        고객은 기능이 부족해서 떠나지 않는다.<br>
+        <strong>성공하는 방법을 몰라서</strong> 떠난다.
+      </p>
+
+      <div class="quote-attr">
+        <div class="divider-accent"></div>
+        <p class="quote-name" style="margin-top: 16px;">이지원 · 기술본부장</p>
+        <p class="t-caption">2026 상반기 고객 경험 리뷰 중</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
