@@ -1,1 +1,156 @@
 <!-- @card 데이터 대시보드 | KPI + 차트 조합 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>데이터 대시보드</title>
+  <link rel="stylesheet" href="../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
+  <link rel="stylesheet" href="_style.css">
+  <style>
+    .content-head {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-6);
+    }
+    .kpi-row { margin-bottom: var(--sp-6); }
+    .kpi-card {
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-5);
+    }
+    .kpi-delta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-1);
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+    }
+    .kpi-delta.up { color: var(--color-positive); }
+    .kpi-delta.down { color: var(--color-negative); }
+
+    .dash-row { flex: 1; align-items: stretch; }
+    .chart-panel {
+      flex: 2;
+      gap: var(--sp-4);
+      padding: var(--sp-5);
+    }
+    .chart-title {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+    }
+    .chart-area { flex: 1; display: flex; align-items: flex-end; }
+    .chart-labels { display: flex; justify-content: space-around; }
+    .insight-panel {
+      flex: 1;
+      padding: var(--sp-5);
+      gap: var(--sp-4);
+    }
+    .insight-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .insight-list li {
+      font-size: var(--fs-body-m);
+      line-height: 1.5;
+      padding-left: var(--sp-4);
+      position: relative;
+    }
+    .insight-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--color-accent);
+    }
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: var(--border-w) solid var(--color-border);
+      padding-top: var(--sp-3);
+      margin-top: var(--sp-6);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+
+      <div class="content-head">
+        <h1 class="t-h1">2026 상반기 핵심 지표</h1>
+        <div class="divider-accent"></div>
+      </div>
+
+      <div class="row kpi-row">
+        <div class="card kpi-card">
+          <div class="stat">
+            <p class="stat-value">128억</p>
+            <p class="stat-label">상반기 매출</p>
+          </div>
+          <p class="kpi-delta up">▲ 23%</p>
+        </div>
+        <div class="card kpi-card">
+          <div class="stat">
+            <p class="stat-value">4,820</p>
+            <p class="stat-label">유료 고객사</p>
+          </div>
+          <p class="kpi-delta up">▲ 31%</p>
+        </div>
+        <div class="card kpi-card">
+          <div class="stat">
+            <p class="stat-value">1.8%</p>
+            <p class="stat-label">월 해지율</p>
+          </div>
+          <p class="kpi-delta down">▼ 0.4%p</p>
+        </div>
+      </div>
+
+      <div class="row dash-row">
+        <div class="card chart-panel">
+          <p class="chart-title">월별 신규 계약 (건)</p>
+          <div class="chart-area">
+            <svg width="1000" height="360" viewBox="0 0 1000 360" fill="none">
+              <line x1="0" y1="330" x2="1000" y2="330" stroke="var(--color-border)" stroke-width="2"/>
+              <rect x="40"  y="210" width="90" height="120" rx="6" fill="var(--color-data-1)"/>
+              <rect x="200" y="180" width="90" height="150" rx="6" fill="var(--color-data-1)"/>
+              <rect x="360" y="195" width="90" height="135" rx="6" fill="var(--color-data-1)"/>
+              <rect x="520" y="140" width="90" height="190" rx="6" fill="var(--color-data-1)"/>
+              <rect x="680" y="90"  width="90" height="240" rx="6" fill="var(--color-data-1)"/>
+              <rect x="840" y="40"  width="90" height="290" rx="6" fill="var(--color-data-2)"/>
+            </svg>
+          </div>
+          <div class="chart-labels">
+            <p class="t-caption">1월</p>
+            <p class="t-caption">2월</p>
+            <p class="t-caption">3월</p>
+            <p class="t-caption">4월</p>
+            <p class="t-caption">5월</p>
+            <p class="t-caption">6월</p>
+          </div>
+        </div>
+
+        <div class="card insight-panel">
+          <p class="chart-title">주요 시사점</p>
+          <ul class="insight-list">
+            <li>6월 신규 계약 급증은 파트너 채널 오픈 효과 — 전체의 34% 기여</li>
+            <li>중소기업(SMB) 세그먼트가 성장 견인, 엔터프라이즈는 보합</li>
+            <li>해지율 개선은 온보딩 파일럿 적용 코호트에서 집중 발생</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <p class="t-caption">출처: 세일즈 오퍼레이션 대시보드, 2026. 07. 31 기준</p>
+        <p class="t-caption">21</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

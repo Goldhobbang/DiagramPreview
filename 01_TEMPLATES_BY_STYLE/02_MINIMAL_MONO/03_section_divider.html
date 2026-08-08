@@ -1,1 +1,73 @@
 <!-- @card 섹션 구분 | 장 표지. 큰 번호 + 섹션명 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>섹션 구분</title>
+  <link rel="stylesheet" href="../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
+  <link rel="stylesheet" href="_style.css">
+  <style>
+    .slide { background: var(--color-surface); }
+
+    .divider-inner { justify-content: center; gap: var(--sp-6); }
+    .section-num {
+      font-size: 200px;               /* 장식용 대형 번호 — 타입 스케일 외 예외 */
+      font-weight: var(--fw-bold);
+      line-height: 1;
+      color: var(--color-accent);
+      letter-spacing: var(--ls-tight);
+    }
+    .section-title { max-width: 1200px; }
+    .section-desc {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-regular);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+    .section-progress {
+      position: absolute;
+      left: var(--slide-pad);
+      bottom: var(--slide-pad);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .progress-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: var(--radius-full);
+      background: var(--color-border);
+    }
+    .progress-dot.active {
+      width: 48px;
+      background: var(--color-accent);
+    }
+    .progress-label {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      letter-spacing: var(--ls-wide);
+      margin-left: var(--sp-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner divider-inner">
+      <p class="section-num">02</p>
+      <h1 class="t-h1 section-title">전략 방향</h1>
+      <p class="section-desc">시장 진단에서 도출한 3대 전략 축과 목표 지표를 정의한다</p>
+    </div>
+
+    <div class="section-progress">
+      <div class="progress-dot"></div>
+      <div class="progress-dot active"></div>
+      <div class="progress-dot"></div>
+      <div class="progress-dot"></div>
+      <p class="progress-label">SECTION 2 / 4</p>
+    </div>
+  </div>
+</body>
+</html>

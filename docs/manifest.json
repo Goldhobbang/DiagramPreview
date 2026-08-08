@@ -112,7 +112,7 @@
               "desc": "제목 · 부제 · 발표자 · 날짜",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/02_agenda.html",
@@ -121,7 +121,7 @@
               "desc": "섹션 목록 + 번호",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/03_section_divider.html",
@@ -130,7 +130,7 @@
               "desc": "장 표지. 큰 번호 + 섹션명",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/04_content_1col.html",
@@ -139,7 +139,7 @@
               "desc": "텍스트 중심 단일 컬럼",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/05_content_2col.html",
@@ -148,7 +148,7 @@
               "desc": "텍스트 + 이미지/도표",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/06_content_3col.html",
@@ -157,7 +157,7 @@
               "desc": "카드 3개 나열",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/07_full_image.html",
@@ -166,7 +166,7 @@
               "desc": "배경 이미지 + 오버레이 텍스트",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/08_quote.html",
@@ -175,7 +175,7 @@
               "desc": "인용문 / 핵심 메시지",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/09_data_dashboard.html",
@@ -184,7 +184,7 @@
               "desc": "KPI + 차트 조합",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/10_closing.html",
@@ -193,7 +193,7 @@
               "desc": "Q&A / 연락처",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -208,7 +208,7 @@
               "desc": "제목 · 부제 · 발표자 · 날짜",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/02_agenda.html",
@@ -217,7 +217,7 @@
               "desc": "섹션 목록 + 번호",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/03_section_divider.html",
@@ -226,7 +226,7 @@
               "desc": "장 표지. 큰 번호 + 섹션명",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/04_content_1col.html",
@@ -235,7 +235,7 @@
               "desc": "텍스트 중심 단일 컬럼",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/05_content_2col.html",
@@ -244,7 +244,7 @@
               "desc": "텍스트 + 이미지/도표",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/06_content_3col.html",
@@ -253,7 +253,7 @@
               "desc": "카드 3개 나열",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/07_full_image.html",
@@ -262,7 +262,7 @@
               "desc": "배경 이미지 + 오버레이 텍스트",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/08_quote.html",
@@ -271,7 +271,7 @@
               "desc": "인용문 / 핵심 메시지",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/09_data_dashboard.html",
@@ -280,7 +280,7 @@
               "desc": "KPI + 차트 조합",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/10_closing.html",
@@ -289,7 +289,7 @@
               "desc": "Q&A / 연락처",
               "w": 1920,
               "h": 1080,
-              "status": "todo"
+              "status": "done"
             }
           ]
         }

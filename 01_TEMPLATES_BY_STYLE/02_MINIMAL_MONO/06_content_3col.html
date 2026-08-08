@@ -1,1 +1,125 @@
 <!-- @card 본문 3단 | 카드 3개 나열 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>본문 3단</title>
+  <link rel="stylesheet" href="../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
+  <link rel="stylesheet" href="_style.css">
+  <style>
+    .content-head {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-7);
+    }
+    .three-col { flex: 1; align-items: stretch; }
+    .strategy-card {
+      flex: 1;
+      padding: var(--sp-6) var(--sp-5);
+      gap: var(--sp-4);
+    }
+    .strategy-num {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      color: var(--color-accent);
+      letter-spacing: var(--ls-wide);
+    }
+    .strategy-title {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-semibold);
+      line-height: 1.4;
+    }
+    .strategy-desc {
+      font-size: var(--fs-body-m);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+    .strategy-kpi {
+      border-top: var(--border-w) solid var(--color-border);
+      padding-top: var(--sp-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-1);
+    }
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: var(--border-w) solid var(--color-border);
+      padding-top: var(--sp-3);
+      margin-top: var(--sp-6);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="slide-inner">
+
+      <div class="content-head">
+        <h1 class="t-h1">3대 전략 방향</h1>
+        <div class="divider-accent"></div>
+      </div>
+
+      <div class="row three-col">
+
+        <div class="card strategy-card">
+          <p class="strategy-num">STRATEGY 01</p>
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="26" fill="var(--color-accent)" fill-opacity="0.12"/>
+            <path d="M16 34 L25 25 L31 31 L40 20" stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M33 20 L40 20 L40 27" stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="strategy-title">구독 모델 중심의<br>매출 구조 전환</p>
+          <p class="strategy-desc">일회성 라이선스 판매를 단계적으로 축소하고, 연간 구독 중심으로 영업 보상 체계와 가격 정책을 재설계한다.</p>
+          <div class="strategy-kpi">
+            <p class="stat-value" style="font-size: var(--fs-h2);">60%</p>
+            <p class="stat-label">2027년 구독 매출 비중 목표</p>
+          </div>
+        </div>
+
+        <div class="card strategy-card">
+          <p class="strategy-num">STRATEGY 02</p>
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="26" fill="var(--color-accent)" fill-opacity="0.12"/>
+            <circle cx="28" cy="22" r="7" stroke="var(--color-accent)" stroke-width="4"/>
+            <path d="M15 41 C15 33.5 21 29 28 29 C35 29 41 33.5 41 41" stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <p class="strategy-title">온보딩 자동화로<br>고객 잔존율 개선</p>
+          <p class="strategy-desc">가입 후 2주 구간에 가이드 자동화와 전담 CS를 투입해 첫 성공 경험까지의 시간을 9일에서 3일로 줄인다.</p>
+          <div class="strategy-kpi">
+            <p class="stat-value" style="font-size: var(--fs-h2);">+18%p</p>
+            <p class="stat-label">6개월 잔존율 개선 목표</p>
+          </div>
+        </div>
+
+        <div class="card strategy-card">
+          <p class="strategy-num">STRATEGY 03</p>
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="26" fill="var(--color-accent)" fill-opacity="0.12"/>
+            <circle cx="28" cy="28" r="12" stroke="var(--color-accent)" stroke-width="4"/>
+            <path d="M28 12 L28 18 M44 28 L38 28 M28 44 L28 38 M12 28 L18 28" stroke="var(--color-accent)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <p class="strategy-title">동남아 2개국<br>파트너 기반 진출</p>
+          <p class="strategy-desc">직접 진출 대신 현지 리셀러 파트너십으로 초기 비용을 낮추고, 1년 내 손익분기 도달 가능한 시장부터 검증한다.</p>
+          <div class="strategy-kpi">
+            <p class="stat-value" style="font-size: var(--fs-h2);">2개국</p>
+            <p class="stat-label">2027년 상반기 진출 목표</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="slide-footer">
+        <p class="t-caption">전략기획팀 · 2026 하반기 전략 보고</p>
+        <p class="t-caption">15</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
