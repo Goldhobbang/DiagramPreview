@@ -13,12 +13,16 @@ const $filters = document.getElementById('filters');
 const $search = document.getElementById('search');
 const $toast = document.getElementById('toast');
 const $sizer = document.querySelector('.sizer');
+const $detail = document.getElementById('detail');
+const $detailBody = document.getElementById('detail-body');
+const $detailClose = document.getElementById('detail-close');
 
 let manifest = null;
 let tokens = null;          // 01_variables.css에서 런타임에 추출
 let activeSection = 'ALL';
 let activeStyle = 'ALL';    // 슬라이드 템플릿 섹션 전용 — 스타일(그룹) 필터
 let thumbW = 380;
+const styleTokenCache = new Map();   // 스타일 폴더 경로 → 병합된 토큰 목록
 
 init();
 
@@ -44,6 +48,10 @@ async function init() {
   $sizer.addEventListener('click', onSizeClick);
   $search.addEventListener('input', render);
   $main.addEventListener('click', onStyleClick);
+  $main.addEventListener('click', onDetailOpenClick);
+  $detailClose.addEventListener('click', closeDetail);
+  $detail.addEventListener('click', e => { if (e.target === $detail) closeDetail(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 }
 
 /* --- 디자인 토큰: CSS를 직접 읽어 파싱 --------------------------------
@@ -172,7 +180,7 @@ function render() {
     html.push(sectionHead(section));
     for (const g of groups) {
       html.push(`<h3 class="group-head">${esc(g.label)}<span class="n">${g.items.length}</span></h3>`);
-      html.push(`<div class="grid">${g.items.map(i => card(i, section.kind)).join('')}</div>`);
+      html.push(`<div class="grid">${g.items.map(i => card(i, section.kind, section.id)).join('')}</div>`);
     }
   }
 
@@ -209,11 +217,13 @@ function styleTabs(section) {
 }
 
 /* --- 카드 ------------------------------------------------------------- */
-function card(item, kind) {
-  return kind === 'image' ? mediaCard(item) : htmlCard(item);
+function card(item, kind, sectionId) {
+  return kind === 'image' ? mediaCard(item) : htmlCard(item, sectionId === 'slides');
 }
 
-function htmlCard(item) {
+/* 슬라이드 템플릿 카드는 인라인 액션 대신 클릭 시 상세 패널(openDetail)을 연다 —
+   폰트·색·새창·다운로드·URL복사 5가지만 그 안에서 보여준다. */
+function htmlCard(item, isSlide) {
   const scale = thumbW / item.w;
   const thumbH = Math.round(item.h * scale);
 
@@ -226,8 +236,15 @@ function htmlCard(item) {
               style="transform:scale(${scale})" loading="lazy"
               title="${esc(item.title)} 미리보기" scrolling="no"></iframe>`;
 
+  const actions = isSlide
+    ? ''
+    : `<div class="card-actions">
+    <a href="${item.path}" target="_blank" rel="noopener">새 창</a>
+    <button class="primary" data-copy="${item.path}">URL 복사</button>
+  </div>`;
+
   return `
-<article class="card">
+<article class="card"${isSlide ? ` data-detail="${item.path}" role="button" tabindex="0"` : ''}>
   <div class="thumb" style="height:${thumbH}px">${inner}</div>
   <div class="card-body">
     <div class="card-head">
@@ -237,10 +254,7 @@ function htmlCard(item) {
     ${item.desc ? `<p class="card-desc">${esc(item.desc)}</p>` : ''}
     <p class="card-path">${esc(item.file)} · ${item.w}×${item.h}</p>
   </div>
-  <div class="card-actions">
-    <a href="${item.path}" target="_blank" rel="noopener">새 창</a>
-    <button class="primary" data-copy="${item.path}">URL 복사</button>
-  </div>
+  ${actions}
 </article>`;
 }
 
@@ -333,6 +347,77 @@ function boxSample(t) {
     <code class="tname">${esc(t.name)}</code>
     <code class="tval">${esc(t.value)}</code>
   </div>`;
+}
+
+/* --- 상세 패널: 슬라이드 카드 전용 (폰트·색·새창·다운로드·URL복사 5가지만) --- */
+function onDetailOpenClick(e) {
+  const el = e.target.closest('[data-detail]');
+  if (!el) return;
+  const item = allItems().find(i => i.path === el.dataset.detail);
+  if (item) openDetail(item);
+}
+
+async function openDetail(item) {
+  const merged = await resolveStyleTokens(item);
+  const byName = n => merged.find(t => t.name === n);
+
+  const fontTok = byName('--font-sans');
+  const colorNames = [
+    '--color-bg', '--color-text', '--color-text-muted', '--color-accent',
+    '--color-border', '--color-data-1', '--color-data-2', '--color-data-3',
+    '--color-data-4', '--color-data-5', '--color-data-6',
+  ];
+  const colorToks = colorNames.map(byName).filter(Boolean);
+
+  $detailBody.innerHTML = `
+    <h2 class="detail-title">${esc(item.title)}</h2>
+    <p class="card-path">${esc(item.file)} · ${item.w}×${item.h}</p>
+
+    <h3 class="group-head">폰트 정보</h3>
+    <div class="token-grid font">${fontTok ? fontSample(fontTok) : '<p class="empty-group">폰트 정보를 읽지 못했습니다.</p>'}</div>
+
+    <h3 class="group-head">색 정보</h3>
+    <div class="token-grid">${colorToks.map(swatch).join('')}</div>
+
+    <h3 class="group-head">바로가기</h3>
+    <div class="detail-actions">
+      <a href="${item.path}" target="_blank" rel="noopener">새 창에서 보기</a>
+      <a href="${item.path}" download="${esc(item.file)}">HTML 다운로드</a>
+      <button class="primary" data-copy="${item.path}">URL 복사</button>
+    </div>
+  `;
+  for (const el of $detailBody.querySelectorAll('[data-copy]')) {
+    el.addEventListener('click', () => copyUrl(el.dataset.copy));
+  }
+
+  $detail.hidden = false;
+}
+
+function closeDetail() {
+  $detail.hidden = true;
+  $detailBody.innerHTML = '';
+}
+
+/* 전역 토큰(01_variables.css) 위에 해당 스타일의 _style.css를 덮어써서
+   그 스타일에서 실제로 쓰이는 값을 얻는다. 폴더별로 1회만 fetch. */
+async function resolveStyleTokens(item) {
+  const dir = item.path.slice(0, item.path.lastIndexOf('/'));
+  if (styleTokenCache.has(dir)) return styleTokenCache.get(dir);
+
+  const byName = new Map((tokens || []).map(t => [t.name, t.value]));
+  try {
+    const res = await fetch(`${dir}/_style.css`);
+    if (res.ok) {
+      const css = await res.text();
+      for (const m of css.matchAll(/--([\w-]+)\s*:\s*([^;]+);/g)) {
+        byName.set(`--${m[1]}`, m[2].replace(/\s+/g, ' ').trim());
+      }
+    }
+  } catch { /* _style.css 없는 폴더(다이어그램 등) — 전역 토큰만 사용 */ }
+
+  const merged = [...byName].map(([name, value]) => ({ name, value }));
+  styleTokenCache.set(dir, merged);
+  return merged;
 }
 
 /* --- URL 복사: Figma 플러그인에 그대로 붙여넣는 값 --------------------- */

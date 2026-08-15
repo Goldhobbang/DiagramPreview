@@ -13,106 +13,16 @@
               "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/01_cover.html",
               "file": "01_cover.html",
               "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/02_agenda.html",
-              "file": "02_agenda.html",
-              "title": "목차",
-              "desc": "섹션 목록 + 번호",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/03_section_divider.html",
-              "file": "03_section_divider.html",
-              "title": "섹션 구분",
-              "desc": "장 표지. 큰 번호 + 섹션명",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/04_content_1col.html",
-              "file": "04_content_1col.html",
-              "title": "본문 1단",
-              "desc": "텍스트 중심 단일 컬럼",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/05_content_2col.html",
-              "file": "05_content_2col.html",
-              "title": "본문 2단",
-              "desc": "텍스트 + 이미지/도표",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/06_content_3col.html",
-              "file": "06_content_3col.html",
-              "title": "본문 3단",
-              "desc": "카드 3개 나열",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/07_full_image.html",
-              "file": "07_full_image.html",
-              "title": "전면 이미지",
-              "desc": "배경 이미지 + 오버레이 텍스트",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/08_quote.html",
-              "file": "08_quote.html",
-              "title": "인용",
-              "desc": "인용문 / 핵심 메시지",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/09_data_dashboard.html",
-              "file": "09_data_dashboard.html",
-              "title": "데이터 대시보드",
-              "desc": "KPI + 차트 조합",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/10_closing.html",
-              "file": "10_closing.html",
-              "title": "마무리",
-              "desc": "Q&A / 연락처",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/11_cover_kanji.html",
-              "file": "11_cover_kanji.html",
-              "title": "표지 · 간지 템플릿",
               "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/12_section_kanji.html",
-              "file": "12_section_kanji.html",
-              "title": "섹션 구분 · 간지 템플릿",
-              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/02_global.html",
+              "file": "02_global.html",
+              "title": "전역",
+              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -127,106 +37,16 @@
               "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/01_cover.html",
               "file": "01_cover.html",
               "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/02_agenda.html",
-              "file": "02_agenda.html",
-              "title": "목차",
-              "desc": "섹션 목록 + 번호",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/03_section_divider.html",
-              "file": "03_section_divider.html",
-              "title": "섹션 구분",
-              "desc": "장 표지. 큰 번호 + 섹션명",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/04_content_1col.html",
-              "file": "04_content_1col.html",
-              "title": "본문 1단",
-              "desc": "텍스트 중심 단일 컬럼",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/05_content_2col.html",
-              "file": "05_content_2col.html",
-              "title": "본문 2단",
-              "desc": "텍스트 + 이미지/도표",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/06_content_3col.html",
-              "file": "06_content_3col.html",
-              "title": "본문 3단",
-              "desc": "카드 3개 나열",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/07_full_image.html",
-              "file": "07_full_image.html",
-              "title": "전면 이미지",
-              "desc": "배경 이미지 + 오버레이 텍스트",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/08_quote.html",
-              "file": "08_quote.html",
-              "title": "인용",
-              "desc": "인용문 / 핵심 메시지",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/09_data_dashboard.html",
-              "file": "09_data_dashboard.html",
-              "title": "데이터 대시보드",
-              "desc": "KPI + 차트 조합",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/10_closing.html",
-              "file": "10_closing.html",
-              "title": "마무리",
-              "desc": "Q&A / 연락처",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/11_cover_kanji.html",
-              "file": "11_cover_kanji.html",
-              "title": "표지 · 간지 템플릿",
               "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/12_section_kanji.html",
-              "file": "12_section_kanji.html",
-              "title": "섹션 구분 · 간지 템플릿",
-              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/02_global.html",
+              "file": "02_global.html",
+              "title": "전역",
+              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -241,106 +61,16 @@
               "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/01_cover.html",
               "file": "01_cover.html",
               "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/02_agenda.html",
-              "file": "02_agenda.html",
-              "title": "목차",
-              "desc": "섹션 목록 + 번호",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/03_section_divider.html",
-              "file": "03_section_divider.html",
-              "title": "섹션 구분",
-              "desc": "장 표지. 큰 번호 + 섹션명",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/04_content_1col.html",
-              "file": "04_content_1col.html",
-              "title": "본문 1단",
-              "desc": "텍스트 중심 단일 컬럼",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/05_content_2col.html",
-              "file": "05_content_2col.html",
-              "title": "본문 2단",
-              "desc": "텍스트 + 이미지/도표",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/06_content_3col.html",
-              "file": "06_content_3col.html",
-              "title": "본문 3단",
-              "desc": "카드 3개 나열",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/07_full_image.html",
-              "file": "07_full_image.html",
-              "title": "전면 이미지",
-              "desc": "배경 이미지 + 오버레이 텍스트",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/08_quote.html",
-              "file": "08_quote.html",
-              "title": "인용",
-              "desc": "인용문 / 핵심 메시지",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/09_data_dashboard.html",
-              "file": "09_data_dashboard.html",
-              "title": "데이터 대시보드",
-              "desc": "KPI + 차트 조합",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/10_closing.html",
-              "file": "10_closing.html",
-              "title": "마무리",
-              "desc": "Q&A / 연락처",
-              "w": 1920,
-              "h": 1080,
-              "status": "done"
-            },
-            {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/11_cover_kanji.html",
-              "file": "11_cover_kanji.html",
-              "title": "표지 · 간지 템플릿",
               "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/12_section_kanji.html",
-              "file": "12_section_kanji.html",
-              "title": "섹션 구분 · 간지 템플릿",
-              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/02_global.html",
+              "file": "02_global.html",
+              "title": "전역",
+              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -361,10 +91,10 @@
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/04_BOLD_POP/02_section_divider.html",
-              "file": "02_section_divider.html",
-              "title": "섹션 구분",
-              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/04_BOLD_POP/02_global.html",
+              "file": "02_global.html",
+              "title": "전역",
+              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -385,10 +115,10 @@
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/05_PASTEL_PLAYFUL/02_section_divider.html",
-              "file": "02_section_divider.html",
-              "title": "섹션 구분",
-              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/05_PASTEL_PLAYFUL/02_global.html",
+              "file": "02_global.html",
+              "title": "전역",
+              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
               "w": 1920,
               "h": 1080,
               "status": "done"

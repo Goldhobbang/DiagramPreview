@@ -214,6 +214,9 @@ main { padding: 8px 32px 32px; }
 
 .card:hover { border-color: #3a3f4a; }
 
+.card[data-detail] { cursor: pointer; }
+.card[data-detail]:hover { border-color: var(--accent); }
+
 /* 썸네일: iframe을 원본 크기로 만들고 transform:scale()로 축소.
    스크린샷 생성 파이프라인 없이 실제 HTML을 미리보기한다. */
 .thumb {
@@ -372,6 +375,72 @@ main { padding: 8px 32px 32px; }
   color: var(--accent);
   word-break: break-all;
 }
+
+/* --- 상세 패널: 슬라이드 카드 클릭 시 폰트·색·바로가기만 보여준다 ------ */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 50;
+}
+
+.detail-overlay[hidden] { display: none; }
+
+.detail-panel {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 28px;
+  width: min(720px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.detail-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.detail-close:hover { color: var(--text); border-color: #3a3f4a; }
+
+.detail-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+
+.detail-actions { display: flex; gap: 10px; margin-bottom: 4px; }
+
+.detail-actions a,
+.detail-actions button {
+  font: inherit;
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  text-decoration: none;
+  flex: 1;
+  text-align: center;
+}
+
+.detail-actions a:hover,
+.detail-actions button:hover { color: var(--text); border-color: #3a3f4a; }
+
+.detail-actions .primary { color: var(--accent); border-color: rgba(110, 168, 254, .35); }
 
 /* --- 토스트 ---------------------------------------------------------- */
 .toast {

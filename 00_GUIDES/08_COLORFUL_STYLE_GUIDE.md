@@ -8,7 +8,8 @@
 — [06_STYLE_IDENTITY.md](06_STYLE_IDENTITY.md)와 동일한 원칙.
 
 각 스타일의 실제 값은 `01_TEMPLATES_BY_STYLE/<스타일>/_style.css` 에 들어 있다.
-현재 이 패밀리는 표지(01_cover) + 섹션 구분(02_section_divider) 2장만 제공한다.
+저장소 전체가 표지(`01_cover.html`) + 전역(`02_global.html`) 2장 체제라, 이 다색 장식
+템플릿은 01~05 모든 스타일이 동일하게 쓴다 — 04·05는 그중 팔레트를 억제하지 않는 쪽이다.
 
 ---
 
@@ -82,7 +83,7 @@
 1. `01_TEMPLATES_BY_STYLE/06_<NAME>/` 생성
 2. `_style.css`에 **변수 오버라이드만** 작성. 새 클래스·셀렉터 정의 금지.
    장식 팔레트는 `--color-data-1~6`을 그 스타일 톤으로 다시 뽑는다
-3. 기존 패밀리 스타일의 2개 HTML(01_cover, 02_section_divider)을 **내용 그대로** 복사
+3. 기존 스타일의 2개 HTML(`01_cover.html`, `02_global.html`)을 **내용 그대로** 복사
 4. 위 비교표에 열 추가, `tools/build-gallery.js`의 `LABELS`에 표시명 추가
 5. `node tools/build-gallery.js` 실행해 갤러리 반영
 
