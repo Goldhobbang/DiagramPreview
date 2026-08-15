@@ -1,0 +1,55 @@
+/* ==========================================================================
+   04_BOLD_POP — 대담 · 에너지 (컬러풀 패밀리)
+   브랜드 캠페인 · 마케팅 피치 · 컨퍼런스
+
+   핵심: 텍스트는 무채색 고정, 색은 장식 도형에만.
+   data-1~6 고채도 원색을 장식 조각에 순서대로 쓴다.
+   장식 면적 합계 35% 이하 · 한 도형 15% 이하 (기존 accent 10% 규칙의
+   컬러풀 패밀리 대체 규칙 — 00_GUIDES/08_COLORFUL_STYLE_GUIDE.md).
+
+   변수 오버라이드만 한다. 새 클래스를 정의하지 않는다.
+   HTML은 어느 스타일에서도 동일해야 한다.
+   ========================================================================== */
+
+:root {
+  /* --- 색: 흰 배경 + 진한 잉크 텍스트. 유채색은 도형 전용 ---------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f7f5f2;        /* 살짝 웜톤 회색 — 원색 조각과 충돌하지 않게 */
+  --color-surface-alt: #edeae5;
+  --color-text: #16130f;           /* 순검정 대신 웜 블랙 */
+  --color-text-muted: #6d675e;     /* 흰 배경 대비 4.9:1 */
+  --color-text-invert: #ffffff;
+  --color-accent: #16130f;         /* 강조도 잉크색 — 색 강조는 도형이 담당 */
+  --color-accent-sub: #6d675e;
+  --color-border: #16130f;         /* 팝 아트풍 굵은 잉크 라인 */
+
+  /* 장식 조각용 고채도 원색 6종. 팝 아트 프라이머리 — 서로 명확히 구분되고
+     흰 배경 위에서 전부 3:1 이상 (그래픽 요소 최소 대비) */
+  --color-data-1: #ff4d3d;   /* 레드-오렌지 */
+  --color-data-2: #ffb800;   /* 옐로 */
+  --color-data-3: #00a86b;   /* 그린 */
+  --color-data-4: #0f6bff;   /* 블루 */
+  --color-data-5: #8b3dff;   /* 퍼플 */
+  --color-data-6: #ff3d8a;   /* 핑크 */
+
+  --color-positive: #00a86b;
+  --color-negative: #ff4d3d;
+  --color-neutral: #6d675e;
+
+  /* 반전 슬라이드 — 웜 블랙 배경 */
+  --color-bg-inverse: #16130f;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #b8b2a8;
+
+  /* --- 형태: 작은 조각은 각지게, 카드는 크게 둥글게 -------------------- */
+  --radius-sm: 8px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+
+  /* 그림자 대신 굵은 잉크 라인으로 구분한다 */
+  --shadow-sm: none;
+  --shadow-md: none;
+
+  --border-w: 2px;                 /* 팝 스타일 잉크 라인 — 기본 1px보다 굵게 */
+  --border-w-thick: 6px;
+}

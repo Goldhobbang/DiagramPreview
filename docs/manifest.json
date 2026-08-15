@@ -98,6 +98,24 @@
               "w": 1920,
               "h": 1080,
               "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/11_cover_kanji.html",
+              "file": "11_cover_kanji.html",
+              "title": "표지 · 간지 템플릿",
+              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/12_section_kanji.html",
+              "file": "12_section_kanji.html",
+              "title": "섹션 구분 · 간지 템플릿",
+              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
             }
           ]
         },
@@ -194,6 +212,24 @@
               "w": 1920,
               "h": 1080,
               "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/11_cover_kanji.html",
+              "file": "11_cover_kanji.html",
+              "title": "표지 · 간지 템플릿",
+              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/12_section_kanji.html",
+              "file": "12_section_kanji.html",
+              "title": "섹션 구분 · 간지 템플릿",
+              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
             }
           ]
         },
@@ -287,6 +323,72 @@
               "file": "10_closing.html",
               "title": "마무리",
               "desc": "Q&A / 연락처",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/11_cover_kanji.html",
+              "file": "11_cover_kanji.html",
+              "title": "표지 · 간지 템플릿",
+              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/12_section_kanji.html",
+              "file": "12_section_kanji.html",
+              "title": "섹션 구분 · 간지 템플릿",
+              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "04_BOLD_POP",
+          "label": "Bold Pop",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/04_BOLD_POP/01_cover.html",
+              "file": "01_cover.html",
+              "title": "표지",
+              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/04_BOLD_POP/02_section_divider.html",
+              "file": "02_section_divider.html",
+              "title": "섹션 구분",
+              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "05_PASTEL_PLAYFUL",
+          "label": "Pastel Playful",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/05_PASTEL_PLAYFUL/01_cover.html",
+              "file": "01_cover.html",
+              "title": "표지",
+              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/05_PASTEL_PLAYFUL/02_section_divider.html",
+              "file": "02_section_divider.html",
+              "title": "섹션 구분",
+              "desc": "장 표지. 큰 번호 + 다색 진행 도트",
               "w": 1920,
               "h": 1080,
               "status": "done"

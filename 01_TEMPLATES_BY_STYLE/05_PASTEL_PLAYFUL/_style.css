@@ -1,0 +1,53 @@
+/* ==========================================================================
+   05_PASTEL_PLAYFUL — 친근 · 부드러움 (컬러풀 패밀리)
+   서비스 소개 · 에듀/커뮤니티 · 사내 컬처
+
+   핵심: 텍스트는 무채색 고정, 색은 장식 도형에만.
+   data-1~6 파스텔 톤을 둥근 blob 장식에 순서대로 쓴다.
+   장식 면적 합계 35% 이하 · 한 도형 15% 이하 (기존 accent 10% 규칙의
+   컬러풀 패밀리 대체 규칙 — 00_GUIDES/08_COLORFUL_STYLE_GUIDE.md).
+
+   변수 오버라이드만 한다. 새 클래스를 정의하지 않는다.
+   HTML은 어느 스타일에서도 동일해야 한다.
+   ========================================================================== */
+
+:root {
+  /* --- 색: 아이보리 배경 + 소프트 잉크 텍스트. 유채색은 도형 전용 -------- */
+  --color-bg: #fffbf5;
+  --color-surface: #fdf3e7;
+  --color-surface-alt: #f8e8d8;
+  --color-text: #3d3833;           /* 다크 브라운-그레이 — 아이보리 위 10.8:1 */
+  --color-text-muted: #8a8178;     /* 아이보리 위 3.9:1 — 캡션 전용 */
+  --color-text-invert: #fffbf5;
+  --color-accent: #3d3833;         /* 강조도 잉크색 — 색 강조는 도형이 담당 */
+  --color-accent-sub: #8a8178;
+  --color-border: #e3d9cc;         /* 부드러운 웜 그레이 라인 */
+
+  /* 장식 blob용 파스텔 6종. 채도를 낮춰도 서로 색상(hue)이 멀어 구분된다 */
+  --color-data-1: #ffb3a7;   /* 피치 */
+  --color-data-2: #ffd98e;   /* 버터 옐로 */
+  --color-data-3: #a8dcc4;   /* 민트 */
+  --color-data-4: #a9c9f5;   /* 베이비 블루 */
+  --color-data-5: #cdb7f0;   /* 라일락 */
+  --color-data-6: #f5b7d5;   /* 로즈 핑크 */
+
+  --color-positive: #7cbf9e;
+  --color-negative: #e8938a;
+  --color-neutral: #8a8178;
+
+  /* 반전 슬라이드 — 딥 브라운 배경 */
+  --color-bg-inverse: #3d3833;
+  --color-text-on-inverse: #fffbf5;
+  --color-text-on-inverse-muted: #c9c0b6;
+
+  /* --- 형태: 전부 크게 둥글게, 그림자는 아주 부드럽게 ------------------ */
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 40px;
+
+  --shadow-sm: 0 4px 16px rgba(61, 56, 51, 0.08);
+  --shadow-md: 0 12px 32px rgba(61, 56, 51, 0.10);
+
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}

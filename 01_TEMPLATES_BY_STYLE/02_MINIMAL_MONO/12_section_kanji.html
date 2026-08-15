@@ -1,0 +1,129 @@
+<!-- @card 섹션 구분 · 간지 템플릿 | 장 표지. 큰 번호 + 다색 진행 도트 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>섹션 구분</title>
+  <link rel="stylesheet" href="../../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
+  <link rel="stylesheet" href="_style.css">
+  <style>
+    /* 배경 장식: 우측 하단 다색 사분원 스택 — 이 슬라이드의 유일한 큰 장식.
+       색은 data-1부터 순서대로. 면적 합계 35% 이하. */
+    .divider-decor {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+
+    .divider-inner { justify-content: space-between; }
+
+    .divider-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .divider-org {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-muted);
+    }
+
+    .divider-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-5);
+    }
+    .section-num {
+      font-size: var(--fs-display);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+    }
+    .section-title { max-width: 1200px; }
+    .section-desc {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-regular);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      max-width: 1000px;
+    }
+
+    /* 진행 표시: 다색 도트 + 단계 라벨 (색만으로 구분하지 않는다) */
+    .section-progress {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .progress-dots {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .progress-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: var(--radius-full);
+      background: var(--c, var(--color-border));
+      opacity: 0.45;
+    }
+    .progress-dot.active {
+      width: 64px;
+      opacity: 1;
+    }
+    .progress-label {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      color: var(--color-text-muted);
+      letter-spacing: var(--ls-wide);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+
+    <!-- 다색 장식: 사분원 3겹 + 조각 — data-1~6 순서 -->
+    <svg class="divider-decor" width="720" height="560" viewBox="0 0 720 560" fill="none">
+      <path d="M720 560 L720 80 A480 480 0 0 0 240 560 Z" fill="var(--color-data-1)"/>
+      <path d="M720 560 L720 240 A320 320 0 0 0 400 560 Z" fill="var(--color-data-2)"/>
+      <path d="M720 560 L720 400 A160 160 0 0 0 560 560 Z" fill="var(--color-data-3)"/>
+      <circle cx="180" cy="120" r="56" fill="var(--color-data-4)"/>
+      <rect x="60" y="300" width="88" height="88" rx="12" fill="var(--color-data-5)"/>
+    </svg>
+
+    <div class="slide-inner divider-inner">
+
+      <div class="divider-head">
+        <p class="divider-org">우리가 만드는 다음 이야기</p>
+        <p class="divider-org">SECTION 02 / 04</p>
+      </div>
+
+      <div class="divider-main">
+        <p class="section-num t-nums">02</p>
+        <!-- 다색 규칙선: 3색 분할 바 (표지와 동일한 시그니처) -->
+        <svg width="144" height="8" viewBox="0 0 144 8">
+          <rect x="0"  y="0" width="48" height="8" fill="var(--color-data-1)"/>
+          <rect x="48" y="0" width="48" height="8" fill="var(--color-data-2)"/>
+          <rect x="96" y="0" width="48" height="8" fill="var(--color-data-3)"/>
+        </svg>
+        <h1 class="t-h1 section-title">캠페인 구조와 핵심 메시지</h1>
+        <p class="section-desc">시즌 3부 구성과 채널별 메시지 위계를 정의한다</p>
+      </div>
+
+      <div class="section-progress">
+        <div class="progress-dots">
+          <div class="progress-dot d1"></div>
+          <div class="progress-dot d2 active"></div>
+          <div class="progress-dot d3"></div>
+          <div class="progress-dot d4"></div>
+        </div>
+        <p class="progress-label">02 캠페인 구조와 핵심 메시지 · 2 / 4</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

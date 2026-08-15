@@ -63,6 +63,8 @@ const LABELS = {
   '01_CORPORATE_BLUE': 'Corporate Blue',
   '02_MINIMAL_MONO': 'Minimal Mono',
   '03_VIVID_GRADIENT': 'Vivid Gradient',
+  '04_BOLD_POP': 'Bold Pop',
+  '05_PASTEL_PLAYFUL': 'Pastel Playful',
   '01_PROCESS_FLOW': '프로세스 · 흐름',
   '02_HIERARCHY_TREE': '계층 · 관계',
   '03_MATRIX_SWOT': '매트릭스 · 4분면',

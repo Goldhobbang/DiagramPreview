@@ -58,6 +58,7 @@ ppt_template/
 | [05_VISUAL_GUIDE.md](00_GUIDES/05_VISUAL_GUIDE.md) | 정렬 · 여백 · 위계 · 강조 · 안티패턴 (**판단**) |
 | [06_STYLE_IDENTITY.md](00_GUIDES/06_STYLE_IDENTITY.md) | 3개 스타일의 시각 정체성 |
 | [07_PROMPTS.md](00_GUIDES/07_PROMPTS.md) | **제작 프롬프트** — 붙여넣어 바로 쓰는 형태 |
+| [08_COLORFUL_STYLE_GUIDE.md](00_GUIDES/08_COLORFUL_STYLE_GUIDE.md) | 컬러풀 패밀리(Bold Pop · Pastel Playful) 정체성 |
 
 ### 만들기 시작할 때
 
