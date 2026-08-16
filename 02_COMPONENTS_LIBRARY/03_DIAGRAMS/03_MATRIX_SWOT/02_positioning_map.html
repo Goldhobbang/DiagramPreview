@@ -1,1 +1,420 @@
 <!-- @card 포지셔닝 맵 | 경쟁사 포지셔닝. X/Y축 + 산점 버블 + 자사 강조 | 1000x900 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>포지셔닝 맵</title>
+    <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       공통 토큰을 고치려면 03_ASSETS/css/를 고친 뒤 이 블록도 함께 갱신한다. -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+
+/* ===== 03_ASSETS/css/02_slide_base.css — .component 캔버스만 ===== */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+
+/* ===== 이 다이어그램 전용 ===== */
+    .component { width: 1000px; height: 900px; }
+
+    .pos-title {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--sp-3);
+    }
+
+    /* 축·버블은 SVG, 라벨은 HTML — 좌표를 맞추기 위해 absolute */
+    .pos { position: relative; width: 904px; height: 700px; }
+    .pos-svg { position: absolute; left: 0; top: 0; }
+
+    .pos-axis {
+      position: absolute;
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-bold);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-muted);
+    }
+
+    .pos-label {
+      position: absolute;
+      width: 200px;
+      margin-left: -100px;          /* 버블 중심 기준 정렬 */
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-1);
+    }
+    .pos-name {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+      line-height: 1.3;
+    }
+    .pos-share {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+    .pos-label.is-own .pos-name { color: var(--color-accent); }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <p class="pos-title">국내 협업툴 시장 포지셔닝 · 2026</p>
+
+    <div class="pos">
+      <svg class="pos-svg" width="904" height="700" viewBox="0 0 904 700" fill="none">
+        <!-- 축 -->
+        <line x1="40" y1="350" x2="868" y2="350" stroke="var(--color-border)" stroke-width="2"/>
+        <polygon points="868,342 868,358 884,350" fill="var(--color-border)"/>
+        <line x1="452" y1="676" x2="452" y2="32" stroke="var(--color-border)" stroke-width="2"/>
+        <polygon points="444,32 460,32 452,16" fill="var(--color-border)"/>
+
+        <!-- 경쟁사 버블 -->
+        <circle cx="700" cy="180" r="40" fill="var(--color-data-2)" opacity="0.75"/>
+        <circle cx="250" cy="470" r="34" fill="var(--color-data-3)" opacity="0.75"/>
+        <circle cx="716" cy="546" r="30" fill="var(--color-data-4)" opacity="0.75"/>
+        <circle cx="190" cy="214" r="26" fill="var(--color-data-5)" opacity="0.75"/>
+        <!-- 자사 -->
+        <circle cx="500" cy="250" r="52" fill="var(--color-accent)"/>
+      </svg>
+
+      <span class="pos-axis" style="left: 470px; top: 0;">기능 폭 넓음</span>
+      <span class="pos-axis" style="left: 470px; top: 664px;">기능 단순 · 특화</span>
+      <span class="pos-axis" style="left: 0; top: 366px;">저가</span>
+      <span class="pos-axis" style="left: 812px; top: 366px;">고가</span>
+
+      <div class="pos-label is-own" style="left: 500px; top: 310px;">
+        <p class="pos-name">자사 (Teamflow)</p>
+        <p class="pos-share">점유율 18% · ARPU 9,800원</p>
+      </div>
+      <div class="pos-label" style="left: 700px; top: 228px;">
+        <p class="pos-name">A사 글로벌 스위트</p>
+        <p class="pos-share">점유율 26%</p>
+      </div>
+      <div class="pos-label" style="left: 250px; top: 512px;">
+        <p class="pos-name">B사 메신저 특화</p>
+        <p class="pos-share">점유율 15%</p>
+      </div>
+      <div class="pos-label" style="left: 716px; top: 584px;">
+        <p class="pos-name">C사 엔터프라이즈</p>
+        <p class="pos-share">점유율 11%</p>
+      </div>
+      <div class="pos-label" style="left: 190px; top: 248px;">
+        <p class="pos-name">D사 무료형</p>
+        <p class="pos-share">점유율 7%</p>
+      </div>
+    </div>
+  </div>
+  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
+       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
+  <script>
+    (function () {
+      var el = document.querySelector('.component');
+      if (!el) return;
+      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
+      function fit() {
+        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
+      }
+      addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>

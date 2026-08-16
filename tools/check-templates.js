@@ -11,6 +11,7 @@
      3. 자기완결형인가 — 외부 CSS 링크가 없고 <style>이 있는가
      4. 그 <style>이 자기 베리에이션 토큰 블록(.v1 등)을 담고 있는가
      5. .slide에 자기 베리에이션 클래스가 붙었는가
+     6. 자기축소 스크립트가 있는가 — 갤러리 미리보기가 여기에 의존한다
 
    HTML이 단일 소스다 — 외부 _style.css는 없다. 토큰은 각 파일 안에 있다.
    ========================================================================== */
@@ -56,6 +57,11 @@ for (const style of fs.readdirSync(BASE).filter(isDir)) {
       if (!raw.includes('<style>')) {
         errors.push(`${style}/${file} — <style> 블록 없음`);
       }
+      // 자기축소: 갤러리 썸네일과 확대 미리보기가 이것에 의존한다.
+      // 없으면 iframe 안에서 1920px 원본이 잘려 보인다.
+      if (!raw.includes('self-fit') || !raw.includes('body.style.zoom')) {
+        errors.push(`${style}/${file} — 자기축소 스크립트 없음 (body.style.zoom)`);
+      }
       // 토큰 블록이 실제로 들어 있는가 — 갤러리 상세 패널이 이걸 읽어 값을 보여준다
       const accent = readAccent(raw, v);
       if (!accent) {
@@ -71,6 +77,19 @@ for (const style of fs.readdirSync(BASE).filter(isDir)) {
   }
 }
 
+/* --- 다이어그램: 스타일 폴더와 규약이 다르다 (베리에이션·1920 캔버스 없음) ---
+   기계로 잡을 수 있는 3가지만 본다. 나머지는 갤러리에서 눈으로. */
+const DIAGRAMS = path.join(ROOT, '02_COMPONENTS_LIBRARY', '03_DIAGRAMS');
+
+for (const file of htmlFiles(DIAGRAMS)) {
+  const rel = path.relative(ROOT, file).replace(/\\/g, '/');
+  const raw = fs.readFileSync(file, 'utf8');
+
+  if (!/^\s*<!--\s*@card\s/.test(raw)) errors.push(`${rel} — 1행 @card 마커 없음`);
+  if (/<link\s+rel="stylesheet"/.test(raw)) errors.push(`${rel} — 외부 CSS 링크 남음`);
+  if (!raw.includes('body.style.zoom')) errors.push(`${rel} — 자기축소 스크립트 없음`);
+}
+
 if (errors.length) {
   console.error(`\n  ${errors.length}건 발견\n`);
   for (const e of errors) console.error(`  ! ${e}`);
@@ -79,10 +98,19 @@ if (errors.length) {
 }
 
 const n = fs.readdirSync(BASE).filter(isDir).length;
-console.log(`\n  스타일 ${n}개 · 파일 ${n * 6}개 — 규약 통과\n`);
+const d = htmlFiles(DIAGRAMS).length;
+console.log(`\n  스타일 ${n}개 · 파일 ${n * 6}개 · 다이어그램 ${d}개 — 규약 통과\n`);
 
 function isDir(f) {
   return fs.statSync(path.join(BASE, f)).isDirectory();
+}
+
+function htmlFiles(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap(e => {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) return htmlFiles(p);
+    return e.name.endsWith('.html') ? [p] : [];
+  });
 }
 
 /* 해당 베리에이션 블록의 --color-accent를 읽는다.

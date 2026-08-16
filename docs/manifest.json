@@ -1241,7 +1241,7 @@
               "desc": "마케팅 퍼널·이탈률. 사다리꼴 5단 + 전환율",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/04_swimlane_process.html",
@@ -1250,7 +1250,7 @@
               "desc": "부서별 R&R 프로세스. 3~4 레인 × 단계 그리드",
               "w": 1600,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/05_decision_flowchart.html",
@@ -1259,7 +1259,7 @@
               "desc": "조건 분기 로직. 마름모 판단 노드 + Yes/No",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/06_gantt_roadmap.html",
@@ -1268,7 +1268,7 @@
               "desc": "분기별 과제 일정. 과제명 + 기간 바",
               "w": 1600,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/07_before_after_arrow.html",
@@ -1277,7 +1277,7 @@
               "desc": "좌우 2블록 + 중앙 대형 변환 화살표",
               "w": 1400,
               "h": 600,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1301,7 +1301,7 @@
               "desc": "브레인스토밍·개념 확장. 중앙 노드 + 곡선 브랜치",
               "w": 1400,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/03_tree_breakdown_wbs.html",
@@ -1310,7 +1310,7 @@
               "desc": "제품·업무 구성 분해. 좌→우 들여쓰기 트리",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/04_logic_tree_issue.html",
@@ -1319,7 +1319,7 @@
               "desc": "MECE 이슈 분해·원인 분석. 좌측 질문 + 2단 분기",
               "w": 1400,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/05_sitemap_structure.html",
@@ -1328,7 +1328,7 @@
               "desc": "서비스 IA·메뉴 구조. 뎁스별 테두리 구분",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/06_stakeholder_map.html",
@@ -1337,7 +1337,7 @@
               "desc": "중심 조직 + 위성 노드 + 관계선 굵기 차등",
               "w": 1200,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1361,7 +1361,7 @@
               "desc": "경쟁사 포지셔닝. X/Y축 + 산점 버블 + 자사 강조",
               "w": 1000,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/03_priority_matrix.html",
@@ -1370,7 +1370,7 @@
               "desc": "중요도-긴급도 / ICE. 4분면 + 항목 태그",
               "w": 1000,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/04_comparison_matrix.html",
@@ -1379,7 +1379,7 @@
               "desc": "다항목 비교. 셀에 ●◐○ 평가 심볼",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/05_bcg_growth_share.html",
@@ -1388,7 +1388,7 @@
               "desc": "사업 포트폴리오. 사분면명 + 버블 크기=매출",
               "w": 1000,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/06_raci_matrix.html",
@@ -1397,7 +1397,7 @@
               "desc": "역할·책임 분담. 업무 × 담당자 + R/A/C/I 배지",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1412,7 +1412,7 @@
               "desc": "3요소 교집합·핵심 가치. 교집합 라벨 + 중앙 결론",
               "w": 1100,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/02_venn_2circle_overlap.html",
@@ -1421,7 +1421,7 @@
               "desc": "두 영역의 시너지. 중앙 교집합 강조",
               "w": 1200,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/03_cycle_arrow_loop.html",
@@ -1439,7 +1439,7 @@
               "desc": "DevOps·지속 개선. 8자 형태 + 양쪽 단계 노드",
               "w": 1400,
               "h": 600,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/05_hub_spoke_radial.html",
@@ -1448,7 +1448,7 @@
               "desc": "플랫폼 중심 생태계. 중앙 허브 + 6~8 스포크",
               "w": 1200,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/06_gear_interlock.html",
@@ -1457,7 +1457,7 @@
               "desc": "상호 연동 요소. 기어 3개 + 각 라벨",
               "w": 1200,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1472,7 +1472,7 @@
               "desc": "계층 구조·매슬로우형. 삼각 분할 + 우측 설명",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/02_inverted_funnel.html",
@@ -1481,7 +1481,7 @@
               "desc": "필터링·선별 과정. 역삼각 단계 + 잔존 수치",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/03_stacked_layers_tech.html",
@@ -1499,7 +1499,7 @@
               "desc": "단계별 성장 모델. 계단형 블록 + 기준 설명",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/05_iceberg_visible.html",
@@ -1508,7 +1508,7 @@
               "desc": "표면 vs 이면. 수면선 기준 상단 소 / 하단 대",
               "w": 1100,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/06_building_blocks.html",
@@ -1517,7 +1517,7 @@
               "desc": "비전-전략-과제. 비전 바 + 기둥 N + 기반 바",
               "w": 1400,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             }
           ]
         }

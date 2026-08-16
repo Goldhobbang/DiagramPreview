@@ -180,7 +180,11 @@ function render() {
     html.push(sectionHead(section));
     for (const g of groups) {
       html.push(`<h3 class="group-head">${esc(g.label)}<span class="n">${g.items.length}</span></h3>`);
-      html.push(`<div class="grid">${g.items.map(i => card(i, section.kind, section.id)).join('')}</div>`);
+      // 슬라이드는 표지·전역을 한 카드로 묶는다 — 열 수가 몇이든 쌍이 안 깨진다.
+      const cards = isSlides
+        ? pairByVariant(g.items).map(pairCard)
+        : g.items.map(i => card(i, section.kind, section.id));
+      html.push(`<div class="grid${isSlides ? ' grid-pair' : ''}">${cards.join('')}</div>`);
     }
   }
 
@@ -221,9 +225,9 @@ function card(item, kind, sectionId) {
   return kind === 'image' ? mediaCard(item) : htmlCard(item, sectionId === 'slides');
 }
 
-/* 슬라이드 템플릿 카드는 인라인 액션 대신 클릭 시 상세 패널(openDetail)을 연다 —
-   폰트·색·새창·다운로드·URL복사 5가지만 그 안에서 보여준다. */
-function htmlCard(item, isSlide) {
+/* 다이어그램·컴포넌트용. 이쪽 파일에는 자기축소 스크립트가 없으므로
+   갤러리가 크기를 알아 transform:scale로 줄인다 (기존 경로 유지). */
+function htmlCard(item) {
   const scale = thumbW / item.w;
   const thumbH = Math.round(item.h * scale);
 
@@ -236,16 +240,9 @@ function htmlCard(item, isSlide) {
               style="transform:scale(${scale})" loading="lazy"
               title="${esc(item.title)} 미리보기" scrolling="no"></iframe>`;
 
-  const actions = isSlide
-    ? ''
-    : `<div class="card-actions">
-    <a href="${item.path}" target="_blank" rel="noopener">새 창</a>
-    <button class="primary" data-copy="${item.path}">URL 복사</button>
-  </div>`;
-
   return `
-<article class="card"${isSlide ? ` data-detail="${item.path}" role="button" tabindex="0"` : ''}>
-  <div class="thumb" style="height:${thumbH}px">${inner}</div>
+<article class="card">
+  <div class="thumb thumb-scaled" style="height:${thumbH}px">${inner}</div>
   <div class="card-body">
     <div class="card-head">
       <span class="card-title">${esc(item.title)}</span>
@@ -254,7 +251,57 @@ function htmlCard(item, isSlide) {
     ${item.desc ? `<p class="card-desc">${esc(item.desc)}</p>` : ''}
     <p class="card-path">${esc(item.file)} · ${item.w}×${item.h}</p>
   </div>
-  ${actions}
+  <div class="card-actions">
+    <a href="${item.path}" target="_blank" rel="noopener">새 창</a>
+    <button class="primary" data-copy="${item.path}">URL 복사</button>
+  </div>
+</article>`;
+}
+
+/* v1_01_cover.html + v1_02_global.html → 한 쌍.
+   120개 전부 `v\d+_(01_cover|02_global).html` 형식이고 제목이 "… · 표지/전역"임을 확인했다.
+   manifest 스키마는 그대로 두고 파일명으로만 짝을 찾는다. */
+function pairByVariant(items) {
+  const by = new Map();
+  for (const it of items) {
+    const v = (it.file.match(/^(v\d+)_/) || [])[1] || it.file;
+    const slot = by.get(v) || { variant: v };
+    slot[it.file.includes('_01_cover') ? 'cover' : 'global'] = it;
+    by.set(v, slot);
+  }
+  return [...by.values()];
+}
+
+/* 슬라이드 카드 — 베리에이션 1개 = 카드 1개.
+   썸네일 크기를 지정하지 않는다. 템플릿이 자기축소 스크립트로 알아서 채운다. */
+function pairCard(pair) {
+  const lead = pair.cover || pair.global;          // 검색 필터로 한쪽만 남을 수 있다
+  const title = lead.title.replace(/\s*·\s*(표지|전역)\s*$/, '');
+  const desc = (pair.cover || lead).desc;
+
+  const shots = [
+    ['표지', pair.cover],
+    ['전역', pair.global],
+  ].filter(([, it]) => it).map(([label, it]) => `
+    <figure class="shot" data-preview="${it.path}" title="${esc(label)} 크게 보기">
+      <div class="thumb">${it.status === 'todo'
+        ? `<div class="thumb-placeholder"><span>미착수</span></div>`
+        : `<iframe src="${it.path}" loading="lazy" scrolling="no"
+                   title="${esc(it.title)} 미리보기"></iframe>`}</div>
+      <figcaption>${label}</figcaption>
+    </figure>`).join('');
+
+  return `
+<article class="card card-pair" data-detail="${lead.path}" role="button" tabindex="0">
+  <div class="pair-thumbs">${shots}</div>
+  <div class="card-body">
+    <div class="card-head">
+      <span class="card-title">${esc(title)}</span>
+      <span class="status ${lead.status}">${lead.status}</span>
+    </div>
+    ${desc ? `<p class="card-desc">${esc(desc)}</p>` : ''}
+    <p class="card-path">${esc(pair.variant)} · ${lead.w}×${lead.h}</p>
+  </div>
 </article>`;
 }
 
@@ -349,16 +396,30 @@ function boxSample(t) {
   </div>`;
 }
 
-/* --- 상세 패널: 슬라이드 카드 전용 (폰트·색·새창·다운로드·URL복사 5가지만) --- */
+/* --- 상세 패널: 확대 미리보기 + 폰트·색·바로가기 -----------------------
+   새 오버레이를 만들지 않는다 — #detail이 이미 ✕·Escape·backdrop 닫기를 처리한다.
+   ---------------------------------------------------------------------- */
 function onDetailOpenClick(e) {
-  const el = e.target.closest('[data-detail]');
-  if (!el) return;
-  const item = allItems().find(i => i.path === el.dataset.detail);
-  if (item) openDetail(item);
+  const card = e.target.closest('[data-detail]');
+  if (!card) return;
+  // 썸네일을 눌렀으면 그 장을, 본문을 눌렀으면 기본값(표지)을 크게 연다.
+  const shot = e.target.closest('[data-preview]');
+  openDetail(card.dataset.detail, shot ? shot.dataset.preview : card.dataset.detail);
 }
 
-async function openDetail(item) {
-  const merged = await resolveStyleTokens(item);
+async function openDetail(leadPath, showPath) {
+  const items = allItems();
+  const lead = items.find(i => i.path === leadPath);
+  if (!lead) return;
+
+  // 같은 폴더의 표지·전역을 모은다. 토큰은 둘이 동일함을 check-templates.js가 보증한다.
+  const dir = leadPath.slice(0, leadPath.lastIndexOf('/'));
+  const variant = (lead.file.match(/^(v\d+)_/) || [])[1];
+  const siblings = variant
+    ? items.filter(i => i.path.startsWith(dir + '/') && i.file.startsWith(variant + '_'))
+    : [lead];
+
+  const merged = await resolveStyleTokens(lead);
   const byName = n => merged.find(t => t.name === n);
 
   const fontTok = byName('--font-sans');
@@ -369,9 +430,26 @@ async function openDetail(item) {
   ];
   const colorToks = colorNames.map(byName).filter(Boolean);
 
+  const kindOf = it => (it.file.includes('_01_cover') ? '표지' : '전역');
+  const shown = siblings.find(i => i.path === showPath) || lead;
+
+  const tabs = siblings.length > 1
+    ? `<div class="preview-tabs">${siblings.map(it =>
+        `<button data-show="${it.path}" aria-pressed="${it.path === shown.path}">${kindOf(it)}</button>`
+      ).join('')}</div>`
+    : '';
+
   $detailBody.innerHTML = `
-    <h2 class="detail-title">${esc(item.title)}</h2>
-    <p class="card-path">${esc(item.file)} · ${item.w}×${item.h}</p>
+    <div class="detail-head">
+      <h2 class="detail-title">${esc(lead.title.replace(/\s*·\s*(표지|전역)\s*$/, ''))}</h2>
+      ${tabs}
+    </div>
+
+    <div class="detail-preview">
+      <iframe id="preview-frame" src="${shown.path}" title="${esc(shown.title)} 확대 미리보기"
+              scrolling="no"></iframe>
+    </div>
+    <p class="card-path" id="preview-path">${esc(shown.file)} · ${shown.w}×${shown.h}</p>
 
     <h3 class="group-head">폰트 정보</h3>
     <div class="token-grid font">${fontTok ? fontSample(fontTok) : '<p class="empty-group">폰트 정보를 읽지 못했습니다.</p>'}</div>
@@ -380,12 +458,30 @@ async function openDetail(item) {
     <div class="token-grid">${colorToks.map(swatch).join('')}</div>
 
     <h3 class="group-head">바로가기</h3>
-    <div class="detail-actions">
-      <a href="${item.path}" target="_blank" rel="noopener">새 창에서 보기</a>
-      <a href="${item.path}" download="${esc(item.file)}">HTML 다운로드</a>
-      <button class="primary" data-copy="${item.path}">URL 복사</button>
-    </div>
+    ${siblings.map(it => `
+      <div class="detail-actions">
+        <span class="actions-label">${kindOf(it)}</span>
+        <a href="${it.path}" target="_blank" rel="noopener">새 창에서 보기</a>
+        <a href="${it.path}" download="${esc(it.file)}">HTML 다운로드</a>
+        <button class="primary" data-copy="${it.path}">URL 복사</button>
+      </div>`).join('')}
   `;
+
+  // 탭은 iframe src만 갈아끼운다 — 토큰 정보는 표지·전역이 같으므로 다시 그릴 필요가 없다.
+  const $frame = $detailBody.querySelector('#preview-frame');
+  const $path = $detailBody.querySelector('#preview-path');
+  for (const btn of $detailBody.querySelectorAll('[data-show]')) {
+    btn.addEventListener('click', () => {
+      const it = siblings.find(i => i.path === btn.dataset.show);
+      if (!it) return;
+      $frame.src = it.path;
+      $path.textContent = `${it.file} · ${it.w}×${it.h}`;
+      for (const b of $detailBody.querySelectorAll('[data-show]')) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      }
+    });
+  }
+
   for (const el of $detailBody.querySelectorAll('[data-copy]')) {
     el.addEventListener('click', () => copyUrl(el.dataset.copy));
   }

@@ -72,23 +72,40 @@ HTML5 스펙상 DOCTYPE 앞 주석은 허용되며 표준 모드가 유지된다
 <head>
   <meta charset="UTF-8">
   <title>가로 단계 흐름</title>
-  <link rel="stylesheet" href="../../../03_ASSETS/css/00_reset.css">
-  <link rel="stylesheet" href="../../../03_ASSETS/css/01_variables.css">
-  <link rel="stylesheet" href="../../../03_ASSETS/css/02_slide_base.css">
-  <link rel="stylesheet" href="../../../03_ASSETS/css/03_components.css">
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음. -->
   <style>
-    /* 이 다이어그램에만 필요한 스타일. 여기서도 색은 변수로. */
+/* ===== 베이스 (reset + variables + .component + components) ===== */
+/* 기존 다이어그램 하나에서 이 블록을 통째로 복사해 온다 */
+
+/* ===== 이 다이어그램 전용 ===== */
+    .component { width: 1400px; height: 700px; }
   </style>
 </head>
 <body>
   <div class="component">
     <!-- 내용 -->
   </div>
+  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
+       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
+  <script>
+    (function () {
+      var el = document.querySelector('.component');
+      if (!el) return;
+      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
+      function fit() {
+        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
+      }
+      addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
 </body>
 </html>
 ```
 
-경로가 `../../../` (3단계)인 것에 주의 — 다이어그램은 카테고리 폴더 안에 한 단계 더 들어있다.
+**외부 CSS 링크는 쓰지 않는다.** 슬라이드 템플릿과 마찬가지로 파일 하나로 열리고, 하나로 Figma에
+들어가야 한다. 베이스 CSS는 `03_ASSETS/css/`(reset · variables · `.component` · components)에서 온
+것이고, 토큰을 고칠 때는 그 원본과 각 HTML의 인라인 블록을 함께 갱신한다.
 
 ---
 
@@ -96,6 +113,7 @@ HTML5 스펙상 DOCTYPE 앞 주석은 허용되며 표준 모드가 유지된다
 
 ```bash
 node tools/build-gallery.js     # 목록 재생성
+node tools/check-templates.js   # @card 마커 · 외부 CSS 링크 · self-fit 검사
 npx serve -l 8000 .             # localhost:8000/docs/ 에서 확인
 ```
 

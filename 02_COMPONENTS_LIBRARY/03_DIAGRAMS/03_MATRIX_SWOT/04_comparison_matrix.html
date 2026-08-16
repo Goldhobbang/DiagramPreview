@@ -1,1 +1,500 @@
 <!-- @card 비교 매트릭스 | 다항목 비교. 셀에 ●◐○ 평가 심볼 | 1400x700 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>비교 매트릭스</title>
+    <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       공통 토큰을 고치려면 03_ASSETS/css/를 고친 뒤 이 블록도 함께 갱신한다. -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+
+/* ===== 03_ASSETS/css/02_slide_base.css — .component 캔버스만 ===== */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+
+/* ===== 이 다이어그램 전용 ===== */
+    .component { width: 1400px; height: 700px; }
+
+    .cmp-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--sp-4);
+    }
+    .cmp-heading {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-semibold);
+    }
+    .cmp-legend {
+      display: flex;
+      gap: var(--sp-4);
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+
+    .cmp { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .cmp-row { display: flex; gap: var(--sp-2); align-items: stretch; }
+
+    .cmp-cell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-1);
+      height: 72px;
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      text-align: center;
+    }
+    .cmp-criteria {
+      width: 300px;
+      flex: none;
+      align-items: flex-start;
+      justify-content: center;
+      background: none;
+      padding-left: var(--sp-2);
+    }
+    .cmp-criteria-name {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+      line-height: 1.3;
+    }
+    .cmp-criteria-note {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+
+    /* 헤더 행 */
+    .cmp-row.is-header .cmp-cell {
+      background: var(--color-accent);
+      color: var(--color-text-invert);
+      height: 80px;
+    }
+    .cmp-row.is-header .cmp-criteria { background: none; }
+    .cmp-vendor {
+      font-size: var(--fs-body-l);
+      font-weight: var(--fw-bold);
+    }
+    .cmp-vendor-sub {
+      font-size: var(--fs-caption);
+      opacity: 0.85;
+    }
+
+    .cmp-mark {
+      font-size: var(--fs-h3);
+      line-height: 1;
+      color: var(--c, var(--color-data-1));
+    }
+    .cmp-note {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+
+    /* 총평 행 */
+    .cmp-row.is-total .cmp-cell {
+      background: var(--color-bg);
+      border: var(--border-w-thick) solid var(--color-border);
+    }
+    .cmp-row.is-total .cmp-cell.is-pick { border-color: var(--color-data-1); }
+    .cmp-score {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-bold);
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <div class="cmp-head">
+      <p class="cmp-heading">사내 데이터 카탈로그 솔루션 비교</p>
+      <div class="cmp-legend">
+        <span>● 충족</span><span>◐ 부분 충족</span><span>○ 미흡</span>
+      </div>
+    </div>
+
+    <div class="cmp">
+
+      <div class="cmp-row is-header">
+        <div class="cmp-cell cmp-criteria"></div>
+        <div class="cmp-cell">
+          <span class="cmp-vendor">A 솔루션</span>
+          <span class="cmp-vendor-sub">SaaS · 연 8,400만원</span>
+        </div>
+        <div class="cmp-cell">
+          <span class="cmp-vendor">B 솔루션</span>
+          <span class="cmp-vendor-sub">구축형 · 연 6,200만원</span>
+        </div>
+        <div class="cmp-cell">
+          <span class="cmp-vendor">오픈소스 자체 구축</span>
+          <span class="cmp-vendor-sub">인건비 환산 5,000만원</span>
+        </div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell cmp-criteria">
+          <p class="cmp-criteria-name">기존 DW 연동</p>
+          <p class="cmp-criteria-note">커넥터 제공 범위</p>
+        </div>
+        <div class="cmp-cell d1"><span class="cmp-mark">●</span><span class="cmp-note">기본 제공</span></div>
+        <div class="cmp-cell d1"><span class="cmp-mark">●</span><span class="cmp-note">기본 제공</span></div>
+        <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">직접 개발</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell cmp-criteria">
+          <p class="cmp-criteria-name">권한 · 감사 로그</p>
+          <p class="cmp-criteria-note">내부 통제 요건</p>
+        </div>
+        <div class="cmp-cell d1"><span class="cmp-mark">●</span><span class="cmp-note">감사 대응 완료</span></div>
+        <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">추가 모듈 필요</span></div>
+        <div class="cmp-cell d5"><span class="cmp-mark">○</span><span class="cmp-note">직접 구현</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell cmp-criteria">
+          <p class="cmp-criteria-name">도입 소요 기간</p>
+          <p class="cmp-criteria-note">파일럿까지</p>
+        </div>
+        <div class="cmp-cell d1"><span class="cmp-mark">●</span><span class="cmp-note">6주</span></div>
+        <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">12주</span></div>
+        <div class="cmp-cell d5"><span class="cmp-mark">○</span><span class="cmp-note">20주 이상</span></div>
+      </div>
+
+      <div class="cmp-row">
+        <div class="cmp-cell cmp-criteria">
+          <p class="cmp-criteria-name">3년 총소유비용</p>
+          <p class="cmp-criteria-note">운영 인력 포함</p>
+        </div>
+        <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">25.2억</span></div>
+        <div class="cmp-cell d1"><span class="cmp-mark">●</span><span class="cmp-note">21.6억</span></div>
+        <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">23.0억</span></div>
+      </div>
+
+      <div class="cmp-row is-total">
+        <div class="cmp-cell cmp-criteria">
+          <p class="cmp-criteria-name">종합 평가</p>
+          <p class="cmp-criteria-note">가중 합산 100점</p>
+        </div>
+        <div class="cmp-cell is-pick"><span class="cmp-score">86점</span><span class="cmp-note">권고안</span></div>
+        <div class="cmp-cell"><span class="cmp-score">74점</span><span class="cmp-note">차선</span></div>
+        <div class="cmp-cell"><span class="cmp-score">58점</span><span class="cmp-note">비권고</span></div>
+      </div>
+
+    </div>
+  </div>
+  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
+       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
+  <script>
+    (function () {
+      var el = document.querySelector('.component');
+      if (!el) return;
+      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
+      function fit() {
+        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
+      }
+      addEventListener('resize', fit);
+      fit();
+    })();
+  </script>
+</body>
+</html>
