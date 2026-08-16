@@ -17,6 +17,12 @@ const $detail = document.getElementById('detail');
 const $detailBody = document.getElementById('detail-body');
 const $detailClose = document.getElementById('detail-close');
 
+/* 캐시 버스터. manifest.buildId를 붙여 iframe·CSS가 옛 사본으로 뜨는 걸 막는다.
+   링크·URL 복사에는 붙이지 않는다 — 사람이 쓰는 주소는 깨끗해야 한다. */
+function v(p) {
+  return manifest && manifest.buildId ? `${p}?v=${manifest.buildId}` : p;
+}
+
 let manifest = null;
 let tokens = null;          // 01_variables.css에서 런타임에 추출
 let activeSection = 'ALL';
@@ -28,7 +34,9 @@ init();
 
 async function init() {
   try {
-    const res = await fetch('manifest.json');
+    // no-cache: 매니페스트만은 항상 서버에 물어본다 (ETag 재검증).
+    // 나머지 파일은 여기서 얻은 buildId로 ?v=를 붙여 캐시를 깬다 — v() 참고.
+    const res = await fetch('manifest.json', { cache: 'no-cache' });
     if (!res.ok) throw new Error(`manifest.json ${res.status}`);
     manifest = await res.json();
   } catch (err) {
@@ -59,7 +67,7 @@ async function init() {
    ---------------------------------------------------------------------- */
 async function loadTokens() {
   try {
-    const res = await fetch(VARS_CSS);
+    const res = await fetch(v(VARS_CSS));
     if (!res.ok) throw new Error(String(res.status));
     const css = await res.text();
 
@@ -236,7 +244,7 @@ function htmlCard(item) {
     ? `<div class="thumb-placeholder">
          <span>미착수</span><span class="dim">${item.w} × ${item.h}</span>
        </div>`
-    : `<iframe src="${item.path}" width="${item.w}" height="${item.h}"
+    : `<iframe src="${v(item.path)}" width="${item.w}" height="${item.h}"
               style="transform:scale(${scale})" loading="lazy"
               title="${esc(item.title)} 미리보기" scrolling="no"></iframe>`;
 
@@ -286,7 +294,7 @@ function pairCard(pair) {
     <figure class="shot" data-preview="${it.path}" title="${esc(label)} 크게 보기">
       <div class="thumb">${it.status === 'todo'
         ? `<div class="thumb-placeholder"><span>미착수</span></div>`
-        : `<iframe src="${it.path}" loading="lazy" scrolling="no"
+        : `<iframe src="${v(it.path)}" loading="lazy" scrolling="no"
                    title="${esc(it.title)} 미리보기"></iframe>`}</div>
       <figcaption>${label}</figcaption>
     </figure>`).join('');
@@ -474,7 +482,7 @@ async function openDetail(leadPath, showPath) {
     btn.addEventListener('click', () => {
       const it = siblings.find(i => i.path === btn.dataset.show);
       if (!it) return;
-      $frame.src = it.path;
+      $frame.src = v(it.path);
       $path.textContent = `${it.file} · ${it.w}×${it.h}`;
       for (const b of $detailBody.querySelectorAll('[data-show]')) {
         b.setAttribute('aria-pressed', String(b === btn));
@@ -504,7 +512,7 @@ async function resolveStyleTokens(item) {
 
   const byName = new Map((tokens || []).map(t => [t.name, t.value]));
   try {
-    const res = await fetch(item.path);
+    const res = await fetch(v(item.path));
     if (res.ok) {
       const html = await res.text();
       // v1_01_cover.html → v1. 없으면 :root 블록만 본다.

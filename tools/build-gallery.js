@@ -134,7 +134,10 @@ function main() {
     sections.push({ id: spec.id, label: spec.label, kind: spec.kind, groups });
   }
 
-  const manifest = { sections };
+  // 빌드 도장. 갤러리가 iframe·CSS 요청에 ?v=로 붙여 브라우저 캐시를 깬다 —
+  // 이게 없으면 GitHub Pages에 새 파일이 올라가도 방문자는 옛 사본을 계속 본다.
+  const buildId = new Date().toISOString().replace(/\D/g, '').slice(0, 14);
+  const manifest = { buildId, sections };
   fs.writeFileSync(OUT, JSON.stringify(manifest, null, 2) + '\n', 'utf8');
 
   report(sections, total, done);
