@@ -1,0 +1,639 @@
+<!-- @card V3 Lilac Slab · 전역 | 떠 있는 캡슐 헤더 · 2열 그리드 유지 · 물결 마감 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Neo-Brutalism V3 · 전역</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       토큰을 고치려면 이 파일을 직접 고친다 (표지·전역 2장을 함께). -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+/* ===== 03_ASSETS/css/02_slide_base.css ===== */
+/* ==========================================================================
+   02_slide_base.css — 슬라이드 캔버스 + 그리드 + 타이포 기본
+   ========================================================================== */
+
+/* --- 슬라이드 캔버스 ------------------------------------------------- */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;                /* ★ Figma와 동일하게 잘라 보여줘 오버플로우를 조기에 발견 */
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+}
+
+/* 세이프 영역이 적용된 콘텐츠 래퍼 */
+.slide-inner {
+  position: absolute;
+  inset: var(--slide-pad);
+  width: var(--content-w);
+  height: var(--content-h);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 컴포넌트 캔버스 (다이어그램 등 슬라이드보다 작은 단위) ---------- */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* --- 그리드 ---------------------------------------------------------- */
+/* Figma에서 Auto Layout으로 변환되지 않으므로, 다이어그램 내부보다는
+   슬라이드 최상위 레이아웃에만 쓴다. 내부는 .row / .col(flex)을 쓸 것. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--grid-gutter);
+}
+
+/* flex 기반 — 이쪽이 Figma Auto Layout으로 변환된다 (권장) */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--grid-gutter);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.row > .flex-1 { flex: 1; }
+.row > .flex-2 { flex: 2; }
+.row > .flex-3 { flex: 3; }
+
+/* --- 타이포 유틸 ----------------------------------------------------- */
+.t-display {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-body-l { font-size: var(--fs-body-l); }
+.t-body-m { font-size: var(--fs-body-m); }
+
+.t-caption {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.t-muted  { color: var(--color-text-muted); }
+.t-accent { color: var(--color-accent); }
+.t-center { text-align: center; }
+.t-right  { text-align: right; }
+
+/* 숫자 세로 정렬 — KPI를 나란히 놓으면 폭이 제각각인 숫자가 들쭉날쭉해 보인다.
+   1과 8의 폭을 같게 고정한다. 한글 폰트는 대개 이 기능을 지원한다. */
+.t-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- 디버그 모드 ----------------------------------------------------- */
+/* <body class="debug"> 로 켠다. 모든 박스 경계를 표시해 오버플로우를 잡는다. */
+.debug .slide,
+.debug .component {
+  outline: 2px solid rgba(255, 0, 0, 0.6);
+}
+
+.debug .slide *,
+.debug .component * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/* 세이프 영역 시각화 */
+.debug .slide::after {
+  content: "";
+  position: absolute;
+  inset: var(--slide-pad);
+  outline: 1px dashed rgba(0, 128, 255, 0.8);
+  pointer-events: none;
+}
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v1 / .v2 / .v3) ===== */
+/* ==========================================================================
+   11_NEO_BRUTALISM — 날것 태도 + 형광 원색 + 하드 섀도
+   기획: 00_GUIDES/PLANS/11_NEO_BRUTALISM.md
+
+   09번 브루탈리즘과 다르다: 여기는 3px 검정 보더 + blur 0 오프셋 그림자 + 팝 컬러.
+   밝고 시끄럽고 친절한 쪽.
+   3종 구조: V1 계단 오프셋 / V2 회전 산포 / V3 엄격한 2열 그리드.
+   ========================================================================== */
+
+/* 공통 하드 섀도 스펙 — blur 0, 확산 0. 이 값이 정체성이다. */
+.v1, .v2, .v3 {
+  --nb-border: 3px;
+  --nb-shadow: 6px 6px 0 var(--color-border);
+  --nb-shadow-lg: 10px 10px 0 var(--color-border);
+  --shadow-sm: var(--nb-shadow);
+  --shadow-md: var(--nb-shadow-lg);
+}
+
+/* --- V1 Yellow Block — 옐로 팝, 계단 오프셋 스택 --------------------- */
+.v1 {
+  --color-bg: #ffe500;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f2f2f2;
+  --color-text: #000000;
+  --color-text-muted: #3d3d3d;
+  --color-text-invert: #ffffff;
+  --color-accent: #ff5c00;
+  --color-accent-sub: #0066ff;
+  --color-border: #000000;
+
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --v-mint: #00d9a3;
+}
+
+/* --- V2 Cyan Punch — 시안, 회전 스티커 산포 ------------------------- */
+.v2 {
+  --color-bg: #fff8e7;              /* 내지는 크림. 표지만 시안 풀블리드. */
+  --color-surface: #ffffff;
+  --color-surface-alt: #fff8e7;
+  --color-text: #000000;
+  --color-text-muted: #3d3d3d;
+  --color-text-invert: #ffffff;
+  --color-accent: #ff2e63;
+  --color-accent-sub: #8b5cf6;
+  --color-border: #000000;
+
+  --radius-sm: 8px;
+  --radius-md: 24px;
+  --radius-lg: 24px;
+  --v-cyan: #00e5ff;
+  --v-yellow: #ffd600;
+}
+
+/* --- V3 Lilac Slab — 파스텔, 엄격한 2열 그리드 ---------------------- */
+.v3 {
+  --color-bg: #c4b5fd;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f3ff;
+  --color-text: #1e1b2e;            /* 순검정 금지 — 파스텔과 조화 */
+  --color-text-muted: #4a4560;
+  --color-text-invert: #ffffff;
+  --color-accent: #f97316;
+  --color-accent-sub: #22c55e;
+  --color-border: #1e1b2e;
+
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 16px;
+  --v-lemon: #fde047;
+}
+  </style>
+  <style>
+    .check-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.18;
+      background-image:
+        linear-gradient(to right,  #fff 2px, transparent 2px),
+        linear-gradient(to bottom, #fff 2px, transparent 2px);
+      background-size: 96px 96px;
+    }
+
+    /* 떠 있는 캡슐 헤더 — 전폭 바가 아니라 좌우 여백을 둔 카드 */
+    .page-head {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      top: 40px;
+      height: 96px;
+      background: var(--color-surface);
+      border: var(--nb-border) solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: 5px 5px 0 var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-6);
+    }
+    .page-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      border: var(--nb-border) solid var(--color-border);
+      color: var(--color-text-invert);
+      font-weight: 900;
+    }
+
+    .page-inner { inset: 184px 60px 120px; width: auto; height: auto; gap: var(--sp-5); }
+
+    /* 2열 그리드 유지 — 거터 32px 고정 */
+    .grid2 { display: grid; grid-template-columns: 1fr 2fr; gap: var(--sp-5); flex: 1; }
+    .panel {
+      background: var(--color-surface);
+      border: var(--nb-border) solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--nb-shadow);
+      padding: var(--sp-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+    /* 파스텔 컬러 패널은 페이지당 최대 2장 */
+    .panel.lemon { background: var(--v-lemon); }
+    .panel.green { background: var(--color-accent-sub); color: var(--color-text-invert); }
+
+    .panel-title { font-size: var(--fs-h3); font-weight: var(--fw-bold); }
+    .panel-body { font-size: var(--fs-body-m); }
+
+    .rows { display: flex; flex-direction: column; gap: var(--sp-4); }
+    .row { display: flex; align-items: center; gap: var(--sp-4); font-size: var(--fs-body-l); }
+    .tick { flex: none; width: 26px; height: 26px; }
+    .row-fig { margin-left: auto; font-size: var(--fs-h3); font-weight: 900; }
+
+    /* 강조 수치: 아래 오렌지 굵은 밑줄 블록 */
+    .big-fig {
+      font-size: 72px;
+      font-weight: var(--fw-bold);
+      line-height: 1.1;
+      display: inline-block;
+      border-bottom: 10px solid var(--color-accent);
+    }
+
+    .wave-strip { position: absolute; left: 0; right: 0; bottom: 0; height: 56px; }
+  </style>
+</head>
+<body>
+  <div class="slide v3">
+
+    <div class="check-bg"></div>
+
+    <div class="page-head">
+      <h2 class="t-h2">캠페인 실행 구조</h2>
+      <div class="page-circle t-nums">03</div>
+    </div>
+
+    <div class="slide-inner page-inner">
+      <div class="grid2">
+        <div class="panel lemon">
+          <p class="panel-title">핵심 지표</p>
+          <p class="panel-body">세 채널의 기여도 합계</p>
+          <p class="big-fig t-nums">1.24M</p>
+          <p class="panel-body">누적 도달 · 전월 대비 +12.4%</p>
+        </div>
+
+        <div class="panel">
+          <p class="panel-title">채널은 셋, 메시지는 하나</p>
+          <div class="rows">
+            <div class="row">
+              <svg class="tick" viewBox="0 0 26 26" fill="none" stroke="#1e1b2e" stroke-width="4"
+                   stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 L10 20 L22 6"/></svg>
+              인지 — 노출 채널 확장
+              <span class="row-fig t-nums">42%</span>
+            </div>
+            <div class="row">
+              <svg class="tick" viewBox="0 0 26 26" fill="none" stroke="#1e1b2e" stroke-width="4"
+                   stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 L10 20 L22 6"/></svg>
+              고려 — 비교 근거 제공
+              <span class="row-fig t-nums">28%</span>
+            </div>
+            <div class="row">
+              <svg class="tick" viewBox="0 0 26 26" fill="none" stroke="#1e1b2e" stroke-width="4"
+                   stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 L10 20 L22 6"/></svg>
+              전환 — 단일 랜딩 집결
+              <span class="row-fig t-nums">30%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="wave-strip" viewBox="0 0 1920 56" preserveAspectRatio="none">
+      <path d="M0 56 L0 22 C240 -8, 480 52, 720 22 C960 -8, 1200 52, 1440 22
+               C1680 -8, 1800 40, 1920 22 L1920 56 Z" fill="#1e1b2e"/>
+    </svg>
+
+  </div>
+</body>
+</html>

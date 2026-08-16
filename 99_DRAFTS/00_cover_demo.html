@@ -1,0 +1,225 @@
+<!-- @card 간지 데모 | 표지 + 전역(섹션 구분) 간지 · 클릭 토글 프리뷰 | 1920x1080 ×2 -->
+<!--
+  99_DRAFTS 전용 인터랙션 데모. 저장소 규칙 "슬라이드 1장 = HTML 1개"의 예외 —
+  프리뷰 목적으로 한 파일에 .slide 2장을 담는다. 갤러리 매니페스트에 넣지 않는다.
+  스타일: 02_MINIMAL_MONO (00_GUIDES/06_STYLE_IDENTITY.md)
+
+  폰트 (임포트 전 아래 링크에서 받아 Figma에 설치할 것.
+  로컬 프리뷰에서만 CDN(pretendard) 사용, 임포트 시엔 로컬 폰트 사용):
+  | 용도      | 폰트           | 라이선스    | 다운로드 |
+  | 본문/제목 | Pretendard     | SIL OFL 1.1 | https://github.com/orioncactus/pretendard |
+  | 대체      | Noto Sans KR   | SIL OFL 1.1 | https://fonts.google.com/noto/specimen/Noto+Sans+KR |
+  | 코드      | JetBrains Mono | Apache 2.0  | https://www.jetbrains.com/lp/mono/ |
+
+  핵심 헥스 (정보 표기용 텍스트. 스타일링에는 var(--color-*)만 사용):
+  --color-bg #FFFFFF · --color-text #111111 · --color-text-muted #6B6B6B ·
+  --color-border #111111 · --color-accent #111111
+-->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>간지 데모 — Minimal Mono</title>
+  <link rel="stylesheet" href="../03_ASSETS/css/00_reset.css">
+  <link rel="stylesheet" href="../03_ASSETS/css/01_variables.css">
+  <link rel="stylesheet" href="../03_ASSETS/css/02_slide_base.css">
+  <link rel="stylesheet" href="../03_ASSETS/css/03_components.css">
+  <link rel="stylesheet" href="../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/_style.css">
+  <!-- 프리뷰 전용 CDN. 임포트 전 제거하고 로컬 폰트 사용 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <style>
+    /* --- 데모 스테이지 (프리뷰 전용) --------------------------------- */
+    .stage { cursor: pointer; }
+    #global-slide { display: none; }
+    #global-slide.open {
+      display: block;
+      /* 표지→전역 페이지 전환 1회만 허용된 애니메이션.
+         00_reset.css가 animation:none!important로 전부 끄므로
+         데모에서만 !important로 되살린다 (임포트 전 script와 함께 제거) */
+      animation: demo-fade 280ms ease-out !important;
+    }
+    @keyframes demo-fade { from { opacity: 0; } to { opacity: 1; } }
+
+    /* --- 표지 ---------------------------------------------------------- */
+    .cvr-inner { justify-content: space-between; }
+
+    .cvr-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cvr-brand { display: flex; align-items: center; gap: var(--sp-3); }
+    .cvr-org {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-muted);
+    }
+
+    .cvr-main { display: flex; flex-direction: column; gap: var(--sp-5); }
+    .cvr-kicker {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text);
+    }
+    .cvr-title { max-width: 1400px; }
+    .cvr-sub {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-regular);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .cvr-foot {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+      border-top: var(--border-w) solid var(--color-border);
+      padding-top: var(--sp-5);
+    }
+    .cvr-meta { display: flex; justify-content: space-between; align-items: flex-end; }
+    .cvr-meta-row { display: flex; gap: var(--sp-8); }
+    .cvr-meta-item { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .cvr-meta-label {
+      font-size: var(--fs-caption);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-muted);
+    }
+    .cvr-meta-value {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+    }
+
+    /* --- 전역 페이지: 섹션 구분 간지 ----------------------------------- */
+    .sec-inner { justify-content: space-between; }
+
+    .sec-main { display: flex; flex-direction: column; gap: var(--sp-5); }
+    .sec-num {
+      font-size: var(--fs-display);
+      font-weight: var(--fw-regular);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-text-muted);
+    }
+    .sec-title { max-width: 1200px; }
+    .sec-sub {
+      font-size: var(--fs-body-l);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    .sec-foot { display: flex; flex-direction: column; gap: var(--sp-4); }
+    .sec-progress { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .sec-progress-labels { display: flex; }
+    .sec-progress-labels p {
+      flex: 1;
+      font-size: var(--fs-caption);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-muted);
+    }
+    .sec-progress-labels p.now {
+      color: var(--color-text);
+      font-weight: var(--fw-bold);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+
+    <!-- ① 표지 — 기본 노출 -->
+    <div class="slide" id="cover-slide">
+      <div class="slide-inner cvr-inner">
+
+        <div class="cvr-head">
+          <div class="cvr-brand">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <rect x="2" y="2" width="32" height="32" stroke="var(--color-text)" stroke-width="2"/>
+              <rect x="11" y="11" width="14" height="14" fill="var(--color-text)"/>
+            </svg>
+            <p class="cvr-org">서울대학교 데이터사이언스 대학원</p>
+          </div>
+          <p class="cvr-org">INTERNAL REVIEW · 2026</p>
+        </div>
+
+        <div class="cvr-main">
+          <svg width="96" height="2" viewBox="0 0 96 2">
+            <line x1="0" y1="1" x2="96" y2="1" stroke="var(--color-border)" stroke-width="2"/>
+          </svg>
+          <p class="cvr-kicker">2026 상반기 연구 중간 보고</p>
+          <h1 class="t-display cvr-title">국내 물류 수요 예측 모델의<br>재현성 검증</h1>
+          <p class="cvr-sub">데이터 구성 · 모델 비교 · 한계와 다음 단계</p>
+        </div>
+
+        <div class="cvr-foot">
+          <div class="cvr-meta">
+            <div class="cvr-meta-row">
+              <div class="cvr-meta-item">
+                <p class="cvr-meta-label">PRESENTER</p>
+                <p class="cvr-meta-value">정하윤 · 박사과정</p>
+              </div>
+              <div class="cvr-meta-item">
+                <p class="cvr-meta-label">DATE</p>
+                <p class="cvr-meta-value">2026. 08. 20</p>
+              </div>
+              <div class="cvr-meta-item">
+                <p class="cvr-meta-label">AUDIENCE</p>
+                <p class="cvr-meta-value">연구윤리위원회</p>
+              </div>
+            </div>
+            <p class="cvr-org">ver 0.9</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ② 전역 페이지 — 섹션 구분 간지 (기본 숨김) -->
+    <div class="slide" id="global-slide">
+      <div class="slide-inner sec-inner">
+
+        <div class="cvr-head">
+          <p class="cvr-org">국내 물류 수요 예측 모델의 재현성 검증</p>
+          <p class="cvr-org">SECTION 02 / 04</p>
+        </div>
+
+        <div class="sec-main">
+          <p class="sec-num t-nums">02</p>
+          <svg width="96" height="2" viewBox="0 0 96 2">
+            <line x1="0" y1="1" x2="96" y2="1" stroke="var(--color-border)" stroke-width="2"/>
+          </svg>
+          <h2 class="t-h1 sec-title">연구 방법과 데이터</h2>
+          <p class="sec-sub">3개 공개 데이터셋 재구성 절차와 비교 모델 4종의 학습 조건</p>
+        </div>
+
+        <div class="sec-foot">
+          <div class="sec-progress">
+            <!-- 진행 표시: 4구간 중 2번째 진행 중. viewBox = 실제 px 1:1 -->
+            <svg width="1664" height="4" viewBox="0 0 1664 4">
+              <rect x="0"    y="1" width="404" height="2" fill="var(--color-text)"/>
+              <rect x="420"  y="0" width="404" height="4" fill="var(--color-text)"/>
+              <rect x="840"  y="1" width="404" height="2" fill="var(--color-border)" fill-opacity="0.25"/>
+              <rect x="1260" y="1" width="404" height="2" fill="var(--color-border)" fill-opacity="0.25"/>
+            </svg>
+            <div class="sec-progress-labels">
+              <p>01 배경과 문제</p>
+              <p class="now">02 연구 방법과 데이터</p>
+              <p>03 결과와 해석</p>
+              <p>04 한계와 다음 단계</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 임포트 전 이 script와 클릭 바인딩 제거 → 정적 표지만 임포트 -->
+  <script>
+    document.getElementById('stage').addEventListener('click', function () {
+      document.getElementById('global-slide').classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

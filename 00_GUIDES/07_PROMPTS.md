@@ -214,14 +214,20 @@ node tools/build-gallery.js
 - 12컬럼 그리드에 스냅. 2단=6+6, 3단=4+4+4, 사이드바형=4+8.
 - 콘텐츠 영역을 60~75%만 채운다. 80%를 넘으면 답답하다.
 - 본문 한 줄은 45자 이내. 1728px를 꽉 채우면 60자가 넘어 읽기 어렵다.
-- <head> 마지막에 _style.css를 링크한다. 항상 마지막이어야 오버라이드가 먹는다.
-- HTML은 3개 스타일에서 완전히 동일해야 한다. 스타일 차이는 _style.css의
-  변수 오버라이드만으로 만든다. HTML을 고쳐야 한다면 그 값을 변수로 빼야 한다는 뜻이다.
-- 스타일별 정체성은 00_GUIDES/06_STYLE_IDENTITY.md 를 따른다.
+- 자기완결형 단일 파일로 만든다. 외부 <link>를 쓰지 않고 CSS 전체를 <style>에 넣는다.
+  기존 슬라이드 하나를 복사해 시작하면 공통 CSS를 그대로 물려받는다.
+- <style> 안 순서: 공통 CSS → 테마 토큰(.v1/.v2/.v3) → 그 슬라이드의 레이아웃.
+- .slide에 베리에이션 클래스를 붙인다: <div class="slide v2">
+- 1행에 갤러리 마커를 넣는다:
+  <!-- @card V2 콘셉트명 · 표지 | 한 줄 설명 | 1920x1080 -->
+- 같은 스타일의 3 베리에이션은 화면 분할 구조가 서로 달라야 한다.
+  색만 바꾼 것은 베리에이션이 아니다. 기획은 00_GUIDES/PLANS/ 를 따른다.
 ```
 
-**작업 순서 권장**: `01_CORPORATE_BLUE`로 10개를 먼저 완성 → HTML을 나머지 두 스타일로 복사 →
-`_style.css`만으로 인상이 갈리는지 갤러리에서 확인. 안 갈리면 변수가 부족한 것이다.
+**작업 순서 권장**: 표지 1장을 먼저 끝내고 전역을 거기서 파생시킨다 →
+`node tools/check-templates.js && node tools/build-gallery.js` →
+갤러리에서 3 베리에이션을 나란히 놓고 **분할 구조가 실제로 다른지** 확인.
+색만 다르면 기획으로 되돌아간다.
 
 ---
 
@@ -258,4 +264,4 @@ node tools/build-gallery.js
 
 ---
 
-관련 문서: [05_VISUAL_GUIDE.md](05_VISUAL_GUIDE.md) · [06_STYLE_IDENTITY.md](06_STYLE_IDENTITY.md) · [04_DIAGRAM_CATALOG.md](04_DIAGRAM_CATALOG.md)
+관련 문서: [05_VISUAL_GUIDE.md](05_VISUAL_GUIDE.md) · [PLANS/](PLANS/) · [04_DIAGRAM_CATALOG.md](04_DIAGRAM_CATALOG.md)

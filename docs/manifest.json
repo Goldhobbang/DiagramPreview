@@ -6,23 +6,59 @@
       "kind": "html",
       "groups": [
         {
-          "id": "01_CORPORATE_BLUE",
-          "label": "Corporate Blue",
+          "id": "01_FLAT_DESIGN",
+          "label": "01 플랫 디자인",
           "items": [
             {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/01_cover.html",
-              "file": "01_cover.html",
-              "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "path": "../01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Primary Signal · 표지",
+              "desc": "좌62:우38 수직 분할 · 톤온톤 원 겹침",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/02_global.html",
-              "file": "02_global.html",
-              "title": "전역",
-              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Primary Signal · 전역",
+              "desc": "헤더 세로바 · 12컬럼 · 라운드 0 카드",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Coral Flat · 표지",
+              "desc": "상45:하55 반원 아치 분할 · 중앙 정렬",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Coral Flat · 전역",
+              "desc": "알약 태그 헤더 · 라운드 24px 카드 · 코너 반원",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Forest Board · 표지",
+              "desc": "전면 그린 · 중앙 아웃라인 프레임에 제목 걸침",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Forest Board · 전역",
+              "desc": "그린 풀블리드 헤더 · ㄱ자 브래킷 · 라인 테이블",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -30,23 +66,59 @@
           ]
         },
         {
-          "id": "02_MINIMAL_MONO",
-          "label": "Minimal Mono",
+          "id": "02_MINIMALISM",
+          "label": "02 미니멀리즘",
           "items": [
             {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/01_cover.html",
-              "file": "01_cover.html",
-              "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMALISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Paper White · 표지",
+              "desc": "황금분할 수평선 1개 · 제목 베이스라인 밀착",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/02_global.html",
-              "file": "02_global.html",
-              "title": "전역",
-              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMALISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Paper White · 전역",
+              "desc": "헤더 없음 · 좌우 240px 대여백 · 크기 점프로만 강조",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMALISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Sand Line · 표지",
+              "desc": "좌측 22% 수직 밴드 관통 · 세로쓰기 연도",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMALISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Sand Line · 전역",
+              "desc": "밴드가 헤더 대체 · 헤어라인 구분 · 불릿 없음",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMALISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Cool Void · 표지",
+              "desc": "중앙 아웃라인 원 · 얕은 라디얼 · 여백 80%",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/02_MINIMALISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Cool Void · 전역",
+              "desc": "중앙 축 대칭 · 아웃라인 원 안 수치 · 라디얼 절반",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -54,23 +126,59 @@
           ]
         },
         {
-          "id": "03_VIVID_GRADIENT",
-          "label": "Vivid Gradient",
+          "id": "03_DARK_MODE",
+          "label": "03 다크 모드",
           "items": [
             {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/01_cover.html",
-              "file": "01_cover.html",
-              "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "path": "../01_TEMPLATES_BY_STYLE/03_DARK_MODE/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Deep Slate · 표지",
+              "desc": "우상단 시안 글로우 오브 · 좌하단 정렬 · 등고선",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/03_VIVID_GRADIENT/02_global.html",
-              "file": "02_global.html",
-              "title": "전역",
-              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/03_DARK_MODE/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Deep Slate · 전역",
+              "desc": "표면 카드 + 보더 · 강조 1장만 시안 글로우",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_DARK_MODE/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Charcoal Amber · 표지",
+              "desc": "수평 3분할 스트라이프 · 완전 무광 · 앰버 마커",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_DARK_MODE/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Charcoal Amber · 전역",
+              "desc": "앰버 블록 헤더 · 배경 톤차 구분 · 좌40:우60",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_DARK_MODE/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Ink Violet · 표지",
+              "desc": "하단 라디얼 광원 · 중앙 대칭 · 그라데이션 텍스트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/03_DARK_MODE/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Ink Violet · 전역",
+              "desc": "중앙 대칭 헤더 · 그라데이션 보더 카드 · blur 오브",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -78,23 +186,59 @@
           ]
         },
         {
-          "id": "04_BOLD_POP",
-          "label": "Bold Pop",
+          "id": "04_GLASSMORPHISM",
+          "label": "04 글래스모피즘",
           "items": [
             {
-              "path": "../01_TEMPLATES_BY_STYLE/04_BOLD_POP/01_cover.html",
-              "file": "01_cover.html",
-              "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "path": "../01_TEMPLATES_BY_STYLE/04_GLASSMORPHISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Aurora Glass · 표지",
+              "desc": "대각 오브 3개 · -4° 기울인 유리 패널",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/04_BOLD_POP/02_global.html",
-              "file": "02_global.html",
-              "title": "전역",
-              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/04_GLASSMORPHISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Aurora Glass · 전역",
+              "desc": "전폭 유리 헤더 바 · 유리 카드 그리드",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/04_GLASSMORPHISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Ocean Frost · 표지",
+              "desc": "라이트 유리 · 수직 3열 · 가운데 풀블리드 컬럼",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/04_GLASSMORPHISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Ocean Frost · 전역",
+              "desc": "유리 알약 태그 헤더 · 좌1:우2 비대칭 2단",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/04_GLASSMORPHISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Sunset Haze · 표지",
+              "desc": "메쉬 그라데이션 · 수평 유리 바 3단 스택",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/04_GLASSMORPHISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Sunset Haze · 전역",
+              "desc": "알약 유리 헤더 · 가로 바 스택 리듬 유지",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -102,23 +246,59 @@
           ]
         },
         {
-          "id": "05_PASTEL_PLAYFUL",
-          "label": "Pastel Playful",
+          "id": "05_NEUMORPHISM",
+          "label": "05 뉴모피즘",
           "items": [
             {
-              "path": "../01_TEMPLATES_BY_STYLE/05_PASTEL_PLAYFUL/01_cover.html",
-              "file": "01_cover.html",
-              "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "path": "../01_TEMPLATES_BY_STYLE/05_NEUMORPHISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Soft Gray · 표지",
+              "desc": "중앙 돌출 패널 안의 함몰 홈 (이중 구조)",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/05_PASTEL_PLAYFUL/02_global.html",
-              "file": "02_global.html",
-              "title": "전역",
-              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/05_NEUMORPHISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Soft Gray · 전역",
+              "desc": "함몰 캡슐 헤더 · 돌출 카드 · 강조는 함몰 전환",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/05_NEUMORPHISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Warm Clay · 표지",
+              "desc": "좌38:우62 비대칭 · 불균등 반경 유기체 도형",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/05_NEUMORPHISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Warm Clay · 전역",
+              "desc": "불균등 반경 태그 · 카드마다 반경 좌우 교대",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/05_NEUMORPHISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Night Soft · 표지",
+              "desc": "다크 뉴모 · 하단 계단식 스택 · 상단 55% 여백",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/05_NEUMORPHISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Night Soft · 전역",
+              "desc": "큰 함몰 패널 안의 돌출 카드 (V1 반대 구조)",
               "w": 1920,
               "h": 1080,
               "status": "done"
@@ -126,23 +306,899 @@
           ]
         },
         {
-          "id": "06_MIDNIGHT_GOLD",
-          "label": "Midnight Gold",
+          "id": "06_CARD_BASED",
+          "label": "06 카드 기반",
           "items": [
             {
-              "path": "../01_TEMPLATES_BY_STYLE/06_MIDNIGHT_GOLD/01_cover.html",
-              "file": "01_cover.html",
-              "title": "표지",
-              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "path": "../01_TEMPLATES_BY_STYLE/06_CARD_BASED/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Clean Stack · 표지",
+              "desc": "12컬럼 대시보드 · 좌7:우5 · 반전 카드 1장",
               "w": 1920,
               "h": 1080,
               "status": "done"
             },
             {
-              "path": "../01_TEMPLATES_BY_STYLE/06_MIDNIGHT_GOLD/02_global.html",
-              "file": "02_global.html",
-              "title": "전역",
-              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "path": "../01_TEMPLATES_BY_STYLE/06_CARD_BASED/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Clean Stack · 전역",
+              "desc": "카드 상단 컬러 스트립 · 증감 지표 · 12컬럼",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/06_CARD_BASED/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Tinted Deck · 표지",
+              "desc": "틴트 3단계 · 지그재그 계단 겹침 · 정보 3장 분산",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/06_CARD_BASED/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Tinted Deck · 전역",
+              "desc": "틴트 3단계로 위계 · 행마다 좌우 오프셋 교대",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/06_CARD_BASED/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Dark Card · 표지",
+              "desc": "좌측 챕터 레일 · 대형 카드 · 2단 명도 계층",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/06_CARD_BASED/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Dark Card · 전역",
+              "desc": "레일이 진행 표시 겸용 · 명도 2단 계층 유지",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "07_3D_ILLUSTRATION",
+          "label": "07 3D · 일러스트",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/07_3D_ILLUSTRATION/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Clay Pop · 표지",
+              "desc": "무광 클레이 군집 · 좌45:우55 · 접지 그림자",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/07_3D_ILLUSTRATION/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Clay Pop · 전역",
+              "desc": "클레이 아이콘이 카드를 뚫고 나옴 · 색 있는 물렁 그림자",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/07_3D_ILLUSTRATION/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Isometric Blue · 표지",
+              "desc": "30° 평행투영 레이어 스택 · 중앙 하단 집중",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/07_3D_ILLUSTRATION/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Isometric Blue · 전역",
+              "desc": "블루 헤더 바 · 아이소 큐브 아이콘 · 3D 막대 차트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/07_3D_ILLUSTRATION/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Glossy Candy · 표지",
+              "desc": "유광 히어로 오브젝트 · 스포트라이트 · 피사계심도",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/07_3D_ILLUSTRATION/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Glossy Candy · 전역",
+              "desc": "중앙 헤더 · 물러난 반투명 카드 · 축소 오브젝트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "08_MAXIMALISM",
+          "label": "08 맥시멀리즘",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/08_MAXIMALISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Baroque Jewel · 표지",
+              "desc": "좌우 완전 대칭 액자 · 다마스크 · 금속 그라데이션",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/08_MAXIMALISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Baroque Jewel · 전역",
+              "desc": "중앙 대칭 헤더 · 금 아웃라인 박스 · 마름모 불릿",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/08_MAXIMALISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Tropical Riot · 표지",
+              "desc": "45° 대각 밴드 3개 · 잎 컷아웃 · 하이라이터 블록",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/08_MAXIMALISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Tropical Riot · 전역",
+              "desc": "라이트 반전 · 45° 잘린 모서리 카드 · 컬러 그림자",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/08_MAXIMALISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Collage Pop · 표지",
+              "desc": "불규칙 격자 + 회전 · 찢긴 종이 · 테이프 · 랜섬 노트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/08_MAXIMALISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Collage Pop · 전역",
+              "desc": "오프화이트 반전 · 회전 ±3° 제한 · 마커 하이라이트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "09_BRUTALISM",
+          "label": "09 브루탈리즘",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/09_BRUTALISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Raw Concrete · 표지",
+              "desc": "12컬럼 그리드 노출 · 도면 치수선 · 제목 어긋남",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/09_BRUTALISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Raw Concrete · 전역",
+              "desc": "4px 룰 헤더 · 카드 없음 · 격자 전체 노출 표",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/09_BRUTALISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Terminal Green · 표지",
+              "desc": "ASCII 박스 · 스캔라인 · 도형 0개",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/09_BRUTALISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Terminal Green · 전역",
+              "desc": "═ 이중선 헤더 · ASCII 테이블 · 반전 셀렉션 강조",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/09_BRUTALISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Red Alert · 표지",
+              "desc": "대각 절단 · 제목 색이 절단면에서 갈라짐 · 경고 테이프",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/09_BRUTALISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Red Alert · 전역",
+              "desc": "검정 헤더 바 · 3px 보더 블록 · 반전 앵커 1개",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "10_SKEUOMORPHISM",
+          "label": "10 스큐어모피즘",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/10_SKEUOMORPHISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Leather Desk · 표지",
+              "desc": "가죽 + 스티치 액자 · 양피지 라벨 · 리본 북마크",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/10_SKEUOMORPHISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Leather Desk · 전역",
+              "desc": "어두운 가죽 헤더 + 스티치 · 양피지 본문 패널",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/10_SKEUOMORPHISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Brushed Metal · 표지",
+              "desc": "좌40:우60 계기판 · 원형 다이얼 · 인셋 유리 + LED",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/10_SKEUOMORPHISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Brushed Metal · 전역",
+              "desc": "다크 메탈 헤더 + 베벨 · 인셋 유리 패널 · LED 지표",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/10_SKEUOMORPHISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Paper Notebook · 표지",
+              "desc": "코르크 책상 top-down · 스프링 노트 · 포스트잇 · 테이프",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/10_SKEUOMORPHISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Paper Notebook · 전역",
+              "desc": "노트 회전 0° · 괘선 스냅 · 포스트잇 강조",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "11_NEO_BRUTALISM",
+          "label": "11 네오 브루탈리즘",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/11_NEO_BRUTALISM/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Yellow Block · 표지",
+              "desc": "계단 오프셋 스택 3겹 · 스파클 · 하드 섀도",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/11_NEO_BRUTALISM/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Yellow Block · 전역",
+              "desc": "흰 헤더 바 · 하드 섀도 카드 · 아웃라인 수치",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/11_NEO_BRUTALISM/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Cyan Punch · 표지",
+              "desc": "말풍선 + 회전 스티커 산포 · 지그재그 하단",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/11_NEO_BRUTALISM/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Cyan Punch · 전역",
+              "desc": "크림 반전 · 회전 ±2° 제한 · 모서리 태그 승계",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/11_NEO_BRUTALISM/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Lilac Slab · 표지",
+              "desc": "엄격한 2열 그리드 · 물결 곡선 · 잉크 네이비 보더",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/11_NEO_BRUTALISM/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Lilac Slab · 전역",
+              "desc": "떠 있는 캡슐 헤더 · 2열 그리드 유지 · 물결 마감",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "12_BENTO_GRID",
+          "label": "12 벤토 그리드",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Light Bento · 표지",
+              "desc": "6×4 격자 · 그라데이션 셀 1개 · 격자 밖 요소 0",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Light Bento · 전역",
+              "desc": "좌상단 1×1 헤더 셀 · 6×4 유지 · 강조 셀 1개",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Dark Bento · 표지",
+              "desc": "좌우 비대칭 고밀도 · 컬러 의미 고정 · 히트맵",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Dark Bento · 전역",
+              "desc": "얇은 헤더 바 · 라벨→수치→스파크라인 3단 통일",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Warm Bento · 표지",
+              "desc": "큰 셀 소수 · 세리프 · 셀별 반경 차등 · 아웃라인 셀",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Warm Bento · 전역",
+              "desc": "틴트 헤더 셀 · 세리프 본문 · 이미지 셀 필수",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "13_BOLD_TYPOGRAPHY",
+          "label": "13 볼드 타이포그래피",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/13_BOLD_TYPOGRAPHY/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Black & Bone · 표지",
+              "desc": "제목 화면 밖 잘림 · 줄 단위 색 강조 · 룰 3개",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/13_BOLD_TYPOGRAPHY/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Black & Bone · 전역",
+              "desc": "룰 2단계 구분 · 카드 없음 · 크기 대비 극단",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/13_BOLD_TYPOGRAPHY/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Editorial Red · 표지",
+              "desc": "세리프 중앙 대칭 · 비대칭 액자 · 이탤릭 강조",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/13_BOLD_TYPOGRAPHY/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Editorial Red · 전역",
+              "desc": "중앙 헤더 + 좌우 룰 · 2컬럼 조판 · 드롭캡",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/13_BOLD_TYPOGRAPHY/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Electric Lime · 표지",
+              "desc": "좌측 90° 세로 축 · 줄마다 채움/아웃라인 교대 · 고스트 레이어",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/13_BOLD_TYPOGRAPHY/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Electric Lime · 전역",
+              "desc": "세로 축 유지 · 본문은 일반 산세리프 · 아웃라인/채움 대비",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "14_CLEAN_WHITESPACE",
+          "label": "14 클린 · 화이트 스페이스",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/14_CLEAN_WHITESPACE/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Pure Air · 표지",
+              "desc": "상단 55% 비움 · 하단 정렬 · 얕은 카드 1장",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/14_CLEAN_WHITESPACE/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Pure Air · 전역",
+              "desc": "좌우 112px 대여백 · 요소 4개 제한 · 격자 없는 차트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/14_CLEAN_WHITESPACE/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Soft Mint Space · 표지",
+              "desc": "중앙 컬럼 폭 52% · 완만한 호 · 좌우 24% 여백",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/14_CLEAN_WHITESPACE/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Soft Mint Space · 전역",
+              "desc": "알약 캡슐 헤더 · 원형 아이콘 슬롯 · 호 구분선",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/14_CLEAN_WHITESPACE/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Blue Note Space · 표지",
+              "desc": "좌측 30% 순수 여백 + 세로선 · 각진 카드 2장",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/14_CLEAN_WHITESPACE/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Blue Note Space · 전역",
+              "desc": "좌측 여백 = 주석 영역 · 4px 세로 바 · 보더만",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "15_SOFT_GRADIENTS",
+          "label": "15 소프트 그라데이션",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/15_SOFT_GRADIENTS/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Peach Dawn · 표지",
+              "desc": "수직 그라데이션 지평선 3분할 · 흰 호",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/15_SOFT_GRADIENTS/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Peach Dawn · 전역",
+              "desc": "가로 그라데이션 헤더 밴드 · 크림 본문 · 호 구분선",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/15_SOFT_GRADIENTS/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Mint Sky · 표지",
+              "desc": "대각 메쉬 그라데이션 · -30° 흰 면 절단",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/15_SOFT_GRADIENTS/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Mint Sky · 전역",
+              "desc": "흰 오버레이로 채도 완화 · -30° 대각 면 유지",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/15_SOFT_GRADIENTS/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Lavender Dusk · 표지",
+              "desc": "라디얼 방사 · 동심원 링 3겹 · 별점",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/15_SOFT_GRADIENTS/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Lavender Dusk · 전역",
+              "desc": "라디얼 중심을 화면 밖 아래로 · 그라데이션 텍스트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "16_INTERACTIVE_MOTION_UI",
+          "label": "16 인터랙티브 모션 UI",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/16_INTERACTIVE_MOTION_UI/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Kinetic Blue · 표지",
+              "desc": "좌→우 잔상 5겹 · 이징 곡선 노출 · 진행 바",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/16_INTERACTIVE_MOTION_UI/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Kinetic Blue · 전역",
+              "desc": "헤더 하단선이 곧 진행 바 · 잔상 화살표 단계",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/16_INTERACTIVE_MOTION_UI/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Neon Trail · 표지",
+              "desc": "S자 테이퍼 광궤 · 색 전이 · 파티클 · 잔광",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/16_INTERACTIVE_MOTION_UI/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Neon Trail · 전역",
+              "desc": "헤더 트레일이 진행률 · 곡선 연결선 · 덱 전체가 한 궤적",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/16_INTERACTIVE_MOTION_UI/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Fluid Teal · 표지",
+              "desc": "아래→위 유체 파형 4겹 · 상승 기포 · 메타볼",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/16_INTERACTIVE_MOTION_UI/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Fluid Teal · 전역",
+              "desc": "세로 진행 인디케이터 · 아래→위 단계 · 하단 파형 유지",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "17_RETRO_PIXEL",
+          "label": "17 레트로 · 픽셀 아트",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/17_RETRO_PIXEL/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Arcade CRT · 표지",
+              "desc": "아케이드 타이틀 · 스캔라인 + 비네트 + 색분리",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/17_RETRO_PIXEL/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Arcade CRT · 전역",
+              "desc": "픽셀 다이얼로그 창 · HP 바 · 8px 배수 강제",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/17_RETRO_PIXEL/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Gameboy Olive · 표지",
+              "desc": "4색 전부 · 좌우 2분할 · 8px 픽셀 계단 경계",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/17_RETRO_PIXEL/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Gameboy Olive · 전역",
+              "desc": "명암 4단계 · 차트를 디더링 패턴 4종으로 구분",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/17_RETRO_PIXEL/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 80s Vaporwave · 표지",
+              "desc": "원근 와이어프레임 그리드 · 잠긴 태양 · 크롬 텍스트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/17_RETRO_PIXEL/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 80s Vaporwave · 전역",
+              "desc": "하단 22% 그리드 유지 · 본문은 일반 산세리프",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "18_NEON_CYBERPUNK",
+          "label": "18 네온 · 사이버펑크",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/18_NEON_CYBERPUNK/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Blade Magenta · 표지",
+              "desc": "수직 네온 스트립 · 비 사선 · 도시 실루엣",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/18_NEON_CYBERPUNK/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Blade Magenta · 전역",
+              "desc": "좌측 스트립 유지 · 모서리 챔퍼 박스 · 시안 강조",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/18_NEON_CYBERPUNK/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Toxic Circuit · 표지",
+              "desc": "PCB 트레이스(직각·45°만) · 육각 프레임 · 데이터 스트림",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/18_NEON_CYBERPUNK/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Toxic Circuit · 전역",
+              "desc": "HUD 브래킷 박스 · 회로 트레이스 연결 · 모노스페이스 표",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/18_NEON_CYBERPUNK/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Cyber Amber · 표지",
+              "desc": "38° 대각 슬래시 · 경고 스트라이프 · 리벳 · 그레인",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/18_NEON_CYBERPUNK/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Cyber Amber · 전역",
+              "desc": "경고 스트라이프 헤더 · 모서리 챔퍼 + 리벳 · 그레인 유지",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "19_MONOCHROME",
+          "label": "19 모노크롬",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/19_MONOCHROME/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 True Gray · 표지",
+              "desc": "계조 사다리 7단을 그래픽으로 노출 · 명도값 라벨",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/19_MONOCHROME/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 True Gray · 전역",
+              "desc": "면 명도로만 위계 · 반전 블록 1개 · 하프톤 차트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/19_MONOCHROME/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Blue Mono · 표지",
+              "desc": "같은 색 불투명도 겹침으로 계조 생성 · 어긋난 패널 3장",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/19_MONOCHROME/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Blue Mono · 전역",
+              "desc": "명도차로만 카드 분리 · 겹침 1쌍 · 5단 차트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/19_MONOCHROME/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Sepia Mono · 표지",
+              "desc": "아카이브 색인 카드 · 45° 해칭 중간톤 · 원형 스탬프",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/19_MONOCHROME/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Sepia Mono · 전역",
+              "desc": "해칭 밀도 3단으로 계조 확장 · 반전 블록 1개 · 세리프",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "20_STORYTELLING_SCROLL",
+          "label": "20 스토리텔링 스크롤",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/20_STORYTELLING_SCROLL/v1_01_cover.html",
+              "file": "v1_01_cover.html",
+              "title": "V1 Journey Indigo · 표지",
+              "desc": "세로 타임라인 시작점 · 축이 화면 밖으로 이어짐",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/20_STORYTELLING_SCROLL/v1_02_global.html",
+              "file": "v1_02_global.html",
+              "title": "V1 Journey Indigo · 전역",
+              "desc": "축이 위아래 화면 밖으로 이어짐 · 가지선 연결",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/20_STORYTELLING_SCROLL/v2_01_cover.html",
+              "file": "v2_01_cover.html",
+              "title": "V2 Nature Path · 표지",
+              "desc": "곡선 등산로 시작점 · 등고선 · 언덕 실루엣",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/20_STORYTELLING_SCROLL/v2_02_global.html",
+              "file": "v2_02_global.html",
+              "title": "V2 Nature Path · 전역",
+              "desc": "헤더 곡선 위 핀이 진행 표시 · 곡선 연결 다이어그램",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/20_STORYTELLING_SCROLL/v3_01_cover.html",
+              "file": "v3_01_cover.html",
+              "title": "V3 Cosmic Scroll · 표지",
+              "desc": "수평 궤도 · 챕터=행성 · 원근 축소 · 별점",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/20_STORYTELLING_SCROLL/v3_02_global.html",
+              "file": "v3_02_global.html",
+              "title": "V3 Cosmic Scroll · 전역",
+              "desc": "궤도가 상단 18%로 이동 · 현재 챕터 행성만 확대",
               "w": 1920,
               "h": 1080,
               "status": "done"

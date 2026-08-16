@@ -17,13 +17,20 @@
 |---|---|
 | [07_PROMPTS.md](07_PROMPTS.md) | **여기서 시작.** 붙여넣어 쓰는 제작 프롬프트 (마스터 + 카테고리 + 항목별 스펙) |
 | [04_DIAGRAM_CATALOG.md](04_DIAGRAM_CATALOG.md) | 다이어그램 31종 기획 목록과 우선순위 |
-| [06_STYLE_IDENTITY.md](06_STYLE_IDENTITY.md) | 슬라이드 만들 때. 3개 스타일의 시각 정체성 |
+| [PLANS/](PLANS/) | 슬라이드 만들 때. 20 스타일 × 3 베리에이션 디자인 기획서 |
 
 ## 3줄 요약
 
 1. 캔버스는 **1920×1080 고정**, 단위는 **px만**, 반응형 아님
 2. 색·간격은 **CSS 변수**로만. 하드코딩하면 테마 교체가 불가능해짐
 3. Figma 임포트는 **GitHub Pages URL 방식**. 뷰포트는 Custom 1920×1080
+
+## 두 갈래 구조
+
+| 대상 | CSS |
+|---|---|
+| `01_TEMPLATES_BY_STYLE/` 슬라이드 120장 | **자기완결형.** 전부 `<style>` 인라인, 외부 링크 없음 |
+| `02_COMPONENTS_LIBRARY/` 다이어그램·컴포넌트 | `03_ASSETS/css/*.css`를 `<link>`로 부른다 |
 
 ## 문서 역할 구분
 

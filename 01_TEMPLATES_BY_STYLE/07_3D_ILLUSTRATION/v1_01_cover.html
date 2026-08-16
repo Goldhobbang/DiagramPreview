@@ -1,0 +1,622 @@
+<!-- @card V1 Clay Pop · 표지 | 무광 클레이 군집 · 좌45:우55 · 접지 그림자 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>3D Illustration V1 · 표지</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       토큰을 고치려면 이 파일을 직접 고친다 (표지·전역 2장을 함께). -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+/* ===== 03_ASSETS/css/02_slide_base.css ===== */
+/* ==========================================================================
+   02_slide_base.css — 슬라이드 캔버스 + 그리드 + 타이포 기본
+   ========================================================================== */
+
+/* --- 슬라이드 캔버스 ------------------------------------------------- */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;                /* ★ Figma와 동일하게 잘라 보여줘 오버플로우를 조기에 발견 */
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+}
+
+/* 세이프 영역이 적용된 콘텐츠 래퍼 */
+.slide-inner {
+  position: absolute;
+  inset: var(--slide-pad);
+  width: var(--content-w);
+  height: var(--content-h);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 컴포넌트 캔버스 (다이어그램 등 슬라이드보다 작은 단위) ---------- */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* --- 그리드 ---------------------------------------------------------- */
+/* Figma에서 Auto Layout으로 변환되지 않으므로, 다이어그램 내부보다는
+   슬라이드 최상위 레이아웃에만 쓴다. 내부는 .row / .col(flex)을 쓸 것. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--grid-gutter);
+}
+
+/* flex 기반 — 이쪽이 Figma Auto Layout으로 변환된다 (권장) */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--grid-gutter);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.row > .flex-1 { flex: 1; }
+.row > .flex-2 { flex: 2; }
+.row > .flex-3 { flex: 3; }
+
+/* --- 타이포 유틸 ----------------------------------------------------- */
+.t-display {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-body-l { font-size: var(--fs-body-l); }
+.t-body-m { font-size: var(--fs-body-m); }
+
+.t-caption {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.t-muted  { color: var(--color-text-muted); }
+.t-accent { color: var(--color-accent); }
+.t-center { text-align: center; }
+.t-right  { text-align: right; }
+
+/* 숫자 세로 정렬 — KPI를 나란히 놓으면 폭이 제각각인 숫자가 들쭉날쭉해 보인다.
+   1과 8의 폭을 같게 고정한다. 한글 폰트는 대개 이 기능을 지원한다. */
+.t-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- 디버그 모드 ----------------------------------------------------- */
+/* <body class="debug"> 로 켠다. 모든 박스 경계를 표시해 오버플로우를 잡는다. */
+.debug .slide,
+.debug .component {
+  outline: 2px solid rgba(255, 0, 0, 0.6);
+}
+
+.debug .slide *,
+.debug .component * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/* 세이프 영역 시각화 */
+.debug .slide::after {
+  content: "";
+  position: absolute;
+  inset: var(--slide-pad);
+  outline: 1px dashed rgba(0, 128, 255, 0.8);
+  pointer-events: none;
+}
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v1 / .v2 / .v3) ===== */
+/* ==========================================================================
+   07_3D_ILLUSTRATION — 화면의 주인공이 텍스트가 아니라 오브젝트
+   기획: 00_GUIDES/PLANS/07_3D_ILLUSTRATION.md
+
+   조명 방향은 덱 전체에서 고정. 오브젝트 아래 접지 그림자를 반드시 넣어
+   떠 있는 느낌을 막는다. 슬라이드당 오브젝트는 1~3개까지.
+   3종은 렌더 방식이 다르다: V1 무광 클레이 / V2 평행투영 / V3 유광 원근.
+   ========================================================================== */
+
+/* --- V1 Clay Pop — 무광 점토, 물렁한 그림자 -------------------------- */
+.v1 {
+  --color-bg: #fff1e9;
+  --color-surface: #ffffff;
+  --color-surface-alt: #ffe0ce;
+  --color-text: #3d2b23;
+  --color-text-muted: #8a7266;
+  --color-text-invert: #ffffff;
+  --color-accent: #ff8a5b;
+  --color-accent-sub: #7bd3c4;
+  --color-border: transparent;
+
+  --radius-sm: 24px;
+  --radius-md: 32px;
+  --radius-lg: 40px;
+  --card-border-w: 0px;
+  /* 색이 섞인 물렁한 그림자 — 검정 그림자는 클레이 촉감을 죽인다 */
+  --shadow-sm: 0 12px 32px rgba(255, 138, 91, 0.16);
+  --shadow-md: 0 20px 48px rgba(255, 138, 91, 0.20);
+
+  --clay-light: #ffc9a3;
+  --clay-dark: #5b4a42;
+}
+
+/* --- V2 Isometric Blue — 30° 평행투영, 면 3단계 --------------------- */
+.v2 {
+  --color-bg: #eef1fb;
+  --color-surface: #ffffff;
+  --color-surface-alt: #d5dcf5;
+  --color-text: #1b2559;
+  --color-text-muted: #6b76a8;
+  --color-text-invert: #ffffff;
+  --color-accent: #4f6bed;
+  --color-accent-sub: #ffb020;
+  --color-border: #c9d2f0;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --card-border-w: 1px;
+  /* 짧고 딱딱한 그림자 — V1의 물렁함과 정반대 */
+  --shadow-sm: 0 4px 8px rgba(27, 37, 89, 0.10);
+  --shadow-md: 0 6px 10px rgba(27, 37, 89, 0.14);
+
+  /* 아이소메트릭 면 3단계. 이 명도차만으로 입체가 성립한다. */
+  --iso-top: #7a90f5;
+  --iso-left: #4f6bed;
+  --iso-right: #3a4fbf;
+}
+
+/* --- V3 Glossy Candy — 유광 크롬, 다크 무대 ------------------------- */
+.v3 {
+  --color-bg: #160c24;
+  --color-surface: rgba(255, 255, 255, 0.06);
+  --color-surface-alt: rgba(255, 255, 255, 0.12);
+  --color-text: #f4eaff;
+  --color-text-muted: #a48cc4;
+  --color-text-invert: #160c24;
+  --color-accent: #b14eff;
+  --color-accent-sub: #ff4ecd;
+  --color-border: rgba(255, 255, 255, 0.14);
+
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --card-border-w: 1px;
+  --shadow-sm: none;
+  --shadow-md: none;
+
+  --holo: linear-gradient(120deg, #b14eff 0%, #ff4ecd 46%, #4ee0ff 100%);
+}
+  </style>
+  <style>
+    /* 접지 그림자: 오브젝트 군집 아래 넓은 타원 하나.
+       이게 없으면 오브젝트가 공중에 뜬 것처럼 보인다. */
+    .ground {
+      position: absolute;
+      left: 46%;
+      bottom: 90px;
+      width: 900px;
+      height: 180px;
+      border-radius: 50%;
+      background: var(--color-surface-alt);
+      filter: blur(24px);
+    }
+
+    /* 벨벳 노이즈 — 무광 촉감 */
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .objects { position: absolute; right: 40px; top: 90px; }
+
+    /* 좌측 텍스트. 오브젝트가 제목 뒤로 8% 겹쳐 들어오도록 z-index를 준다. */
+    .title-block {
+      position: absolute;
+      left: var(--slide-pad);
+      bottom: 200px;
+      max-width: 880px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-5);
+    }
+    .tag {
+      align-self: flex-start;
+      padding: 10px var(--sp-4);
+      border-radius: var(--radius-full);
+      background: var(--color-accent);
+      color: var(--color-text-invert);
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-bold);
+      letter-spacing: var(--ls-wide);
+    }
+    .cover-title { font-weight: var(--fw-bold); }
+    .cover-sub { font-size: var(--fs-h3); color: var(--color-text-muted); }
+
+    .cover-foot {
+      position: absolute;
+      left: var(--slide-pad);
+      bottom: 96px;
+      font-size: var(--fs-body-m);
+      color: var(--color-text-muted);
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide v1">
+
+    <div class="ground"></div>
+
+    <!-- 클레이 군집: 뭉툭한 도넛 중심 + 뒤에 반쯤 가린 구 + 앞에 눕힌 캡슐 2개.
+         시점은 15° 하향, 조명은 좌상단 30°. 반사광 없이 부드러운 명암만. -->
+    <svg class="objects" width="1000" height="820" viewBox="0 0 1000 820" fill="none">
+      <defs>
+        <radialGradient id="sphereMint" cx="34%" cy="28%">
+          <stop offset="0%"   stop-color="#a8e6da"/>
+          <stop offset="100%" stop-color="#5fb5a6"/>
+        </radialGradient>
+        <radialGradient id="torusMain" cx="34%" cy="26%">
+          <stop offset="0%"   stop-color="#ffb08b"/>
+          <stop offset="100%" stop-color="#f2703c"/>
+        </radialGradient>
+        <radialGradient id="capsuleLight" cx="32%" cy="26%">
+          <stop offset="0%"   stop-color="#ffe0ce"/>
+          <stop offset="100%" stop-color="#f7b78e"/>
+        </radialGradient>
+      </defs>
+
+      <!-- 뒤: 민트 구 (도넛에 반쯤 가림) -->
+      <circle cx="700" cy="230" r="150" fill="url(#sphereMint)"/>
+
+      <!-- 중심: 뭉툭한 도넛 -->
+      <circle cx="450" cy="330" r="290" fill="url(#torusMain)"/>
+      <circle cx="450" cy="330" r="118" fill="#fff1e9"/>
+
+      <!-- 앞: 바닥에 눕힌 캡슐 2개 -->
+      <rect x="180" y="600" width="330" height="132" rx="66" fill="url(#capsuleLight)"/>
+      <rect x="560" y="640" width="250" height="104" rx="52" fill="url(#capsuleLight)"/>
+    </svg>
+
+    <div class="title-block">
+      <span class="tag">BRAND CAMPAIGN 2026</span>
+      <h1 class="t-display cover-title">우리가 만드는<br>다음 이야기</h1>
+      <p class="cover-sub">브랜드 방향 · 캠페인 구조 · 채널별 실행 계획</p>
+    </div>
+
+    <p class="cover-foot">이서준 · 브랜드팀 &nbsp;·&nbsp; 2026. 09. 03</p>
+
+    <div class="grain"></div>
+  </div>
+</body>
+</html>

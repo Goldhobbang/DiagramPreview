@@ -22,7 +22,7 @@ let tokens = null;          // 01_variables.css에서 런타임에 추출
 let activeSection = 'ALL';
 let activeStyle = 'ALL';    // 슬라이드 템플릿 섹션 전용 — 스타일(그룹) 필터
 let thumbW = 380;
-const styleTokenCache = new Map();   // 스타일 폴더 경로 → 병합된 토큰 목록
+const styleTokenCache = new Map();   // 파일 경로 → 병합된 토큰 목록
 
 init();
 
@@ -398,26 +398,49 @@ function closeDetail() {
   $detailBody.innerHTML = '';
 }
 
-/* 전역 토큰(01_variables.css) 위에 해당 스타일의 _style.css를 덮어써서
-   그 스타일에서 실제로 쓰이는 값을 얻는다. 폴더별로 1회만 fetch. */
+/* 전역 토큰(01_variables.css) 위에 그 슬라이드가 실제로 쓰는 값을 덮어쓴다.
+
+   슬라이드는 자기완결형이라 별도 CSS 파일이 없다 — HTML 자체를 읽어
+   :root와 자기 베리에이션 블록(.v1 등)에서 토큰을 뽑는다.
+   파일별로 1회만 fetch. 다이어그램·컴포넌트는 파일에 토큰이 없어 전역값만 남는다. */
 async function resolveStyleTokens(item) {
-  const dir = item.path.slice(0, item.path.lastIndexOf('/'));
-  if (styleTokenCache.has(dir)) return styleTokenCache.get(dir);
+  if (styleTokenCache.has(item.path)) return styleTokenCache.get(item.path);
 
   const byName = new Map((tokens || []).map(t => [t.name, t.value]));
   try {
-    const res = await fetch(`${dir}/_style.css`);
+    const res = await fetch(item.path);
     if (res.ok) {
-      const css = await res.text();
-      for (const m of css.matchAll(/--([\w-]+)\s*:\s*([^;]+);/g)) {
-        byName.set(`--${m[1]}`, m[2].replace(/\s+/g, ' ').trim());
+      const html = await res.text();
+      // v1_01_cover.html → v1. 없으면 :root 블록만 본다.
+      const variant = (item.file.match(/^(v\d+)_/) || [])[1];
+      for (const block of collectTokenBlocks(html, variant)) {
+        for (const m of block.matchAll(/--([\w-]+)\s*:\s*([^;]+);/g)) {
+          byName.set(`--${m[1]}`, m[2].replace(/\s+/g, ' ').trim());
+        }
       }
     }
-  } catch { /* _style.css 없는 폴더(다이어그램 등) — 전역 토큰만 사용 */ }
+  } catch { /* 못 읽으면 전역 토큰만 사용 */ }
 
   const merged = [...byName].map(([name, value]) => ({ name, value }));
-  styleTokenCache.set(dir, merged);
+  styleTokenCache.set(item.path, merged);
   return merged;
+}
+
+/* :root { } 와 해당 베리에이션 선택자의 { } 본문을 순서대로 돌려준다.
+   나중 것이 앞의 값을 덮어써야 하므로 :root를 먼저 넣는다. */
+function collectTokenBlocks(html, variant) {
+  // 주석을 먼저 걷어낸다. 주석 안의 ".v1/.v2/.v3" 같은 문구를 선택자로 오인하면
+  // 정규식 lastIndex가 진짜 블록을 건너뛴다.
+  const css = html.replace(/\/\*[\s\S]*?\*\//g, '');
+
+  const out = [];
+  const grab = (selectorRe) => {
+    for (const m of css.matchAll(selectorRe)) out.push(m[1]);
+  };
+  grab(/:root\s*\{([^}]*)\}/g);
+  // 선택자는 `{`와 같은 줄에 있어야 한다 — `.v1 {` 과 `.v1, .v2, .v3 {` 둘 다 잡힌다.
+  if (variant) grab(new RegExp(`^[^\\n{}]*\\.${variant}\\b[^\\n{}]*\\{([^}]*)\\}`, 'gm'));
+  return out;
 }
 
 /* --- URL 복사: Figma 플러그인에 그대로 붙여넣는 값 --------------------- */

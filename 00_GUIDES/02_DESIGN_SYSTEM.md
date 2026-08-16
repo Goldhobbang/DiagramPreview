@@ -88,29 +88,46 @@
 
 ### 4-2. 테마 교체는 변수 오버라이드로만
 
-`03_ASSETS/css/01_variables.css`가 **단일 소스**. 각 스타일 폴더의 `_style.css`는
-**같은 변수명을 덮어쓰기만** 한다. HTML은 한 줄도 고치지 않는다.
+토큰 이름은 어디서나 같고, **값만 덮어쓴다.** 슬라이드 템플릿은 베리에이션 클래스
+(`.v1` / `.v2` / `.v3`)에 오버라이드를 걸어 한 파일 안에서 테마를 구분한다.
 
 ```css
-/* 01_TEMPLATES_BY_STYLE/02_MINIMAL_MONO/_style.css */
-:root {
-  --color-accent: #111111;
-  --color-accent-sub: #666666;
-  --font-sans: "Pretendard", sans-serif;
+/* 01_TEMPLATES_BY_STYLE/02_MINIMALISM/v1_01_cover.html 안 */
+.v1 {
+  --color-accent: #1a1a1a;
+  --color-text-muted: #9a9a94;
+  --font-sans: "Noto Serif KR", Georgia, serif;
 }
 ```
 
+`:root`가 아니라 클래스에 거는 이유: 한 파일에 세 테마의 토큰이 함께 들어가도
+서로 간섭하지 않는다. `.slide`에 그 클래스가 붙어야 값이 적용된다.
+
 ### 4-3. CSS 로드 순서 (고정)
 
+순서를 바꾸면 변수가 정의되기 전에 참조되어 조용히 무시된다.
+
+```
+00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰 → 레이아웃
+```
+
+이 저장소는 두 방식이 공존한다.
+
+| 대상 | 방식 |
+|---|---|
+| `01_TEMPLATES_BY_STYLE/` 슬라이드 120장 | **자기완결형.** CSS 전체를 `<style>`에 인라인. 외부 `<link>` 없음 |
+| `02_COMPONENTS_LIBRARY/` 다이어그램·컴포넌트 | 외부 `<link>` 4줄로 `03_ASSETS/css/*.css`를 부른다 |
+
 ```html
+<!-- 컴포넌트 쪽만 해당 -->
 <link rel="stylesheet" href="../../03_ASSETS/css/00_reset.css">
 <link rel="stylesheet" href="../../03_ASSETS/css/01_variables.css">
 <link rel="stylesheet" href="../../03_ASSETS/css/02_slide_base.css">
 <link rel="stylesheet" href="../../03_ASSETS/css/03_components.css">
-<link rel="stylesheet" href="_style.css">   <!-- 테마가 있을 때만, 항상 마지막 -->
 ```
 
-순서를 바꾸면 변수가 정의되기 전에 참조되어 조용히 무시된다.
+슬라이드를 자기완결형으로 둔 이유: 파일 하나만 복사해도 어디서든 열린다.
+대신 토큰을 고치려면 그 HTML을 직접 고쳐야 한다 — 표지·전역 2장을 함께 본다.
 
 ---
 

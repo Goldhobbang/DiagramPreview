@@ -19,7 +19,7 @@ python -m http.server 8000
 #    http://localhost:8000/docs/
 
 # 3. 개별 슬라이드 확인
-#    http://localhost:8000/01_TEMPLATES_BY_STYLE/01_CORPORATE_BLUE/01_cover.html
+#    http://localhost:8000/01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v1_01_cover.html
 ```
 
 Figma로 옮기려면: 갤러리 카드의 **URL 복사** → Figma에서 `html.to.design` 실행 →
@@ -56,9 +56,8 @@ ppt_template/
 | [03_CHECKLIST.md](00_GUIDES/03_CHECKLIST.md) | 임포트 전/후 체크리스트 |
 | [04_DIAGRAM_CATALOG.md](00_GUIDES/04_DIAGRAM_CATALOG.md) | 다이어그램 31종 기획 + 우선순위 |
 | [05_VISUAL_GUIDE.md](00_GUIDES/05_VISUAL_GUIDE.md) | 정렬 · 여백 · 위계 · 강조 · 안티패턴 (**판단**) |
-| [06_STYLE_IDENTITY.md](00_GUIDES/06_STYLE_IDENTITY.md) | 3개 스타일의 시각 정체성 |
 | [07_PROMPTS.md](00_GUIDES/07_PROMPTS.md) | **제작 프롬프트** — 붙여넣어 바로 쓰는 형태 |
-| [08_COLORFUL_STYLE_GUIDE.md](00_GUIDES/08_COLORFUL_STYLE_GUIDE.md) | 컬러풀 패밀리(Bold Pop · Pastel Playful) 정체성 |
+| [PLANS/](00_GUIDES/PLANS/) | 20 스타일 × 3 베리에이션 디자인 기획서 (슬라이드 120장의 근거) |
 
 ### 만들기 시작할 때
 
