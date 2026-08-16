@@ -124,6 +124,30 @@
               "status": "done"
             }
           ]
+        },
+        {
+          "id": "06_MIDNIGHT_GOLD",
+          "label": "Midnight Gold",
+          "items": [
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/06_MIDNIGHT_GOLD/01_cover.html",
+              "file": "01_cover.html",
+              "title": "표지",
+              "desc": "제목 · 부제 · 발표자 · 날짜 · 다색 장식",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            },
+            {
+              "path": "../01_TEMPLATES_BY_STYLE/06_MIDNIGHT_GOLD/02_global.html",
+              "file": "02_global.html",
+              "title": "전역",
+              "desc": "섹션 번호 · 제목 · 다색 진행 도트",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
+            }
+          ]
         }
       ]
     },

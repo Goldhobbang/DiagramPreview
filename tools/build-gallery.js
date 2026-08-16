@@ -65,6 +65,7 @@ const LABELS = {
   '03_VIVID_GRADIENT': 'Vivid Gradient',
   '04_BOLD_POP': 'Bold Pop',
   '05_PASTEL_PLAYFUL': 'Pastel Playful',
+  '06_MIDNIGHT_GOLD': 'Midnight Gold',
   '01_PROCESS_FLOW': '프로세스 · 흐름',
   '02_HIERARCHY_TREE': '계층 · 관계',
   '03_MATRIX_SWOT': '매트릭스 · 4분면',

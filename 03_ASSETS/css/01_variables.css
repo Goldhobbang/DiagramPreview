@@ -20,6 +20,7 @@
                "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
   --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
 
   /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
   --fs-display: 96px;
