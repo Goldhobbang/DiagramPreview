@@ -219,14 +219,13 @@ function fitFrames(root) {
     const w = +f.dataset.w;
     const box = f.parentElement;
     if (!w || !box.clientWidth) continue;
-    // min(1, …) — 예전 zoom 스크립트와 같이 원본보다 키우지 않는다
-    const scale = Math.min(1, box.clientWidth / w);
+    // 카드 폭에 정확히 맞춘다 — 1을 넘겨 확대해도 된다. transform은 문서 밖이라
+    // import에 영향이 없다(문서 안 zoom과 다르다). 클램프를 걸면 캔버스가 작은
+    // 다이어그램이 L에서 카드 안에 작게 박히고 여백도 카드마다 달라진다.
+    const scale = box.clientWidth / w;
     f.style.width = `${w}px`;
     f.style.height = `${f.dataset.h}px`;
     f.style.transform = `scale(${scale})`;
-    // 박스가 캔버스보다 넓으면 가운데로. 예전에는 iframe이 박스 100%였고
-    // 내부 .slide/.component의 margin:0 auto가 정렬을 맡았다 — 그 그림을 유지한다.
-    f.style.marginLeft = `${Math.max(0, (box.clientWidth - w * scale) / 2)}px`;
   }
 }
 

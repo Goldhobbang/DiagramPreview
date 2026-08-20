@@ -163,6 +163,7 @@ body {
    비율은 캔버스 크기대로 인라인으로 박는다. */
 .pal-thumb {
   display: block;
+  position: relative;
   width: 100%;
   margin-bottom: 4px;
   background: #fff;
@@ -173,9 +174,12 @@ body {
 
 /* width/height/scale은 builder.js의 fitFrames()가 인라인으로 덮는다 —
    원본 HTML에는 자기축소 스크립트가 없다(html.to.design import를 깨서 걷어냈다). */
+/* absolute 필수 — fitFrames가 캔버스 원본 폭을 박으므로 흐름에 남기면
+   그 폭이 min-content가 되어 팔레트 칼럼을 밀어버린다. */
 .pal-thumb iframe {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   border: 0;
   display: block;
   transform-origin: top left;

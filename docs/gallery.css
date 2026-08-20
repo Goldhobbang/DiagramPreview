@@ -268,11 +268,15 @@ main { padding: 8px 32px 32px; }
   aspect-ratio: 16 / 9;
 }
 
-/* width/height/scale은 gallery.js의 fitFrames()가 인라인으로 덮는다 */
+/* width/height/scale은 gallery.js의 fitFrames()가 인라인으로 덮는다.
+   position:absolute가 필수다 — fitFrames가 캔버스 원본 폭(예: 1920px)을 박으므로
+   흐름에 남겨두면 그 폭이 grid의 min-content가 되어 .pair-thumbs의 1fr 컬럼이
+   1920까지 늘어난다(측정→확대→재측정 되먹임). 흐름에서 빼면 그 고리가 끊긴다. */
 .thumb iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
   border: none;
-  width: 100%;
-  height: 100%;
   transform-origin: top left;
   pointer-events: none;   /* 카드 클릭을 iframe이 가로채지 않게 */
 }
@@ -535,8 +539,15 @@ main { padding: 8px 32px 32px; }
   margin-bottom: 8px;
 }
 
+.detail-preview { position: relative; }
+
+/* .thumb iframe과 같은 이유로 absolute — 원본 폭이 레이아웃에 새면 안 된다 */
 .detail-preview iframe {
-  width: 100%; height: 100%; border: 0; display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  display: block;
   transform-origin: top left;
 }
 
