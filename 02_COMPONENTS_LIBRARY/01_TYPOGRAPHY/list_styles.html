@@ -1,1 +1,468 @@
 <!-- @card 리스트 스타일 | 불릿 · 번호 · 체크 · 아이콘 리스트 | 1400x700 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>리스트 스타일</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       공통 토큰을 고치려면 03_ASSETS/css/를 고친 뒤 이 블록도 함께 갱신한다. -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+
+/* ===== 03_ASSETS/css/02_slide_base.css — .component 캔버스만 ===== */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
+}
+
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 이 컴포넌트 전용 ===== */
+    .component { width: 1400px; height: 700px; }
+
+    .list-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-5) var(--sp-6);
+    }
+    /* 2×2 — 한 칸이 슬라이드에 그대로 복사되는 단위다 */
+    .list-cell {
+      width: calc((100% - var(--sp-6)) / 2);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .list-label {
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-text-muted);
+      padding-bottom: var(--sp-2);
+      border-bottom: var(--border-w) solid var(--color-border);
+    }
+    .list-cell ul {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .list-cell li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      font-size: var(--fs-body-m);
+      line-height: var(--lh-body);
+    }
+
+    /* 1. 점 불릿 — 첫 줄 중앙에 맞추기 위해 line-height 절반만큼 내린다 */
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--radius-full);
+      background: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 14px;
+    }
+
+    /* 2. 번호 원 — .step-num을 줄여 쓴다 */
+    .num {
+      width: 36px;
+      height: 36px;
+      font-size: var(--fs-caption);
+      background: var(--color-text);
+      color: var(--color-text-invert);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* 3·4. SVG 아이콘 — 도형은 벡터로, 글자는 HTML로 */
+    .ico { flex-shrink: 0; margin-top: 6px; }
+
+    .strike { color: var(--color-text-muted); text-decoration: line-through; }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <div class="list-grid">
+
+      <div class="list-cell">
+        <p class="list-label">점 불릿 — 기본 나열</p>
+        <ul>
+          <li><span class="dot"></span><span>승인 경로를 조직도 기준으로 자동 배정</span></li>
+          <li><span class="dot"></span><span>대기 24시간 초과 건은 담당자에게 알림 발송</span></li>
+          <li><span class="dot"></span><span>결재 이력을 문서 단위로 한 화면에 표시</span></li>
+        </ul>
+      </div>
+
+      <div class="list-cell">
+        <p class="list-label">번호 원 — 순서가 있는 절차</p>
+        <ul>
+          <li><span class="num">1</span><span>요구사항 정의 및 우선순위 확정</span></li>
+          <li><span class="num">2</span><span>후보 솔루션 3종 정량 평가</span></li>
+          <li><span class="num">3</span><span>1개 팀 대상 4주 파일럿 운영</span></li>
+        </ul>
+      </div>
+
+      <div class="list-cell">
+        <p class="list-label">체크 — 완료 · 잔여 구분</p>
+        <ul>
+          <li>
+            <svg class="ico" width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="12" fill="var(--color-positive)"/>
+              <path d="M7.5 13.5 L11 17 L18.5 9.5" stroke="var(--color-text-invert)" stroke-width="2.6"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="strike">현업 인터뷰 12개 팀 완료</span>
+          </li>
+          <li>
+            <svg class="ico" width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="12" fill="var(--color-positive)"/>
+              <path d="M7.5 13.5 L11 17 L18.5 9.5" stroke="var(--color-text-invert)" stroke-width="2.6"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="strike">보안 검토 의견 회신</span>
+          </li>
+          <li>
+            <svg class="ico" width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="12" stroke="var(--color-border)" stroke-width="2"/>
+            </svg>
+            <span>전사 확산 교육 일정 확정</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="list-cell">
+        <p class="list-label">화살표 — 결과 · 시사점</p>
+        <ul>
+          <li>
+            <svg class="ico" width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M4 13 H20 M14 7 L20 13 L14 19" stroke="var(--color-accent)" stroke-width="2.6"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>대기 시간 4.2일 → 1.4일 (67% 단축)</span>
+          </li>
+          <li>
+            <svg class="ico" width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M4 13 H20 M14 7 L20 13 L14 19" stroke="var(--color-accent)" stroke-width="2.6"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>재상신 건수 월 38건 → 0건</span>
+          </li>
+          <li>
+            <svg class="ico" width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M4 13 H20 M14 7 L20 13 L14 19" stroke="var(--color-accent)" stroke-width="2.6"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>연간 3,200시간 업무 시간 회수</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

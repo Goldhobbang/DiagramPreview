@@ -193,13 +193,21 @@ th {
   height: 700px;
   overflow: hidden;
   position: relative;
-  background: var(--color-bg);
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body-m);
   line-height: var(--lh-body);
   margin: 0 auto;
   padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
 }
 
 /* ===== 03_ASSETS/css/03_components.css ===== */
@@ -381,19 +389,19 @@ th {
         <path d="M 0 -34 L 50 0 L 0 34 Z" fill="var(--color-data-4)" transform="translate(403.4 126.3) rotate(350)"/>
       </svg>
 
-      <div class="cycle-label d1" style="left: 596px; top: 96px;">
+      <div data-anchor="step-1" class="cycle-label d1" style="left: 596px; top: 96px;">
         <p class="cycle-step">Plan</p>
         <p class="cycle-desc">목표 설정과 실행 계획 수립</p>
       </div>
-      <div class="cycle-label d2" style="left: 596px; top: 600px;">
+      <div data-anchor="step-2" class="cycle-label d2" style="left: 596px; top: 600px;">
         <p class="cycle-step">Do</p>
         <p class="cycle-desc">계획에 따른 실행과 기록</p>
       </div>
-      <div class="cycle-label d3" style="left: 84px; top: 600px;">
+      <div data-anchor="step-3" class="cycle-label d3" style="left: 84px; top: 600px;">
         <p class="cycle-step">Check</p>
         <p class="cycle-desc">결과 측정과 목표 대비 평가</p>
       </div>
-      <div class="cycle-label d4" style="left: 84px; top: 96px;">
+      <div data-anchor="step-4" class="cycle-label d4" style="left: 84px; top: 96px;">
         <p class="cycle-step">Act</p>
         <p class="cycle-desc">개선안 도출과 표준화 반영</p>
       </div>
@@ -405,19 +413,5 @@ th {
 
     </div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

@@ -16,7 +16,7 @@
   --accent: #6ea8fe;
   --done: #4ade80;
   --wip: #fbbf24;
-  --card-w: 380px;      /* gallery.js의 thumbW와 항상 같이 움직인다 (S/M/L 토글) */
+  --card-w: 380px;      /* = L. gallery.js의 thumbW와 항상 같이 움직인다 (S/M/L 토글) */
 }
 
 body {
@@ -59,6 +59,28 @@ a { color: var(--accent); }
 h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
 
 .sub { font-size: 14px; color: var(--muted); margin-top: 2px; }
+
+/* 진척 표시 + 빌더 링크를 한 줄에. 링크가 진척 막대 위로 겹치지 않게 세로 정렬한다 */
+.head-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 조합 빌더로 가는 문 — 갤러리에서 유일하게 다른 페이지로 나가는 버튼 */
+.to-builder {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  background: var(--panel);
+  border: 1px solid rgba(110, 168, 254, .4);
+  border-radius: 999px;
+  padding: 7px 16px;
+  white-space: nowrap;
+}
+
+.to-builder:hover { background: var(--accent); color: #0c0d10; border-color: var(--accent); }
 
 .progress {
   text-align: right;
@@ -111,7 +133,7 @@ h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
 
 .n { opacity: 0.6; margin-left: 5px; font-weight: 400; }
 
-/* 썸네일 크기 토글 — 1920 슬라이드를 380px로 줄이면 본문이 5px가 되므로 L이 필요하다 */
+/* 썸네일 크기 토글 — L(380)이 기본. 값은 트랙 최소폭의 절반이다(.grid-wide 참고) */
 .sizer {
   display: flex;
   gap: 4px;
@@ -193,8 +215,7 @@ main { padding: 8px 32px 32px; }
 .empty { text-align: center; padding: 64px 0; }
 
 /* --- 그리드 ---------------------------------------------------------- */
-/* 컬럼 폭을 고정한다. minmax(...,1fr)로 늘리면 카드가 --card-w보다 넓어지는데
-   다이어그램 iframe은 gallery.js가 --card-w 기준으로 scale하므로 흰 여백이 생긴다. */
+/* 기본은 고정 폭 — 이미지(media) 카드처럼 늘려도 얻는 게 없는 경우용. */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card-w));
@@ -202,14 +223,21 @@ main { padding: 8px 32px 32px; }
   margin-bottom: 8px;
 }
 
-/* 슬라이드 전용: 카드 하나가 표지·전역 2장을 품으므로 컬럼이 2배 넓다.
-   열 수가 몇이든 쌍이 한 카드 안에 있으므로 행 경계에서 갈라지지 않는다.
+/* HTML 미리보기 카드는 트랙을 넓히고 남는 폭까지 채운다.
+   늘려도 흰 여백이 없는 이유: 슬라이드든 다이어그램이든 파일이 self-fit
+   스크립트로 컨테이너에 맞춰 스스로 축소한다. 갤러리는 비율만 정해준다.
+   min(100%, …)로 감싸 좁은 화면에서 가로 스크롤이 생기지 않게 한다.
 
-   여기만 1fr로 늘려도 되는 이유: 슬라이드는 자기축소라 iframe이 폭을 그대로 채운다.
-   (다이어그램은 JS가 --card-w 기준으로 scale하므로 늘리면 흰 여백이 생긴다)
-   min(100%, …)로 감싸 좁은 화면에서 가로 스크롤이 생기지 않게 한다. */
-.grid-pair {
+   배수가 다른 이유 — 기준은 "미리보기 1장의 폭"이다.
+   .grid-wide(다이어그램·컴포넌트)는 카드 = 미리보기 1장 → 2배.
+   .grid-pair(슬라이드)는 카드 하나가 표지·전역 2장을 품으므로 3배로 더 넓힌다.
+   (4배로 하면 1920 화면에서 M·L이 둘 다 1열이 되어 토글이 무의미해진다) */
+.grid-wide {
   grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(var(--card-w) * 2)), 1fr));
+}
+
+.grid-pair {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(var(--card-w) * 3)), 1fr));
 }
 
 /* --- 카드 ------------------------------------------------------------ */
@@ -228,8 +256,10 @@ main { padding: 8px 32px 32px; }
 .card[data-detail]:hover { border-color: var(--accent); }
 
 /* 썸네일 — 스크린샷 파이프라인 없이 실제 HTML을 미리보기한다.
-   슬라이드: 높이를 16:9 비율로 고정하고 축소는 템플릿이 스스로 한다(자기축소 스크립트).
-   다이어그램·컴포넌트: 자기축소가 없으므로 gallery.js가 transform:scale로 줄인다. */
+   축소는 갤러리가 한다. 예전에는 HTML 파일마다 body.style.zoom 스크립트가 있었지만
+   그 zoom이 html.to.design import를 깨서(좌표계가 갈린다) 전부 걷어냈다.
+   16/9는 슬라이드 기본값. 다이어그램·컴포넌트는 캔버스 비율이 제각각이라
+   gallery.js가 aspect-ratio를 인라인으로 덮는다. */
 .thumb {
   position: relative;
   overflow: hidden;
@@ -238,16 +268,14 @@ main { padding: 8px 32px 32px; }
   aspect-ratio: 16 / 9;
 }
 
+/* width/height/scale은 gallery.js의 fitFrames()가 인라인으로 덮는다 */
 .thumb iframe {
   border: none;
   width: 100%;
   height: 100%;
+  transform-origin: top left;
   pointer-events: none;   /* 카드 클릭을 iframe이 가로채지 않게 */
 }
-
-/* 옛 경로(다이어그램·컴포넌트): 높이를 JS가 인라인으로 박고 iframe은 원본 크기 + scale */
-.thumb-scaled { aspect-ratio: auto; }
-.thumb-scaled iframe { width: auto; height: auto; transform-origin: top left; }
 
 /* --- 슬라이드 쌍 카드 ------------------------------------------------- */
 /* 표지·전역을 2열로. gap 1px이 그대로 구분선이 된다. */
@@ -495,8 +523,9 @@ main { padding: 8px 32px 32px; }
   border-color: rgba(110, 168, 254, .45);
 }
 
-/* 확대 미리보기 — 크기만 정해주면 템플릿이 자기축소로 채운다.
-   썸네일(380px)과 완전히 같은 iframe이고 폭만 다르다. */
+/* 확대 미리보기 — 썸네일과 완전히 같은 iframe이고 폭만 다르다.
+   축소는 gallery.js의 fitFrames()가 한다.
+   16/9는 슬라이드 기본값 — 다이어그램은 gallery.js가 인라인으로 덮는다. */
 .detail-preview {
   aspect-ratio: 16 / 9;
   background: #fff;
@@ -506,7 +535,10 @@ main { padding: 8px 32px 32px; }
   margin-bottom: 8px;
 }
 
-.detail-preview iframe { width: 100%; height: 100%; border: 0; display: block; }
+.detail-preview iframe {
+  width: 100%; height: 100%; border: 0; display: block;
+  transform-origin: top left;
+}
 
 .detail-actions { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 

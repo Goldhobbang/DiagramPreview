@@ -193,13 +193,21 @@ th {
   height: 700px;
   overflow: hidden;
   position: relative;
-  background: var(--color-bg);
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body-m);
   line-height: var(--lh-body);
   margin: 0 auto;
   padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
 }
 
 /* ===== 03_ASSETS/css/03_components.css ===== */
@@ -355,7 +363,7 @@ th {
     <p class="steps-title">신규 서비스 도입 절차</p>
     <div class="steps-row">
 
-      <div class="step-item">
+      <div data-anchor="step-1" class="step-item">
         <div class="step-num d1">1</div>
         <p class="step-name">요구사항 정의</p>
         <p class="step-desc">현업 인터뷰로 핵심 요구사항을 수집하고 우선순위를 확정</p>
@@ -367,7 +375,7 @@ th {
         </svg>
       </div>
 
-      <div class="step-item">
+      <div data-anchor="step-2" class="step-item">
         <div class="step-num d2">2</div>
         <p class="step-name">솔루션 비교 평가</p>
         <p class="step-desc">기능 · 비용 · 보안 3개 축으로 후보 솔루션을 정량 평가</p>
@@ -379,7 +387,7 @@ th {
         </svg>
       </div>
 
-      <div class="step-item">
+      <div data-anchor="step-3" class="step-item">
         <div class="step-num d3">3</div>
         <p class="step-name">파일럿 운영</p>
         <p class="step-desc">1개 팀 대상 4주 시범 운영으로 실사용 이슈를 검증</p>
@@ -391,7 +399,7 @@ th {
         </svg>
       </div>
 
-      <div class="step-item">
+      <div data-anchor="step-4" class="step-item">
         <div class="step-num d4">4</div>
         <p class="step-name">전사 확산</p>
         <p class="step-desc">부서별 교육과 함께 단계적으로 전 조직에 배포</p>
@@ -403,7 +411,7 @@ th {
         </svg>
       </div>
 
-      <div class="step-item">
+      <div data-anchor="step-5" class="step-item">
         <div class="step-num d5">5</div>
         <p class="step-name">정착 · 개선</p>
         <p class="step-desc">분기별 사용률 점검과 피드백 반영으로 운영 고도화</p>
@@ -411,19 +419,5 @@ th {
 
     </div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

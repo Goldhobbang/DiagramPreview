@@ -561,15 +561,13 @@ th {
     }
     .step-name { width: 160px; font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
     .step-body { font-size: var(--fs-body-m); color: var(--color-text-muted); }
-    /* 아래에서 위로 페이드되는 그라데이션 채움 */
+    /* 단색 채움. background-clip:text는 html.to.design 미지원 —
+       그라데이션이 텍스트 박스를 칠하고 글자가 사라진다. */
     .step-fig {
       margin-left: auto;
       font-size: var(--fs-h2);
       font-weight: var(--fw-bold);
-      background: linear-gradient(0deg, var(--fluid-3), var(--color-accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: var(--color-accent);
     }
     /* 하강·감소 지표에만 웜 옐로 */
     .step-fig.is-down {
@@ -630,20 +628,5 @@ th {
     </svg>
 
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

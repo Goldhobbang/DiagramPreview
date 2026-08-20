@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>조합 빌더 — Figma PPT Template System</title>
+<!-- ?v= 는 손으로 올린다. builder.css/js를 고치면 숫자를 +1 해야 방문자 캐시가 갱신된다. -->
+<link rel="stylesheet" href="builder.css?v=4">
+</head>
+<body>
+
+<header class="top">
+  <a class="back" href="index.html">← 갤러리</a>
+  <div>
+    <h1>조합 빌더</h1>
+    <p class="sub">다이어그램을 이어 붙여 하나의 구조를 만든다 · 스냅: 지정 앵커 → 박스 8앵커 → 8px 그리드</p>
+  </div>
+
+  <div class="tools">
+    <button id="fit">전체 보기</button>
+    <button id="front">앞으로</button>
+    <button id="back-z">뒤로</button>
+    <button id="dup">복제</button>
+    <button id="del">삭제</button>
+    <span class="sep"></span>
+    <button id="clear">비우기</button>
+    <button id="save-json">JSON 저장</button>
+    <button id="load-json">JSON 불러오기</button>
+    <button id="export" class="primary">HTML 내보내기</button>
+  </div>
+</header>
+
+<div class="work">
+  <aside class="palette">
+    <input type="search" id="search" placeholder="다이어그램 검색…" autocomplete="off">
+    <div class="pal-tabs" id="pal-tabs"></div>
+    <p class="pal-hint" id="pal-hint">항목을 클릭하면 캔버스 중앙에 놓인다.</p>
+    <div class="pal-list" id="pal-list"></div>
+  </aside>
+
+  <main class="canvas-wrap" id="canvas-wrap">
+    <div class="stage" id="stage">
+      <div class="guides" id="guides"></div>
+    </div>
+    <p class="empty-hint" id="empty-hint">왼쪽 목록에서 다이어그램을 골라 시작한다.</p>
+    <div class="statusbar">
+      <span id="status">노드 0개</span>
+      <span class="keys">변·모퉁이 어디서나 크기 조절 · Alt = 자유 배율 · Shift = 스냅 해제 · Space 드래그 = 화면 이동 · Delete = 삭제</span>
+    </div>
+  </main>
+</div>
+
+<input type="file" id="file-input" accept="application/json" hidden>
+<div class="toast" id="toast"></div>
+
+<script src="builder.js?v=4"></script>
+</body>
+</html>

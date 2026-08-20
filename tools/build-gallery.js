@@ -53,6 +53,12 @@ const SECTIONS = [
     defaults: { w: 1400, h: 700 },
   },
   {
+    // 조합 빌더(docs/builder.html)가 내보낸 합성 HTML을 여기 두면 갤러리에 뜬다.
+    id: 'drafts', label: '조합 · 초안', kind: 'html',
+    dirs: ['99_DRAFTS'], groupBy: 'self',
+    defaults: { w: 1920, h: 1080 },
+  },
+  {
     id: 'media', label: '이미지 · 아이콘', kind: 'image',
     dirs: ['03_ASSETS/images', '03_ASSETS/icons'], groupBy: 'self',
   },
@@ -86,10 +92,14 @@ const LABELS = {
   '03_MATRIX_SWOT': '매트릭스 · 4분면',
   '04_VENN_CYCLE': '교집합 · 순환',
   '05_PYRAMID_LAYER': '피라미드 · 레이어',
+  '06_SYSTEM_ARCH': '시스템 · 아키텍처',
+  '07_BUSINESS_MODEL': '비즈니스 모델',
+  '08_DATA_RELATION': '수치 관계',
   '01_TYPOGRAPHY': '타이포그래피',
   '02_CHARTS': '차트',
   '04_TABLES': '표',
   '05_UI_PARTS': 'UI 부품',
+  '99_DRAFTS': '작업 중 · 조합 결과',
   'images': '이미지',
   'icons': '아이콘',
 };

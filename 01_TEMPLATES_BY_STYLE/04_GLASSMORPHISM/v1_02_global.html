@@ -500,10 +500,12 @@ th {
   </style>
   <style>
     /* 내지에서는 오브 불투명도를 낮춘다 — 표지와 같은 강도면 본문이 안 읽힌다. */
-    .orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.6; }
-    .orb.a { left: -140px; top: -180px;  width: 900px; height: 900px; background: #6d5ef7; }
-    .orb.b { left: 620px;  top: 240px;   width: 680px; height: 680px; background: #3abef9; }
-    .orb.c { right: -160px; bottom: -220px; width: 800px; height: 800px; background: #ff6fd8; }
+    /* 흐림은 filter:blur가 아니라 radial-gradient로 — filter는 래스터화 위험이 있다.
+       blur(120px)가 상자 밖으로 퍼지던 만큼 상자를 키우고 위치를 당겼다. */
+    .orb { position: absolute; border-radius: 50%; opacity: 0.6; }
+    .orb.a { left: -380px; top: -420px; width: 1380px; height: 1380px; background: radial-gradient(circle, #6d5ef7 0%, rgba(109,94,247,0) 62%); }
+    .orb.b { left: 380px;  top: 0;      width: 1160px; height: 1160px; background: radial-gradient(circle, #3abef9 0%, rgba(58,190,249,0) 62%); }
+    .orb.c { right: -400px; bottom: -460px; width: 1280px; height: 1280px; background: radial-gradient(circle, #ff6fd8 0%, rgba(255,111,216,0) 62%); }
 
     /* 헤더는 전폭 유리 바. 반경 0으로 화면에 붙인다. */
     .page-head {
@@ -516,8 +518,6 @@ th {
       justify-content: space-between;
       background: var(--color-surface);
       border-bottom: 1px solid var(--color-border);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
     }
     .page-no { font-size: var(--fs-body-m); color: var(--color-text-muted); }
 
@@ -534,8 +534,6 @@ th {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       box-shadow: var(--shadow-sm);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
       display: flex;
       flex-direction: column;
       gap: var(--sp-4);
@@ -585,20 +583,5 @@ th {
     </div>
 
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

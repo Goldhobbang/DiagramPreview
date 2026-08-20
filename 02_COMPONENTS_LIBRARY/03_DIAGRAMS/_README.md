@@ -52,6 +52,20 @@ Figma Auto Layout으로 변환된다. `position:absolute`는 SVG 오버레이 �
 "Lorem ipsum"이나 "제목1/제목2"는 금지. 실제 발표에서 쓸 법한 길이의 한글 문구를 넣어야
 임포트 후 줄바꿈·오버플로우 문제를 미리 발견한다.
 
+### 7. 이어 붙일 지점에 `data-anchor`를 붙인다
+조합 빌더(`docs/builder.html`)가 이 지점을 스냅 대상으로 쓴다.
+반복 노드의 **컨테이너에만** 붙인다 (단계 카드 · 레인 · 레이어 · 분면 · 허브).
+값은 짧은 식별자 + 순번:
+
+```html
+<div class="step-item" data-anchor="step-1">…</div>
+<div class="layer d1"  data-anchor="layer-1">…</div>
+```
+
+없어도 동작한다 — 빌더가 박스 8앵커(모퉁이 4 + 변 중점 4)로 폴백한다. 붙이면
+"프로세스 3단계 **아래에** 상세 매트릭스 붙이기"처럼 박스 안쪽 지점에 스냅할 수 있다.
+`node tools/check-templates.js`가 앵커 보유 파일 수를 세어 보여준다(강제는 아니다).
+
 ---
 
 ## 파일 골격
@@ -85,20 +99,9 @@ HTML5 스펙상 DOCTYPE 앞 주석은 허용되며 표준 모드가 유지된다
   <div class="component">
     <!-- 내용 -->
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
+  <!-- JS 0줄. 축소는 갤러리(docs/gallery.js fitFrames)가 iframe 쪽에서 한다.
+       예전에는 body.style.zoom 자기축소 스크립트가 있었는데, 그 zoom이
+       html.to.design import 때 좌표계를 갈라 텍스트를 밀어버려서 걷어냈다. -->
 </body>
 </html>
 ```
@@ -113,7 +116,8 @@ HTML5 스펙상 DOCTYPE 앞 주석은 허용되며 표준 모드가 유지된다
 
 ```bash
 node tools/build-gallery.js     # 목록 재생성
-node tools/check-templates.js   # @card 마커 · 외부 CSS 링크 · self-fit 검사
+node tools/check-templates.js   # @card 마커 · 외부 CSS 링크 · JS 0줄 검사
+node tools/check-templates.js --figma   # Figma import를 깨는 CSS 목록
 npx serve -l 8000 .             # localhost:8000/docs/ 에서 확인
 ```
 

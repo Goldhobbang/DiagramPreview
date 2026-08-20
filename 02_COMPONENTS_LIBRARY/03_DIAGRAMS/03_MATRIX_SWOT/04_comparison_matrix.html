@@ -193,13 +193,21 @@ th {
   height: 700px;
   overflow: hidden;
   position: relative;
-  background: var(--color-bg);
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body-m);
   line-height: var(--lh-body);
   margin: 0 auto;
   padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
 }
 
 /* ===== 03_ASSETS/css/03_components.css ===== */
@@ -414,7 +422,7 @@ th {
 
     <div class="cmp">
 
-      <div class="cmp-row is-header">
+      <div data-anchor="row-1" class="cmp-row is-header">
         <div class="cmp-cell cmp-criteria"></div>
         <div class="cmp-cell">
           <span class="cmp-vendor">A 솔루션</span>
@@ -430,7 +438,7 @@ th {
         </div>
       </div>
 
-      <div class="cmp-row">
+      <div data-anchor="row-2" class="cmp-row">
         <div class="cmp-cell cmp-criteria">
           <p class="cmp-criteria-name">기존 DW 연동</p>
           <p class="cmp-criteria-note">커넥터 제공 범위</p>
@@ -440,7 +448,7 @@ th {
         <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">직접 개발</span></div>
       </div>
 
-      <div class="cmp-row">
+      <div data-anchor="row-3" class="cmp-row">
         <div class="cmp-cell cmp-criteria">
           <p class="cmp-criteria-name">권한 · 감사 로그</p>
           <p class="cmp-criteria-note">내부 통제 요건</p>
@@ -450,7 +458,7 @@ th {
         <div class="cmp-cell d5"><span class="cmp-mark">○</span><span class="cmp-note">직접 구현</span></div>
       </div>
 
-      <div class="cmp-row">
+      <div data-anchor="row-4" class="cmp-row">
         <div class="cmp-cell cmp-criteria">
           <p class="cmp-criteria-name">도입 소요 기간</p>
           <p class="cmp-criteria-note">파일럿까지</p>
@@ -460,7 +468,7 @@ th {
         <div class="cmp-cell d5"><span class="cmp-mark">○</span><span class="cmp-note">20주 이상</span></div>
       </div>
 
-      <div class="cmp-row">
+      <div data-anchor="row-5" class="cmp-row">
         <div class="cmp-cell cmp-criteria">
           <p class="cmp-criteria-name">3년 총소유비용</p>
           <p class="cmp-criteria-note">운영 인력 포함</p>
@@ -470,7 +478,7 @@ th {
         <div class="cmp-cell d4"><span class="cmp-mark">◐</span><span class="cmp-note">23.0억</span></div>
       </div>
 
-      <div class="cmp-row is-total">
+      <div data-anchor="row-6" class="cmp-row is-total">
         <div class="cmp-cell cmp-criteria">
           <p class="cmp-criteria-name">종합 평가</p>
           <p class="cmp-criteria-note">가중 합산 100점</p>
@@ -482,19 +490,5 @@ th {
 
     </div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

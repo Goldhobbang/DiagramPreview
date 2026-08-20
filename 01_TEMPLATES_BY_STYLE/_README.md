@@ -33,21 +33,23 @@ CSS 파일이 없다. 각 HTML이 자기 CSS를 전부 품고 있다.
 같은 베리에이션의 표지·전역 2장이 토큰을 각자 갖고 있으므로, 색을 바꾸면
 **2개 파일을 함께** 고쳐야 한다. 자기완결성의 대가다.
 
-## 자기축소 — 슬라이드가 스스로 컨테이너에 맞춘다
+## 축소 — 슬라이드 파일은 JS 0줄, 축소는 갤러리가 한다
 
-각 HTML `</body>` 앞에 자기축소 스크립트가 있다. `.slide` 크기를 한 번 실측하고
-`body`에 `zoom`을 걸어 **창이든 iframe이든 들어가는 만큼 줄어든다.**
+각 HTML은 **1920×1080 원본 그대로**다. `<script>`가 없다.
 
-```js
-document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-```
+예전에는 `</body>` 앞에 `body.style.zoom`으로 컨테이너에 맞추는 자기축소 스크립트가
+있었지만 **걷어냈다.** `zoom`은 `getBoundingClientRect`(스케일 반영)와
+`getComputedStyle`의 `font-size`/`padding`(스케일 미반영)을 서로 다른 좌표계로 갈라
+놓는다. html.to.design이 그 둘을 섞어 읽으므로 뷰포트가 1px만 작아도 import 결과에서
+텍스트가 밀렸다.
 
-- 갤러리가 축소 배율을 계산하지 않는다 — iframe에 크기만 주면 된다.
-  같은 iframe이 380px에선 썸네일, 1100px에선 확대 미리보기가 된다.
-- 파일을 직접 열어도 작은 창에서 스크롤바가 생기지 않는다. `min(1, …)`이라 원본보다
-  커지지는 않는다.
-- `transform: scale()`이 아니라 `zoom`인 이유: zoom은 레이아웃 자체를 줄이므로
-  `backdrop-filter`(04 글래스모피즘)가 깨지지 않고 스크롤바도 안 생긴다.
+축소는 이제 보여주는 쪽이 한다 — `docs/gallery.js`의 `fitFrames()`가 iframe에
+캔버스 원본 px를 주고 `transform: scale()`로 컨테이너 폭에 맞춘다
+(`docs/builder.js`의 팔레트 썸네일도 같은 함수를 쓴다).
+카드 폭은 갤러리 헤더의 S/M/L 토글이 정한다 (`docs/index.html`의 `data-size`).
+
+- 파일을 직접 열면 원본 1920×1080이다 — 창이 작으면 스크롤바가 생긴다. 정상이다.
+  Figma import는 이 상태를 그대로 캡처해야 맞는다.
 - `17_RETRO_PIXEL`은 비정수 배율에서 픽셀 가장자리가 뭉갠다 — 원본 크기로 열면 선명하다.
 
 `tools/check-templates.js`가 이 스크립트의 존재를 검사한다. 새 템플릿은 기존 파일을

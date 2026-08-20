@@ -558,15 +558,14 @@ th {
 
     .box-title { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
     .box-body { font-size: var(--fs-body-m); color: var(--color-accent-sub); }
-    /* 수치는 금속 그라데이션 채움 */
+    /* 수치는 금 중간색 단색. --gold 그라데이션을 텍스트에 채우려면
+       background-clip:text가 필요한데 html.to.design이 이를 무시해
+       그라데이션이 박스를 칠하고 글자가 사라진다. */
     .box-figure {
       margin-top: auto;
       font-size: var(--fs-h1);
       font-weight: var(--fw-bold);
-      background: var(--gold);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #c9a227;              /* --gold 48% 지점 */
     }
     .list { display: flex; flex-direction: column; gap: var(--sp-3); align-items: center; }
     .list-item { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-body-m); }
@@ -635,20 +634,5 @@ th {
 
     <p class="page-no t-nums">03 / 24</p>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

@@ -546,14 +546,13 @@ th {
     }
     .card-title { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
     .card-body { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    /* 단색 채움. background-clip:text는 html.to.design 미지원 —
+       그라데이션이 텍스트 박스를 칠하고 글자가 사라진다. */
     .card-figure {
       margin-top: auto;
       font-size: var(--fs-h1);
       font-weight: var(--fw-bold);
-      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-sub));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: var(--color-accent);
     }
 
     .page-no {
@@ -563,10 +562,7 @@ th {
       bottom: 48px;
       text-align: center;
       font-size: var(--fs-caption);
-      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-sub));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: var(--color-accent);
     }
   </style>
 </head>
@@ -605,20 +601,5 @@ th {
 
     <p class="page-no t-nums">03 / 24</p>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

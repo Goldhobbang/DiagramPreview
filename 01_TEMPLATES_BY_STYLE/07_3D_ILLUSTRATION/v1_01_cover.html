@@ -524,8 +524,9 @@ th {
       width: 900px;
       height: 180px;
       border-radius: 50%;
-      background: var(--color-surface-alt);
-      filter: blur(24px);
+      /* 가장자리 흐림은 radial-gradient로 — filter:blur는 html.to.design에서
+         이미지로 래스터화될 수 있다. */
+      background: radial-gradient(ellipse at center, var(--color-surface-alt) 0%, transparent 72%);
     }
 
     /* 벨벳 노이즈 — 무광 촉감 */
@@ -618,20 +619,5 @@ th {
 
     <div class="grain"></div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

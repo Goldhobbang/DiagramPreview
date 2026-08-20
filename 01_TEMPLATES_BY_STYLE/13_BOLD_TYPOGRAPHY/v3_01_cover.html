@@ -553,10 +553,16 @@ th {
       letter-spacing: -0.03em;
     }
     .tl.fill-w { color: var(--color-text); }
-    /* 아웃라인만 — 채움 없음 */
+    /* 아웃라인만 — 채움은 배경색.
+       color:transparent + -webkit-text-stroke는 html.to.design에서 둘 다 유실돼
+       글자가 아예 안 보이게 들어온다. 배경색 채움 + 8방향 text-shadow로 같은 그림을
+       만든다 (Figma에서 텍스트 레이어 + 그림자 이펙트로 살아남는다). */
     .tl.outline {
-      color: transparent;
-      -webkit-text-stroke: 2px var(--color-accent);
+      color: var(--color-bg);
+      text-shadow:
+        -2px -2px 0 var(--color-accent),  0 -2px 0 var(--color-accent),  2px -2px 0 var(--color-accent),
+        -2px  0    0 var(--color-accent),                               2px  0    0 var(--color-accent),
+        -2px  2px  0 var(--color-accent),  0  2px 0 var(--color-accent),  2px  2px 0 var(--color-accent);
     }
     .tl.fill-a { color: var(--color-accent); }
 
@@ -614,20 +620,5 @@ th {
     <div class="date-block t-nums">2026. 09. 03</div>
 
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

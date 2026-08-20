@@ -523,9 +523,10 @@ th {
       width: 560px;
       height: 560px;
       border-radius: 50%;
-      background: var(--color-surface-alt);
+      /* 가장자리 흐림은 radial-gradient로 — filter:blur는 래스터화 위험이 있다.
+         blur(8px)은 원래도 거의 안 보이던 수준이라 감쇠 구간으로 충분히 대체된다. */
+      background: radial-gradient(circle, var(--color-surface-alt) 0%, transparent 78%);
       opacity: 0.20;
-      filter: blur(8px);
     }
     .grain {
       position: absolute;
@@ -650,20 +651,5 @@ th {
 
     <div class="grain"></div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

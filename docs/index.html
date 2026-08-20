@@ -6,7 +6,7 @@
 <title>Preview — Figma PPT Template System</title>
 <!-- ?v= 는 손으로 올린다. gallery.css/js를 고치면 숫자를 +1 해야 방문자 캐시가 갱신된다.
      (나머지 파일은 gallery.js가 manifest.buildId로 ?v=를 자동으로 붙인다) -->
-<link rel="stylesheet" href="gallery.css?v=2">
+<link rel="stylesheet" href="gallery.css?v=6">
 </head>
 <body>
 
@@ -16,20 +16,26 @@
       <h1>Preview</h1>
       <p class="sub">슬라이드 · 다이어그램 · 컴포넌트 · 디자인 토큰 전체 미리보기</p>
     </div>
-    <div class="progress">
-      <span id="count-done">0</span><span class="slash">/</span><span id="count-total">0</span>
-      <span class="progress-label">완료</span>
-      <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+    <div class="head-right">
+      <a class="to-builder" href="builder.html">조합 빌더 →</a>
+      <div class="progress">
+        <span id="count-done">0</span><span class="slash">/</span><span id="count-total">0</span>
+        <span class="progress-label">완료</span>
+        <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+      </div>
     </div>
   </div>
 
   <div class="controls">
     <div class="filters" id="filters"></div>
 
+    <!-- 값은 미리보기 1장의 최소 폭 기준이다 (gallery.css가 카드 종류별로 2·3배로 늘린다).
+         190/260/380 → 1920 화면에서 다이어그램 4열/3열/2열 · 슬라이드 3열/2열/1열.
+         이보다 크게 잡으면 두 단계가 같은 열 수로 뭉쳐 토글이 무의미해진다. -->
     <div class="sizer" role="group" aria-label="썸네일 크기">
-      <button data-size="260">S</button>
-      <button data-size="380" aria-pressed="true">M</button>
-      <button data-size="520">L</button>
+      <button data-size="190">S</button>
+      <button data-size="260">M</button>
+      <button data-size="380" aria-pressed="true">L</button>
     </div>
 
     <input type="search" id="search" placeholder="이름 · 용도 검색…" autocomplete="off">
@@ -59,6 +65,6 @@
   </div>
 </div>
 
-<script src="gallery.js?v=2"></script>
+<script src="gallery.js?v=6"></script>
 </body>
 </html>

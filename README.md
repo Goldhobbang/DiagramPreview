@@ -33,16 +33,24 @@ Viewport를 **Custom 1920×1080** → URL 붙여넣기.
 ppt_template/
 ├── 00_GUIDES/                공통 지침서 ← 먼저 읽을 것
 ├── 01_TEMPLATES_BY_STYLE/    스타일별 완성형 템플릿 (3스타일 × 10슬라이드)
-├── 02_COMPONENTS_LIBRARY/    개별 부품 (다이어그램 31종 포함)
+├── 02_COMPONENTS_LIBRARY/    개별 부품 (다이어그램 60종 + 컴포넌트 16종)
 ├── 03_ASSETS/                공통 CSS · 폰트 · 이미지 · 아이콘
-├── 99_DRAFTS/                작업/테스트용 (언제든 삭제됨)
-├── tools/                    build-gallery.js — 갤러리 목록 생성기
-└── docs/                     GitHub Pages 프리뷰 갤러리
+├── 99_DRAFTS/                작업용 + 조합 빌더 산출물 (갤러리 "조합 · 초안" 섹션)
+├── tools/                    build-gallery.js · check-templates.js · check-builder.js
+└── docs/                     GitHub Pages — 프리뷰 갤러리 + 조합 빌더
 ```
 
 갤러리는 저장소의 **모든 요소**를 한 페이지에서 보여준다 —
-슬라이드 30 · 다이어그램 31 · 컴포넌트 16 · 디자인 토큰 62 · 이미지/아이콘.
+슬라이드 120 · 다이어그램 60 · 컴포넌트 16 · 디자인 토큰 · 이미지/아이콘.
 썸네일 크기 S/M/L 토글이 있어 1920 슬라이드도 비교할 수 있다.
+
+헤더의 **`조합 빌더 →`** 버튼을 누르면 [docs/builder.html](docs/builder.html)로 간다.
+여러 다이어그램을 캔버스에 놓고 이동·크기조절·스냅으로 하나의 구조를 만든 뒤
+**자기완결형 HTML로 내보낸다** — `99_DRAFTS/`에 넣고 `node tools/build-gallery.js`를
+실행하면 갤러리에 뜨고, 그대로 Figma에 임포트할 수 있다.
+
+스냅은 3단계다: 다이어그램 안에 지정된 앵커(`data-anchor`) → 박스 8앵커(모퉁이·변 중점)
+→ 8px 그리드. Shift를 누르면 스냅이 풀린다.
 
 ---
 
@@ -54,7 +62,8 @@ ppt_template/
 | [01_FIGMA_IMPORT_GUIDE.md](00_GUIDES/01_FIGMA_IMPORT_GUIDE.md) | 임포트 절차 · 함정 · 미지원 CSS |
 | [02_DESIGN_SYSTEM.md](00_GUIDES/02_DESIGN_SYSTEM.md) | 폰트 스케일 · 간격 · CSS 변수 규칙 (**숫자**) |
 | [03_CHECKLIST.md](00_GUIDES/03_CHECKLIST.md) | 임포트 전/후 체크리스트 |
-| [04_DIAGRAM_CATALOG.md](00_GUIDES/04_DIAGRAM_CATALOG.md) | 다이어그램 31종 기획 + 우선순위 |
+| [04_DIAGRAM_CATALOG.md](00_GUIDES/04_DIAGRAM_CATALOG.md) | 다이어그램 60종 기획 + 우선순위 |
+| [06_COMPONENT_CATALOG.md](00_GUIDES/06_COMPONENT_CATALOG.md) | 타이포·차트·표·UI 부품 16종 기획 |
 | [05_VISUAL_GUIDE.md](00_GUIDES/05_VISUAL_GUIDE.md) | 정렬 · 여백 · 위계 · 강조 · 안티패턴 (**판단**) |
 | [07_PROMPTS.md](00_GUIDES/07_PROMPTS.md) | **제작 프롬프트** — 붙여넣어 바로 쓰는 형태 |
 | [PLANS/](00_GUIDES/PLANS/) | 20 스타일 × 3 베리에이션 디자인 기획서 (슬라이드 120장의 근거) |

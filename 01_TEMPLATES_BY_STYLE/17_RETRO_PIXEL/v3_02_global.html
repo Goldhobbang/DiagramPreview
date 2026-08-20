@@ -543,14 +543,15 @@ th {
     .card-body { font-family: var(--font-body); font-size: 20px; line-height: 1.6; color: var(--color-text-muted); }
     .item { display: flex; align-items: center; gap: 12px; font-family: var(--font-body); font-size: 20px; }
     .px { flex: none; width: 12px; height: 12px; background: var(--v-mint); }
+    /* 크롬 그라데이션 대신 단색 흰색 + 핑크 하드 섀도.
+       background-clip:text는 html.to.design 미지원 — 그라데이션이 텍스트 박스를
+       칠하고 글자가 사라진다. 섀도도 filter가 아니라 text-shadow로 —
+       filter는 텍스트를 이미지로 래스터화할 수 있다. */
     .card-fig {
       margin-top: auto;
       font-size: 40px;
-      background: linear-gradient(180deg, #01cdfe, #ffffff 50%, #b967ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      filter: drop-shadow(3px 3px 0 #ff71ce);
+      color: #ffffff;
+      text-shadow: 3px 3px 0 #ff71ce;
     }
 
     /* 하단 22%에 원근 그리드 유지 — 표지 규칙 승계 */
@@ -626,20 +627,5 @@ th {
 
     <div class="vhs"></div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

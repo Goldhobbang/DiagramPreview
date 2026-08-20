@@ -192,7 +192,9 @@ function render() {
       const cards = isSlides
         ? pairByVariant(g.items).map(pairCard)
         : g.items.map(i => card(i, section.kind, section.id));
-      html.push(`<div class="grid${isSlides ? ' grid-pair' : ''}">${cards.join('')}</div>`);
+      // 이미지(media)만 고정 폭. HTML 미리보기는 넓은 트랙에서 늘려야 읽힌다.
+      const track = isSlides ? ' grid-pair' : section.kind === 'image' ? '' : ' grid-wide';
+      html.push(`<div class="grid${track}">${cards.join('')}</div>`);
     }
   }
 
@@ -201,11 +203,30 @@ function render() {
   }
 
   $main.innerHTML = html.join('') || `<p class="empty">조건에 맞는 항목이 없습니다.</p>`;
+  fitFrames($main);
 
   for (const el of $main.querySelectorAll('[data-copy]')) {
     el.addEventListener('click', () => copyUrl(el.dataset.copy));
   }
 }
+
+/* iframe을 캔버스 원본 크기로 띄우고 컨테이너 폭에 맞게 scale로 줄인다.
+   예전에는 HTML 파일 안의 body.style.zoom 스크립트가 이 일을 했는데, 그 zoom이
+   html.to.design import 때 좌표계를 갈라 텍스트를 밀어버려서 축소를 이쪽으로 옮겼다.
+   컨테이너의 aspect-ratio가 캔버스 비율과 같으므로 폭만 맞추면 높이도 맞는다. */
+function fitFrames(root) {
+  for (const f of root.querySelectorAll('iframe[data-w]')) {
+    const w = +f.dataset.w;
+    const box = f.parentElement;
+    if (!w || !box.clientWidth) continue;
+    f.style.width = `${w}px`;
+    f.style.height = `${f.dataset.h}px`;
+    // min(1, …) — 예전 zoom 스크립트와 같이 원본보다 키우지 않는다
+    f.style.transform = `scale(${Math.min(1, box.clientWidth / w)})`;
+  }
+}
+
+addEventListener('resize', () => fitFrames(document));
 
 function matches(item, q) {
   if (!q) return true;
@@ -233,24 +254,21 @@ function card(item, kind, sectionId) {
   return kind === 'image' ? mediaCard(item) : htmlCard(item, sectionId === 'slides');
 }
 
-/* 다이어그램·컴포넌트용. 이쪽 파일에는 자기축소 스크립트가 없으므로
-   갤러리가 크기를 알아 transform:scale로 줄인다 (기존 경로 유지). */
+/* 다이어그램·컴포넌트용. 슬라이드와 같은 경로다 — 크기를 지정하지 않고
+   컨테이너 비율만 맞춰주면 파일의 self-fit 스크립트가 스스로 축소한다.
+   비율은 캔버스마다 다르므로(1600×600 ~ 1000×900) 인라인으로 박는다. */
 function htmlCard(item) {
-  const scale = thumbW / item.w;
-  const thumbH = Math.round(item.h * scale);
-
   // todo면 iframe을 만들지 않는다 — 빈 파일 로드도 네트워크 요청도 낭비.
   const inner = item.status === 'todo'
     ? `<div class="thumb-placeholder">
          <span>미착수</span><span class="dim">${item.w} × ${item.h}</span>
        </div>`
-    : `<iframe src="${v(item.path)}" width="${item.w}" height="${item.h}"
-              style="transform:scale(${scale})" loading="lazy"
+    : `<iframe src="${v(item.path)}" loading="lazy" data-w="${item.w}" data-h="${item.h}"
               title="${esc(item.title)} 미리보기" scrolling="no"></iframe>`;
 
   return `
-<article class="card">
-  <div class="thumb thumb-scaled" style="height:${thumbH}px">${inner}</div>
+<article class="card" data-detail="${item.path}" role="button" tabindex="0">
+  <div class="thumb" style="aspect-ratio:${item.w}/${item.h}">${inner}</div>
   <div class="card-body">
     <div class="card-head">
       <span class="card-title">${esc(item.title)}</span>
@@ -295,6 +313,7 @@ function pairCard(pair) {
       <div class="thumb">${it.status === 'todo'
         ? `<div class="thumb-placeholder"><span>미착수</span></div>`
         : `<iframe src="${v(it.path)}" loading="lazy" scrolling="no"
+                   data-w="${it.w}" data-h="${it.h}"
                    title="${esc(it.title)} 미리보기"></iframe>`}</div>
       <figcaption>${label}</figcaption>
     </figure>`).join('');
@@ -410,6 +429,8 @@ function boxSample(t) {
 function onDetailOpenClick(e) {
   const card = e.target.closest('[data-detail]');
   if (!card) return;
+  // 카드 안의 새 창·URL 복사는 자기 일을 한다 — 상세 패널까지 열지 않는다.
+  if (e.target.closest('a, button')) return;
   // 썸네일을 눌렀으면 그 장을, 본문을 눌렀으면 기본값(표지)을 크게 연다.
   const shot = e.target.closest('[data-preview]');
   openDetail(card.dataset.detail, shot ? shot.dataset.preview : card.dataset.detail);
@@ -453,9 +474,9 @@ async function openDetail(leadPath, showPath) {
       ${tabs}
     </div>
 
-    <div class="detail-preview">
+    <div class="detail-preview" id="preview-box" style="aspect-ratio:${shown.w}/${shown.h}">
       <iframe id="preview-frame" src="${shown.path}" title="${esc(shown.title)} 확대 미리보기"
-              scrolling="no"></iframe>
+              data-w="${shown.w}" data-h="${shown.h}" scrolling="no"></iframe>
     </div>
     <p class="card-path" id="preview-path">${esc(shown.file)} · ${shown.w}×${shown.h}</p>
 
@@ -477,12 +498,17 @@ async function openDetail(leadPath, showPath) {
 
   // 탭은 iframe src만 갈아끼운다 — 토큰 정보는 표지·전역이 같으므로 다시 그릴 필요가 없다.
   const $frame = $detailBody.querySelector('#preview-frame');
+  const $box = $detailBody.querySelector('#preview-box');
   const $path = $detailBody.querySelector('#preview-path');
   for (const btn of $detailBody.querySelectorAll('[data-show]')) {
     btn.addEventListener('click', () => {
       const it = siblings.find(i => i.path === btn.dataset.show);
       if (!it) return;
       $frame.src = v(it.path);
+      $box.style.aspectRatio = `${it.w}/${it.h}`;
+      $frame.dataset.w = it.w;
+      $frame.dataset.h = it.h;
+      fitFrames($box);
       $path.textContent = `${it.file} · ${it.w}×${it.h}`;
       for (const b of $detailBody.querySelectorAll('[data-show]')) {
         b.setAttribute('aria-pressed', String(b === btn));
@@ -495,6 +521,7 @@ async function openDetail(leadPath, showPath) {
   }
 
   $detail.hidden = false;
+  fitFrames($detailBody);   // 패널이 보이기 전에는 clientWidth가 0이라 여기서 잰다
 }
 
 function closeDetail() {

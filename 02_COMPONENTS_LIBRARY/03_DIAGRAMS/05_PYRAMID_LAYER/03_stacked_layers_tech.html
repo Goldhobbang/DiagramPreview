@@ -193,13 +193,21 @@ th {
   height: 700px;
   overflow: hidden;
   position: relative;
-  background: var(--color-bg);
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body-m);
   line-height: var(--lh-body);
   margin: 0 auto;
   padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
 }
 
 /* ===== 03_ASSETS/css/03_components.css ===== */
@@ -364,7 +372,7 @@ th {
     <p class="stack-title">서비스 아키텍처 레이어</p>
     <div class="stack">
 
-      <div class="layer d1">
+      <div data-anchor="layer-1" class="layer d1">
         <div class="layer-name">
           <p class="layer-ko">사용자 인터페이스</p>
           <p class="layer-en">PRESENTATION</p>
@@ -372,7 +380,7 @@ th {
         <p class="layer-desc">웹 · 모바일 앱 클라이언트. 디자인 시스템 기반 공통 UI 컴포넌트</p>
       </div>
 
-      <div class="layer d2">
+      <div data-anchor="layer-2" class="layer d2">
         <div class="layer-name">
           <p class="layer-ko">서비스</p>
           <p class="layer-en">SERVICE</p>
@@ -380,7 +388,7 @@ th {
         <p class="layer-desc">주문 · 결제 · 회원 등 도메인별 비즈니스 로직. 마이크로서비스 단위 배포</p>
       </div>
 
-      <div class="layer d3">
+      <div data-anchor="layer-3" class="layer d3">
         <div class="layer-name">
           <p class="layer-ko">API 게이트웨이</p>
           <p class="layer-en">API GATEWAY</p>
@@ -388,7 +396,7 @@ th {
         <p class="layer-desc">인증 · 라우팅 · 속도 제한. 외부 파트너 API 제공 창구 단일화</p>
       </div>
 
-      <div class="layer d4">
+      <div data-anchor="layer-4" class="layer d4">
         <div class="layer-name">
           <p class="layer-ko">데이터</p>
           <p class="layer-en">DATA</p>
@@ -396,7 +404,7 @@ th {
         <p class="layer-desc">운영 DB · 데이터 웨어하우스 · 실시간 스트림. 분석 파이프라인 포함</p>
       </div>
 
-      <div class="layer d5">
+      <div data-anchor="layer-5" class="layer d5">
         <div class="layer-name">
           <p class="layer-ko">인프라</p>
           <p class="layer-en">INFRASTRUCTURE</p>
@@ -406,19 +414,5 @@ th {
 
     </div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

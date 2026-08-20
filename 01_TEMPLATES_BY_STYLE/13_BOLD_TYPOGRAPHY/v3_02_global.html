@@ -565,7 +565,15 @@ th {
       line-height: 0.9;
       letter-spacing: -0.03em;
     }
-    .fig.outline { color: transparent; -webkit-text-stroke: 2px var(--color-accent); }
+    /* 아웃라인 수치 — 채움은 배경색 + 8방향 text-shadow.
+       color:transparent + -webkit-text-stroke는 html.to.design에서 유실돼 글자가 사라진다. */
+    .fig.outline {
+      color: var(--color-bg);
+      text-shadow:
+        -2px -2px 0 var(--color-accent),  0 -2px 0 var(--color-accent),  2px -2px 0 var(--color-accent),
+        -2px  0    0 var(--color-accent),                               2px  0    0 var(--color-accent),
+        -2px  2px  0 var(--color-accent),  0  2px 0 var(--color-accent),  2px  2px 0 var(--color-accent);
+    }
     .fig.fill { color: var(--color-accent); }
     .fig-label {
       font-family: var(--font-body);
@@ -613,20 +621,5 @@ th {
     </div>
 
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

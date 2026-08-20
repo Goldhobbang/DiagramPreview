@@ -193,13 +193,21 @@ th {
   height: 700px;
   overflow: hidden;
   position: relative;
-  background: var(--color-bg);
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body-m);
   line-height: var(--lh-body);
   margin: 0 auto;
   padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
 }
 
 /* ===== 03_ASSETS/css/03_components.css ===== */
@@ -376,14 +384,14 @@ th {
 
     <div class="pri-grid">
       <div class="pri-row">
-        <div class="pri-quad d1">
+        <div data-anchor="quad-1" class="pri-quad d1">
           <p class="pri-quad-name">지금 실행</p>
           <p class="pri-quad-rule">중요 · 긴급 — 이번 스프린트에 착수</p>
           <p class="pri-item">결제 실패 재시도 로직 수정</p>
           <p class="pri-item">개인정보 보관 정책 감사 대응</p>
           <p class="pri-item">피크 시간대 응답 지연 해소</p>
         </div>
-        <div class="pri-quad d2">
+        <div data-anchor="quad-2" class="pri-quad d2">
           <p class="pri-quad-name">계획 수립</p>
           <p class="pri-quad-rule">중요 · 비긴급 — 분기 로드맵에 배치</p>
           <p class="pri-item">데이터 파이프라인 재설계</p>
@@ -393,13 +401,13 @@ th {
       </div>
 
       <div class="pri-row">
-        <div class="pri-quad d4">
+        <div data-anchor="quad-3" class="pri-quad d4">
           <p class="pri-quad-name">위임 · 자동화</p>
           <p class="pri-quad-rule">비중요 · 긴급 — 담당 이관하거나 자동화</p>
           <p class="pri-item">주간 리포트 수기 집계</p>
           <p class="pri-item">단순 문의 1차 응대</p>
         </div>
-        <div class="pri-quad d5">
+        <div data-anchor="quad-4" class="pri-quad d5">
           <p class="pri-quad-name">보류 · 제거</p>
           <p class="pri-quad-rule">비중요 · 비긴급 — 백로그로 내리고 재검토</p>
           <p class="pri-item">사내 위키 테마 개편</p>
@@ -413,19 +421,5 @@ th {
       <span>긴급도 낮음 →</span>
     </div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

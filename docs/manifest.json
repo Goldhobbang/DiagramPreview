@@ -1,5 +1,5 @@
 {
-  "buildId": "20260816182502",
+  "buildId": "20260819152946",
   "sections": [
     {
       "id": "slides",
@@ -1279,6 +1279,24 @@
               "w": 1400,
               "h": 600,
               "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/08_state_transition.html",
+              "file": "08_state_transition.html",
+              "title": "상태 전이도",
+              "desc": "상태 노드 + 전이 조건 화살표",
+              "w": 1400,
+              "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/01_PROCESS_FLOW/09_kanban_board.html",
+              "file": "09_kanban_board.html",
+              "title": "칸반 보드",
+              "desc": "4열 보드 + 카드(담당·기한) + 건수",
+              "w": 1600,
+              "h": 800,
+              "status": "done"
             }
           ]
         },
@@ -1338,6 +1356,15 @@
               "desc": "중심 조직 + 위성 노드 + 관계선 굵기 차등",
               "w": 1200,
               "h": 900,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/02_HIERARCHY_TREE/07_org_matrix.html",
+              "file": "07_org_matrix.html",
+              "title": "매트릭스 조직",
+              "desc": "기능 조직 × 프로젝트 교차 배치",
+              "w": 1400,
+              "h": 800,
               "status": "done"
             }
           ]
@@ -1399,6 +1426,15 @@
               "w": 1400,
               "h": 700,
               "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/03_MATRIX_SWOT/07_kano_model.html",
+              "file": "07_kano_model.html",
+              "title": "카노 모델",
+              "desc": "만족도-충족도 곡선 3종 + 기능 배치",
+              "w": 1200,
+              "h": 800,
+              "status": "done"
             }
           ]
         },
@@ -1458,6 +1494,15 @@
               "desc": "상호 연동 요소. 기어 3개 + 각 라벨",
               "w": 1200,
               "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/04_VENN_CYCLE/07_double_diamond.html",
+              "file": "07_double_diamond.html",
+              "title": "더블 다이아몬드",
+              "desc": "발산·수렴 4단계 디자인 프로세스",
+              "w": 1600,
+              "h": 600,
               "status": "done"
             }
           ]
@@ -1519,6 +1564,240 @@
               "w": 1400,
               "h": 800,
               "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/05_PYRAMID_LAYER/07_kpi_tree.html",
+              "file": "07_kpi_tree.html",
+              "title": "KPI 트리",
+              "desc": "핵심 지표 2단 분해 + 기여도",
+              "w": 1600,
+              "h": 800,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "06_SYSTEM_ARCH",
+          "label": "시스템 · 아키텍처",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/01_system_context.html",
+              "file": "01_system_context.html",
+              "title": "시스템 구성도",
+              "desc": "시스템 경계와 외부 연동 관계",
+              "w": 1600,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/02_data_flow.html",
+              "file": "02_data_flow.html",
+              "title": "데이터 흐름",
+              "desc": "소스에서 활용까지 4단 파이프라인",
+              "w": 1600,
+              "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/03_sequence_api.html",
+              "file": "03_sequence_api.html",
+              "title": "API 시퀀스",
+              "desc": "참가자 4 레인 + 번호 붙은 호출 순서",
+              "w": 1200,
+              "h": 900,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/04_erd_tables.html",
+              "file": "04_erd_tables.html",
+              "title": "ERD 데이터 모델",
+              "desc": "테이블 4개 + 1:N 관계선",
+              "w": 1400,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/05_network_topology.html",
+              "file": "05_network_topology.html",
+              "title": "네트워크 토폴로지",
+              "desc": "존 구분 + 장비 노드 + 연결",
+              "w": 1400,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/06_deploy_pipeline.html",
+              "file": "06_deploy_pipeline.html",
+              "title": "배포 파이프라인",
+              "desc": "커밋에서 배포까지 스테이지 + 게이트",
+              "w": 1600,
+              "h": 600,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/06_SYSTEM_ARCH/07_three_tier.html",
+              "file": "07_three_tier.html",
+              "title": "3계층 아키텍처",
+              "desc": "프레젠테이션·애플리케이션·데이터 레이어",
+              "w": 1200,
+              "h": 800,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "07_BUSINESS_MODEL",
+          "label": "비즈니스 모델",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/01_business_model_canvas.html",
+              "file": "01_business_model_canvas.html",
+              "title": "비즈니스 모델 캔버스",
+              "desc": "9블록 그리드 + 블록별 불릿",
+              "w": 1600,
+              "h": 900,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/02_value_chain.html",
+              "file": "02_value_chain.html",
+              "title": "밸류체인",
+              "desc": "본원적 활동 5단 + 지원 활동 상단 바",
+              "w": 1600,
+              "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/03_customer_journey.html",
+              "file": "03_customer_journey.html",
+              "title": "고객 여정 맵",
+              "desc": "단계 5 × 행동·접점·감정·기회",
+              "w": 1600,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/04_service_blueprint.html",
+              "file": "04_service_blueprint.html",
+              "title": "서비스 블루프린트",
+              "desc": "프론트·백스테이지·지원 3레인",
+              "w": 1600,
+              "h": 900,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/05_persona_card.html",
+              "file": "05_persona_card.html",
+              "title": "페르소나 카드",
+              "desc": "프로필 + 목표·불편·행동 3열",
+              "w": 1400,
+              "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/06_five_forces.html",
+              "file": "06_five_forces.html",
+              "title": "5 Forces",
+              "desc": "중앙 경쟁 + 4방향 압력 + 강도",
+              "w": 1200,
+              "h": 900,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/07_pest_analysis.html",
+              "file": "07_pest_analysis.html",
+              "title": "PEST 분석",
+              "desc": "4분면 + 요인별 영향도 배지",
+              "w": 1200,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/07_BUSINESS_MODEL/08_lean_canvas.html",
+              "file": "08_lean_canvas.html",
+              "title": "린 캔버스",
+              "desc": "9블록 사업 가설 정리",
+              "w": 1600,
+              "h": 900,
+              "status": "done"
+            }
+          ]
+        },
+        {
+          "id": "08_DATA_RELATION",
+          "label": "수치 관계",
+          "items": [
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/01_waterfall_bridge.html",
+              "file": "01_waterfall_bridge.html",
+              "title": "워터폴 증감 분해",
+              "desc": "기초에서 기말까지 증감 요인",
+              "w": 1400,
+              "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/02_scatter_correlation.html",
+              "file": "02_scatter_correlation.html",
+              "title": "산점 상관",
+              "desc": "두 변수 관계 + 추세선 + 사분면",
+              "w": 1200,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/03_heatmap_grid.html",
+              "file": "03_heatmap_grid.html",
+              "title": "히트맵",
+              "desc": "행×열 밀도 + 농도 범례",
+              "w": 1400,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/04_treemap_share.html",
+              "file": "04_treemap_share.html",
+              "title": "트리맵",
+              "desc": "면적 비례 비중 + 상위 그룹 구분",
+              "w": 1400,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/05_sankey_flow.html",
+              "file": "05_sankey_flow.html",
+              "title": "생키 흐름",
+              "desc": "유입에서 결과까지 폭=값 흐름 배분",
+              "w": 1600,
+              "h": 800,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/06_radar_profile.html",
+              "file": "06_radar_profile.html",
+              "title": "레이다 프로필",
+              "desc": "6축 거미줄 + 2계열 비교",
+              "w": 1000,
+              "h": 900,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/07_bubble_timeline.html",
+              "file": "07_bubble_timeline.html",
+              "title": "버블 타임라인",
+              "desc": "시점별 규모(버블 크기) + 라벨",
+              "w": 1600,
+              "h": 700,
+              "status": "done"
+            },
+            {
+              "path": "../02_COMPONENTS_LIBRARY/03_DIAGRAMS/08_DATA_RELATION/08_bullet_target.html",
+              "file": "08_bullet_target.html",
+              "title": "불릿 목표 대비",
+              "desc": "실적 바 + 목표 기준선 + 구간 배경",
+              "w": 1200,
+              "h": 600,
+              "status": "done"
             }
           ]
         }
@@ -1540,7 +1819,7 @@
               "desc": "단락 · 강조 · 인용 · 각주",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/01_TYPOGRAPHY/heading_scale.html",
@@ -1549,7 +1828,7 @@
               "desc": "Display~Caption 7단계 견본",
               "w": 1400,
               "h": 900,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/01_TYPOGRAPHY/list_styles.html",
@@ -1558,7 +1837,7 @@
               "desc": "불릿 · 번호 · 체크 · 아이콘 리스트",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1573,7 +1852,7 @@
               "desc": "항목명이 긴 경우의 순위 비교",
               "w": 1200,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/bar_vertical.html",
@@ -1582,7 +1861,7 @@
               "desc": "카테고리 비교. 값 라벨 + 축",
               "w": 1200,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/donut_share.html",
@@ -1591,7 +1870,7 @@
               "desc": "구성비. 중앙 총합 + 범례",
               "w": 1000,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/kpi_number_cards.html",
@@ -1600,7 +1879,7 @@
               "desc": "핵심 지표 4개. 값 + 증감률",
               "w": 1400,
               "h": 400,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/line_trend.html",
@@ -1609,7 +1888,7 @@
               "desc": "시계열 추이. 다계열 + 범례",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/02_CHARTS/stacked_composition.html",
@@ -1618,7 +1897,7 @@
               "desc": "기간별 구성 변화. 누적 막대",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1633,7 +1912,7 @@
               "desc": "다중 옵션 비교. 헤더 강조 + 줄무늬",
               "w": 1400,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/04_TABLES/pricing_table.html",
@@ -1642,7 +1921,7 @@
               "desc": "요금제 3단. 추천 플랜 강조",
               "w": 1400,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/04_TABLES/spec_sheet.html",
@@ -1651,7 +1930,7 @@
               "desc": "2열 라벨-값 나열. 구분선 중심",
               "w": 1200,
               "h": 800,
-              "status": "todo"
+              "status": "done"
             }
           ]
         },
@@ -1666,7 +1945,7 @@
               "desc": "상태 배지 · 카테고리 태그 변형",
               "w": 1200,
               "h": 500,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/callout_boxes.html",
@@ -1675,7 +1954,7 @@
               "desc": "정보 · 주의 · 성공 · 경고 4종",
               "w": 1200,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/icon_bullet_rows.html",
@@ -1684,7 +1963,7 @@
               "desc": "아이콘 + 제목 + 설명 행 반복",
               "w": 1200,
               "h": 700,
-              "status": "todo"
+              "status": "done"
             },
             {
               "path": "../02_COMPONENTS_LIBRARY/05_UI_PARTS/progress_indicators.html",
@@ -1693,7 +1972,29 @@
               "desc": "진행 바 · 원형 게이지 · 단계 표시",
               "w": 1200,
               "h": 600,
-              "status": "todo"
+              "status": "done"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drafts",
+      "label": "조합 · 초안",
+      "kind": "html",
+      "groups": [
+        {
+          "id": "99_DRAFTS",
+          "label": "작업 중 · 조합 결과",
+          "items": [
+            {
+              "path": "../99_DRAFTS/00_cover_demo.html",
+              "file": "00_cover_demo.html",
+              "title": "간지 데모",
+              "desc": "표지 + 전역(섹션 구분) 간지 2장 · 클릭 토글 프리뷰",
+              "w": 1920,
+              "h": 1080,
+              "status": "done"
             }
           ]
         }

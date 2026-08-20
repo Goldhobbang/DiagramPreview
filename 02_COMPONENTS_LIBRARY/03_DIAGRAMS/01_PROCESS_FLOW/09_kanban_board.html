@@ -1,0 +1,499 @@
+<!-- @card 칸반 보드 | 4열 보드 + 카드(담당·기한) + 건수 | 1600x800 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>칸반 보드</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       공통 토큰을 고치려면 03_ASSETS/css/를 고친 뒤 이 블록도 함께 갱신한다. -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+
+/* ===== 03_ASSETS/css/02_slide_base.css — .component 캔버스만 ===== */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
+}
+
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 이 다이어그램 전용 ===== */
+    .component { width: 1600px; height: 800px; }
+
+    .kb-title { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
+    .kb-sub {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      margin: var(--sp-1) 0 var(--sp-4);
+    }
+
+    .kb { display: flex; gap: var(--sp-3); height: 620px; }
+
+    .kb-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      padding: var(--sp-3);
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      min-width: 0;
+    }
+    .kb-col-head {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding-bottom: var(--sp-2);
+      border-bottom: var(--border-w-thick) solid var(--c, var(--color-border));
+    }
+    .kb-col-name {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+    }
+    .kb-count {
+      margin-left: auto;
+      min-width: 34px;
+      text-align: center;
+      padding: 0 var(--sp-2);
+      border-radius: var(--radius-full);
+      background: var(--c, var(--color-neutral));
+      color: var(--color-text-invert);
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-bold);
+      font-variant-numeric: tabular-nums;
+    }
+    /* WIP 한도 초과 열은 헤더에 경고를 띄운다 — 보드의 존재 이유 */
+    .kb-wip {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+    .kb-wip.over { color: var(--color-negative); font-weight: var(--fw-semibold); }
+
+    .kb-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      padding: var(--sp-3);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      border-left: var(--border-w-thick) solid var(--c, var(--color-border));
+      box-shadow: var(--shadow-sm);
+    }
+    .kb-card-title {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-medium);
+      line-height: 1.4;
+    }
+    .kb-card-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
+    .kb-card-meta .due { margin-left: auto; font-variant-numeric: tabular-nums; }
+    .kb-card-meta .due.late { color: var(--color-negative); font-weight: var(--fw-semibold); }
+    .kb-owner {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-alt);
+      color: var(--color-text);
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-semibold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <p class="kb-title">전사 확산 과제 보드 — 3월 2주</p>
+    <p class="kb-sub">WIP 한도: 진행 중 4건 · 검토 3건. 초과 시 새 과제를 당기지 않는다</p>
+
+    <div class="kb">
+
+      <div class="kb-col" data-anchor="col-todo" style="--c: var(--color-neutral)">
+        <div class="kb-col-head">
+          <p class="kb-col-name">대기</p>
+          <span class="kb-count">5</span>
+        </div>
+        <p class="kb-wip">한도 없음</p>
+        <div class="kb-card" style="--c: var(--color-neutral)">
+          <p class="kb-card-title">지사 3곳 계정 일괄 등록</p>
+          <p class="kb-card-meta"><span class="kb-owner">박</span>인프라<span class="due">3/22</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-neutral)">
+          <p class="kb-card-title">교육 영상 4편 촬영</p>
+          <p class="kb-card-meta"><span class="kb-owner">이</span>CS<span class="due">3/26</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-neutral)">
+          <p class="kb-card-title">모바일 승인 가이드 개정</p>
+          <p class="kb-card-meta"><span class="kb-owner">최</span>기획<span class="due">3/29</span></p>
+        </div>
+      </div>
+
+      <div class="kb-col" data-anchor="col-doing" style="--c: var(--color-accent)">
+        <div class="kb-col-head">
+          <p class="kb-col-name">진행 중</p>
+          <span class="kb-count">5</span>
+        </div>
+        <p class="kb-wip over">한도 4건 초과 — 신규 착수 중단</p>
+        <div class="kb-card" style="--c: var(--color-accent)">
+          <p class="kb-card-title">부서 코드 불일치 47명 정리</p>
+          <p class="kb-card-meta"><span class="kb-owner">김</span>인사<span class="due late">3/15 지연</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-accent)">
+          <p class="kb-card-title">승인 경로 시나리오 12종 검증</p>
+          <p class="kb-card-meta"><span class="kb-owner">정</span>개발<span class="due">3/18</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-accent)">
+          <p class="kb-card-title">ERP 전표 연동 테스트</p>
+          <p class="kb-card-meta"><span class="kb-owner">한</span>개발<span class="due">3/20</span></p>
+        </div>
+      </div>
+
+      <div class="kb-col" data-anchor="col-review" style="--c: var(--color-data-4)">
+        <div class="kb-col-head">
+          <p class="kb-col-name">검토</p>
+          <span class="kb-count">2</span>
+        </div>
+        <p class="kb-wip">한도 3건 이내</p>
+        <div class="kb-card" style="--c: var(--color-data-4)">
+          <p class="kb-card-title">보안팀 취약점 점검 회신 대기</p>
+          <p class="kb-card-meta"><span class="kb-owner">오</span>보안<span class="due">3/19</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-data-4)">
+          <p class="kb-card-title">관리자 콘솔 UI 리뷰</p>
+          <p class="kb-card-meta"><span class="kb-owner">윤</span>디자인<span class="due">3/21</span></p>
+        </div>
+      </div>
+
+      <div class="kb-col" data-anchor="col-done" style="--c: var(--color-positive)">
+        <div class="kb-col-head">
+          <p class="kb-col-name">완료</p>
+          <span class="kb-count">14</span>
+        </div>
+        <p class="kb-wip">이번 주 6건 완료</p>
+        <div class="kb-card" style="--c: var(--color-positive)">
+          <p class="kb-card-title">파일럿 결과 리포트 공유</p>
+          <p class="kb-card-meta"><span class="kb-owner">김</span>기획<span class="due">3/8</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-positive)">
+          <p class="kb-card-title">알림 채널 메신저 연동</p>
+          <p class="kb-card-meta"><span class="kb-owner">한</span>개발<span class="due">3/11</span></p>
+        </div>
+        <div class="kb-card" style="--c: var(--color-positive)">
+          <p class="kb-card-title">1차 교육 (구매·총무 42명)</p>
+          <p class="kb-card-meta"><span class="kb-owner">이</span>CS<span class="due">3/13</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

@@ -193,13 +193,21 @@ th {
   height: 700px;
   overflow: hidden;
   position: relative;
-  background: var(--color-bg);
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
   color: var(--color-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body-m);
   line-height: var(--lh-body);
   margin: 0 auto;
   padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
 }
 
 /* ===== 03_ASSETS/css/03_components.css ===== */
@@ -367,31 +375,31 @@ th {
         <circle cx="1376" cy="252" r="14" fill="var(--color-data-5)"/>
       </svg>
 
-      <div class="ms-card above" style="left: 0;">
+      <div data-anchor="ms-1" class="ms-card above" style="left: 0;">
         <p class="ms-date">2026. 01</p>
         <p class="ms-name">프로젝트 착수</p>
         <p class="ms-desc">TF 구성 및 킥오프, 범위 확정</p>
       </div>
 
-      <div class="ms-card below" style="left: 312px;">
+      <div data-anchor="ms-2" class="ms-card below" style="left: 312px;">
         <p class="ms-date">2026. 03</p>
         <p class="ms-name">설계 완료</p>
         <p class="ms-desc">아키텍처 확정, 상세 설계 검토 통과</p>
       </div>
 
-      <div class="ms-card above" style="left: 624px;">
+      <div data-anchor="ms-3" class="ms-card above" style="left: 624px;">
         <p class="ms-date">2026. 06</p>
         <p class="ms-name">베타 오픈</p>
         <p class="ms-desc">사내 500명 대상 베타 테스트 시작</p>
       </div>
 
-      <div class="ms-card below" style="left: 936px;">
+      <div data-anchor="ms-4" class="ms-card below" style="left: 936px;">
         <p class="ms-date">2026. 09</p>
         <p class="ms-name">정식 출시</p>
         <p class="ms-desc">전 고객 대상 서비스 오픈, 마케팅 개시</p>
       </div>
 
-      <div class="ms-card above" style="left: 1248px;">
+      <div data-anchor="ms-5" class="ms-card above" style="left: 1248px;">
         <p class="ms-date">2026. 12</p>
         <p class="ms-name">확장 단계</p>
         <p class="ms-desc">MAU 10만 달성, 2차 로드맵 착수</p>
@@ -399,19 +407,5 @@ th {
 
     </div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       갤러리 썸네일은 iframe 폭을 캔버스 폭과 같게 주므로 zoom=1 — 이중 축소가 없다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.component');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

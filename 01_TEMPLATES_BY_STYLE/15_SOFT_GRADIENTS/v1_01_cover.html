@@ -531,17 +531,10 @@ th {
       background: rgba(255, 255, 255, 0.22);
     }
 
-    /* 하단 30% — 수면. 호 아래는 한 단계 진해진다. */
-    .water {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 30%;
-      background: linear-gradient(180deg, #ff6a88 0%, #e0526e 100%);
-      /* 지평선을 아주 완만한 호로 */
-      clip-path: ellipse(140% 100% at 50% 100%);
-    }
+    /* 하단 30% — 수면. 호 아래는 한 단계 진해진다.
+       원래 clip-path: ellipse()로 지평선을 호로 깎았지만 html.to.design이
+       곡선 clip-path를 깨뜨린다. 인라인 SVG <path>로 옮겼다 (벡터로 들어온다). */
+    .water { position: absolute; left: 0; right: 0; bottom: 0; height: 30%; }
     .horizon { position: absolute; left: 0; right: 0; bottom: 30%; height: 40px; }
 
     /* 중앙 40% — 제목. 좌측 정렬로 대칭을 깬다. */
@@ -578,7 +571,13 @@ th {
   <div class="slide v1 dawn">
 
     <div class="sun"></div>
-    <div class="water"></div>
+    <svg class="water" viewBox="0 0 1920 324" preserveAspectRatio="none">
+      <linearGradient id="water-fill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#ff6a88"/>
+        <stop offset="1" stop-color="#e0526e"/>
+      </linearGradient>
+      <path d="M0 21 Q960 -21 1920 21 L1920 324 L0 324 Z" fill="url(#water-fill)"/>
+    </svg>
     <svg class="horizon" viewBox="0 0 1920 40" preserveAspectRatio="none">
       <path d="M0 34 C480 6, 1440 6, 1920 34" stroke="rgba(255,255,255,0.55)" stroke-width="1" fill="none"/>
     </svg>
@@ -596,20 +595,5 @@ th {
 
     <div class="noise"></div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

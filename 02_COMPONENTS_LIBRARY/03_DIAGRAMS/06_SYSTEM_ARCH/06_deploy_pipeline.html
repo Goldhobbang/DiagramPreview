@@ -1,0 +1,509 @@
+<!-- @card 배포 파이프라인 | 커밋에서 배포까지 스테이지 + 게이트 | 1600x600 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>배포 파이프라인</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       공통 토큰을 고치려면 03_ASSETS/css/를 고친 뒤 이 블록도 함께 갱신한다. -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+
+/* ===== 03_ASSETS/css/02_slide_base.css — .component 캔버스만 ===== */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  /* 배경을 깔지 않는다 — 조합 빌더에서 여러 개를 겹쳐야 한다.
+     흰색은 보여주는 쪽이 깐다: 아래 body · 갤러리 .thumb · 빌더 모눈지 */
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* 파일을 단독으로 열었을 때만 흰 종이를 깐다 (00_reset.css의 회색을 덮는다).
+   조합 빌더는 iframe 안에서 이 규칙을 끄고 노드를 투명하게 쓴다. */
+body {
+  background: var(--color-bg);
+}
+
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 이 다이어그램 전용 ===== */
+    .component { width: 1600px; height: 600px; }
+
+    .pipe-title {
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-semibold);
+      margin-bottom: var(--sp-2);
+    }
+    .pipe-sub {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      margin-bottom: var(--sp-5);
+    }
+
+    .pipe-row { display: flex; align-items: stretch; gap: 0; }
+
+    /* 스테이지는 오각형 화살표 모양 — clip-path 대신 SVG 배지를 쓰면 Figma에서
+       모양이 벡터로 남는다. 여기서는 배경 면 + 우측 삼각 SVG 조합으로 만든다. */
+    .stage {
+      flex: 1;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      padding: var(--sp-4) var(--sp-4) var(--sp-4) var(--sp-5);
+      background: var(--color-surface);
+      border-top: var(--border-w-thick) solid var(--c, var(--color-data-1));
+    }
+    .stage + .stage { margin-left: 18px; }
+    .stage-notch {
+      position: absolute;
+      right: -18px;
+      top: 0;
+      z-index: 1;
+    }
+    .stage-no {
+      font-family: var(--font-mono);
+      font-size: var(--fs-caption);
+      font-weight: var(--fw-bold);
+      color: var(--c, var(--color-data-1));
+    }
+    .stage-name {
+      font-size: var(--fs-body-l);
+      font-weight: var(--fw-semibold);
+      line-height: var(--lh-heading);
+    }
+    .stage-what {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+    .stage-time {
+      margin-top: auto;
+      font-family: var(--font-mono);
+      font-size: var(--fs-caption);
+      color: var(--color-text);
+    }
+
+    /* 게이트 — 통과 조건. 실패 시 어디로 되돌아가는지 함께 적는다 */
+    .gates {
+      display: flex;
+      gap: var(--sp-3);
+      margin-top: var(--sp-5);
+    }
+    .gate {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3);
+      padding: var(--sp-3);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+      border: var(--border-w) solid var(--color-border);
+    }
+    .gate svg { flex-shrink: 0; margin-top: 2px; }
+    .gate-name {
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+    }
+    .gate-rule {
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="component">
+    <p class="pipe-title">배포 파이프라인 — main 브랜치 머지 기준</p>
+    <p class="pipe-sub">커밋에서 운영 반영까지 평균 22분 · 하루 평균 6회 배포</p>
+
+    <div class="pipe-row">
+
+      <div class="stage d1" data-anchor="stage-1">
+        <span class="stage-notch">
+          <svg width="18" height="152" viewBox="0 0 18 152" fill="none">
+            <path d="M0 0 L18 76 L0 152 Z" fill="var(--color-surface)"/>
+          </svg>
+        </span>
+        <p class="stage-no">01</p>
+        <p class="stage-name">커밋 · PR</p>
+        <p class="stage-what">기능 브랜치 푸시, 리뷰어 2명 자동 지정</p>
+        <p class="stage-time">~ 1 min</p>
+      </div>
+
+      <div class="stage d2" data-anchor="stage-2">
+        <span class="stage-notch">
+          <svg width="18" height="152" viewBox="0 0 18 152" fill="none">
+            <path d="M0 0 L18 76 L0 152 Z" fill="var(--color-surface)"/>
+          </svg>
+        </span>
+        <p class="stage-no">02</p>
+        <p class="stage-name">빌드</p>
+        <p class="stage-what">의존성 캐시 복원 → 컨테이너 이미지 생성 · 태깅</p>
+        <p class="stage-time">4 min</p>
+      </div>
+
+      <div class="stage d3" data-anchor="stage-3">
+        <span class="stage-notch">
+          <svg width="18" height="152" viewBox="0 0 18 152" fill="none">
+            <path d="M0 0 L18 76 L0 152 Z" fill="var(--color-surface)"/>
+          </svg>
+        </span>
+        <p class="stage-no">03</p>
+        <p class="stage-name">테스트</p>
+        <p class="stage-what">단위 1,840건 · 통합 210건 · 취약점 스캔 병렬 실행</p>
+        <p class="stage-time">9 min</p>
+      </div>
+
+      <div class="stage d4" data-anchor="stage-4">
+        <span class="stage-notch">
+          <svg width="18" height="152" viewBox="0 0 18 152" fill="none">
+            <path d="M0 0 L18 76 L0 152 Z" fill="var(--color-surface)"/>
+          </svg>
+        </span>
+        <p class="stage-no">04</p>
+        <p class="stage-name">스테이징</p>
+        <p class="stage-what">운영 데이터 사본으로 스모크 테스트 · 성능 회귀 확인</p>
+        <p class="stage-time">6 min</p>
+      </div>
+
+      <div class="stage d6" data-anchor="stage-5">
+        <p class="stage-no">05</p>
+        <p class="stage-name">운영 배포</p>
+        <p class="stage-what">카나리 10% → 20분 관측 → 전량 전환</p>
+        <p class="stage-time">2 min + 관측</p>
+      </div>
+
+    </div>
+
+    <div class="gates">
+      <div class="gate">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="var(--color-positive)"/>
+          <path d="M7 12.5 L10.5 16 L17 8.5" stroke="var(--color-text-invert)" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="gate-name">게이트 A · 리뷰 승인</p>
+          <p class="gate-rule">02로 진입 조건 — 승인 2명 + 컨벤션 검사 통과</p>
+        </div>
+      </div>
+      <div class="gate">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="var(--color-data-4)"/>
+          <path d="M12 6 V13" stroke="var(--color-text-invert)" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="12" cy="17" r="1.5" fill="var(--color-text-invert)"/>
+        </svg>
+        <div>
+          <p class="gate-name">게이트 B · 커버리지 70%</p>
+          <p class="gate-rule">미달 시 03에서 중단하고 PR로 되돌린다</p>
+        </div>
+      </div>
+      <div class="gate">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="var(--color-negative)"/>
+          <path d="M8 8 L16 16 M16 8 L8 16" stroke="var(--color-text-invert)" stroke-width="2.4"
+                stroke-linecap="round"/>
+        </svg>
+        <div>
+          <p class="gate-name">게이트 C · 오류율 0.5%</p>
+          <p class="gate-rule">카나리 관측 중 초과하면 자동 롤백 (직전 이미지)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

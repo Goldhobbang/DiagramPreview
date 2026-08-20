@@ -139,14 +139,26 @@ HTML 작성 → 로컬 서버로 육안 확인 → commit & push
 
 | 속성 | 증상 | 대안 |
 |---|---|---|
+| `zoom` / `body.style.zoom` | **레이아웃 좌표계가 갈려 텍스트가 밀린다.** 플러그인이 `getBoundingClientRect`(스케일 반영)와 `getComputedStyle`의 `font-size`·`padding`(미반영)을 섞어 읽는다 | **사용 금지.** 파일은 원본 크기 그대로 두고 축소는 갤러리가 한다 (`docs/gallery.js` `fitFrames`) |
+| `background-clip: text` | **그라데이션이 텍스트 박스를 칠하고 글자가 사라진다** (`color: transparent`라서) | 그라데이션 중간색 단색 `color`. 그라데이션이 디자인의 본질이면 인라인 SVG `<text>` + `<linearGradient>` |
+| `color: transparent` | 글자가 안 보이게 들어온다 | 실제 색을 넣는다. 아웃라인 글자는 배경색 채움 + 8방향 `text-shadow` |
+| `-webkit-text-stroke` | 유실된다 | 8방향 `text-shadow` (예: `13_BOLD_TYPOGRAPHY/v3_01_cover.html`) |
 | `backdrop-filter` | 무시되거나 불투명 배경으로 렌더 | 반투명 배경색 + 그림자 |
 | `mix-blend-mode` | 대부분 무시됨 | `rgba()` 반투명으로 대체 |
-| `filter: blur()` | 불안정. 이미지로 래스터화될 수 있음 | 최소 사용 |
-| 복잡한 `clip-path` | 다각형은 대체로 되나 곡선은 깨짐 | 인라인 SVG `<path>` 사용 |
+| `filter: blur()` | 불안정. 이미지로 래스터화될 수 있음 | 장식 blob은 `radial-gradient(circle, C 0%, transparent 62%)`로. blur가 상자 밖으로 퍼지던 만큼 상자를 키운다 |
+| `conic-gradient` | 미지원 | 체커보드는 `linear-gradient` 2겹을 반칸 엇갈리게 |
+| 복잡한 `clip-path` | 다각형은 대체로 되나 곡선은 깨짐 | 곡선만 인라인 SVG `<path>`로 (`polygon()`은 그대로 둔다) |
 | CSS 애니메이션 / `transition` | 캡처 시점의 정지 상태로 들어옴 | 최종 상태를 기본값으로 작성 |
 | `grid` 의 `subgrid` | 미지원 | 중첩 flex로 대체 |
 | 웹폰트 `font-feature-settings` | 유실 가능 | Figma에서 재설정 |
 | `position: sticky` | 의미 없음 (정적 캡처) | 사용 금지 |
+| `writing-mode` | **미검증.** 세로쓰기가 살아오는지 확인되지 않았다 | 깨지면 라틴·숫자는 `transform: rotate(90deg)`, 한글은 글자 낱개 flex 세로 배열 |
+
+기계로 확인한다:
+
+```bash
+node tools/check-templates.js --figma   # 위 속성이 남은 곳을 파일:줄로 출력
+```
 
 ---
 
@@ -160,6 +172,8 @@ HTML 작성 → 로컬 서버로 육안 확인 → commit & push
 | 요소가 잘려 있음 | `.slide` 밖으로 오버플로우 | 브라우저에서 먼저 오버플로우 수정 |
 | 레이어가 수백 개 | `div` 과다 중첩 | HTML 구조 단순화 후 재임포트 |
 | 아이콘이 하나로 뭉쳐 있음 | `<img src="*.svg">` 사용 | 인라인 `<svg>`로 변경 |
+| 텍스트 위치가 미세하게 밀림 | 파일에 `zoom` 스크립트가 남아 있음 | `node tools/check-templates.js` — `<script>`가 있으면 에러난다 |
+| 글자가 사라지고 그 자리가 그라데이션 사각형 | `background-clip: text` | 단색 `color`로 교체 (§6) |
 
 ---
 

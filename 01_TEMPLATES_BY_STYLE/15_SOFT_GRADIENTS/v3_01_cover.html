@@ -536,10 +536,12 @@ th {
     .ring.r2 { width: 1540px; height: 1540px; opacity: 0.14; }
     .ring.r3 { width: 2120px; height: 2120px; opacity: 0.08; }
 
-    /* 네 모서리 blur 오브 */
-    .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.25; }
-    .orb.tl { left: -140px;  top: -140px;    width: 520px; height: 520px; background: #7a5fff; }
-    .orb.br { right: -140px; bottom: -140px; width: 520px; height: 520px; background: #ff9ecd; }
+    /* 모서리 오브 — 흐림은 radial-gradient로 만든다. filter:blur는
+       html.to.design에서 이미지로 래스터화될 수 있다.
+       blur(100px)가 상자 밖으로 퍼지던 만큼 상자를 키우고 위치를 당겼다. */
+    .orb { position: absolute; border-radius: 50%; opacity: 0.25; }
+    .orb.tl { left: -340px;  top: -340px;    width: 920px; height: 920px; background: radial-gradient(circle, #7a5fff 0%, rgba(122,95,255,0) 62%); }
+    .orb.br { right: -340px; bottom: -340px; width: 920px; height: 920px; background: radial-gradient(circle, #ff9ecd 0%, rgba(255,158,205,0) 62%); }
 
     .stars { position: absolute; inset: 0; }
 
@@ -609,20 +611,5 @@ th {
 
     <div class="noise"></div>
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

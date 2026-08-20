@@ -552,9 +552,11 @@ th {
     }
     .cover-sub { margin-top: var(--sp-4); font-size: var(--fs-h3); color: var(--color-text-muted); }
 
-    /* 피사계심도: 가까운 구슬만 blur. 전경만 선명하게 두면 원근이 살아난다. */
+    /* 피사계심도: 가까운 구슬을 뒤로 물린다. 원래 filter:blur(6px)였지만
+       html.to.design에서 이미지로 래스터화될 수 있어 불투명도로 대체했다.
+       ponytail: 진짜 blur이 필요해지면 인라인 SVG feGaussianBlur로 갈 것 */
     .bead { position: absolute; border-radius: 50%; }
-    .bead.near { filter: blur(6px); }
+    .bead.near { opacity: 0.55; }
 
     .cover-foot {
       position: absolute;
@@ -629,20 +631,5 @@ th {
     <p class="cover-foot">이서준 · 브랜드팀 &nbsp;·&nbsp; 2026. 09. 03</p>
 
   </div>
-  <!-- self-fit: 창이든 iframe이든 컨테이너에 맞춰 스스로 축소한다.
-       zoom은 레이아웃 자체를 줄이므로 backdrop-filter가 깨지지 않고 스크롤바도 안 생긴다.
-       transform:scale은 이 둘을 보장하지 못한다. -->
-  <script>
-    (function () {
-      var el = document.querySelector('.slide');
-      if (!el) return;
-      var w = el.offsetWidth, h = el.offsetHeight;   // zoom 걸기 전에 1회만 측정
-      function fit() {
-        document.body.style.zoom = Math.min(1, innerWidth / w, innerHeight / h);
-      }
-      addEventListener('resize', fit);
-      fit();
-    })();
-  </script>
 </body>
 </html>

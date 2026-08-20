@@ -1,0 +1,394 @@
+/* ==========================================================================
+   builder.css — 조합 빌더
+   갤러리와 같은 색 변수 이름을 쓴다(--bg/--text/--accent). 슬라이드용 토큰
+   (--color-*)과는 겹치지 않으므로 iframe 안 다이어그램에 영향이 없다.
+   ========================================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c0d10;
+  --panel: #16181d;
+  --panel-2: #1e2128;
+  --line: #2a2e37;
+  --text: #e8eaed;
+  --muted: #8b909b;
+  --accent: #6ea8fe;
+  --snap: #f472b6;      /* 스냅 가이드 — accent와 헷갈리지 않는 색이어야 한다 */
+  --top-h: 78px;
+
+  /* 캔버스는 밝은 모눈지다 — 노드(다이어그램)가 투명이라 검은 본문이 읽혀야 한다.
+     헤더·팔레트는 다크로 두어 도구와 작업물을 눈으로 분리한다. */
+  --paper: #f4f5f7;
+  --paper-line: #dcdfe6;
+  --paper-line-soft: #e8eaef;
+}
+
+html, body { height: 100%; overflow: hidden; }   /* 캔버스가 화면을 채운다 */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- 헤더 ------------------------------------------------------------- */
+.top {
+  height: var(--top-h);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.back {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.back:hover { color: var(--text); border-color: #3a3f4a; }
+
+.top h1 { font-size: 18px; font-weight: 700; }
+.top .sub { font-size: 12px; color: var(--muted); }
+
+.tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tools button {
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 11px;
+  cursor: pointer;
+}
+.tools button:hover { color: var(--text); border-color: #3a3f4a; }
+.tools button.primary { color: var(--accent); border-color: rgba(110, 168, 254, .4); }
+.tools .sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+
+/* --- 작업 영역 -------------------------------------------------------- */
+.work {
+  display: flex;
+  height: calc(100vh - var(--top-h));
+}
+
+/* --- 팔레트 ----------------------------------------------------------- */
+.palette {
+  width: 340px;          /* 썸네일이 형태를 알아볼 만큼은 넓어야 한다 */
+  flex-shrink: 0;
+  border-right: 1px solid var(--line);
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 10px;
+  overflow: hidden;
+}
+
+#search {
+  font: inherit;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+#search:focus { outline: none; border-color: var(--accent); }
+#search::placeholder { color: var(--muted); }
+
+.pal-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.pal-tabs button {
+  font: inherit;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+.pal-tabs button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0c0d10;
+  font-weight: 600;
+}
+
+.pal-hint { font-size: 11px; color: var(--muted); }
+/* 앵커를 찍어 놓고 부품을 고르는 중 — 힌트를 강조해 모드를 알린다 */
+.pal-hint.armed { color: var(--snap); font-weight: 600; }
+
+.pal-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 2px;
+}
+
+.pal-item {
+  text-align: left;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pal-item:hover { border-color: var(--accent); }
+
+/* 썸네일 — 부품 파일이 투명하므로 여기서 흰 종이를 깐다 (캔버스와 같은 규칙).
+   비율은 캔버스 크기대로 인라인으로 박는다. */
+.pal-thumb {
+  display: block;
+  width: 100%;
+  margin-bottom: 4px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* width/height/scale은 builder.js의 fitFrames()가 인라인으로 덮는다 —
+   원본 HTML에는 자기축소 스크립트가 없다(html.to.design import를 깨서 걷어냈다). */
+.pal-thumb iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  transform-origin: top left;
+  pointer-events: none;   /* 클릭은 버튼이 받는다 */
+}
+
+.pal-item .t { font-size: 13px; font-weight: 600; }
+.pal-item .d {
+  font-size: 11px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pal-item .m {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 10px;
+  color: #5a5f6a;
+}
+
+/* --- 캔버스 ----------------------------------------------------------- */
+.canvas-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  /* 모눈지 — 8px 격자(스냅 단위) 위에 40px 보조선을 겹쳐 깐다.
+     8px 선이 진하면 눈이 피로해서 연한 색을 쓴다. */
+  background:
+    linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px) 0 0 / 40px 40px,
+    linear-gradient(var(--paper-line-soft) 1px, transparent 1px) 0 0 / 8px 8px,
+    linear-gradient(90deg, var(--paper-line-soft) 1px, transparent 1px) 0 0 / 8px 8px,
+    var(--paper);
+  cursor: default;
+  /* 드래그가 라벨·힌트 글자 선택으로 새지 않게 한다 (builder.js의 preventDefault와 한 쌍) */
+  user-select: none;
+  -webkit-user-select: none;
+}
+.canvas-wrap.panning { cursor: grabbing; }
+
+.stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}
+
+/* 노드는 배경을 깔지 않는다 — 흰 판이 있으면 겹쳐 붙일 때 뒤 노드가 가려진다.
+   (원본 .component는 투명, iframe의 body는 builder.js가 투명으로 덮는다)
+   대신 경계를 파선으로 표시해 빈 영역도 집을 수 있게 한다. */
+.node {
+  position: absolute;
+  transform-origin: 0 0;
+  background: transparent;
+  outline: 1px dashed var(--paper-line);
+}
+.node:hover { outline-color: #b9bfcc; }
+.node.sel { outline: 2px solid var(--accent); }
+
+.node iframe {
+  border: 0;
+  display: block;
+  pointer-events: none;            /* 드래그를 iframe이 가로채지 않게 */
+}
+
+/* 라벨 — 노드 위에 떠서 스케일과 무관하게 읽힌다 (--inv는 placeNode가 내려준다) */
+.node .tag {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  transform-origin: 0 100%;
+  transform: scale(var(--inv, 1));
+  font-size: 11px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px 4px 0 0;
+  padding: 1px 6px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.node.sel .tag { color: var(--accent); border-color: var(--accent); }
+
+/* --- 리사이즈 핸들 8개 -------------------------------------------------
+   변 4개는 그 변 전체를 덮고(길이 100%), 모퉁이 4개가 위에 얹힌다.
+   노드가 축소돼도 손에 잡히는 두께는 일정해야 하므로 --inv(역배율)를
+   두께 축에만 건다 — 길이까지 보정하면 변을 다 덮지 못한다. */
+.node .resize {
+  position: absolute;
+  opacity: 0;                       /* 선택 전에는 숨긴다 — 캔버스가 조용해야 한다 */
+}
+.node.sel .resize,
+.node:hover .resize { opacity: 1; }
+
+/* 변 — 전체 길이 */
+.node .rz-n,
+.node .rz-s {
+  left: 0;
+  width: 100%;
+  height: 10px;
+  cursor: ns-resize;
+  background: var(--accent);
+}
+.node .rz-n { top: 0;    transform-origin: 50% 0;    transform: scaleY(var(--inv, 1)); }
+.node .rz-s { bottom: 0; transform-origin: 50% 100%; transform: scaleY(var(--inv, 1)); }
+
+.node .rz-e,
+.node .rz-w {
+  top: 0;
+  height: 100%;
+  width: 10px;
+  cursor: ew-resize;
+  background: var(--accent);
+}
+.node .rz-w { left: 0;  transform-origin: 0 50%;   transform: scaleX(var(--inv, 1)); }
+.node .rz-e { right: 0; transform-origin: 100% 50%; transform: scaleX(var(--inv, 1)); }
+
+/* 변 핸들은 띠라서 진하면 그림을 가린다 — 흐리게 두고 잡을 때만 진해진다 */
+.node .rz-n, .node .rz-s, .node .rz-e, .node .rz-w { opacity: 0; }
+.node.sel .rz-n, .node.sel .rz-s, .node.sel .rz-e, .node.sel .rz-w { opacity: .35; }
+.node .rz-n:hover, .node .rz-s:hover, .node .rz-e:hover, .node .rz-w:hover { opacity: .8; }
+
+/* 모퉁이 — 변 위에 얹혀 대각 방향을 담당한다 */
+.node .rz-nw,
+.node .rz-ne,
+.node .rz-sw,
+.node .rz-se {
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  border-radius: 3px;
+  z-index: 2;
+}
+.node .rz-nw { left: 0;  top: 0;    transform-origin: 0 0;       transform: scale(var(--inv, 1)); cursor: nwse-resize; }
+.node .rz-ne { right: 0; top: 0;    transform-origin: 100% 0;    transform: scale(var(--inv, 1)); cursor: nesw-resize; }
+.node .rz-sw { left: 0;  bottom: 0; transform-origin: 0 100%;    transform: scale(var(--inv, 1)); cursor: nesw-resize; }
+.node .rz-se { right: 0; bottom: 0; transform-origin: 100% 100%; transform: scale(var(--inv, 1)); cursor: nwse-resize; }
+
+/* 앵커 점 — 선택된 노드에만 보인다. 클릭하면 그 지점에 새 부품을 붙인다 */
+.anchor {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  cursor: copy;
+}
+.anchor.inner { border-color: var(--snap); }
+.anchor:hover { transform: scale(1.35); }
+
+/* 스냅 가이드선 — stage 안에 그려 노드 좌표계를 그대로 쓴다 */
+.guides { position: absolute; left: 0; top: 0; pointer-events: none; }
+.guide {
+  position: absolute;
+  background: var(--snap);
+}
+.guide.h { height: 1px; }
+.guide.v { width: 1px; }
+.guide-dot {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--snap);
+}
+
+/* 밝은 모눈지 위 글자 — 다크 테마 muted색은 여기서 안 읽힌다 */
+.empty-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #6b7280;
+  pointer-events: none;
+}
+.empty-hint[hidden] { display: none; }
+
+.statusbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 6px 14px;
+  background: rgba(12, 13, 16, .85);
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+}
+.statusbar .keys { margin-left: auto; }
+
+/* --- 토스트 ----------------------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  background: var(--accent);
+  color: #0c0d10;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: transform .2s ease;
+  pointer-events: none;
+  max-width: 80vw;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
