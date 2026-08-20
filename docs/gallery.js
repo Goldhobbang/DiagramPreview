@@ -219,10 +219,14 @@ function fitFrames(root) {
     const w = +f.dataset.w;
     const box = f.parentElement;
     if (!w || !box.clientWidth) continue;
+    // min(1, …) — 예전 zoom 스크립트와 같이 원본보다 키우지 않는다
+    const scale = Math.min(1, box.clientWidth / w);
     f.style.width = `${w}px`;
     f.style.height = `${f.dataset.h}px`;
-    // min(1, …) — 예전 zoom 스크립트와 같이 원본보다 키우지 않는다
-    f.style.transform = `scale(${Math.min(1, box.clientWidth / w)})`;
+    f.style.transform = `scale(${scale})`;
+    // 박스가 캔버스보다 넓으면 가운데로. 예전에는 iframe이 박스 100%였고
+    // 내부 .slide/.component의 margin:0 auto가 정렬을 맡았다 — 그 그림을 유지한다.
+    f.style.marginLeft = `${Math.max(0, (box.clientWidth - w * scale) / 2)}px`;
   }
 }
 

@@ -111,9 +111,11 @@ function fitFrames(root) {
     const w = +f.dataset.w;
     const box = f.parentElement;
     if (!w || !box.clientWidth) continue;
+    const scale = Math.min(1, box.clientWidth / w);   // 원본보다 키우지 않는다
     f.style.width = `${w}px`;
     f.style.height = `${f.dataset.h}px`;
-    f.style.transform = `scale(${Math.min(1, box.clientWidth / w)})`;   // 원본보다 키우지 않는다
+    f.style.transform = `scale(${scale})`;
+    f.style.marginLeft = `${Math.max(0, (box.clientWidth - w * scale) / 2)}px`;   // 남는 폭은 좌우로 나눈다
   }
 }
 
