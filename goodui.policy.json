@@ -1,0 +1,27 @@
+{
+  "$schema": "./.goodui/schema.json",
+  "version": 1,
+  "rules": [
+    {
+      "id": "no-docs-gradient-syntax",
+      "kind": "restricted-syntax",
+      "files": ["docs/**"],
+      "selectors": [
+        "Literal[value=/(?:repeating-)?(?:linear|radial|conic)-gradient\\s*\\(/i]",
+        "TemplateElement[value.raw=/(?:repeating-)?(?:linear|radial|conic)-gradient\\s*\\(/i]",
+        "Literal[value=/<(?:linear|radial)Gradient\\b/i]",
+        "TemplateElement[value.raw=/<(?:linear|radial)Gradient\\b/i]"
+      ],
+      "reason": "docs 디자인에는 그라데이션(CSS gradient 함수 및 SVG gradient 요소)을 사용하지 않습니다.",
+      "suggestion": "그라데이션 대신 단색 디자인 토큰(var(--bg), var(--panel), var(--accent) 등)을 사용하세요."
+    },
+    {
+      "id": "no-docs-gradient-ui",
+      "kind": "restricted-ui",
+      "files": ["docs/**"],
+      "tags": ["linearGradient", "radialGradient"],
+      "reason": "docs UI에서 SVG 그라데이션 태그 사용을 금지합니다.",
+      "suggestion": "단색 fill 또는 CSS 변수 토큰을 사용하세요."
+    }
+  ]
+}

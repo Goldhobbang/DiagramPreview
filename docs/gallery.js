@@ -59,7 +59,14 @@ async function init() {
   $main.addEventListener('click', onDetailOpenClick);
   $detailClose.addEventListener('click', closeDetail);
   $detail.addEventListener('click', e => { if (e.target === $detail) closeDetail(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeDetail();
+    if (e.key === '/' && document.activeElement !== $search && e.target.tagName !== 'INPUT') {
+      e.preventDefault();
+      $search.focus();
+      $search.select();
+    }
+  });
 }
 
 /* --- 디자인 토큰: CSS를 직접 읽어 파싱 --------------------------------
@@ -128,7 +135,7 @@ function renderFilters() {
   $filters.innerHTML = chips.join('');
 
   function chip(id, label, n) {
-    return `<button data-sec="${id}" aria-pressed="${id === activeSection}">${esc(label)}<span class="n">${n}</span></button>`;
+    return `<button type="button" data-sec="${id}" aria-pressed="${id === activeSection}">${esc(label)}<span class="n">${n}</span></button>`;
   }
 }
 
@@ -244,9 +251,9 @@ function sectionHead(s) {
 /* 슬라이드 템플릿 섹션 전용 — 스타일(폴더) 탭. 그룹 순서 그대로 사용. */
 function styleTabs(section) {
   const chips = [
-    `<button data-style="ALL" aria-pressed="${activeStyle === 'ALL'}">전체 스타일</button>`,
+    `<button type="button" data-style="ALL" aria-pressed="${activeStyle === 'ALL'}">전체 스타일</button>`,
     ...section.groups.map(g =>
-      `<button data-style="${esc(g.id)}" aria-pressed="${activeStyle === g.id}">${esc(g.label)}<span class="n">${g.items.length}</span></button>`
+      `<button type="button" data-style="${esc(g.id)}" aria-pressed="${activeStyle === g.id}">${esc(g.label)}<span class="n">${g.items.length}</span></button>`
     ),
   ];
   return `<div class="style-tabs">${chips.join('')}</div>`;
@@ -282,7 +289,7 @@ function htmlCard(item) {
   </div>
   <div class="card-actions">
     <a href="${item.path}" target="_blank" rel="noopener">새 창</a>
-    <button class="primary" data-copy="${item.path}">URL 복사</button>
+    <button type="button" class="primary" data-copy="${item.path}">URL 복사</button>
   </div>
 </article>`;
 }
@@ -345,7 +352,7 @@ function mediaCard(item) {
   </div>
   <div class="card-actions">
     <a href="${item.path}" target="_blank" rel="noopener">원본</a>
-    <button class="primary" data-copy="${item.path}">URL 복사</button>
+    <button type="button" class="primary" data-copy="${item.path}">URL 복사</button>
   </div>
 </article>`;
 }
@@ -467,7 +474,7 @@ async function openDetail(leadPath, showPath) {
 
   const tabs = siblings.length > 1
     ? `<div class="preview-tabs">${siblings.map(it =>
-        `<button data-show="${it.path}" aria-pressed="${it.path === shown.path}">${kindOf(it)}</button>`
+        `<button type="button" data-show="${it.path}" aria-pressed="${it.path === shown.path}">${kindOf(it)}</button>`
       ).join('')}</div>`
     : '';
 
@@ -495,7 +502,7 @@ async function openDetail(leadPath, showPath) {
         <span class="actions-label">${kindOf(it)}</span>
         <a href="${it.path}" target="_blank" rel="noopener">새 창에서 보기</a>
         <a href="${it.path}" download="${esc(it.file)}">HTML 다운로드</a>
-        <button class="primary" data-copy="${it.path}">URL 복사</button>
+        <button type="button" class="primary" data-copy="${it.path}">URL 복사</button>
       </div>`).join('')}
   `;
 

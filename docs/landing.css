@@ -1,0 +1,650 @@
+/* ==========================================================================
+   landing.css — 루트 랜딩 페이지 전용 스타일
+   docs 갤러리/빌더와 역할을 분리하여 제품 소개와 탐색 동선에 집중한다.
+   그라데이션 없음 (GoodUI 정적 검사 준수)
+   ========================================================================== */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0b0f19;
+  --surface: #111827;
+  --card: #1f2937;
+  --card-hover: #263344;
+  --muted-box: #182232;
+  --line: #334155;
+  --line-strong: #475569;
+  --text: #ffffff;
+  --text-body: #d1d5db;
+  --text-sub: #94a3b8;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-tint: rgba(56, 189, 248, 0.14);
+  --done: #10b981;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+code {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 0.88em;
+  background: var(--muted-box);
+  border: 1px solid var(--line);
+  color: #f8fafc;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* --- 상단 글로벌 네비게이션 (GNB) ------------------------------------ */
+.gnb {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--surface);
+  border-bottom: 1.5px solid var(--line);
+}
+
+.gnb-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.brand-mark {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 800;
+  color: #0b0f19;
+  background: var(--accent);
+  padding: 3px 8px;
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+}
+
+.gnb-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.gnb-nav a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-body);
+  padding: 7px 12px;
+  border-radius: 6px;
+  transition: color 0.12s ease, background-color 0.12s ease;
+}
+
+.gnb-nav a:hover {
+  color: #ffffff;
+  background: var(--card);
+}
+
+.gnb-nav a[aria-current="page"] {
+  color: var(--accent);
+  background: var(--accent-tint);
+  font-weight: 700;
+}
+
+.gnb-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- 공통 버튼 ------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 9px 16px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.14s ease;
+}
+
+.btn-lg {
+  font-size: 15.5px;
+  padding: 13px 22px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0b0f19;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #0b0f19;
+}
+
+.btn-secondary {
+  background: var(--card);
+  border-color: var(--line-strong);
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text-body);
+}
+
+.btn-ghost:hover {
+  background: var(--card);
+  border-color: var(--line-strong);
+  color: #ffffff;
+}
+
+/* --- 히어로 섹션 ----------------------------------------------------- */
+.hero {
+  padding: 64px 0 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  background: var(--accent-tint);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 5px 11px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+
+.hero-copy h1 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.24;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.hero-lead {
+  font-size: 17px;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.hero-lead strong {
+  color: #ffffff;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.stat-item {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.stat-item dt {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 4px;
+}
+
+.stat-item dd {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+/* 우측 실시간 슬라이드 쇼케이스 */
+.hero-stage {
+  background: var(--surface);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.stage-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+  flex-wrap: wrap;
+}
+
+.stage-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-body);
+}
+
+.stage-tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 3px;
+  border-radius: 6px;
+}
+
+.stage-tabs button {
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-body);
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.stage-tabs button:hover {
+  color: #ffffff;
+}
+
+.stage-tabs button[aria-pressed="true"] {
+  background: var(--accent);
+  color: #0b0f19;
+  font-weight: 800;
+}
+
+.stage-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.stage-frame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.stage-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.stage-caption {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  color: var(--text-body);
+}
+
+.stage-more {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.stage-more:hover {
+  text-decoration: underline;
+}
+
+/* --- Docs 도구 진입 카드 (갤러리 / 빌더 분리) ------------------------ */
+.split-entry {
+  padding: 48px 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.entry-card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.entry-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.entry-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.entry-tag {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+
+.entry-card h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.entry-card p {
+  font-size: 15px;
+  color: var(--text-body);
+  line-height: 1.65;
+  margin-bottom: 6px;
+}
+
+/* --- 공통 섹션 ------------------------------------------------------- */
+.section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-alt {
+  background: var(--surface);
+}
+
+.section-header {
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+
+.section-kicker {
+  display: inline-block;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.section-header h2 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.section-header p {
+  font-size: 16px;
+  color: var(--text-body);
+}
+
+/* 핵심 원칙 3단 그리드 */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feature-num {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.feature-card p {
+  font-size: 14.5px;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+/* 3단계 워크플로우 */
+.step-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.step-card {
+  background: var(--bg);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-badge {
+  align-self: flex-start;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 800;
+  color: #0b0f19;
+  background: var(--done);
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+
+.step-card h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.step-card p {
+  font-size: 14.5px;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+/* 가이드 문서 그리드 */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.guide-card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--text);
+  transition: border-color 0.14s ease, background-color 0.14s ease;
+}
+
+.guide-card:hover {
+  border-color: var(--accent);
+  background: var(--card-hover);
+}
+
+.guide-code {
+  font-family: "JetBrains Mono", Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.guide-card h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.guide-card p {
+  font-size: 14px;
+  color: var(--text-body);
+}
+
+/* --- 푸터 ------------------------------------------------------------ */
+.site-foot {
+  background: var(--surface);
+  padding: 32px 0 44px;
+  font-size: 14px;
+  color: var(--text-body);
+}
+
+.foot-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.foot-row strong {
+  display: block;
+  color: #ffffff;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.foot-links {
+  display: flex;
+  gap: 20px;
+  font-weight: 600;
+}
+
+.foot-links a:hover {
+  text-decoration: underline;
+}
+
+/* --- 반응형 (랜딩 페이지 전용) --------------------------------------- */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid,
+  .step-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-grid,
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .gnb-nav {
+    display: none;
+  }
+
+  .hero-copy h1 {
+    font-size: 30px;
+  }
+
+  .stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

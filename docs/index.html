@@ -3,68 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Preview — Figma PPT Template System</title>
-<!-- ?v= 는 손으로 올린다. gallery.css/js를 고치면 숫자를 +1 해야 방문자 캐시가 갱신된다.
-     (나머지 파일은 gallery.js가 manifest.buildId로 ?v=를 자동으로 붙인다) -->
-<link rel="stylesheet" href="gallery.css?v=6">
+<title>프리뷰 갤러리 — Figma PPT System Docs</title>
+<!-- ?v= 수동 갱신: 캐시 방지 -->
+<link rel="stylesheet" href="gallery.css?v=9">
 </head>
 <body>
 
 <header class="top">
-  <div class="top-row">
-    <div>
-      <h1>Preview</h1>
-      <p class="sub">슬라이드 · 다이어그램 · 컴포넌트 · 디자인 토큰 전체 미리보기</p>
+  <div class="top-main">
+    <div class="nav-brand-group">
+      <a class="home-link" href="../">← 홈</a>
+      <span class="nav-sep"></span>
+      <div class="brand">
+        <h1>프리뷰 갤러리</h1>
+      </div>
+      <nav class="sub-nav" aria-label="페이지 전환">
+        <a href="index.html" aria-current="page">갤러리</a>
+        <a href="builder.html">조합 빌더</a>
+      </nav>
     </div>
-    <div class="head-right">
-      <a class="to-builder" href="builder.html">조합 빌더 →</a>
-      <div class="progress">
-        <span id="count-done">0</span><span class="slash">/</span><span id="count-total">0</span>
-        <span class="progress-label">완료</span>
+
+    <div class="head-actions">
+      <div class="progress-box" aria-label="제작 완료율">
+        <div class="progress-info">
+          <span class="progress-label">제작 완료</span>
+          <span class="progress-num"><strong id="count-done">0</strong><span class="slash">/</span><span id="count-total">0</span></span>
+        </div>
         <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
       </div>
+      <a class="to-builder-btn" href="builder.html">조합 빌더 열기 →</a>
     </div>
   </div>
 
-  <div class="controls">
-    <div class="filters" id="filters"></div>
+  <div class="control-bar">
+    <div class="filters" id="filters" role="toolbar" aria-label="섹션 필터"></div>
 
-    <!-- 값은 미리보기 1장의 최소 폭 기준이다 (gallery.css가 카드 종류별로 2·3배로 늘린다).
-         190/260/380 → 1920 화면에서 다이어그램 4열/3열/2열 · 슬라이드 3열/2열/1열.
-         이보다 크게 잡으면 두 단계가 같은 열 수로 뭉쳐 토글이 무의미해진다. -->
-    <div class="sizer" role="group" aria-label="썸네일 크기">
-      <button data-size="190">S</button>
-      <button data-size="260">M</button>
-      <button data-size="380" aria-pressed="true">L</button>
+    <div class="control-tools">
+      <div class="sizer" role="group" aria-label="카드 크기">
+        <button type="button" data-size="190">작게</button>
+        <button type="button" data-size="260">중간</button>
+        <button type="button" data-size="380" aria-pressed="true">크게</button>
+      </div>
+
+      <div class="search-box">
+        <input type="search" id="search" placeholder="이름 · 설명 · 키워드 검색 (/)" autocomplete="off">
+      </div>
     </div>
-
-    <input type="search" id="search" placeholder="이름 · 용도 검색…" autocomplete="off">
   </div>
 </header>
 
 <main id="main"></main>
 
 <footer class="foot">
-  <p>
-    카드의 <strong>URL 복사</strong> → Figma <code>html.to.design</code> 실행 →
-    Viewport <strong>Custom 1920×1080</strong> → 붙여넣기.
-    자세한 절차는 <a href="../00_GUIDES/01_FIGMA_IMPORT_GUIDE.md">임포트 가이드</a> 참조.
-  </p>
-  <p>
-    목록은 <code>node tools/build-gallery.js</code>가 폴더를 스캔해 생성한다.
-    <code>manifest.json</code>을 손으로 고치지 말 것.
-  </p>
+  <div class="foot-inner">
+    <p>
+      전체 시스템 소개 및 가져오는 법은 <a href="../">랜딩 페이지(홈)</a> 및 <a href="../00_GUIDES/01_FIGMA_IMPORT_GUIDE.md">임포트 가이드</a>를 참고하세요.
+      목록 갱신: <code>node tools/build-gallery.js</code>
+    </p>
+  </div>
 </footer>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="detail-overlay" id="detail" hidden>
-  <div class="detail-panel">
-    <button class="detail-close" id="detail-close" aria-label="닫기">✕</button>
+  <div class="detail-panel" role="dialog" aria-modal="true" aria-label="상세 미리보기">
+    <button type="button" class="detail-close" id="detail-close" aria-label="닫기">✕</button>
     <div class="detail-body" id="detail-body"></div>
   </div>
 </div>
 
-<script src="gallery.js?v=6"></script>
+<script src="gallery.js?v=9"></script>
 </body>
 </html>

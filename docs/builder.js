@@ -75,7 +75,7 @@ function v(p) {
 function renderTabs() {
   const secs = manifest.sections.filter(s => s.kind === 'html');
   $palTabs.innerHTML = secs.map(s =>
-    `<button data-sec="${s.id}" aria-pressed="${s.id === activeSection}">${esc(s.label)}</button>`
+    `<button type="button" data-sec="${s.id}" aria-pressed="${s.id === activeSection}">${esc(s.label)}</button>`
   ).join('');
 }
 
@@ -89,7 +89,7 @@ function renderPalette() {
   // loading="lazy"라 스크롤에 들어온 것만 실제로 로드된다.
   $palList.innerHTML = list.length
     ? list.map(i => `
-      <button class="pal-item" data-path="${esc(i.path)}" title="${esc(i.title)} 추가">
+      <button type="button" class="pal-item" data-path="${esc(i.path)}" title="${esc(i.title)} 추가">
         <span class="pal-thumb" style="aspect-ratio:${i.w}/${i.h}">
           <iframe src="${v(i.path)}" loading="lazy" scrolling="no" tabindex="-1"
                   data-w="${i.w}" data-h="${i.h}"

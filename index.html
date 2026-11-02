@@ -1,16 +1,266 @@
 <!DOCTYPE html>
 <html lang="ko">
+<head>
 <meta charset="UTF-8">
-<title>Preview — Figma PPT Template System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figma PPT Template System — HTML 기반 슬라이드 · 다이어그램 시스템</title>
 <!--
   GitHub Pages는 레포 루트 전체를 게시한다 (source: main / ).
-  갤러리가 ../02_COMPONENTS_LIBRARY/ 같은 상대경로로 원본 HTML을 iframe 참조하므로,
-  docs/ 만 게시하면 그 경로들이 게시 범위 밖이 되어 전부 404가 난다.
-  루트를 게시하고 여기서 갤러리로 넘긴다.
+  루트(/)는 제품 소개 랜딩 페이지이며, 실제 프리뷰 갤러리와 조합 빌더는 docs/ 로 분리되어 있다.
 -->
-<meta http-equiv="refresh" content="0; url=docs/">
-<link rel="canonical" href="docs/">
-<body style="background:#0c0d10;color:#e8eaed;font-family:system-ui,sans-serif;padding:48px">
-<p><a href="docs/" style="color:#6ea8fe">Preview 갤러리로 이동 →</a></p>
+<link rel="stylesheet" href="docs/landing.css?v=1">
+</head>
+<body>
+
+<header class="gnb">
+  <div class="gnb-inner">
+    <a class="brand" href="./">
+      <span class="brand-mark">PPT</span>
+      <span class="brand-name">Figma PPT System</span>
+    </a>
+
+    <nav class="gnb-nav" aria-label="주요 메뉴">
+      <a href="./" aria-current="page">홈</a>
+      <a href="#features">핵심 구조</a>
+      <a href="#workflow">임포트 절차</a>
+      <a href="#guides">설계 문서</a>
+      <a href="docs/">프리뷰 갤러리</a>
+      <a href="docs/builder.html">조합 빌더</a>
+    </nav>
+
+    <div class="gnb-cta">
+      <a class="btn btn-ghost" href="docs/builder.html">조합 빌더</a>
+      <a class="btn btn-primary" href="docs/">갤러리 열기 →</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- 히어로 섹션 -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">1920 × 1080 FIXED CANVAS · HTML TO FIGMA</span>
+        <h1>HTML로 설계하고,<br>URL 하나로 Figma 슬라이드를 완성하세요.</h1>
+        <p class="hero-lead">
+          매번 수작업으로 도형을 맞추는 대신, CSS 변수로 통제되는 <strong>1920×1080 고정 캔버스</strong>에서
+          슬라이드와 다이어그램을 고르고 <code>html.to.design</code>으로 즉시 가져옵니다.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="docs/">프리뷰 갤러리 둘러보기 →</a>
+          <a class="btn btn-secondary btn-lg" href="docs/builder.html">다이어그램 조합 빌더</a>
+        </div>
+
+        <dl class="stat-strip" aria-label="라이브러리 규모">
+          <div class="stat-item">
+            <dt>스타일 테마</dt>
+            <dd id="stat-styles">20</dd>
+          </div>
+          <div class="stat-item">
+            <dt>완성형 슬라이드</dt>
+            <dd id="stat-slides">120</dd>
+          </div>
+          <div class="stat-item">
+            <dt>다이어그램 부품</dt>
+            <dd id="stat-diagrams">60</dd>
+          </div>
+          <div class="stat-item">
+            <dt>타이포 · 차트 · 표</dt>
+            <dd id="stat-components">16</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="hero-stage">
+        <div class="stage-toolbar">
+          <span class="stage-label">실시간 슬라이드 미리보기</span>
+          <div class="stage-tabs" id="showcase-tabs" role="tablist" aria-label="미리보기 스타일 선택">
+            <button type="button" data-src="01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v1_01_cover.html" data-caption="01 플랫 디자인 · V1 Primary Signal" aria-pressed="true">플랫</button>
+            <button type="button" data-src="01_TEMPLATES_BY_STYLE/02_MINIMALISM/v1_01_cover.html" data-caption="02 미니멀리즘 · V1 Paper White" aria-pressed="false">미니멀</button>
+            <button type="button" data-src="01_TEMPLATES_BY_STYLE/03_DARK_MODE/v1_01_cover.html" data-caption="03 다크 모드 · V1 Cover" aria-pressed="false">다크</button>
+            <button type="button" data-src="01_TEMPLATES_BY_STYLE/12_BENTO_GRID/v1_02_global.html" data-caption="12 벤토 그리드 · V1 Global" aria-pressed="false">벤토</button>
+          </div>
+        </div>
+
+        <div class="stage-frame" id="showcase-box">
+          <iframe
+            id="showcase-frame"
+            src="01_TEMPLATES_BY_STYLE/01_FLAT_DESIGN/v1_01_cover.html"
+            data-w="1920"
+            data-h="1080"
+            title="대표 슬라이드 실시간 미리보기"
+            scrolling="no"></iframe>
+        </div>
+
+        <div class="stage-foot">
+          <span id="showcase-caption" class="stage-caption">01 플랫 디자인 · V1 Primary Signal</span>
+          <a class="stage-more" href="docs/">전체 120장 슬라이드 보기 →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 페이지 역할 분리 안내 카드 -->
+  <section class="split-entry">
+    <div class="container entry-grid">
+      <article class="entry-card">
+        <div class="entry-head">
+          <span class="entry-tag">DOCS · GALLERY</span>
+          <h2>프리뷰 갤러리</h2>
+        </div>
+        <p>
+          슬라이드 120장, 다이어그램 60종, 컴포넌트 16종, 시맨틱 디자인 토큰 전체를 한 화면에서 검색·비교하고
+          Figma 임포트용 URL을 원클릭으로 복사하는 전용 작업 화면입니다.
+        </p>
+        <a class="btn btn-primary" href="docs/">프리뷰 갤러리 이동 →</a>
+      </article>
+
+      <article class="entry-card">
+        <div class="entry-head">
+          <span class="entry-tag">DOCS · BUILDER</span>
+          <h2>다이어그램 조합 빌더</h2>
+        </div>
+        <p>
+          여러 다이어그램 부품을 하나의 캔버스 위에 올리고 3단계 스냅(지정 앵커 · 박스 8앵커 · 8px 격자)으로 이어 붙여
+          클래스 충돌 없는 자기완결형 HTML 파일로 내보냅니다.
+        </p>
+        <a class="btn btn-secondary" href="docs/builder.html">조합 빌더 실행 →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- 핵심 설계 원칙 -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">CORE PRINCIPLES</span>
+        <h2>왜 고정 HTML 슬라이드 시스템인가</h2>
+        <p>웹 반응형 문법을 버리고 발표용 16:9 캔버스와 Figma 변환 정확도에만 집중했습니다.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span class="feature-num">01</span>
+          <h3>1920×1080 고정 캔버스 · PX 전용</h3>
+          <p>
+            <code>rem</code>·<code>vw</code>·미디어쿼리를 쓰지 않고 모든 치수를 정확한 <code>px</code>로 고정해
+            브라우저 화면과 Figma 임포트 결과 사이의 계산 오차를 원천 차단합니다.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-num">02</span>
+          <h3>CSS 변수 기반 즉시 테마 전환</h3>
+          <p>
+            색상(<code>--color-*</code>), 간격(<code>--sp-*</code>), 타이포 스케일(<code>--fs-*</code>)이
+            의미 기반 토큰으로 분리되어 HTML 수정 없이 브랜드 테마를 교체할 수 있습니다.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-num">03</span>
+          <h3>Figma Auto Layout 직결 구조</h3>
+          <p>
+            도형·커넥터는 인라인 벡터 SVG로, 텍스트와 카드 배치는 <code>flex + gap</code>으로 작성해
+            Figma 임포트 즉시 편집 가능한 Auto Layout과 텍스트 레이어로 변환됩니다.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3단계 워크플로우 -->
+  <section class="section section-alt" id="workflow">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">WORKFLOW</span>
+        <h2>3단계 Figma 가져오기 절차</h2>
+        <p>스크린샷이나 별도 빌드 파이프라인 없이 URL 복사 한 번으로 끝납니다.</p>
+      </div>
+
+      <ol class="step-grid">
+        <li class="step-card">
+          <span class="step-badge">STEP 1</span>
+          <h3>갤러리에서 URL 복사</h3>
+          <p>
+            <a href="docs/">프리뷰 갤러리</a>에서 원하는 슬라이드나 다이어그램 카드를 고르고
+            <strong>[URL 복사]</strong> 버튼을 누릅니다.
+          </p>
+        </li>
+
+        <li class="step-card">
+          <span class="step-badge">STEP 2</span>
+          <h3>html.to.design 실행</h3>
+          <p>
+            Figma에서 <code>html.to.design</code> 플러그인을 열고 Viewport 크기를
+            <strong>Custom 1920 × 1080</strong>으로 맞춥니다.
+          </p>
+        </li>
+
+        <li class="step-card">
+          <span class="step-badge">STEP 3</span>
+          <h3>붙여넣기 및 즉시 편집</h3>
+          <p>
+            복사한 주소를 붙여넣으면 폰트, 간격, 벡터 도형, Auto Layout이 살아 있는 Figma 프레임이 즉시 생성됩니다.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 설계 가이드 문서 -->
+  <section class="section" id="guides">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-kicker">DOCUMENTATION</span>
+        <h2>시스템 설계 가이드 <code>00_GUIDES</code></h2>
+        <p>제작 규약과 시각 판단 기준을 문서로 관리합니다.</p>
+      </div>
+
+      <div class="guide-grid">
+        <a class="guide-card" href="00_GUIDES/01_FIGMA_IMPORT_GUIDE.md">
+          <span class="guide-code">01_FIGMA_IMPORT_GUIDE</span>
+          <h3>Figma 임포트 가이드</h3>
+          <p>가져오기 상세 절차, 자주 발생하는 레이아웃 함정, 미지원 CSS 우회 방법 정리</p>
+        </a>
+
+        <a class="guide-card" href="00_GUIDES/02_DESIGN_SYSTEM.md">
+          <span class="guide-code">02_DESIGN_SYSTEM</span>
+          <h3>디자인 시스템 명세</h3>
+          <p>12컬럼 그리드, 96px 세이프 영역, 타입 스케일, 8px 간격 및 시맨틱 색상 토큰 규칙</p>
+        </a>
+
+        <a class="guide-card" href="00_GUIDES/05_VISUAL_GUIDE.md">
+          <span class="guide-code">05_VISUAL_GUIDE</span>
+          <h3>시각 원칙 및 안티패턴</h3>
+          <p>정렬 축, 근접성 여백, 3단계 위계, 7:1 명도 대비, SVG+HTML 하이브리드 작도 기준</p>
+        </a>
+
+        <a class="guide-card" href="00_GUIDES/04_DIAGRAM_CATALOG.md">
+          <span class="guide-code">04_DIAGRAM_CATALOG</span>
+          <h3>다이어그램 60종 카탈로그</h3>
+          <p>프로세스, 트리, 매트릭스, 순환, 피라미드, 시스템 아키텍처 등 60종 부품 기획서</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="container foot-row">
+    <div>
+      <strong>Figma PPT Template System</strong>
+      <p>로컬 실행: <code>npx serve -l 8000 .</code> 실행 후 <code>http://localhost:8000/</code> 접속</p>
+    </div>
+    <div class="foot-links">
+      <a href="docs/">프리뷰 갤러리</a>
+      <a href="docs/builder.html">조합 빌더</a>
+      <a href="README.md">README</a>
+    </div>
+  </div>
+</footer>
+
+<script src="docs/landing.js?v=1"></script>
 </body>
 </html>
