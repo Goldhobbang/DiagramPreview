@@ -1,7 +1,6 @@
 <!-- @card V2 Neon Trail · 표지 | S자 테이퍼 광궤 · 색 전이 · 파티클 · 잔광 | 1920x1080 -->
 <!DOCTYPE html>
-<html lang="ko">
-<head>
+<html lang="ko"><head>
   <meta charset="UTF-8">
   <title>Motion UI V2 · 표지</title>
   <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
@@ -556,58 +555,55 @@ th {
     <svg class="trail" viewBox="0 0 1920 1080" fill="none">
       <defs>
         <linearGradient id="trailGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%"   stop-color="#3a0a24"/>
-          <stop offset="42%"  stop-color="#ff2e93"/>
-          <stop offset="100%" stop-color="#00f0ff"/>
+          <stop offset="0%" stop-color="#3a0a24"></stop>
+          <stop offset="42%" stop-color="#ff2e93"></stop>
+          <stop offset="100%" stop-color="#00f0ff"></stop>
         </linearGradient>
         <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-          <feGaussianBlur stdDeviation="24" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          <feGaussianBlur stdDeviation="24" result="b"></feGaussianBlur>
+          <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
         </filter>
       </defs>
 
       <!-- 잔광 번짐: 궤적을 따라 넓게 -->
-      <path d="M120 980 C520 900, 560 420, 1040 480 C1460 532, 1520 240, 1860 140"
-            stroke="#ff2e93" stroke-width="72" opacity="0.08" stroke-linecap="round"/>
+      <path d="M120 980 C520 900, 560 420, 1040 480 C1460 532, 1520 240, 1860 140" stroke="#ff2e93" stroke-width="72" opacity="0.08" stroke-linecap="round"></path>
 
       <!-- 본 궤적 (테이퍼는 세 구간을 굵기 다르게 겹쳐 만든다) -->
       <g filter="url(#glow)" opacity="0.9">
-        <path d="M120 980 C300 940, 420 760, 560 660"
-              stroke="url(#trailGrad)" stroke-width="3" stroke-linecap="round"/>
-        <path d="M560 660 C740 540, 860 460, 1040 480"
-              stroke="url(#trailGrad)" stroke-width="8" stroke-linecap="round"/>
-        <path d="M1040 480 C1400 520, 1540 250, 1860 140"
-              stroke="url(#trailGrad)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M120 980 C300 940, 420 760, 560 660" stroke="url(#trailGrad)" stroke-width="3" stroke-linecap="round"></path>
+        <path d="M560 660 C740 540, 860 460, 1040 480" stroke="url(#trailGrad)" stroke-width="8" stroke-linecap="round"></path>
+        <path d="M1040 480 C1400 520, 1540 250, 1860 140" stroke="url(#trailGrad)" stroke-width="4" stroke-linecap="round"></path>
       </g>
 
       <!-- 가장 밝은 지점 = 코어 -->
-      <circle cx="1040" cy="480" r="120" fill="#ff2e93" opacity="0.18"/>
-      <circle cx="1040" cy="480" r="20" fill="#ffffff"/>
+      <circle cx="1040" cy="480" r="120" fill="#ff2e93" opacity="0.18"></circle>
+      <circle cx="1040" cy="480" r="20" fill="#ffffff"></circle>
 
       <!-- 파티클: 궤적 방향으로 흩날린다 -->
       <g fill="#ff2e93">
-        <circle cx="700"  cy="596" r="4" opacity="0.6"/>
-        <circle cx="820"  cy="540" r="3" opacity="0.4"/>
-        <circle cx="1180" cy="452" r="5" opacity="0.5"/>
-        <circle cx="1320" cy="404" r="3" opacity="0.35"/>
+        <circle cx="700" cy="596" r="4" opacity="0.6"></circle>
+        <circle cx="820" cy="540" r="3" opacity="0.4"></circle>
+        <circle cx="1180" cy="452" r="5" opacity="0.5"></circle>
+        <circle cx="1320" cy="404" r="3" opacity="0.35"></circle>
       </g>
       <g fill="#00f0ff">
-        <circle cx="1480" cy="330" r="4" opacity="0.55"/>
-        <circle cx="1620" cy="252" r="3" opacity="0.45"/>
-        <circle cx="1740" cy="196" r="5" opacity="0.6"/>
-        <circle cx="1840" cy="120" r="2" opacity="0.3"/>
+        <circle cx="1480" cy="330" r="4" opacity="0.55"></circle>
+        <circle cx="1620" cy="252" r="3" opacity="0.45"></circle>
+        <circle cx="1740" cy="196" r="5" opacity="0.6"></circle>
+        <circle cx="1840" cy="120" r="2" opacity="0.3"></circle>
       </g>
     </svg>
 
     <div class="title-block">
       <p class="kicker">BRAND CAMPAIGN 2026</p>
-      <h1 class="t-display cover-title">우리가 만드는<br>다음 이야기</h1>
-      <p class="cover-sub">브랜드 방향 · 캠페인 구조</p>
+      <h1 class="t-display cover-title">우리가 만드는 다음 이야기</h1>
+      <p class="cover-sub">캠페인 구조 · 채널별 실행 계획</p>
     </div>
 
     <p class="cover-foot">이서준 · 브랜드팀</p>
-    <p class="timecode">[ &#9654; ] 00:00 / 24:00</p>
+    <p class="timecode">[ ▶ ] 00:00 / 24:00</p>
 
   </div>
-</body>
-</html>
+
+
+</body></html>
