@@ -540,11 +540,7 @@ th {
       top: 0;
       width: 1920px;
       height: 112px;
-      padding: 0 var(--slide-pad);
       background: var(--color-bg-inverse);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
     .holes {
       position: absolute;
@@ -556,32 +552,32 @@ th {
       padding: 0 var(--sp-6);
     }
     .holes i { width: 24px; height: 32px; border-radius: var(--radius-sm); background: var(--color-bg); }
-    .band-kicker { font-size: var(--fs-caption); color: var(--color-text-on-inverse-muted); }
-    .band-count { font-family: var(--font-mono); font-size: var(--fs-caption); color: var(--color-text-on-inverse); }
-
     .head {
       position: absolute;
       left: var(--slide-pad);
       right: var(--slide-pad);
       top: 176px;
       display: flex;
-      flex-direction: column;
-      gap: var(--sp-3);
+      justify-content: space-between;
+      align-items: flex-start;
     }
+    .head-main { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .head-kicker { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .band-count { font-family: var(--font-mono); font-size: var(--fs-body-m); color: var(--color-text-muted); }
     .lead { font-size: var(--fs-body-m); color: var(--color-text-muted); }
 
     /* 래더: DOM 순서는 위→아래. 1단(접수)이 맨 아래, 올라갈수록 좁아지는 계단. */
     .ladder {
       position: absolute;
       left: var(--slide-pad);
-      top: 376px;
+      top: 416px;
       bottom: var(--slide-pad);
       display: flex;
       flex-direction: column;
       gap: var(--sp-3);
     }
     .rung {
-      height: 136px;
+      height: 124px;
       padding: 0 var(--sp-5);
       background: var(--color-surface);
       border-radius: var(--radius-md);
@@ -613,13 +609,15 @@ th {
 
     <div class="band">
       <div class="holes"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <p class="band-kicker">운영 구조 · 단계 4</p>
-      <p class="band-count">03 / 12</p>
     </div>
 
     <div class="head">
-      <h2 class="t-h1">단계는 아래에서 위로 쌓인다</h2>
-      <p class="lead">접수가 기반이 되고, 정산이 맨 위에 올라간다.</p>
+      <div class="head-main">
+        <p class="head-kicker">운영 구조 · 단계 4</p>
+        <h2 class="t-h1">단계는 아래에서 위로 쌓인다</h2>
+        <p class="lead">접수가 기반이 되고, 정산이 맨 위에 올라간다.</p>
+      </div>
+      <p class="band-count">03 / 12</p>
     </div>
 
     <div class="ladder">
