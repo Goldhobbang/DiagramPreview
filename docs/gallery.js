@@ -28,6 +28,7 @@ let tokens = null;          // 01_variables.css에서 런타임에 추출
 let activeSection = 'ALL';
 let activeStyle = 'ALL';    // 슬라이드 템플릿 섹션 전용 — 스타일(그룹) 필터
 let thumbW = 380;
+const LIST_MAX = 190;       // 이 폭 이하("작게")면 목록 보기
 const styleTokenCache = new Map();   // 파일 경로 → 병합된 토큰 목록
 
 init();
@@ -201,7 +202,8 @@ function render() {
         : g.items.map(i => card(i, section.kind, section.id));
       // 이미지(media)만 고정 폭. HTML 미리보기는 넓은 트랙에서 늘려야 읽힌다.
       const track = isSlides ? ' grid-pair' : section.kind === 'image' ? '' : ' grid-wide';
-      html.push(`<div class="grid${track}">${cards.join('')}</div>`);
+      // "작게"는 카드 격자가 아니라 한 줄짜리 목록으로 보여준다.
+      html.push(`<div class="grid${thumbW <= LIST_MAX ? ' grid-list' : track}">${cards.join('')}</div>`);
     }
   }
 

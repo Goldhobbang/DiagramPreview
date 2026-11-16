@@ -991,3 +991,93 @@ main {
   flex-direction: column;
   gap: 8px;
 }
+
+/* --- 목록 보기 ("작게") -----------------------------------------------
+   카드 격자 대신 한 줄에 하나: 작은 썸네일 + 제목·설명·경로 + 버튼.
+   썸네일 폭은 고정(표지·전역 각 120px)이라 fitFrames가 그대로 맞춘다. */
+.grid-list {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.grid-list .card {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px 8px 8px;
+  box-shadow: none;
+}
+
+.grid-list .card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.grid-list .card > .thumb {
+  width: 160px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+}
+
+.grid-list .pair-thumbs {
+  width: 244px;
+  flex-shrink: 0;
+  gap: 4px;
+  background: transparent;
+}
+
+.grid-list .pair-thumbs .thumb {
+  border: 1px solid var(--line);
+}
+
+.grid-list .pair-thumbs figcaption {
+  display: none;
+}
+
+.grid-list .card-body {
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  padding: 0;
+  min-width: 0;
+}
+
+.grid-list .card-head {
+  flex: 0 0 280px;
+  justify-content: flex-start;
+}
+
+.grid-list .card-desc,
+.grid-list .card-pair .card-desc {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  font-size: 13px;
+  -webkit-line-clamp: 1;
+}
+
+.grid-list .card-path {
+  flex: 0 0 150px;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: right;
+}
+
+.grid-list .card-actions {
+  border-top: none;
+  background: transparent;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.grid-list .card-actions button,
+.grid-list .card-actions a {
+  flex: none;
+  padding: 6px 12px;
+}
+
+@media (max-width: 900px) {
+  .grid-list .card-desc,
+  .grid-list .card-path { display: none; }
+  .grid-list .card-head { flex: 1; }
+}

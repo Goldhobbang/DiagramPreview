@@ -4,9 +4,9 @@
 
      node tools/check-templates.js
 
-   20개 폴더 × 6파일을 손으로 만드는 동안 같은 실수가 반복된다.
+   20개 폴더 × 12파일을 손으로 만드는 동안 같은 실수가 반복된다.
    기계적으로 잡을 수 있는 것만 잡는다 (레이아웃 품질은 눈으로 볼 것):
-     1. v{1,2,3}_{01_cover,02_global}.html 6개가 다 있는가
+     1. v{1..6}_{01_cover,02_global}.html 12개가 다 있는가
      2. 1행에 @card 마커가 있는가
      3. 자기완결형인가 — 외부 CSS 링크가 없고 <style>이 있는가
      4. 그 <style>이 자기 베리에이션 토큰 블록(.v1 등)을 담고 있는가
@@ -28,7 +28,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const BASE = path.join(ROOT, '01_TEMPLATES_BY_STYLE');
-const VARIANTS = ['v1', 'v2', 'v3'];
+const VARIANTS = ['v1', 'v2', 'v3', 'v4', 'v5', 'v6'];
 const KINDS = ['01_cover', '02_global'];
 
 const errors = [];
@@ -153,7 +153,7 @@ if (errors.length) {
 const n = fs.readdirSync(BASE).filter(isDir).length;
 // data-anchor는 강제하지 않는다 (빌더가 박스 8앵커로 폴백한다) — 진척만 보여준다
 const anchored = componentFiles.filter(f => fs.readFileSync(f, 'utf8').includes('data-anchor=')).length;
-console.log(`\n  스타일 ${n}개 · 파일 ${n * 6}개 · 컴포넌트 ${componentFiles.length}개 — 규약 통과`);
+console.log(`\n  스타일 ${n}개 · 파일 ${n * 12}개 · 컴포넌트 ${componentFiles.length}개 — 규약 통과`);
 console.log(`  조합 빌더 앵커(data-anchor) 보유 ${anchored} / ${componentFiles.length}개`);
 console.log(`  Figma import 경고 ${figmaHits.length}건 — 목록은 --figma\n`);
 
