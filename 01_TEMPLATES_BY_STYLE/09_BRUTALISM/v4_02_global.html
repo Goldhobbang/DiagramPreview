@@ -1,0 +1,613 @@
+<!-- @card V4 Newsprint · 전역 | 신문 기사면 · 2단 본문 + 전 셀 노출 표 사이드바 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Brutalism V4 · 전역</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       토큰을 고치려면 이 파일을 직접 고친다 (표지·전역 2장을 함께). -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+/* ===== 03_ASSETS/css/02_slide_base.css ===== */
+/* ==========================================================================
+   02_slide_base.css — 슬라이드 캔버스 + 그리드 + 타이포 기본
+   ========================================================================== */
+
+/* --- 슬라이드 캔버스 ------------------------------------------------- */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;                /* ★ Figma와 동일하게 잘라 보여줘 오버플로우를 조기에 발견 */
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+}
+
+/* 세이프 영역이 적용된 콘텐츠 래퍼 */
+.slide-inner {
+  position: absolute;
+  inset: var(--slide-pad);
+  width: var(--content-w);
+  height: var(--content-h);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 컴포넌트 캔버스 (다이어그램 등 슬라이드보다 작은 단위) ---------- */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* --- 그리드 ---------------------------------------------------------- */
+/* Figma에서 Auto Layout으로 변환되지 않으므로, 다이어그램 내부보다는
+   슬라이드 최상위 레이아웃에만 쓴다. 내부는 .row / .col(flex)을 쓸 것. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--grid-gutter);
+}
+
+/* flex 기반 — 이쪽이 Figma Auto Layout으로 변환된다 (권장) */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--grid-gutter);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.row > .flex-1 { flex: 1; }
+.row > .flex-2 { flex: 2; }
+.row > .flex-3 { flex: 3; }
+
+/* --- 타이포 유틸 ----------------------------------------------------- */
+.t-display {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-body-l { font-size: var(--fs-body-l); }
+.t-body-m { font-size: var(--fs-body-m); }
+
+.t-caption {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.t-muted  { color: var(--color-text-muted); }
+.t-accent { color: var(--color-accent); }
+.t-center { text-align: center; }
+.t-right  { text-align: right; }
+
+/* 숫자 세로 정렬 — KPI를 나란히 놓으면 폭이 제각각인 숫자가 들쭉날쭉해 보인다.
+   1과 8의 폭을 같게 고정한다. 한글 폰트는 대개 이 기능을 지원한다. */
+.t-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- 디버그 모드 ----------------------------------------------------- */
+/* <body class="debug"> 로 켠다. 모든 박스 경계를 표시해 오버플로우를 잡는다. */
+.debug .slide,
+.debug .component {
+  outline: 2px solid rgba(255, 0, 0, 0.6);
+}
+
+.debug .slide *,
+.debug .component * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/* 세이프 영역 시각화 */
+.debug .slide::after {
+  content: "";
+  position: absolute;
+  inset: var(--slide-pad);
+  outline: 1px dashed rgba(0, 128, 255, 0.8);
+  pointer-events: none;
+}
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
+/* ==========================================================================
+   09_BRUTALISM — 꾸미지 않은 날것. 시스템 서체, 노출된 구조.
+   기획: 00_GUIDES/PLANS/09_BRUTALISM.md
+
+   11번 네오 브루탈리즘과 다르다: 여기는 그림자·라운드가 전혀 없다.
+   낡고 거칠고 불친절한 쪽.
+   3종 구조: V4 신문 1면(웜 라이트, 세로 단 분할) / V5 구형 OS 창(쿨 틸, 창+작업표시줄)
+            / V6 현장 안전 표지(웜 다크, 가로 띠 분할).
+   ========================================================================== */
+
+/* 공통: 라운드 0, 그림자 0. 서체는 시스템 기본만. */
+.v4, .v5, .v6 {
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-full: 0px;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --card-border-w: 0px;
+  --border-w: 2px;
+  --border-w-thick: 4px;
+  --font-mono: "Courier New", Courier, monospace;
+}
+
+/* --- V4 Newsprint — 누렇게 바랜 신문지, 세로 단 분할 ---------------- */
+.v4 {
+  --color-bg: #e9e1cc;
+  --color-surface: #f3eedf;
+  --color-surface-alt: #d9cfb4;
+  --color-text: #141210;
+  --color-text-muted: #3f392f;
+  --color-text-invert: #ffffff;
+  --color-accent: #1038c8;          /* 청색 별색 인쇄 — 슬라이드당 1회 */
+  --color-accent-sub: #141210;
+  --color-border: #141210;
+
+  --font-sans: "Times New Roman", Times, serif;
+}
+
+/* --- V5 System Window — 구형 OS 기본 창, 틸 바탕화면 ---------------- */
+.v5 {
+  --color-bg: #008080;
+  --color-surface: #c0c0c0;
+  --color-surface-alt: #dfdfdf;
+  --color-text: #000000;
+  --color-text-muted: #404040;
+  --color-text-invert: #ffffff;
+  --color-accent: #000080;          /* 제목 표시줄 — 슬라이드당 1회 */
+  --color-accent-sub: #000000;
+  --color-border: #000000;
+
+  --font-sans: Arial, Helvetica, sans-serif;
+  --v-hi: #ffffff;                  /* 베벨 밝은 변 */
+  --v-lo: #808080;                  /* 베벨 어두운 변 */
+  --v-field: #ffffff;               /* 입력 칸·목록 바탕 */
+}
+
+/* --- V6 Hazard Stencil — 아스팔트 바탕 안전 표지, 가로 띠 분할 ------ */
+.v6 {
+  --color-bg: #181613;
+  --color-surface: #24211c;
+  --color-surface-alt: #2f2b24;
+  --color-text: #f1ece0;
+  --color-text-muted: #b8b09f;
+  --color-text-invert: #181613;
+  --color-accent: #f2b705;          /* 경고 표지 황색 — 면으로 1곳 */
+  --color-accent-sub: #f1ece0;
+  --color-border: #f1ece0;
+
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+  </style>
+  <style>
+    .paper { inset: var(--sp-8); width: auto; height: auto; gap: var(--sp-4); }
+
+    .mast-meta {
+      display: flex;
+      justify-content: space-between;
+      border-top: var(--border-w-thick) solid var(--color-border);
+      border-bottom: var(--border-w) solid var(--color-border);
+      padding: var(--sp-2) 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .headline { font-size: 64px; font-weight: 900; line-height: 1.25; letter-spacing: -0.02em; }
+    .deck {
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1.6;
+      padding-bottom: var(--sp-4);
+      border-bottom: var(--border-w-thick) solid var(--color-border);
+    }
+
+    .article { flex: 1; display: flex; gap: 0; }
+    .text-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      padding: 0 var(--sp-5);
+      border-right: var(--border-w) solid var(--color-border);
+      font-size: 28px;
+      line-height: 1.7;
+    }
+    .text-col:first-child { padding-left: 0; }
+    .text-col h3 { font-size: 36px; font-weight: 900; line-height: 1.3; }
+
+    .side { flex: 1.1; padding-left: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-3); }
+    .side-head { font-size: 24px; font-weight: 900; letter-spacing: 0.1em; }
+
+    /* 표는 모든 셀 경계를 노출한다 */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 26px; }
+    .tbl th, .tbl td { border: 1px solid var(--color-border); padding: var(--sp-3) var(--sp-3); }
+    .tbl th { background: var(--color-surface-alt); font-weight: 900; }
+    .tbl .num { text-align: right; }
+    .tbl .hit td { background: var(--color-accent); color: var(--color-text-invert); font-weight: 700; }
+    .src { font-size: 22px; color: var(--color-text-muted); }
+
+    .foot {
+      display: flex;
+      justify-content: space-between;
+      border-top: var(--border-w-thick) solid var(--color-border);
+      padding-top: var(--sp-2);
+      font-size: 22px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide v4">
+    <div class="slide-inner paper">
+
+      <div class="mast-meta">
+        <span>한강정밀 타임스 · 품질</span>
+        <span>2026년 11월 16일</span>
+        <span>[ 03 / 18 ]</span>
+      </div>
+
+      <h2 class="headline">공정 14곳 중 3곳이 불량의 61%를 만들었다</h2>
+      <p class="deck">전수 조사 결과, 문제는 고르게 퍼져 있지 않았다. 손볼 곳이 정해지면 비용도 정해진다.</p>
+
+      <div class="article">
+        <div class="text-col">
+          <h3>사출 성형이 가장 크다</h3>
+          <p>올해 3분기 접수된 불량 1,212건 가운데 412건이 사출 성형에서 나왔다. 금형 온도 편차가 반복해서 지목됐다.</p>
+          <p>현장 점검에서는 교대 시간마다 설정값이 달라지는 설비 두 대가 확인됐다. 우선 이 두 대의 설정을 하나로 고정한다.</p>
+        </div>
+        <div class="text-col">
+          <h3>프레스와 도장이 뒤를 잇는다</h3>
+          <p>두 공정을 합치면 27%다. 세 곳만 잡아도 전체 불량의 절반 이상을 줄일 수 있다는 계산이다.</p>
+          <p>도장은 건조 시간이 짧아 생기는 얼룩이 대부분이다. 프레스는 금형 마모 주기를 앞당기는 것으로 대응한다.</p>
+        </div>
+        <div class="side">
+          <p class="side-head">공정별 불량 비중</p>
+          <table class="tbl">
+            <thead><tr><th>공정</th><th class="num">건수</th><th class="num">비중</th></tr></thead>
+            <tbody>
+              <tr class="hit"><td>사출 성형</td><td class="num">412</td><td class="num">34%</td></tr>
+              <tr><td>프레스</td><td class="num">182</td><td class="num">15%</td></tr>
+              <tr><td>도장</td><td class="num">145</td><td class="num">12%</td></tr>
+              <tr><td>나머지 11곳</td><td class="num">473</td><td class="num">39%</td></tr>
+            </tbody>
+          </table>
+          <p class="src">자료 품질경영팀, 2026년 3분기 접수 기준</p>
+        </div>
+      </div>
+
+      <div class="foot">
+        <span>발행 품질경영팀</span>
+        <span>다음 면 · 현장 인터뷰</span>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
