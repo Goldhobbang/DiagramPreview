@@ -512,14 +512,14 @@ th {
     }
     .main-kicker { font-size: 24px; color: var(--color-text-muted); }
     .main-title { font-size: 64px; line-height: 1.25; font-weight: 700; letter-spacing: -0.02em; color: var(--color-text); }
-    .bars { flex: 1; display: flex; justify-content: space-between; align-items: flex-end; margin-top: 32px; }
-    .col { width: 200px; display: flex; flex-direction: column; align-items: center; }
+    .bars { flex: none; height: 520px; display: flex; justify-content: space-between; align-items: flex-end; margin-top: 32px; }
+    .bar-col { width: 200px; display: flex; flex-direction: column; align-items: center; }
     .bar-val { font-size: 28px; font-weight: 700; color: var(--color-text); margin-bottom: 16px; }
-    .col i { display: block; width: 120px; height: 36px; margin-bottom: 4px; background: var(--color-surface-alt); }
-    .col i.on { background: var(--v-slate); }
-    .col.hl i.on { background: var(--color-accent); }
+    .bar-col i { display: block; width: 120px; height: 28px; margin-bottom: 4px; background: var(--color-surface-alt); }
+    .bar-col i.on { background: var(--v-slate); }
+    .bar-col.hl i.on { background: var(--color-accent); }
     .bar-name { font-size: 24px; color: var(--color-text); margin-top: 16px; }
-    .col.hl .bar-name { color: var(--color-accent); font-weight: 700; }
+    .bar-col.hl .bar-name { color: var(--color-accent); font-weight: 700; }
     .foot { font-size: 18px; line-height: 1.5; color: var(--color-text-muted); }
   </style>
 </head>
@@ -539,13 +539,13 @@ th {
       </aside>
       <main class="main">
         <p class="main-kicker">권역별 회전 배수 · 최근 8주 평균</p>
-        <h1 class="main-title">남부 권역 9.1배, 제주는 3.3배에 머물렀다</h1>
+        <h1 class="main-title">남부 9.1배, 제주는 3.3배</h1>
         <ol class="bars">
-        <li class="col"><p class="bar-val">4.2배</p><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">북부</p></li>
-        <li class="col"><p class="bar-val">6.8배</p><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">중부</p></li>
-        <li class="col hl"><p class="bar-val">9.1배</p><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">남부</p></li>
-        <li class="col"><p class="bar-val">5.5배</p><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">동부</p></li>
-        <li class="col"><p class="bar-val">3.3배</p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">제주</p></li>
+        <li class="bar-col"><p class="bar-val">4.2배</p><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">북부</p></li>
+        <li class="bar-col"><p class="bar-val">6.8배</p><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">중부</p></li>
+        <li class="bar-col hl"><p class="bar-val">9.1배</p><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">남부</p></li>
+        <li class="bar-col"><p class="bar-val">5.5배</p><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">동부</p></li>
+        <li class="bar-col"><p class="bar-val">3.3배</p><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i class="on"></i><i class="on"></i><p class="bar-name">제주</p></li>
         </ol>
         <p class="foot">칸 1개 = 1배 (소수점 버림) · 콜드체인 재고 2,400 파레트 기준</p>
       </main>
