@@ -1,0 +1,879 @@
+<!-- @card V6 Felt Table · 표지 | 그린 펠트 · 대각선 나무 레일 분할 · 좌하 점수판 | 1920x1080 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Skeuomorphism V6 · 표지</title>
+  <!-- 자기완결형: CSS 전체를 아래에 인라인했다. 외부 링크 없음.
+       토큰을 고치려면 이 파일을 직접 고친다 (표지·전역 2장을 함께). -->
+  <style>
+/* ===== 03_ASSETS/css/00_reset.css ===== */
+/* ==========================================================================
+   00_reset.css — 슬라이드 전용 최소 리셋
+   normalize.css를 쓰지 않는 이유: 범용 규칙이 Figma 레이어에 노이즈를 더한다.
+   로드 순서: 00_reset → 01_variables → 02_slide_base → 03_components → 테마 토큰
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* rem을 쓰지 않지만, 브라우저 기본 확대 설정의 영향을 없애기 위해 고정 */
+  font-size: 16px;
+}
+
+body {
+  background: #52525b;              /* 캔버스 밖 회색 — 슬라이드 경계를 눈으로 구분 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+  text-align: left;
+  font-weight: inherit;
+}
+
+/* 슬라이드는 정적 캡처 대상 — 애니메이션은 최종 상태로 고정한다 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+/* ===== 03_ASSETS/css/01_variables.css ===== */
+/* ==========================================================================
+   01_variables.css — 디자인 토큰 단일 소스
+   규칙: 의미 기반 이름만 쓴다 (--blue-500 X / --color-accent O)
+   테마 교체는 같은 변수명을 덮어쓰는 방식. 슬라이드는 .v1/.v2/.v3 클래스에 건다.
+   상세: 00_GUIDES/02_DESIGN_SYSTEM.md
+   ========================================================================== */
+
+:root {
+  /* --- 캔버스 --------------------------------------------------------- */
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  --slide-pad: 96px;               /* 세이프 영역 */
+  --content-w: 1728px;             /* 1920 - 96*2 */
+  --content-h: 888px;              /* 1080 - 96*2 */
+  --grid-cols: 12;
+  --grid-gutter: 32px;
+
+  /* --- 폰트 ----------------------------------------------------------- */
+  --font-sans: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "D2Coding", Consolas, monospace;
+  --font-serif: "Noto Serif KR", Georgia, serif;
+  --font-kicker: var(--font-sans);  /* 라벨/킥커 전용 훅 — 대부분 본문과 동일, 럭셔리 계열만 세리프로 교체 */
+
+  /* --- 타입 스케일 (1080p 프로젝터 기준 / 최소 18px) ------------------- */
+  --fs-display: 96px;
+  --fs-h1: 64px;
+  --fs-h2: 44px;
+  --fs-h3: 32px;
+  --fs-body-l: 28px;
+  --fs-body-m: 24px;
+  --fs-caption: 18px;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* line-height만 배수 사용 — 폰트 교체에 강하다 */
+  --lh-tight: 1.2;
+  --lh-heading: 1.3;
+  --lh-body: 1.6;
+
+  --ls-tight: -0.02em;             /* 48px 이상 대제목 */
+  --ls-normal: 0;
+  --ls-wide: 0.05em;               /* 대문자 라벨 */
+
+  /* --- 간격 (8px 배수) ------------------------------------------------ */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+  --sp-7: 64px;
+  --sp-8: 96px;
+  --sp-9: 128px;
+
+  /* --- 색: 시맨틱 (테마마다 값이 바뀜) -------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f4f5;
+  --color-surface-alt: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-text-invert: #ffffff;
+  --color-accent: #2563eb;
+  --color-accent-sub: #60a5fa;
+  --color-border: #d4d4d8;
+
+  /* --- 색: 데이터 시각화 팔레트 (반드시 1→6 순서대로 사용) ------------ */
+  --color-data-1: #2563eb;
+  --color-data-2: #0ea5e9;
+  --color-data-3: #14b8a6;
+  --color-data-4: #f59e0b;
+  --color-data-5: #ef4444;
+  --color-data-6: #8b5cf6;
+
+  /* --- 색: 상태 (테마 무관 고정) -------------------------------------- */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #71717a;
+
+  /* --- 색: 반전 슬라이드 (전면 이미지 등 어두운 배경 1장용) ------------ */
+  --color-bg-inverse: #0f172a;
+  --color-text-on-inverse: #ffffff;
+  --color-text-on-inverse-muted: #cbd5e1;
+
+  /* --- 카드 보더 (Minimal Mono처럼 선으로 구분하는 테마만 1px로 올림) -- */
+  --card-border-w: 0px;
+
+  /* --- 라운드 --------------------------------------------------------- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* --- 그림자 (Figma 유실 방지: 다중 그림자 금지, 1개만) -------------- */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  /* --- 선 ------------------------------------------------------------- */
+  --border-w: 1px;
+  --border-w-thick: 3px;
+}
+/* ===== 03_ASSETS/css/02_slide_base.css ===== */
+/* ==========================================================================
+   02_slide_base.css — 슬라이드 캔버스 + 그리드 + 타이포 기본
+   ========================================================================== */
+
+/* --- 슬라이드 캔버스 ------------------------------------------------- */
+.slide {
+  width: var(--slide-w);
+  height: var(--slide-h);
+  overflow: hidden;                /* ★ Figma와 동일하게 잘라 보여줘 오버플로우를 조기에 발견 */
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-l);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+}
+
+/* 세이프 영역이 적용된 콘텐츠 래퍼 */
+.slide-inner {
+  position: absolute;
+  inset: var(--slide-pad);
+  width: var(--content-w);
+  height: var(--content-h);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- 컴포넌트 캔버스 (다이어그램 등 슬라이드보다 작은 단위) ---------- */
+.component {
+  width: 1400px;
+  height: 700px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  margin: 0 auto;
+  padding: var(--sp-6);
+}
+
+/* --- 그리드 ---------------------------------------------------------- */
+/* Figma에서 Auto Layout으로 변환되지 않으므로, 다이어그램 내부보다는
+   슬라이드 최상위 레이아웃에만 쓴다. 내부는 .row / .col(flex)을 쓸 것. */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--grid-gutter);
+}
+
+/* flex 기반 — 이쪽이 Figma Auto Layout으로 변환된다 (권장) */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--grid-gutter);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.row > .flex-1 { flex: 1; }
+.row > .flex-2 { flex: 2; }
+.row > .flex-3 { flex: 3; }
+
+/* --- 타이포 유틸 ----------------------------------------------------- */
+.t-display {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h1 {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-h2 {
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-h3 {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+}
+
+.t-body-l { font-size: var(--fs-body-l); }
+.t-body-m { font-size: var(--fs-body-m); }
+
+.t-caption {
+  font-size: var(--fs-caption);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.t-muted  { color: var(--color-text-muted); }
+.t-accent { color: var(--color-accent); }
+.t-center { text-align: center; }
+.t-right  { text-align: right; }
+
+/* 숫자 세로 정렬 — KPI를 나란히 놓으면 폭이 제각각인 숫자가 들쭉날쭉해 보인다.
+   1과 8의 폭을 같게 고정한다. 한글 폰트는 대개 이 기능을 지원한다. */
+.t-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- 디버그 모드 ----------------------------------------------------- */
+/* <body class="debug"> 로 켠다. 모든 박스 경계를 표시해 오버플로우를 잡는다. */
+.debug .slide,
+.debug .component {
+  outline: 2px solid rgba(255, 0, 0, 0.6);
+}
+
+.debug .slide *,
+.debug .component * {
+  outline: 1px solid rgba(255, 0, 0, 0.25);
+}
+
+/* 세이프 영역 시각화 */
+.debug .slide::after {
+  content: "";
+  position: absolute;
+  inset: var(--slide-pad);
+  outline: 1px dashed rgba(0, 128, 255, 0.8);
+  pointer-events: none;
+}
+/* ===== 03_ASSETS/css/03_components.css ===== */
+/* ==========================================================================
+   03_components.css — 여러 다이어그램/슬라이드가 공유하는 최소 컴포넌트
+   여기 있는 것만으로 다이어그램이 완성되지는 않는다. 반복되는 것만 올린다.
+   ========================================================================== */
+
+/* --- 카드 ------------------------------------------------------------ */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.card-outlined {
+  background: var(--color-bg);
+  border: var(--border-w) solid var(--color-border);
+}
+
+.card-elevated {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- 번호 배지 (프로세스 단계용) ------------------------------------- */
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* --- 태그 / 배지 ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-1) var(--sp-3);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-alt);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+}
+
+.badge-accent {
+  background: var(--color-accent);
+  color: var(--color-text-invert);
+}
+
+/* --- 구분선 ---------------------------------------------------------- */
+.divider {
+  height: var(--border-w);
+  background: var(--color-border);
+  border: none;
+}
+
+.divider-accent {
+  height: var(--border-w-thick);
+  width: 96px;
+  background: var(--color-accent);
+}
+
+/* --- 라벨 붙은 값 (KPI) ---------------------------------------------- */
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.stat-value {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.stat-label {
+  font-size: var(--fs-caption);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wide);
+}
+
+/* --- 데이터 계열 색 (1~6 순서대로 사용) ------------------------------ */
+.d1 { --c: var(--color-data-1); }
+.d2 { --c: var(--color-data-2); }
+.d3 { --c: var(--color-data-3); }
+.d4 { --c: var(--color-data-4); }
+.d5 { --c: var(--color-data-5); }
+.d6 { --c: var(--color-data-6); }
+
+.fill-data   { background: var(--c, var(--color-data-1)); }
+.text-data   { color: var(--c, var(--color-data-1)); }
+.border-data { border-color: var(--c, var(--color-data-1)); }
+
+/* --- 정렬 유틸 ------------------------------------------------------- */
+.items-center   { align-items: center; }
+.items-start    { align-items: flex-start; }
+.justify-center { justify-content: center; }
+.justify-between{ justify-content: space-between; }
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
+/* ==========================================================================
+   10_SKEUOMORPHISM — 실물의 재질·두께·조명을 화면에 그대로 옮긴다.
+   기획: 00_GUIDES/PLANS/10_SKEUOMORPHISM.md
+
+   V4 Delft Porcelain : 쿨 라이트 · 코발트 타일 (상하 분할)
+   V5 Vinyl Sleeve    : 뉴트럴 다크 · 차콜 LP 원반 (오프셋 원형 분할)
+   V6 Felt Table      : 그린 펠트 · 나무 레일 (대각 분할)
+
+   모든 표면에 (1) 재질 텍스처 (2) 베벨(두께 가장자리) (3) 드롭섀도 3종을 넣는다.
+   광원은 좌상단 고정. 색은 레이아웃 CSS에 쓰지 않고 이 블록의 토큰으로만 받는다.
+   ========================================================================== */
+
+/* --- 공통: 세 베리에이션이 같이 쓰는 두께 규칙 ----------------------- */
+.v4, .v5, .v6 {
+  --mat-bevel: 2px;                 /* 가장자리 베벨 두께 */
+  --mat-lip: 4px;                   /* 접시·디스크의 아랫면 두께 */
+}
+
+/* --- V4 Delft Porcelain — 코발트 타일 + 유약 흰 접시 ------------------ */
+.v4 {
+  --color-bg: #eef3f8;              /* 포슬린 */
+  --color-surface: #fbfcfe;         /* 유약 흰색 */
+  --color-surface-alt: #dce6f2;     /* 연한 유약 */
+  --color-text: #17243a;
+  --color-text-muted: #4a5f7f;
+  --color-text-invert: #fbfcfe;
+  --color-accent: #1f4e8c;          /* 코발트 안료 */
+  --color-accent-sub: #8fb0d6;
+  --color-border: #b9cbe0;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 4px 12px rgba(23, 36, 58, 0.16);
+  --shadow-md: 0 10px 24px rgba(23, 36, 58, 0.24);
+
+  --v-tile: #1f4e8c;
+  --v-plate-lip: #b9cbe0;
+}
+
+/* --- V5 Vinyl Sleeve — 차콜 바탕 + 앰버 레이블 + 크롬 ---------------- */
+.v5 {
+  --color-bg: #16161a;              /* 차콜 슬리브 */
+  --color-surface: #23232a;
+  --color-surface-alt: #2a2a31;
+  --color-text: #f0eee8;
+  --color-text-muted: #b4b2aa;
+  --color-text-invert: #16161a;
+  --color-accent: #e8a33d;          /* 앰버 레이블 */
+  --color-accent-sub: #c4c2bc;      /* 크롬 */
+  --color-border: #3a3a44;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.50);
+  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.60);
+
+  --v-disc: #0e0e11;
+  --v-groove: #2b2b33;
+  --v-chrome: #c4c2bc;
+}
+
+/* --- V6 Felt Table — 그린 펠트 + 나무 레일 + 황동 ---------------------- */
+.v6 {
+  --color-bg: #1e5b47;              /* 펠트 */
+  --color-surface: #0f3b2e;         /* 쿠션 안쪽 */
+  --color-surface-alt: #7a4e2d;     /* 나무 레일 */
+  --color-text: #f3eedc;
+  --color-text-muted: #b9d3c6;
+  --color-text-invert: #0f3b2e;
+  --color-accent: #d8b45a;          /* 황동 */
+  --color-accent-sub: #a7d0c4;
+  --color-border: #3c7a63;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 22px rgba(0, 0, 0, 0.45);
+
+  --v-wood: #7a4e2d;
+  --v-wood-hi: #a06a3c;
+  --v-wood-lo: #4d2f18;
+  --v-pocket: #0a1f18;
+  --v-speck: #2a6e57;
+}
+  </style>
+  <style>
+
+    /* 펠트 바탕 + 대각선 나무 레일 — 위 오른쪽은 제목, 아래 왼쪽은 점수판 */
+    .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .speck { fill: var(--v-speck); }
+    .rail { fill: var(--v-wood); }
+    .rail-hi { stroke: var(--v-wood-hi); stroke-width: 8px; }
+    .rail-lo { stroke: var(--v-wood-lo); stroke-width: 10px; }
+    .sight { fill: var(--color-accent); }
+    .pocket { fill: var(--v-pocket); stroke: var(--v-wood-lo); stroke-width: 6px; }
+
+    .cover-text {
+      position: absolute;
+      left: 1000px;
+      top: 140px;
+      width: 824px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--sp-4);
+    }
+    .kicker {
+      font-size: var(--fs-caption);
+      font-weight: 600;
+      letter-spacing: var(--ls-wide);
+      color: var(--color-accent);
+    }
+    .cover-title {
+      font-size: var(--fs-display);
+      font-weight: 700;
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-text);
+    }
+    .cover-sub { font-size: var(--fs-body-l); color: var(--color-text-muted); }
+    .cover-foot { font-size: var(--fs-caption); color: var(--color-text-muted); }
+
+    .board {
+      position: absolute;
+      left: 96px;
+      top: 680px;
+      width: 560px;
+      height: 304px;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border-bottom: var(--mat-lip) solid var(--v-pocket);
+      box-shadow: var(--shadow-md);
+      padding: var(--sp-5) var(--sp-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--sp-3);
+    }
+    .board-head { font-size: var(--fs-caption); letter-spacing: var(--ls-wide); color: var(--color-text-muted); }
+    .board-row { display: flex; align-items: center; gap: var(--sp-4); }
+    .board-name { width: 112px; font-size: var(--fs-body-m); color: var(--color-text); }
+    .board-track {
+      flex: 1;
+      height: 16px;
+      border-radius: 8px;
+      background: var(--v-pocket);
+      overflow: hidden;
+    }
+    .board-fill { height: 16px; border-radius: 8px; background: var(--color-accent-sub); }
+    .board-row.hero .board-fill { background: var(--color-accent); }
+    .board-pct { width: 112px; text-align: right; font-size: var(--fs-h3); font-weight: 700; color: var(--color-text); }
+    .board-row.hero .board-pct { color: var(--color-accent); }
+  </style>
+</head>
+<body>
+  <div class="slide v6">
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" >
+<circle class="speck" cx="622" cy="163" r="1.5"/>
+<circle class="speck" cx="139" cy="579" r="1.3"/>
+<circle class="speck" cx="111" cy="548" r="1.0"/>
+<circle class="speck" cx="833" cy="75" r="1.1"/>
+<circle class="speck" cx="815" cy="893" r="1.1"/>
+<circle class="speck" cx="429" cy="678" r="1.8"/>
+<circle class="speck" cx="1108" cy="428" r="1.8"/>
+<circle class="speck" cx="89" cy="927" r="1.2"/>
+<circle class="speck" cx="277" cy="127" r="1.2"/>
+<circle class="speck" cx="1567" cy="195" r="1.5"/>
+<circle class="speck" cx="1227" cy="402" r="1.4"/>
+<circle class="speck" cx="121" cy="64" r="1.2"/>
+<circle class="speck" cx="1306" cy="462" r="1.3"/>
+<circle class="speck" cx="1124" cy="489" r="1.2"/>
+<circle class="speck" cx="1525" cy="755" r="1.2"/>
+<circle class="speck" cx="1103" cy="567" r="1.7"/>
+<circle class="speck" cx="1401" cy="311" r="1.8"/>
+<circle class="speck" cx="227" cy="452" r="1.6"/>
+<circle class="speck" cx="292" cy="528" r="1.0"/>
+<circle class="speck" cx="1283" cy="826" r="1.5"/>
+<circle class="speck" cx="1681" cy="339" r="1.6"/>
+<circle class="speck" cx="1141" cy="626" r="1.4"/>
+<circle class="speck" cx="1613" cy="1020" r="1.4"/>
+<circle class="speck" cx="1275" cy="66" r="1.6"/>
+<circle class="speck" cx="1242" cy="1073" r="1.7"/>
+<circle class="speck" cx="546" cy="417" r="1.5"/>
+<circle class="speck" cx="43" cy="499" r="1.1"/>
+<circle class="speck" cx="225" cy="64" r="1.6"/>
+<circle class="speck" cx="248" cy="267" r="1.3"/>
+<circle class="speck" cx="1673" cy="87" r="1.4"/>
+<circle class="speck" cx="1055" cy="954" r="1.7"/>
+<circle class="speck" cx="1659" cy="301" r="1.3"/>
+<circle class="speck" cx="689" cy="955" r="1.8"/>
+<circle class="speck" cx="290" cy="190" r="1.2"/>
+<circle class="speck" cx="448" cy="524" r="1.5"/>
+<circle class="speck" cx="504" cy="4" r="1.3"/>
+<circle class="speck" cx="709" cy="612" r="1.8"/>
+<circle class="speck" cx="1326" cy="557" r="1.5"/>
+<circle class="speck" cx="1298" cy="58" r="1.7"/>
+<circle class="speck" cx="1498" cy="944" r="1.6"/>
+<circle class="speck" cx="753" cy="431" r="1.1"/>
+<circle class="speck" cx="1218" cy="67" r="1.1"/>
+<circle class="speck" cx="401" cy="175" r="1.3"/>
+<circle class="speck" cx="101" cy="0" r="1.1"/>
+<circle class="speck" cx="195" cy="393" r="1.0"/>
+<circle class="speck" cx="1679" cy="663" r="1.1"/>
+<circle class="speck" cx="484" cy="375" r="1.3"/>
+<circle class="speck" cx="236" cy="917" r="1.8"/>
+<circle class="speck" cx="895" cy="523" r="1.1"/>
+<circle class="speck" cx="196" cy="370" r="1.2"/>
+<circle class="speck" cx="1591" cy="174" r="1.0"/>
+<circle class="speck" cx="1826" cy="571" r="1.1"/>
+<circle class="speck" cx="1043" cy="29" r="1.4"/>
+<circle class="speck" cx="1879" cy="932" r="1.6"/>
+<circle class="speck" cx="501" cy="396" r="1.1"/>
+<circle class="speck" cx="1482" cy="575" r="1.6"/>
+<circle class="speck" cx="633" cy="241" r="1.6"/>
+<circle class="speck" cx="1891" cy="921" r="1.6"/>
+<circle class="speck" cx="1571" cy="799" r="1.2"/>
+<circle class="speck" cx="994" cy="384" r="1.0"/>
+<circle class="speck" cx="54" cy="302" r="1.2"/>
+<circle class="speck" cx="1330" cy="1033" r="1.4"/>
+<circle class="speck" cx="1799" cy="1067" r="1.8"/>
+<circle class="speck" cx="700" cy="238" r="1.2"/>
+<circle class="speck" cx="378" cy="221" r="1.5"/>
+<circle class="speck" cx="1729" cy="908" r="1.4"/>
+<circle class="speck" cx="1254" cy="864" r="1.1"/>
+<circle class="speck" cx="1268" cy="983" r="1.6"/>
+<circle class="speck" cx="1440" cy="516" r="1.1"/>
+<circle class="speck" cx="1515" cy="359" r="1.6"/>
+<circle class="speck" cx="1866" cy="428" r="1.3"/>
+<circle class="speck" cx="1818" cy="783" r="1.1"/>
+<circle class="speck" cx="244" cy="163" r="1.7"/>
+<circle class="speck" cx="1548" cy="158" r="1.7"/>
+<circle class="speck" cx="1882" cy="710" r="1.3"/>
+<circle class="speck" cx="1053" cy="141" r="1.0"/>
+<circle class="speck" cx="1864" cy="702" r="1.4"/>
+<circle class="speck" cx="1793" cy="469" r="1.7"/>
+<circle class="speck" cx="1586" cy="228" r="1.2"/>
+<circle class="speck" cx="562" cy="260" r="1.5"/>
+<circle class="speck" cx="498" cy="453" r="1.1"/>
+<circle class="speck" cx="1747" cy="382" r="1.4"/>
+<circle class="speck" cx="1120" cy="977" r="1.3"/>
+<circle class="speck" cx="1762" cy="542" r="1.4"/>
+<circle class="speck" cx="1005" cy="20" r="1.4"/>
+<circle class="speck" cx="352" cy="4" r="1.6"/>
+<circle class="speck" cx="331" cy="511" r="1.6"/>
+<circle class="speck" cx="1068" cy="352" r="1.4"/>
+<circle class="speck" cx="1066" cy="847" r="1.1"/>
+<circle class="speck" cx="1076" cy="268" r="1.2"/>
+<circle class="speck" cx="1483" cy="548" r="1.4"/>
+<circle class="speck" cx="1459" cy="985" r="1.4"/>
+<circle class="speck" cx="1176" cy="546" r="1.4"/>
+<circle class="speck" cx="1330" cy="489" r="1.4"/>
+<circle class="speck" cx="918" cy="1017" r="1.6"/>
+<circle class="speck" cx="1683" cy="1018" r="1.2"/>
+<circle class="speck" cx="1074" cy="1019" r="1.7"/>
+<circle class="speck" cx="263" cy="131" r="1.4"/>
+<circle class="speck" cx="139" cy="260" r="1.1"/>
+<circle class="speck" cx="1285" cy="847" r="1.7"/>
+<circle class="speck" cx="297" cy="773" r="1.5"/>
+<circle class="speck" cx="275" cy="953" r="1.8"/>
+<circle class="speck" cx="422" cy="1029" r="1.3"/>
+<circle class="speck" cx="936" cy="1069" r="1.7"/>
+<circle class="speck" cx="310" cy="466" r="1.4"/>
+<circle class="speck" cx="651" cy="211" r="1.3"/>
+<circle class="speck" cx="1387" cy="21" r="1.4"/>
+<circle class="speck" cx="846" cy="20" r="1.3"/>
+<circle class="speck" cx="1198" cy="553" r="1.1"/>
+<circle class="speck" cx="1891" cy="851" r="1.8"/>
+<circle class="speck" cx="201" cy="287" r="1.0"/>
+<circle class="speck" cx="1496" cy="292" r="1.1"/>
+<circle class="speck" cx="811" cy="984" r="1.7"/>
+<circle class="speck" cx="497" cy="161" r="1.7"/>
+<circle class="speck" cx="1096" cy="756" r="1.1"/>
+<circle class="speck" cx="110" cy="743" r="1.3"/>
+<circle class="speck" cx="139" cy="1013" r="1.5"/>
+<circle class="speck" cx="1539" cy="90" r="1.7"/>
+<circle class="speck" cx="128" cy="932" r="1.4"/>
+<circle class="speck" cx="651" cy="597" r="1.7"/>
+<circle class="speck" cx="514" cy="140" r="1.4"/>
+<circle class="speck" cx="458" cy="118" r="1.1"/>
+<circle class="speck" cx="97" cy="218" r="1.2"/>
+<circle class="speck" cx="586" cy="820" r="1.2"/>
+<circle class="speck" cx="960" cy="192" r="1.3"/>
+<circle class="speck" cx="35" cy="270" r="1.0"/>
+<circle class="speck" cx="1408" cy="595" r="1.2"/>
+<circle class="speck" cx="912" cy="1009" r="1.1"/>
+<circle class="speck" cx="1572" cy="467" r="1.4"/>
+<circle class="speck" cx="1602" cy="425" r="1.4"/>
+<circle class="speck" cx="1320" cy="1061" r="1.3"/>
+<circle class="speck" cx="1598" cy="763" r="1.5"/>
+<circle class="speck" cx="777" cy="375" r="1.0"/>
+<circle class="speck" cx="249" cy="76" r="1.6"/>
+<circle class="speck" cx="491" cy="176" r="1.1"/>
+<circle class="speck" cx="1615" cy="940" r="1.5"/>
+<circle class="speck" cx="541" cy="262" r="1.2"/>
+<circle class="speck" cx="882" cy="170" r="1.4"/>
+<circle class="speck" cx="505" cy="1039" r="1.8"/>
+<circle class="speck" cx="1050" cy="264" r="1.8"/>
+<circle class="speck" cx="594" cy="385" r="1.0"/>
+<circle class="speck" cx="733" cy="513" r="1.4"/>
+<circle class="speck" cx="386" cy="545" r="1.0"/>
+<circle class="speck" cx="507" cy="97" r="1.3"/>
+<circle class="speck" cx="80" cy="24" r="1.2"/>
+<circle class="speck" cx="447" cy="632" r="1.4"/>
+<circle class="speck" cx="1441" cy="710" r="1.6"/>
+<circle class="speck" cx="1688" cy="421" r="1.3"/>
+<circle class="speck" cx="1891" cy="161" r="1.6"/>
+<circle class="speck" cx="1235" cy="47" r="1.7"/>
+<circle class="speck" cx="1713" cy="678" r="1.6"/>
+<circle class="speck" cx="1559" cy="150" r="1.4"/>
+<circle class="speck" cx="968" cy="902" r="1.6"/>
+<circle class="speck" cx="1587" cy="631" r="1.7"/>
+<circle class="speck" cx="1311" cy="749" r="1.2"/>
+<circle class="speck" cx="60" cy="144" r="1.3"/>
+<circle class="speck" cx="201" cy="903" r="1.4"/>
+<circle class="speck" cx="1205" cy="676" r="1.5"/>
+<circle class="speck" cx="939" cy="4" r="1.6"/>
+<circle class="speck" cx="1437" cy="543" r="1.4"/>
+<circle class="speck" cx="1266" cy="71" r="1.6"/>
+<circle class="speck" cx="484" cy="80" r="1.2"/>
+<circle class="speck" cx="1400" cy="222" r="1.6"/>
+<circle class="speck" cx="1873" cy="533" r="1.3"/>
+<circle class="speck" cx="920" cy="738" r="1.6"/>
+<circle class="speck" cx="1185" cy="694" r="1.1"/>
+<circle class="speck" cx="283" cy="274" r="1.6"/>
+<circle class="speck" cx="584" cy="613" r="1.0"/>
+<circle class="speck" cx="116" cy="290" r="1.5"/>
+<circle class="speck" cx="1329" cy="730" r="1.2"/>
+<circle class="speck" cx="992" cy="502" r="1.4"/>
+<circle class="speck" cx="228" cy="965" r="1.2"/>
+<circle class="speck" cx="1878" cy="1011" r="1.0"/>
+<circle class="speck" cx="881" cy="885" r="1.8"/>
+<circle class="speck" cx="863" cy="290" r="1.2"/>
+<circle class="speck" cx="1816" cy="228" r="1.5"/>
+<circle class="speck" cx="272" cy="566" r="1.8"/>
+<circle class="speck" cx="255" cy="886" r="1.4"/>
+<circle class="speck" cx="1703" cy="760" r="1.2"/>
+<circle class="speck" cx="1724" cy="525" r="1.0"/>
+<circle class="speck" cx="7" cy="531" r="1.4"/>
+<circle class="speck" cx="580" cy="152" r="1.3"/>
+<circle class="speck" cx="607" cy="907" r="1.0"/>
+<circle class="speck" cx="1441" cy="906" r="1.1"/>
+<circle class="speck" cx="1779" cy="770" r="1.7"/>
+<circle class="speck" cx="556" cy="402" r="1.3"/>
+<circle class="speck" cx="1918" cy="636" r="1.3"/>
+<circle class="speck" cx="822" cy="297" r="1.0"/>
+<circle class="speck" cx="195" cy="901" r="1.2"/>
+<circle class="speck" cx="1796" cy="269" r="1.2"/>
+<circle class="speck" cx="981" cy="205" r="1.3"/>
+<circle class="speck" cx="1836" cy="955" r="1.6"/>
+<circle class="speck" cx="1211" cy="986" r="1.8"/>
+<circle class="speck" cx="1055" cy="777" r="1.0"/>
+<circle class="speck" cx="1406" cy="487" r="1.6"/>
+<circle class="speck" cx="1237" cy="309" r="1.0"/>
+<circle class="speck" cx="1779" cy="137" r="1.4"/>
+<circle class="speck" cx="660" cy="322" r="1.6"/>
+<circle class="speck" cx="1874" cy="281" r="1.5"/>
+<circle class="speck" cx="578" cy="602" r="1.3"/>
+<circle class="speck" cx="321" cy="175" r="1.2"/>
+<circle class="speck" cx="1739" cy="537" r="1.2"/>
+<circle class="speck" cx="1740" cy="1076" r="1.4"/>
+<circle class="speck" cx="268" cy="208" r="1.1"/>
+<circle class="speck" cx="657" cy="98" r="1.2"/>
+<circle class="speck" cx="496" cy="615" r="1.7"/>
+<circle class="speck" cx="1439" cy="446" r="1.3"/>
+<circle class="speck" cx="1006" cy="407" r="1.3"/>
+<circle class="speck" cx="119" cy="300" r="1.8"/>
+<circle class="speck" cx="242" cy="544" r="1.5"/>
+<circle class="speck" cx="1657" cy="233" r="1.2"/>
+<circle class="speck" cx="477" cy="432" r="1.4"/>
+<circle class="speck" cx="1832" cy="917" r="1.7"/>
+<circle class="speck" cx="42" cy="35" r="1.6"/>
+<circle class="speck" cx="1720" cy="511" r="1.5"/>
+<circle class="speck" cx="0" cy="423" r="1.7"/>
+<circle class="speck" cx="1585" cy="924" r="1.8"/>
+<circle class="speck" cx="477" cy="118" r="1.1"/>
+<circle class="speck" cx="1003" cy="737" r="1.8"/>
+<circle class="speck" cx="1386" cy="699" r="1.6"/>
+<circle class="speck" cx="878" cy="596" r="1.0"/>
+<circle class="speck" cx="1502" cy="251" r="1.7"/>
+<circle class="speck" cx="1239" cy="328" r="1.1"/>
+<circle class="speck" cx="483" cy="687" r="1.6"/>
+<circle class="speck" cx="215" cy="76" r="1.4"/>
+<circle class="speck" cx="1119" cy="419" r="1.2"/>
+<circle class="speck" cx="1154" cy="11" r="1.2"/>
+<circle class="speck" cx="885" cy="1036" r="1.5"/>
+<circle class="speck" cx="1697" cy="513" r="1.2"/>
+<circle class="speck" cx="474" cy="1037" r="1.6"/>
+<circle class="speck" cx="590" cy="24" r="1.4"/>
+<circle class="speck" cx="1295" cy="454" r="1.2"/>
+<circle class="speck" cx="1281" cy="999" r="1.2"/>
+<circle class="speck" cx="65" cy="365" r="1.3"/>
+<circle class="speck" cx="1311" cy="214" r="1.6"/>
+<circle class="speck" cx="1419" cy="545" r="1.2"/>
+<circle class="speck" cx="1862" cy="337" r="1.7"/>
+<circle class="speck" cx="443" cy="239" r="1.6"/>
+<circle class="speck" cx="566" cy="1028" r="1.4"/>
+<circle class="speck" cx="360" cy="241" r="1.3"/>
+</svg>
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" >
+<polygon class="rail" points="0,236 1920,1028 1920,1156 0,364"/>
+<line class="rail-hi" x1="0" y1="236" x2="1920" y2="1028"/>
+<line class="rail-lo" x1="0" y1="364" x2="1920" y2="1156"/>
+<circle class="sight" cx="240" cy="399.0" r="6"/>
+<circle class="sight" cx="480" cy="498.0" r="6"/>
+<circle class="sight" cx="720" cy="597.0" r="6"/>
+<circle class="sight" cx="1200" cy="795.0" r="6"/>
+<circle class="sight" cx="1440" cy="894.0" r="6"/>
+<circle class="sight" cx="1680" cy="993.0" r="6"/>
+<circle class="pocket" cx="96" cy="339.6" r="38"/>
+<circle class="pocket" cx="960" cy="696.0" r="38"/>
+</svg>
+
+    <div class="cover-text">
+      <p class="kicker">Q3 BRANCH CUP · 2026</p>
+      <h1 class="cover-title">가온리테일<br>3분기 스코어</h1>
+      <p class="cover-sub">5개 지점 · 분기 목표 달성률 기준</p>
+      <p class="cover-foot">영업기획팀 · 2026. 10. 07</p>
+    </div>
+
+    <div class="board">
+      <p class="board-head">지점별 목표 달성률</p>
+      <div class="board-row hero">
+        <span class="board-name">강남점</span>
+        <div class="board-track"><div class="board-fill" style="width:98%"></div></div>
+        <span class="board-pct t-nums">118%</span>
+      </div>
+      <div class="board-row">
+        <span class="board-name">합정점</span>
+        <div class="board-track"><div class="board-fill" style="width:85%"></div></div>
+        <span class="board-pct t-nums">102%</span>
+      </div>
+      <div class="board-row">
+        <span class="board-name">성수점</span>
+        <div class="board-track"><div class="board-fill" style="width:81%"></div></div>
+        <span class="board-pct t-nums">97%</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

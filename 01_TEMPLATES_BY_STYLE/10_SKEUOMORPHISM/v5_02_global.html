@@ -1,4 +1,4 @@
-<!-- @card V5 White Marble · 전역 | 좌측 황동 레일 192px · 대리석 석판 위 파낸 타일 2×2 · 황동 진행 바 | 1920x1080 -->
+<!-- @card V5 Vinyl Sleeve · 전역 | 트랙리스트 헤더 · 좌 트랙 4행 · 우 VU 미터 카드 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -437,218 +437,266 @@ th {
    10_SKEUOMORPHISM — 실물의 재질·두께·조명을 화면에 그대로 옮긴다.
    기획: 00_GUIDES/PLANS/10_SKEUOMORPHISM.md
 
-   05번 뉴모피즘과 다르다: 뉴모는 배경과 같은 색 단색, 여기는 실제 재질 텍스처 + 다색.
-   모든 표면에 (1) 재질 텍스처 (2) 베벨 (3) 드롭섀도 3종을 넣는다.
-   셋 중 하나라도 빠지면 재질이 살지 않는다. 광원은 좌상단 고정.
-   색은 전부 토큰 — 레이아웃 CSS에는 var()만 쓴다.
+   V4 Delft Porcelain : 쿨 라이트 · 코발트 타일 (상하 분할)
+   V5 Vinyl Sleeve    : 뉴트럴 다크 · 차콜 LP 원반 (오프셋 원형 분할)
+   V6 Felt Table      : 그린 펠트 · 나무 레일 (대각 분할)
+
+   모든 표면에 (1) 재질 텍스처 (2) 베벨(두께 가장자리) (3) 드롭섀도 3종을 넣는다.
+   광원은 좌상단 고정. 색은 레이아웃 CSS에 쓰지 않고 이 블록의 토큰으로만 받는다.
    ========================================================================== */
 
-/* --- 공통 — 베벨(상단 하이라이트 / 하단 섀도) · 라운드 --------------- */
+/* --- 공통: 세 베리에이션이 같이 쓰는 두께 규칙 ----------------------- */
 .v4, .v5, .v6 {
+  --mat-bevel: 2px;                 /* 가장자리 베벨 두께 */
+  --mat-lip: 4px;                   /* 접시·디스크의 아랫면 두께 */
+}
+
+/* --- V4 Delft Porcelain — 코발트 타일 + 유약 흰 접시 ------------------ */
+.v4 {
+  --color-bg: #eef3f8;              /* 포슬린 */
+  --color-surface: #fbfcfe;         /* 유약 흰색 */
+  --color-surface-alt: #dce6f2;     /* 연한 유약 */
+  --color-text: #17243a;
+  --color-text-muted: #4a5f7f;
+  --color-text-invert: #fbfcfe;
+  --color-accent: #1f4e8c;          /* 코발트 안료 */
+  --color-accent-sub: #8fb0d6;
+  --color-border: #b9cbe0;
+
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 16px;
-  --v-hi: rgba(255, 255, 255, 0.50);   /* 상단 1px 하이라이트 */
-  --v-lo: rgba(0, 0, 0, 0.45);         /* 하단 1px 섀도 */
-  --v-shade: rgba(0, 0, 0, 0.40);      /* 면 위 어두운 덧칠 */
-  --v-grain-op: 0.18;                  /* 재질 노이즈 불투명도 */
+  --radius-lg: 12px;
+  --shadow-sm: 0 4px 12px rgba(23, 36, 58, 0.16);
+  --shadow-md: 0 10px 24px rgba(23, 36, 58, 0.24);
+
+  --v-tile: #1f4e8c;
+  --v-plate-lip: #b9cbe0;
 }
 
-/* --- V4 Green Felt — 펠트 카드테이블 + 월넛 레일 + 카드·칩 ----------- */
-.v4 {
-  --color-bg: #1a5037;               /* 펠트 */
-  --color-surface: #f7f2e6;          /* 카드 용지 */
-  --color-surface-alt: #4b2a18;      /* 어두운 월넛 */
-  --color-text: #14281d;
-  --color-text-muted: #45584c;
-  --color-text-invert: #f3ecd6;
-  --color-accent: #e0b84f;           /* 금 */
-  --color-accent-sub: #b3262e;       /* 칩 레드 */
-  --color-border: #c9a24a;
-
-  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.50);
-
-  --v-felt-lit: #2a7350;
-  --v-felt-deep: #123a27;
-  --v-wood: #6a3b20;
-  --v-wood-lo: #3a1f10;
-  --v-wood-tex: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0.10) 5px, rgba(0, 0, 0, 0.10) 6px, rgba(255, 255, 255, 0.04) 6px, rgba(255, 255, 255, 0.04) 9px);
-  --v-wood-tex-v: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0.10) 5px, rgba(0, 0, 0, 0.10) 6px, rgba(255, 255, 255, 0.04) 6px, rgba(255, 255, 255, 0.04) 9px);
-  --v-brass: linear-gradient(180deg, #f0d98a 0%, #c9a24a 45%, #7d5f1f 100%);
-  --v-ink: #14281d;
-  --v-inlay: rgba(224, 184, 79, 0.55);
-  --v-card-face: linear-gradient(160deg, #fffaf0 0%, #f7f2e6 55%, #e9e1cc 100%);
-  --v-chip-white: #f7f2e6;
-  --v-chip-black: #1b1b1b;
-  --v-line: rgba(20, 40, 29, 0.28);
-}
-
-/* --- V5 White Marble — 대리석 + 황동 명판 + 음각 --------------------- */
+/* --- V5 Vinyl Sleeve — 차콜 바탕 + 앰버 레이블 + 크롬 ---------------- */
 .v5 {
-  --color-bg: #e9e7e2;               /* 대리석 */
-  --color-surface: #f6f4ef;          /* 밝은 석판 */
-  --color-surface-alt: #cfcac0;      /* 어두운 석판 */
-  --color-text: #25231f;
-  --color-text-muted: #4f4b44;
-  --color-text-invert: #f6f4ef;
-  --color-accent: #765818;           /* 진한 황동 */
-  --color-accent-sub: #c09a45;       /* 황동 */
-  --color-border: #b9b4aa;
+  --color-bg: #16161a;              /* 차콜 슬리브 */
+  --color-surface: #23232a;
+  --color-surface-alt: #2a2a31;
+  --color-text: #f0eee8;
+  --color-text-muted: #b4b2aa;
+  --color-text-invert: #16161a;
+  --color-accent: #e8a33d;          /* 앰버 레이블 */
+  --color-accent-sub: #c4c2bc;      /* 크롬 */
+  --color-border: #3a3a44;
 
-  --font-sans: "Noto Serif KR", Georgia, serif;
-  --shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.50);
+  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.60);
 
-  --v-marble-hi: #f6f4f0;
-  --v-marble-lo: #d6d2ca;
-  --v-vein: #aaa49a;
-  --v-groove: #bdb8ad;
-  --v-brass-flat: linear-gradient(180deg, #ecd68e 0%, #c09a45 50%, #8d6e2a 100%);
-  --v-brass-brushed: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0px, rgba(255, 255, 255, 0.10) 1px, rgba(0, 0, 0, 0.06) 1px, rgba(0, 0, 0, 0.06) 3px);
-  --v-brass-rail: linear-gradient(90deg, #8d6e2a 0%, #d9bd6c 22%, #c09a45 60%, #8d6e2a 100%);
-  --v-brass-ink: #2a2113;
-  --v-screw: #dcc274;
-  --v-engrave-hi: rgba(255, 255, 255, 0.90);
-  --v-engrave-lo: rgba(0, 0, 0, 0.28);
-  --v-recess: #dfdcd4;
+  --v-disc: #0e0e11;
+  --v-groove: #2b2b33;
+  --v-chrome: #c4c2bc;
 }
 
-/* --- V6 Navy Cloth — 청색 천 하드커버 + 은박 + 펼친 책 --------------- */
+/* --- V6 Felt Table — 그린 펠트 + 나무 레일 + 황동 ---------------------- */
 .v6 {
-  --color-bg: #1c2742;               /* 네이비 천 */
-  --color-surface: #efe9da;          /* 책 속지 */
-  --color-surface-alt: #141c30;      /* 책등 */
-  --color-text: #26221a;
-  --color-text-muted: #5c5546;
-  --color-text-invert: #e6eaf2;
-  --color-accent: #c23b32;           /* 가름끈 레드 */
-  --color-accent-sub: #c9d1e0;       /* 은박 */
-  --color-border: #3b4a70;
+  --color-bg: #1e5b47;              /* 펠트 */
+  --color-surface: #0f3b2e;         /* 쿠션 안쪽 */
+  --color-surface-alt: #7a4e2d;     /* 나무 레일 */
+  --color-text: #f3eedc;
+  --color-text-muted: #b9d3c6;
+  --color-text-invert: #0f3b2e;
+  --color-accent: #d8b45a;          /* 황동 */
+  --color-accent-sub: #a7d0c4;
+  --color-border: #3c7a63;
 
-  --font-sans: "Noto Serif KR", Georgia, serif;
-  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.55);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 22px rgba(0, 0, 0, 0.45);
 
-  --v-navy-lit: #2b3a62;
-  --v-weave: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0px, rgba(255, 255, 255, 0.045) 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 4px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 4px);
-  --v-foil: #c9d1e0;
-  --v-stitch: #8d9ac0;
-  --v-page-gutter-l: linear-gradient(90deg, rgba(60, 45, 20, 0) 0%, rgba(60, 45, 20, 0.30) 100%);
-  --v-page-gutter-r: linear-gradient(90deg, rgba(60, 45, 20, 0.30) 0%, rgba(60, 45, 20, 0) 100%);
-  --v-page-edge: #d9d0bb;
-  --v-groove: #d3c9b0;
-  --v-groove-fill: #e3dbc6;
+  --v-wood: #7a4e2d;
+  --v-wood-hi: #a06a3c;
+  --v-wood-lo: #4d2f18;
+  --v-pocket: #0a1f18;
+  --v-speck: #2a6e57;
 }
   </style>
   <style>
 
-    /* 대리석: 좌상단이 밝은 면 + 맥(SVG) + 미세 노이즈 */
-    .marble { position: absolute; inset: 0; background: linear-gradient(135deg, var(--v-marble-hi) 0%, var(--color-bg) 48%, var(--v-marble-lo) 100%); }
-    .veins { position: absolute; inset: 0; opacity: 0.55; }
-    .vein { fill: none; stroke: var(--v-vein); stroke-linecap: round; }
-    .vein-1 { stroke-width: 3; }
-    .vein-2 { stroke-width: 1.5; }
-    .vein-3 { stroke-width: 1; }
-    .grain { position: absolute; inset: 0; opacity: 0.10; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); }
-    .screw-bg { fill: var(--v-screw); }
-    .screw-ring { fill: none; stroke: var(--v-lo); stroke-width: 2; }
-    .screw-slot { stroke: var(--v-brass-ink); stroke-width: 3; stroke-linecap: round; }
-    .screw { flex: none; }
+    /* 트랙리스트 헤더 + 좌측 트랙 목록 · 우측 VU 미터 카드 */
+    .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .groove { fill: none; stroke: var(--v-groove); stroke-width: 2px; }
 
-    /* 좌측 황동 레일 192px */
-    .rail { position: absolute; left: 0; top: 0; bottom: 0; width: 192px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: var(--sp-8) var(--sp-4) var(--sp-8); background-color: var(--color-accent-sub); background-image: var(--v-brass-brushed), var(--v-brass-rail); border-right: 2px solid var(--v-lo); border-left: 1px solid var(--v-hi); box-shadow: var(--shadow-md); color: var(--v-brass-ink); }
-    .rail-top { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
-    .rail-no { font-size: var(--fs-h1); font-weight: var(--fw-bold); line-height: var(--lh-tight); text-shadow: 0 2px 0 var(--v-hi); }
-    .rail-name { font-size: var(--fs-body-m); font-weight: var(--fw-bold); text-align: center; text-shadow: 0 1px 0 var(--v-hi); }
-    .rail-bottom { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
-    .rail-page { font-size: var(--fs-body-m); font-weight: var(--fw-bold); text-shadow: 0 1px 0 var(--v-hi); }
-    .rail-screw-t { position: absolute; top: 40px; left: 82px; }
-    .rail-screw-b { position: absolute; bottom: 40px; left: 82px; }
+    .head {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1920px;
+      height: 200px;
+      background: var(--color-surface);
+      border-bottom: var(--border-w-thick) solid var(--v-groove);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--slide-pad) var(--slide-pad) 0;
+    }
+    .head-left { display: flex; align-items: center; gap: var(--sp-5); }
+    .mini-disc {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--v-disc);
+      border: var(--mat-bevel) solid var(--v-groove);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mini-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--color-accent); }
+    .head-title { font-size: var(--fs-h2); font-weight: 600; color: var(--color-text); }
+    .track-no { font-family: var(--font-mono); font-size: var(--fs-body-m); color: var(--color-accent-sub); }
 
-    .slab { position: absolute; left: 192px; right: 0; top: 0; bottom: 0; display: flex; flex-direction: column; gap: var(--sp-6); padding: var(--sp-8); }
-    .lead { font-size: var(--fs-h1); font-weight: var(--fw-bold); line-height: var(--lh-heading); letter-spacing: var(--ls-tight); color: var(--color-text); text-shadow: 0 2px 0 var(--v-engrave-hi); }
-    .tiles { flex: 1; display: flex; flex-direction: column; gap: var(--sp-5); }
-    .tile-row { flex: 1; display: flex; gap: var(--sp-5); }
-    /* 파낸 석판: 위·왼쪽 어두운 가장자리, 아래·오른쪽 밝은 가장자리 */
-    .tile { flex: 1; position: relative; display: flex; flex-direction: column; justify-content: center; gap: var(--sp-2); padding: var(--sp-4) var(--sp-5) var(--sp-4) var(--sp-6); background: var(--v-recess); border-radius: var(--radius-sm); border-top: 3px solid var(--v-engrave-lo); border-left: 3px solid var(--v-engrave-lo); border-bottom: 2px solid var(--v-engrave-hi); border-right: 2px solid var(--v-engrave-hi); box-shadow: 0 2px 0 var(--v-engrave-hi); }
-    .tile-mark { position: absolute; left: 0; top: 24px; bottom: 24px; width: 8px; background: var(--v-brass-flat); border-radius: 0 4px 4px 0; border-right: 1px solid var(--v-lo); }
-    .tile-name { font-size: var(--fs-body-m); font-weight: var(--fw-bold); color: var(--color-text-muted); letter-spacing: var(--ls-wide); }
-    .tile-fig { font-size: var(--fs-h2); font-weight: var(--fw-bold); line-height: var(--lh-tight); color: var(--color-text); text-shadow: 0 1px 0 var(--v-engrave-hi); }
-    .tile-fig-em { color: var(--color-accent); }
-    .tile-unit { font-size: var(--fs-body-m); font-weight: var(--fw-regular); color: var(--color-text-muted); margin-left: var(--sp-2); }
-    .tile-desc { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .body {
+      position: absolute;
+      left: var(--slide-pad);
+      right: var(--slide-pad);
+      top: 248px;
+      bottom: var(--slide-pad);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-6);
+    }
+    .lead {
+      font-size: var(--fs-h1);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: var(--ls-tight);
+      color: var(--color-text);
+    }
+    .cols { flex: 1; display: flex; gap: var(--sp-6); min-height: 0; }
 
-    .budget { flex: none; display: flex; align-items: center; gap: var(--sp-5); }
-    .budget-label { flex: none; width: 240px; font-size: var(--fs-body-m); font-weight: var(--fw-bold); }
-    .budget-bar { flex: 1; height: 32px; padding: 4px; background: var(--v-recess); border-radius: var(--radius-full); border-top: 3px solid var(--v-engrave-lo); border-bottom: 2px solid var(--v-engrave-hi); }
-    .budget-fill { height: 100%; background: var(--v-brass-flat); border-radius: var(--radius-full); border-top: 1px solid var(--v-hi); border-bottom: 1px solid var(--v-lo); }
-    .budget-no { flex: none; width: 96px; text-align: right; font-size: var(--fs-h3); font-weight: var(--fw-bold); color: var(--color-accent); }
+    .tracks { flex: 1.6; display: flex; flex-direction: column; }
+    .track {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      border-bottom: var(--border-w-thick) solid var(--v-groove);
+    }
+    .track:first-child { border-top: var(--border-w-thick) solid var(--v-groove); }
+    .track-id { width: 72px; font-family: var(--font-mono); font-size: var(--fs-body-m); color: var(--color-accent); }
+    .track-body { flex: 1; display: flex; flex-direction: column; gap: var(--sp-1); }
+    .track-name { font-size: var(--fs-h3); font-weight: 600; color: var(--color-text); }
+    .track-desc { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .track-time { font-family: var(--font-mono); font-size: var(--fs-body-m); color: var(--color-text-muted); }
+
+    .meter {
+      flex: 1;
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--sp-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+    .meter-label { font-size: var(--fs-body-m); color: var(--color-text-muted); letter-spacing: var(--ls-wide); }
+    .vu { width: 100%; height: 200px; flex-shrink: 0; }
+    .vu-lit { fill: var(--color-accent-sub); }
+    .vu-off { fill: var(--v-groove); }
+    .meter-value {
+      font-size: var(--fs-display);
+      font-weight: 700;
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-accent);
+    }
+    .meter-note { font-size: var(--fs-caption); line-height: 1.5; color: var(--color-text-muted); margin-top: auto; }
   </style>
 </head>
 <body>
   <div class="slide v5">
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" >
+<circle class="groove" cx="1920" cy="1080" r="300"/>
+<circle class="groove" cx="1920" cy="1080" r="360"/>
+<circle class="groove" cx="1920" cy="1080" r="420"/>
+<circle class="groove" cx="1920" cy="1080" r="480"/>
+<circle class="groove" cx="1920" cy="1080" r="540"/>
+<circle class="groove" cx="1920" cy="1080" r="600"/>
+<circle class="groove" cx="1920" cy="1080" r="660"/>
+<circle class="groove" cx="1920" cy="1080" r="720"/>
+<circle class="groove" cx="1920" cy="1080" r="780"/>
+<circle class="groove" cx="1920" cy="1080" r="840"/>
+<circle class="groove" cx="1920" cy="1080" r="900"/>
+</svg>
 
-    <div class="marble"></div>
-    <svg class="veins" width="1920" height="1080" viewBox="0 0 1920 1080">
-      <path class="vein vein-1" d="M-40 220 C 260 140, 420 360, 700 300 S 1180 60, 1500 190 S 1800 330, 1980 240"/>
-      <path class="vein vein-2" d="M120 -20 C 220 160, 180 300, 360 420 S 620 560, 640 700"/>
-      <path class="vein vein-2" d="M1240 -20 C 1180 120, 1320 260, 1260 380 S 1380 560, 1500 640"/>
-      <path class="vein vein-3" d="M-20 520 C 200 480, 380 620, 560 560 S 880 420, 1040 520"/>
-      <path class="vein vein-3" d="M1000 700 C 1180 620, 1340 760, 1500 700 S 1800 620, 1940 700"/>
-    </svg>
-    <div class="grain"></div>
-
-    <div class="rail">
-      <span class="rail-screw-t"><svg class="screw" width="28" height="28" viewBox="0 0 28 28"><circle class="screw-bg" cx="14" cy="14" r="12"/><circle class="screw-ring" cx="14" cy="14" r="12"/><path class="screw-slot" d="M8 14h12" transform="rotate(30 14 14)"/></svg></span>
-      <div class="rail-top">
-        <p class="rail-no t-nums">03</p>
-        <p class="rail-name">사업 성과</p>
+    <header class="head">
+      <div class="head-left">
+        <div class="mini-disc"><span class="mini-dot"></span></div>
+        <h2 class="head-title">로고 사운드 기준</h2>
       </div>
-      <div class="rail-bottom">
-        <p class="rail-page t-nums">03 / 20</p>
-      </div>
-      <span class="rail-screw-b"><svg class="screw" width="28" height="28" viewBox="0 0 28 28"><circle class="screw-bg" cx="14" cy="14" r="12"/><circle class="screw-ring" cx="14" cy="14" r="12"/><path class="screw-slot" d="M8 14h12" transform="rotate(-50 14 14)"/></svg></span>
-    </div>
+      <p class="track-no">SIDE A · 03 / 24</p>
+    </header>
 
-    <div class="slab">
-      <h2 class="lead">네 개 사업 모두<br>연초 목표를 넘겼다.</h2>
+    <div class="body">
+      <h1 class="lead">짧은 소리일수록 오래 기억에 남는다</h1>
 
-      <div class="tiles">
-        <div class="tile-row">
-          <div class="tile">
-            <span class="tile-mark"></span>
-            <p class="tile-name">전시 관람객</p>
-            <p class="tile-fig tile-fig-em t-nums">128,400<span class="tile-unit">명</span></p>
-            <p class="tile-desc">전년 대비 18% 늘었다.</p>
+      <div class="cols">
+        <div class="tracks">
+          <div class="track">
+            <span class="track-id">A1</span>
+            <div class="track-body">
+              <p class="track-name">첫 음 5초 규칙</p>
+              <p class="track-desc">로고 사운드는 5초 안에 끝낸다.</p>
+            </div>
+            <span class="track-time">0:05</span>
           </div>
-          <div class="tile">
-            <span class="tile-mark"></span>
-            <p class="tile-name">교육 프로그램</p>
-            <p class="tile-fig t-nums">9,620<span class="tile-unit">명</span></p>
-            <p class="tile-desc">학교 연계 수업이 절반을 차지했다.</p>
+          <div class="track">
+            <span class="track-id">A2</span>
+            <div class="track-body">
+              <p class="track-name">반복 간격</p>
+              <p class="track-desc">같은 음은 2초 이상 띄워 재생한다.</p>
+            </div>
+            <span class="track-time">2:00</span>
+          </div>
+          <div class="track">
+            <span class="track-id">A3</span>
+            <div class="track-body">
+              <p class="track-name">음량 기준</p>
+              <p class="track-desc">광고 본편보다 6dB 낮게 맞춘다.</p>
+            </div>
+            <span class="track-time">−6dB</span>
+          </div>
+          <div class="track">
+            <span class="track-id">A4</span>
+            <div class="track-body">
+              <p class="track-name">사용 채널</p>
+              <p class="track-desc">매장·앱·영상에 같은 음원을 쓴다.</p>
+            </div>
+            <span class="track-time">3 CH</span>
           </div>
         </div>
-        <div class="tile-row">
-          <div class="tile">
-            <span class="tile-mark"></span>
-            <p class="tile-name">기증 유물</p>
-            <p class="tile-fig t-nums">312<span class="tile-unit">점</span></p>
-            <p class="tile-desc">시민 기증 87건이 포함됐다.</p>
-          </div>
-          <div class="tile">
-            <span class="tile-mark"></span>
-            <p class="tile-name">지역 협력기관</p>
-            <p class="tile-fig t-nums">47<span class="tile-unit">곳</span></p>
-            <p class="tile-desc">구립 도서관과 박물관이 새로 참여했다.</p>
-          </div>
-        </div>
-      </div>
 
-      <div class="budget">
-        <p class="budget-label">연간 예산 집행률</p>
-        <div class="budget-bar"><div class="budget-fill" style="width:72%"></div></div>
-        <p class="budget-no t-nums">72%</p>
+        <div class="meter">
+          <p class="meter-label">3개월 브랜드 회상률 차이</p>
+          <svg class="vu" viewBox="0 0 480 200" aria-hidden="true">
+<rect class="vu-lit" x="4" y="160" width="32" height="40"/>
+<rect class="vu-lit" x="44" y="138" width="32" height="62"/>
+<rect class="vu-lit" x="84" y="116" width="32" height="84"/>
+<rect class="vu-lit" x="124" y="80" width="32" height="120"/>
+<rect class="vu-lit" x="164" y="104" width="32" height="96"/>
+<rect class="vu-lit" x="204" y="50" width="32" height="150"/>
+<rect class="vu-lit" x="244" y="82" width="32" height="118"/>
+<rect class="vu-lit" x="284" y="30" width="32" height="170"/>
+<rect class="vu-off" x="324" y="68" width="32" height="132"/>
+<rect class="vu-off" x="364" y="112" width="32" height="88"/>
+<rect class="vu-off" x="404" y="60" width="32" height="140"/>
+<rect class="vu-off" x="444" y="90" width="32" height="110"/>
+</svg>
+          <p class="meter-value t-nums">+18%p</p>
+          <p class="meter-note">로고 음원 노출 그룹과 미노출 그룹 비교 (n=1,200, 2026. 03 조사)</p>
+        </div>
       </div>
     </div>
   </div>

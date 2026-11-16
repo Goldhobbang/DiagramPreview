@@ -1,4 +1,4 @@
-<!-- @card V4 Green Felt · 표지 | 펠트 카드테이블 · 월넛 레일 · 카드와 칩 소품 | 1920x1080 -->
+<!-- @card V4 Delft Porcelain · 표지 | 코발트 타일 상단 + 포슬린 하단 상하 분할 · 유약 흰 접시 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -437,194 +437,436 @@ th {
    10_SKEUOMORPHISM — 실물의 재질·두께·조명을 화면에 그대로 옮긴다.
    기획: 00_GUIDES/PLANS/10_SKEUOMORPHISM.md
 
-   05번 뉴모피즘과 다르다: 뉴모는 배경과 같은 색 단색, 여기는 실제 재질 텍스처 + 다색.
-   모든 표면에 (1) 재질 텍스처 (2) 베벨 (3) 드롭섀도 3종을 넣는다.
-   셋 중 하나라도 빠지면 재질이 살지 않는다. 광원은 좌상단 고정.
-   색은 전부 토큰 — 레이아웃 CSS에는 var()만 쓴다.
+   V4 Delft Porcelain : 쿨 라이트 · 코발트 타일 (상하 분할)
+   V5 Vinyl Sleeve    : 뉴트럴 다크 · 차콜 LP 원반 (오프셋 원형 분할)
+   V6 Felt Table      : 그린 펠트 · 나무 레일 (대각 분할)
+
+   모든 표면에 (1) 재질 텍스처 (2) 베벨(두께 가장자리) (3) 드롭섀도 3종을 넣는다.
+   광원은 좌상단 고정. 색은 레이아웃 CSS에 쓰지 않고 이 블록의 토큰으로만 받는다.
    ========================================================================== */
 
-/* --- 공통 — 베벨(상단 하이라이트 / 하단 섀도) · 라운드 --------------- */
+/* --- 공통: 세 베리에이션이 같이 쓰는 두께 규칙 ----------------------- */
 .v4, .v5, .v6 {
+  --mat-bevel: 2px;                 /* 가장자리 베벨 두께 */
+  --mat-lip: 4px;                   /* 접시·디스크의 아랫면 두께 */
+}
+
+/* --- V4 Delft Porcelain — 코발트 타일 + 유약 흰 접시 ------------------ */
+.v4 {
+  --color-bg: #eef3f8;              /* 포슬린 */
+  --color-surface: #fbfcfe;         /* 유약 흰색 */
+  --color-surface-alt: #dce6f2;     /* 연한 유약 */
+  --color-text: #17243a;
+  --color-text-muted: #4a5f7f;
+  --color-text-invert: #fbfcfe;
+  --color-accent: #1f4e8c;          /* 코발트 안료 */
+  --color-accent-sub: #8fb0d6;
+  --color-border: #b9cbe0;
+
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 16px;
-  --v-hi: rgba(255, 255, 255, 0.50);   /* 상단 1px 하이라이트 */
-  --v-lo: rgba(0, 0, 0, 0.45);         /* 하단 1px 섀도 */
-  --v-shade: rgba(0, 0, 0, 0.40);      /* 면 위 어두운 덧칠 */
-  --v-grain-op: 0.18;                  /* 재질 노이즈 불투명도 */
+  --radius-lg: 12px;
+  --shadow-sm: 0 4px 12px rgba(23, 36, 58, 0.16);
+  --shadow-md: 0 10px 24px rgba(23, 36, 58, 0.24);
+
+  --v-tile: #1f4e8c;
+  --v-plate-lip: #b9cbe0;
 }
 
-/* --- V4 Green Felt — 펠트 카드테이블 + 월넛 레일 + 카드·칩 ----------- */
-.v4 {
-  --color-bg: #1a5037;               /* 펠트 */
-  --color-surface: #f7f2e6;          /* 카드 용지 */
-  --color-surface-alt: #4b2a18;      /* 어두운 월넛 */
-  --color-text: #14281d;
-  --color-text-muted: #45584c;
-  --color-text-invert: #f3ecd6;
-  --color-accent: #e0b84f;           /* 금 */
-  --color-accent-sub: #b3262e;       /* 칩 레드 */
-  --color-border: #c9a24a;
-
-  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.50);
-
-  --v-felt-lit: #2a7350;
-  --v-felt-deep: #123a27;
-  --v-wood: #6a3b20;
-  --v-wood-lo: #3a1f10;
-  --v-wood-tex: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0.10) 5px, rgba(0, 0, 0, 0.10) 6px, rgba(255, 255, 255, 0.04) 6px, rgba(255, 255, 255, 0.04) 9px);
-  --v-wood-tex-v: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0.10) 5px, rgba(0, 0, 0, 0.10) 6px, rgba(255, 255, 255, 0.04) 6px, rgba(255, 255, 255, 0.04) 9px);
-  --v-brass: linear-gradient(180deg, #f0d98a 0%, #c9a24a 45%, #7d5f1f 100%);
-  --v-ink: #14281d;
-  --v-inlay: rgba(224, 184, 79, 0.55);
-  --v-card-face: linear-gradient(160deg, #fffaf0 0%, #f7f2e6 55%, #e9e1cc 100%);
-  --v-chip-white: #f7f2e6;
-  --v-chip-black: #1b1b1b;
-  --v-line: rgba(20, 40, 29, 0.28);
-}
-
-/* --- V5 White Marble — 대리석 + 황동 명판 + 음각 --------------------- */
+/* --- V5 Vinyl Sleeve — 차콜 바탕 + 앰버 레이블 + 크롬 ---------------- */
 .v5 {
-  --color-bg: #e9e7e2;               /* 대리석 */
-  --color-surface: #f6f4ef;          /* 밝은 석판 */
-  --color-surface-alt: #cfcac0;      /* 어두운 석판 */
-  --color-text: #25231f;
-  --color-text-muted: #4f4b44;
-  --color-text-invert: #f6f4ef;
-  --color-accent: #765818;           /* 진한 황동 */
-  --color-accent-sub: #c09a45;       /* 황동 */
-  --color-border: #b9b4aa;
+  --color-bg: #16161a;              /* 차콜 슬리브 */
+  --color-surface: #23232a;
+  --color-surface-alt: #2a2a31;
+  --color-text: #f0eee8;
+  --color-text-muted: #b4b2aa;
+  --color-text-invert: #16161a;
+  --color-accent: #e8a33d;          /* 앰버 레이블 */
+  --color-accent-sub: #c4c2bc;      /* 크롬 */
+  --color-border: #3a3a44;
 
-  --font-sans: "Noto Serif KR", Georgia, serif;
-  --shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.50);
+  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.60);
 
-  --v-marble-hi: #f6f4f0;
-  --v-marble-lo: #d6d2ca;
-  --v-vein: #aaa49a;
-  --v-groove: #bdb8ad;
-  --v-brass-flat: linear-gradient(180deg, #ecd68e 0%, #c09a45 50%, #8d6e2a 100%);
-  --v-brass-brushed: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0px, rgba(255, 255, 255, 0.10) 1px, rgba(0, 0, 0, 0.06) 1px, rgba(0, 0, 0, 0.06) 3px);
-  --v-brass-rail: linear-gradient(90deg, #8d6e2a 0%, #d9bd6c 22%, #c09a45 60%, #8d6e2a 100%);
-  --v-brass-ink: #2a2113;
-  --v-engrave-hi: rgba(255, 255, 255, 0.90);
-  --v-engrave-lo: rgba(0, 0, 0, 0.28);
-  --v-recess: #dfdcd4;
+  --v-disc: #0e0e11;
+  --v-groove: #2b2b33;
+  --v-chrome: #c4c2bc;
 }
 
-/* --- V6 Navy Cloth — 청색 천 하드커버 + 은박 + 펼친 책 --------------- */
+/* --- V6 Felt Table — 그린 펠트 + 나무 레일 + 황동 ---------------------- */
 .v6 {
-  --color-bg: #1c2742;               /* 네이비 천 */
-  --color-surface: #efe9da;          /* 책 속지 */
-  --color-surface-alt: #141c30;      /* 책등 */
-  --color-text: #26221a;
-  --color-text-muted: #5c5546;
-  --color-text-invert: #e6eaf2;
-  --color-accent: #c23b32;           /* 가름끈 레드 */
-  --color-accent-sub: #c9d1e0;       /* 은박 */
-  --color-border: #3b4a70;
+  --color-bg: #1e5b47;              /* 펠트 */
+  --color-surface: #0f3b2e;         /* 쿠션 안쪽 */
+  --color-surface-alt: #7a4e2d;     /* 나무 레일 */
+  --color-text: #f3eedc;
+  --color-text-muted: #b9d3c6;
+  --color-text-invert: #0f3b2e;
+  --color-accent: #d8b45a;          /* 황동 */
+  --color-accent-sub: #a7d0c4;
+  --color-border: #3c7a63;
 
-  --font-sans: "Noto Serif KR", Georgia, serif;
-  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.55);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 22px rgba(0, 0, 0, 0.45);
 
-  --v-navy-lit: #2b3a62;
-  --v-weave: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0px, rgba(255, 255, 255, 0.045) 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 4px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 4px);
-  --v-foil: #c9d1e0;
-  --v-stitch: #8d9ac0;
-  --v-page-gutter-l: linear-gradient(90deg, rgba(60, 45, 20, 0) 0%, rgba(60, 45, 20, 0.30) 100%);
-  --v-page-gutter-r: linear-gradient(90deg, rgba(60, 45, 20, 0.30) 0%, rgba(60, 45, 20, 0) 100%);
-  --v-page-edge: #d9d0bb;
-  --v-groove: #d3c9b0;
-  --v-groove-fill: #e3dbc6;
+  --v-wood: #7a4e2d;
+  --v-wood-hi: #a06a3c;
+  --v-wood-lo: #4d2f18;
+  --v-pocket: #0a1f18;
+  --v-speck: #2a6e57;
 }
   </style>
   <style>
 
-    /* 펠트 + 좌상단 광원 + 재질 노이즈 */
-    .felt { position: absolute; inset: 0; background: radial-gradient(ellipse at 28% 22%, var(--v-felt-lit) 0%, var(--color-bg) 52%, var(--v-felt-deep) 100%); }
-    .grain { position: absolute; inset: 0; opacity: var(--v-grain-op); pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.55' numOctaves='5'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    /* 상단 코발트 타일 면 + 하단 포슬린 — 수평 상하 분할 */
+    .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .tile { fill: var(--v-tile); stroke: var(--color-surface); stroke-width: 4px; }
+    .motif { fill: var(--color-surface); }
+    .ring { fill: none; stroke: var(--color-surface); stroke-width: 6px; }
+    .dot { fill: var(--color-surface); }
+    .edge { fill: var(--v-tile); }
 
-    /* 칩 SVG 색 */
-    .chip-red, .chip-c-red { fill: var(--color-accent-sub); }
-    .chip-white, .chip-c-white { fill: var(--v-chip-white); }
-    .chip-black { fill: var(--v-chip-black); }
-    .chip-edge { fill: var(--v-lo); }
-    .chip-mark { fill: var(--v-chip-white); }
-    .chip-ring { stroke: var(--v-hi); stroke-width: 2; }
-    .chip-gloss { fill: var(--v-hi); fill-opacity: 0.22; }
-    .chip-suit { fill: var(--color-accent-sub); }
-    .suit-spade, .suit-heart, .suit-diamond { flex: none; }
+    /* 유약 흰 접시 — 타일 면과 포슬린 경계에 걸친다 */
+    .plate {
+      position: absolute;
+      left: 1200px;
+      top: 240px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border-bottom: var(--mat-lip) solid var(--v-plate-lip);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .plate-num { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); }
+    .plate-big {
+      font-size: 180px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: var(--ls-tight);
+      color: var(--color-accent);
+    }
+    .plate-unit { font-size: var(--fs-body-l); color: var(--color-text); }
 
-    /* 월넛 레일 4면 — 가로/세로 결 */
-    .rail-top, .rail-bottom { position: absolute; left: 0; right: 0; height: 48px; background-color: var(--v-wood); background-image: var(--v-wood-tex); }
-    .rail-left, .rail-right { position: absolute; top: 48px; bottom: 48px; width: 48px; background-color: var(--v-wood); background-image: var(--v-wood-tex-v); }
-    .rail-top { top: 0; border-bottom: 2px solid var(--v-wood-lo); border-top: 1px solid var(--v-hi); }
-    .rail-bottom { bottom: 0; border-top: 2px solid var(--v-wood-lo); }
-    .rail-left { left: 0; border-right: 2px solid var(--v-wood-lo); border-left: 1px solid var(--v-hi); }
-    .rail-right { right: 0; border-left: 2px solid var(--v-wood-lo); }
-    .rail-shadow { position: absolute; inset: 48px; box-shadow: inset 0 0 32px var(--v-shade); pointer-events: none; }
-    /* 금실 상감 */
-    .inlay { position: absolute; inset: 72px; border: 2px solid var(--v-inlay); border-radius: var(--radius-sm); pointer-events: none; }
-
-    .stage { position: absolute; inset: 48px; padding: var(--sp-6); display: flex; align-items: center; gap: var(--sp-7); }
-    .copy { flex: 1; display: flex; flex-direction: column; gap: var(--sp-5); }
-    .kicker { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-body-m); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); color: var(--color-accent); }
-    .kicker-bar { width: 64px; height: 4px; background: var(--v-brass); border-radius: 2px; }
-    .cover-title { font-size: var(--fs-display); line-height: var(--lh-tight); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight); color: var(--color-text-invert); text-shadow: 0 4px 0 var(--v-shade); }
-    .cover-sub { font-size: var(--fs-body-l); color: var(--color-text-invert); }
-    .plate { align-self: flex-start; display: flex; align-items: center; gap: var(--sp-4); padding: var(--sp-3) var(--sp-5); background: var(--v-brass); border-radius: var(--radius-sm); border-top: 1px solid var(--v-hi); border-bottom: 1px solid var(--v-lo); box-shadow: var(--shadow-sm); color: var(--v-ink); font-size: var(--fs-body-m); font-weight: var(--fw-semibold); }
-    .plate-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--v-wood-lo); }
-
-    /* 테이블 위 소품 */
-    .props { position: relative; flex: none; width: 720px; height: 744px; }
-    .pcard { position: absolute; width: 264px; height: 368px; background: var(--v-card-face); border-radius: var(--radius-lg); border-top: 1px solid var(--v-hi); border-bottom: 1px solid var(--v-lo); box-shadow: var(--shadow-md); color: var(--v-ink); }
-    .pcard-red { color: var(--color-accent-sub); }
-    .pcard-a { left: 24px; top: 48px; transform: rotate(-13deg); }
-    .pcard-b { left: 248px; top: 8px; transform: rotate(8deg); }
-    .pc-idx { position: absolute; display: flex; flex-direction: column; align-items: center; gap: var(--sp-1); font-size: var(--fs-h3); font-weight: var(--fw-bold); line-height: 1.25; }
-    .pc-tl { left: 20px; top: 20px; }
-    .pc-br { right: 20px; bottom: 20px; transform: rotate(180deg); }
-    .pc-mid { position: absolute; left: 0; right: 0; top: 0; bottom: 0; display: flex; align-items: center; justify-content: center; }
-    .stack-a { position: absolute; left: 56px; bottom: 40px; }
-    .stack-b { position: absolute; left: 312px; bottom: 112px; }
-    .stack-c { position: absolute; left: 456px; bottom: 16px; }
-    .chip-top { position: absolute; left: 488px; top: 320px; transform: rotate(14deg); }
+    .cover-text {
+      position: absolute;
+      left: 96px;
+      top: 560px;
+      width: 960px;
+      height: 424px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+    .kicker {
+      font-size: var(--fs-caption);
+      font-weight: 600;
+      letter-spacing: var(--ls-wide);
+      color: var(--color-accent);
+    }
+    .cover-title {
+      font-size: var(--fs-display);
+      font-weight: 700;
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-text);
+    }
+    .cover-sub { font-size: var(--fs-body-l); color: var(--color-text-muted); }
+    .cover-foot {
+      margin-top: auto;
+      display: flex;
+      gap: var(--sp-4);
+      padding-top: var(--sp-3);
+      border-top: var(--border-w) solid var(--color-border);
+      font-size: var(--fs-caption);
+      color: var(--color-text-muted);
+    }
   </style>
 </head>
 <body>
   <div class="slide v4">
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" >
+<rect class="tile" x="0" y="0" width="120" height="120"/>
+<circle class="ring" cx="60" cy="60" r="36"/>
+<circle class="dot" cx="60" cy="60" r="9"/>
+<rect class="tile" x="120" y="0" width="120" height="120"/>
+<path class="motif" d="M120,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M240,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M120,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M240,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="240" y="0" width="120" height="120"/>
+<circle class="ring" cx="300" cy="60" r="36"/>
+<circle class="dot" cx="300" cy="60" r="9"/>
+<rect class="tile" x="360" y="0" width="120" height="120"/>
+<path class="motif" d="M360,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M480,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M360,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M480,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="480" y="0" width="120" height="120"/>
+<circle class="ring" cx="540" cy="60" r="36"/>
+<circle class="dot" cx="540" cy="60" r="9"/>
+<rect class="tile" x="600" y="0" width="120" height="120"/>
+<path class="motif" d="M600,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M720,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M600,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M720,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="720" y="0" width="120" height="120"/>
+<circle class="ring" cx="780" cy="60" r="36"/>
+<circle class="dot" cx="780" cy="60" r="9"/>
+<rect class="tile" x="840" y="0" width="120" height="120"/>
+<path class="motif" d="M840,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M960,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M840,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M960,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="960" y="0" width="120" height="120"/>
+<circle class="ring" cx="1020" cy="60" r="36"/>
+<circle class="dot" cx="1020" cy="60" r="9"/>
+<rect class="tile" x="1080" y="0" width="120" height="120"/>
+<path class="motif" d="M1080,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1200,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1080,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1200,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1200" y="0" width="120" height="120"/>
+<circle class="ring" cx="1260" cy="60" r="36"/>
+<circle class="dot" cx="1260" cy="60" r="9"/>
+<rect class="tile" x="1320" y="0" width="120" height="120"/>
+<path class="motif" d="M1320,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1440,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1320,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1440,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1440" y="0" width="120" height="120"/>
+<circle class="ring" cx="1500" cy="60" r="36"/>
+<circle class="dot" cx="1500" cy="60" r="9"/>
+<rect class="tile" x="1560" y="0" width="120" height="120"/>
+<path class="motif" d="M1560,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1680,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1560,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1680,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1680" y="0" width="120" height="120"/>
+<circle class="ring" cx="1740" cy="60" r="36"/>
+<circle class="dot" cx="1740" cy="60" r="9"/>
+<rect class="tile" x="1800" y="0" width="120" height="120"/>
+<path class="motif" d="M1800,0 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1920,0 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1800,120 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1920,120 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="0" y="120" width="120" height="120"/>
+<path class="motif" d="M0,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M120,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M0,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M120,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="120" y="120" width="120" height="120"/>
+<circle class="ring" cx="180" cy="180" r="36"/>
+<circle class="dot" cx="180" cy="180" r="9"/>
+<rect class="tile" x="240" y="120" width="120" height="120"/>
+<path class="motif" d="M240,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M360,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M240,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M360,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="360" y="120" width="120" height="120"/>
+<circle class="ring" cx="420" cy="180" r="36"/>
+<circle class="dot" cx="420" cy="180" r="9"/>
+<rect class="tile" x="480" y="120" width="120" height="120"/>
+<path class="motif" d="M480,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M600,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M480,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M600,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="600" y="120" width="120" height="120"/>
+<circle class="ring" cx="660" cy="180" r="36"/>
+<circle class="dot" cx="660" cy="180" r="9"/>
+<rect class="tile" x="720" y="120" width="120" height="120"/>
+<path class="motif" d="M720,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M840,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M720,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M840,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="840" y="120" width="120" height="120"/>
+<circle class="ring" cx="900" cy="180" r="36"/>
+<circle class="dot" cx="900" cy="180" r="9"/>
+<rect class="tile" x="960" y="120" width="120" height="120"/>
+<path class="motif" d="M960,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1080,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M960,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1080,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1080" y="120" width="120" height="120"/>
+<circle class="ring" cx="1140" cy="180" r="36"/>
+<circle class="dot" cx="1140" cy="180" r="9"/>
+<rect class="tile" x="1200" y="120" width="120" height="120"/>
+<path class="motif" d="M1200,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1320,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1200,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1320,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1320" y="120" width="120" height="120"/>
+<circle class="ring" cx="1380" cy="180" r="36"/>
+<circle class="dot" cx="1380" cy="180" r="9"/>
+<rect class="tile" x="1440" y="120" width="120" height="120"/>
+<path class="motif" d="M1440,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1560,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1440,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1560,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1560" y="120" width="120" height="120"/>
+<circle class="ring" cx="1620" cy="180" r="36"/>
+<circle class="dot" cx="1620" cy="180" r="9"/>
+<rect class="tile" x="1680" y="120" width="120" height="120"/>
+<path class="motif" d="M1680,120 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1800,120 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1680,240 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1800,240 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1800" y="120" width="120" height="120"/>
+<circle class="ring" cx="1860" cy="180" r="36"/>
+<circle class="dot" cx="1860" cy="180" r="9"/>
+<rect class="tile" x="0" y="240" width="120" height="120"/>
+<circle class="ring" cx="60" cy="300" r="36"/>
+<circle class="dot" cx="60" cy="300" r="9"/>
+<rect class="tile" x="120" y="240" width="120" height="120"/>
+<path class="motif" d="M120,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M240,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M120,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M240,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="240" y="240" width="120" height="120"/>
+<circle class="ring" cx="300" cy="300" r="36"/>
+<circle class="dot" cx="300" cy="300" r="9"/>
+<rect class="tile" x="360" y="240" width="120" height="120"/>
+<path class="motif" d="M360,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M480,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M360,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M480,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="480" y="240" width="120" height="120"/>
+<circle class="ring" cx="540" cy="300" r="36"/>
+<circle class="dot" cx="540" cy="300" r="9"/>
+<rect class="tile" x="600" y="240" width="120" height="120"/>
+<path class="motif" d="M600,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M720,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M600,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M720,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="720" y="240" width="120" height="120"/>
+<circle class="ring" cx="780" cy="300" r="36"/>
+<circle class="dot" cx="780" cy="300" r="9"/>
+<rect class="tile" x="840" y="240" width="120" height="120"/>
+<path class="motif" d="M840,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M960,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M840,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M960,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="960" y="240" width="120" height="120"/>
+<circle class="ring" cx="1020" cy="300" r="36"/>
+<circle class="dot" cx="1020" cy="300" r="9"/>
+<rect class="tile" x="1080" y="240" width="120" height="120"/>
+<path class="motif" d="M1080,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1200,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1080,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1200,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1200" y="240" width="120" height="120"/>
+<circle class="ring" cx="1260" cy="300" r="36"/>
+<circle class="dot" cx="1260" cy="300" r="9"/>
+<rect class="tile" x="1320" y="240" width="120" height="120"/>
+<path class="motif" d="M1320,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1440,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1320,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1440,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1440" y="240" width="120" height="120"/>
+<circle class="ring" cx="1500" cy="300" r="36"/>
+<circle class="dot" cx="1500" cy="300" r="9"/>
+<rect class="tile" x="1560" y="240" width="120" height="120"/>
+<path class="motif" d="M1560,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1680,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1560,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1680,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1680" y="240" width="120" height="120"/>
+<circle class="ring" cx="1740" cy="300" r="36"/>
+<circle class="dot" cx="1740" cy="300" r="9"/>
+<rect class="tile" x="1800" y="240" width="120" height="120"/>
+<path class="motif" d="M1800,240 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1920,240 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1800,360 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1920,360 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="0" y="360" width="120" height="120"/>
+<path class="motif" d="M0,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M120,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M0,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M120,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="120" y="360" width="120" height="120"/>
+<circle class="ring" cx="180" cy="420" r="36"/>
+<circle class="dot" cx="180" cy="420" r="9"/>
+<rect class="tile" x="240" y="360" width="120" height="120"/>
+<path class="motif" d="M240,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M360,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M240,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M360,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="360" y="360" width="120" height="120"/>
+<circle class="ring" cx="420" cy="420" r="36"/>
+<circle class="dot" cx="420" cy="420" r="9"/>
+<rect class="tile" x="480" y="360" width="120" height="120"/>
+<path class="motif" d="M480,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M600,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M480,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M600,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="600" y="360" width="120" height="120"/>
+<circle class="ring" cx="660" cy="420" r="36"/>
+<circle class="dot" cx="660" cy="420" r="9"/>
+<rect class="tile" x="720" y="360" width="120" height="120"/>
+<path class="motif" d="M720,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M840,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M720,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M840,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="840" y="360" width="120" height="120"/>
+<circle class="ring" cx="900" cy="420" r="36"/>
+<circle class="dot" cx="900" cy="420" r="9"/>
+<rect class="tile" x="960" y="360" width="120" height="120"/>
+<path class="motif" d="M960,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1080,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M960,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1080,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1080" y="360" width="120" height="120"/>
+<circle class="ring" cx="1140" cy="420" r="36"/>
+<circle class="dot" cx="1140" cy="420" r="9"/>
+<rect class="tile" x="1200" y="360" width="120" height="120"/>
+<path class="motif" d="M1200,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1320,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1200,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1320,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1320" y="360" width="120" height="120"/>
+<circle class="ring" cx="1380" cy="420" r="36"/>
+<circle class="dot" cx="1380" cy="420" r="9"/>
+<rect class="tile" x="1440" y="360" width="120" height="120"/>
+<path class="motif" d="M1440,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1560,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1440,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1560,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1560" y="360" width="120" height="120"/>
+<circle class="ring" cx="1620" cy="420" r="36"/>
+<circle class="dot" cx="1620" cy="420" r="9"/>
+<rect class="tile" x="1680" y="360" width="120" height="120"/>
+<path class="motif" d="M1680,360 h48 a48 48 0 0 1 -48 48 z"/>
+<path class="motif" d="M1800,360 h-48 a48 48 0 0 0 48 48 z"/>
+<path class="motif" d="M1680,480 h48 a48 48 0 0 0 -48 -48 z"/>
+<path class="motif" d="M1800,480 h-48 a48 48 0 0 1 48 -48 z"/>
+<rect class="tile" x="1800" y="360" width="120" height="120"/>
+<circle class="ring" cx="1860" cy="420" r="36"/>
+<circle class="dot" cx="1860" cy="420" r="9"/>
+<rect class="edge" x="0" y="480" width="1920" height="12"/>
+</svg>
 
-    <div class="felt"></div>
-    <div class="grain"></div>
-    <div class="rail-top"></div><div class="rail-bottom"></div><div class="rail-left"></div><div class="rail-right"></div>
-    <div class="rail-shadow"></div>
-    <div class="inlay"></div>
+    <div class="plate">
+      <div class="plate-num">
+        <p class="plate-big t-nums">4</p>
+        <p class="plate-unit">개 점포</p>
+      </div>
+    </div>
 
-    <div class="stage">
-      <div class="copy">
-        <p class="kicker"><span class="kicker-bar"></span>STRATEGY TABLE 2027</p>
-        <h1 class="cover-title">다음 분기의<br>승부수를 읽다</h1>
-        <p class="cover-sub">신규사업 시나리오 워크숍</p>
-        <p class="plate"><span class="plate-dot"></span>전략기획실 한지우 &nbsp;·&nbsp; 2026. 11. 20<span class="plate-dot"></span></p>
-      </div>
-
-      <div class="props">
-      <div class="pcard pcard-a">
-        <div class="pc-idx pc-tl"><span>K</span><svg class="suit-spade" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2s8 5.4 8 11.2a4.6 4.6 0 0 1-8 3.1 4.6 4.6 0 0 1-8-3.1C4 7.4 12 2 12 2z"/><path fill="currentColor" d="M12 13l3.2 9H8.8z"/></svg></div>
-        <div class="pc-mid"><svg class="suit-spade" width="120" height="120" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2s8 5.4 8 11.2a4.6 4.6 0 0 1-8 3.1 4.6 4.6 0 0 1-8-3.1C4 7.4 12 2 12 2z"/><path fill="currentColor" d="M12 13l3.2 9H8.8z"/></svg></div>
-        <div class="pc-idx pc-br"><span>K</span><svg class="suit-spade" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2s8 5.4 8 11.2a4.6 4.6 0 0 1-8 3.1 4.6 4.6 0 0 1-8-3.1C4 7.4 12 2 12 2z"/><path fill="currentColor" d="M12 13l3.2 9H8.8z"/></svg></div>
-      </div>
-      <div class="pcard pcard-b pcard-red">
-        <div class="pc-idx pc-tl"><span>A</span><svg class="suit-heart" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22s-9-5.6-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.4-9 12-9 12z"/></svg></div>
-        <div class="pc-mid"><svg class="suit-heart" width="120" height="120" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22s-9-5.6-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.4-9 12-9 12z"/></svg></div>
-        <div class="pc-idx pc-br"><span>A</span><svg class="suit-heart" width="28" height="28" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22s-9-5.6-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.4-9 12-9 12z"/></svg></div>
-      </div>
-        <div class="stack-a"><svg class="chip-stack" width="200" height="174" viewBox="0 0 200 174"><ellipse class="chip-red" cx="100" cy="148" rx="80" ry="18"/><rect class="chip-red" x="20" y="122" width="160" height="26"/><rect class="chip-edge" x="20" y="145" width="160" height="3"/><rect class="chip-mark" x="34" y="124" width="14" height="20"/><rect class="chip-mark" x="65" y="124" width="14" height="20"/><rect class="chip-mark" x="96" y="124" width="14" height="20"/><rect class="chip-mark" x="127" y="124" width="14" height="20"/><rect class="chip-mark" x="158" y="124" width="14" height="20"/><ellipse class="chip-red" cx="100" cy="122" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="122" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="122" rx="80" ry="18"/><ellipse class="chip-white" cx="100" cy="122" rx="80" ry="18"/><rect class="chip-white" x="20" y="96" width="160" height="26"/><rect class="chip-edge" x="20" y="119" width="160" height="3"/><rect class="chip-mark" x="34" y="98" width="14" height="20"/><rect class="chip-mark" x="65" y="98" width="14" height="20"/><rect class="chip-mark" x="96" y="98" width="14" height="20"/><rect class="chip-mark" x="127" y="98" width="14" height="20"/><rect class="chip-mark" x="158" y="98" width="14" height="20"/><ellipse class="chip-white" cx="100" cy="96" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="96" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="96" rx="80" ry="18"/><ellipse class="chip-red" cx="100" cy="96" rx="80" ry="18"/><rect class="chip-red" x="20" y="70" width="160" height="26"/><rect class="chip-edge" x="20" y="93" width="160" height="3"/><rect class="chip-mark" x="34" y="72" width="14" height="20"/><rect class="chip-mark" x="65" y="72" width="14" height="20"/><rect class="chip-mark" x="96" y="72" width="14" height="20"/><rect class="chip-mark" x="127" y="72" width="14" height="20"/><rect class="chip-mark" x="158" y="72" width="14" height="20"/><ellipse class="chip-red" cx="100" cy="70" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="70" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="70" rx="80" ry="18"/><ellipse class="chip-black" cx="100" cy="70" rx="80" ry="18"/><rect class="chip-black" x="20" y="44" width="160" height="26"/><rect class="chip-edge" x="20" y="67" width="160" height="3"/><rect class="chip-mark" x="34" y="46" width="14" height="20"/><rect class="chip-mark" x="65" y="46" width="14" height="20"/><rect class="chip-mark" x="96" y="46" width="14" height="20"/><rect class="chip-mark" x="127" y="46" width="14" height="20"/><rect class="chip-mark" x="158" y="46" width="14" height="20"/><ellipse class="chip-black" cx="100" cy="44" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="44" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="44" rx="80" ry="18"/><ellipse class="chip-red" cx="100" cy="44" rx="80" ry="18"/><rect class="chip-red" x="20" y="18" width="160" height="26"/><rect class="chip-edge" x="20" y="41" width="160" height="3"/><rect class="chip-mark" x="34" y="20" width="14" height="20"/><rect class="chip-mark" x="65" y="20" width="14" height="20"/><rect class="chip-mark" x="96" y="20" width="14" height="20"/><rect class="chip-mark" x="127" y="20" width="14" height="20"/><rect class="chip-mark" x="158" y="20" width="14" height="20"/><ellipse class="chip-red" cx="100" cy="18" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="18" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="18" rx="80" ry="18"/></svg></div>
-        <div class="stack-b"><svg class="chip-stack" width="160" height="122" viewBox="0 0 200 122"><ellipse class="chip-black" cx="100" cy="96" rx="80" ry="18"/><rect class="chip-black" x="20" y="70" width="160" height="26"/><rect class="chip-edge" x="20" y="93" width="160" height="3"/><rect class="chip-mark" x="34" y="72" width="14" height="20"/><rect class="chip-mark" x="65" y="72" width="14" height="20"/><rect class="chip-mark" x="96" y="72" width="14" height="20"/><rect class="chip-mark" x="127" y="72" width="14" height="20"/><rect class="chip-mark" x="158" y="72" width="14" height="20"/><ellipse class="chip-black" cx="100" cy="70" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="70" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="70" rx="80" ry="18"/><ellipse class="chip-white" cx="100" cy="70" rx="80" ry="18"/><rect class="chip-white" x="20" y="44" width="160" height="26"/><rect class="chip-edge" x="20" y="67" width="160" height="3"/><rect class="chip-mark" x="34" y="46" width="14" height="20"/><rect class="chip-mark" x="65" y="46" width="14" height="20"/><rect class="chip-mark" x="96" y="46" width="14" height="20"/><rect class="chip-mark" x="127" y="46" width="14" height="20"/><rect class="chip-mark" x="158" y="46" width="14" height="20"/><ellipse class="chip-white" cx="100" cy="44" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="44" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="44" rx="80" ry="18"/><ellipse class="chip-black" cx="100" cy="44" rx="80" ry="18"/><rect class="chip-black" x="20" y="18" width="160" height="26"/><rect class="chip-edge" x="20" y="41" width="160" height="3"/><rect class="chip-mark" x="34" y="20" width="14" height="20"/><rect class="chip-mark" x="65" y="20" width="14" height="20"/><rect class="chip-mark" x="96" y="20" width="14" height="20"/><rect class="chip-mark" x="127" y="20" width="14" height="20"/><rect class="chip-mark" x="158" y="20" width="14" height="20"/><ellipse class="chip-black" cx="100" cy="18" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="18" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="18" rx="80" ry="18"/></svg></div>
-        <div class="stack-c"><svg class="chip-stack" width="160" height="148" viewBox="0 0 200 148"><ellipse class="chip-white" cx="100" cy="122" rx="80" ry="18"/><rect class="chip-white" x="20" y="96" width="160" height="26"/><rect class="chip-edge" x="20" y="119" width="160" height="3"/><rect class="chip-mark" x="34" y="98" width="14" height="20"/><rect class="chip-mark" x="65" y="98" width="14" height="20"/><rect class="chip-mark" x="96" y="98" width="14" height="20"/><rect class="chip-mark" x="127" y="98" width="14" height="20"/><rect class="chip-mark" x="158" y="98" width="14" height="20"/><ellipse class="chip-white" cx="100" cy="96" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="96" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="96" rx="80" ry="18"/><ellipse class="chip-red" cx="100" cy="96" rx="80" ry="18"/><rect class="chip-red" x="20" y="70" width="160" height="26"/><rect class="chip-edge" x="20" y="93" width="160" height="3"/><rect class="chip-mark" x="34" y="72" width="14" height="20"/><rect class="chip-mark" x="65" y="72" width="14" height="20"/><rect class="chip-mark" x="96" y="72" width="14" height="20"/><rect class="chip-mark" x="127" y="72" width="14" height="20"/><rect class="chip-mark" x="158" y="72" width="14" height="20"/><ellipse class="chip-red" cx="100" cy="70" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="70" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="70" rx="80" ry="18"/><ellipse class="chip-white" cx="100" cy="70" rx="80" ry="18"/><rect class="chip-white" x="20" y="44" width="160" height="26"/><rect class="chip-edge" x="20" y="67" width="160" height="3"/><rect class="chip-mark" x="34" y="46" width="14" height="20"/><rect class="chip-mark" x="65" y="46" width="14" height="20"/><rect class="chip-mark" x="96" y="46" width="14" height="20"/><rect class="chip-mark" x="127" y="46" width="14" height="20"/><rect class="chip-mark" x="158" y="46" width="14" height="20"/><ellipse class="chip-white" cx="100" cy="44" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="44" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="44" rx="80" ry="18"/><ellipse class="chip-red" cx="100" cy="44" rx="80" ry="18"/><rect class="chip-red" x="20" y="18" width="160" height="26"/><rect class="chip-edge" x="20" y="41" width="160" height="3"/><rect class="chip-mark" x="34" y="20" width="14" height="20"/><rect class="chip-mark" x="65" y="20" width="14" height="20"/><rect class="chip-mark" x="96" y="20" width="14" height="20"/><rect class="chip-mark" x="127" y="20" width="14" height="20"/><rect class="chip-mark" x="158" y="20" width="14" height="20"/><ellipse class="chip-red" cx="100" cy="18" rx="80" ry="18"/><ellipse class="chip-ring" cx="100" cy="18" rx="68" ry="13" fill="none"/><ellipse class="chip-gloss" cx="100" cy="18" rx="80" ry="18"/></svg></div>
-        <div class="chip-top"><svg class="chip-flat" width="168" height="168" viewBox="0 0 200 200"><circle class="chip-c-red" cx="100" cy="100" r="96"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(0 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(45 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(90 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(135 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(180 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(225 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(270 100 100)"/><rect class="chip-mark" x="88" y="4" width="24" height="26" transform="rotate(315 100 100)"/><circle class="chip-c-white" cx="100" cy="100" r="62"/><circle class="chip-c-red" cx="100" cy="100" r="52"/><circle class="chip-ring" cx="100" cy="100" r="40" fill="none"/><g class="chip-suit" transform="translate(76 76) scale(2)"><path d="M12 2s8 5.4 8 11.2a4.6 4.6 0 0 1-8 3.1 4.6 4.6 0 0 1-8-3.1C4 7.4 12 2 12 2z"/><path d="M12 13l3.2 9H8.8z"/></g><circle class="chip-gloss" cx="100" cy="100" r="96"/></svg></div>
+    <div class="cover-text">
+      <p class="kicker">DELFT SERIES · 2026</p>
+      <h1 class="cover-title">도심 공유 주방<br>파일럿 결과</h1>
+      <p class="cover-sub">3개월 운영 · 4개 점포 · 주문 건수 2.1배 증가</p>
+      <div class="cover-foot">
+        <span>외식사업팀</span>
+        <span class="t-nums">2026. 10. 12</span>
       </div>
     </div>
   </div>

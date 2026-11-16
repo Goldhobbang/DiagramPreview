@@ -1,4 +1,4 @@
-<!-- @card V5 White Marble · 표지 | 대리석 상단(음각 제목) · 황동 몰딩 · 하단 황동 명판 띠 | 1920x1080 -->
+<!-- @card V5 Vinyl Sleeve · 표지 | 차콜 바탕 · 오른쪽으로 밀린 LP 원반 · 앰버 레이블 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -437,193 +437,196 @@ th {
    10_SKEUOMORPHISM — 실물의 재질·두께·조명을 화면에 그대로 옮긴다.
    기획: 00_GUIDES/PLANS/10_SKEUOMORPHISM.md
 
-   05번 뉴모피즘과 다르다: 뉴모는 배경과 같은 색 단색, 여기는 실제 재질 텍스처 + 다색.
-   모든 표면에 (1) 재질 텍스처 (2) 베벨 (3) 드롭섀도 3종을 넣는다.
-   셋 중 하나라도 빠지면 재질이 살지 않는다. 광원은 좌상단 고정.
-   색은 전부 토큰 — 레이아웃 CSS에는 var()만 쓴다.
+   V4 Delft Porcelain : 쿨 라이트 · 코발트 타일 (상하 분할)
+   V5 Vinyl Sleeve    : 뉴트럴 다크 · 차콜 LP 원반 (오프셋 원형 분할)
+   V6 Felt Table      : 그린 펠트 · 나무 레일 (대각 분할)
+
+   모든 표면에 (1) 재질 텍스처 (2) 베벨(두께 가장자리) (3) 드롭섀도 3종을 넣는다.
+   광원은 좌상단 고정. 색은 레이아웃 CSS에 쓰지 않고 이 블록의 토큰으로만 받는다.
    ========================================================================== */
 
-/* --- 공통 — 베벨(상단 하이라이트 / 하단 섀도) · 라운드 --------------- */
+/* --- 공통: 세 베리에이션이 같이 쓰는 두께 규칙 ----------------------- */
 .v4, .v5, .v6 {
+  --mat-bevel: 2px;                 /* 가장자리 베벨 두께 */
+  --mat-lip: 4px;                   /* 접시·디스크의 아랫면 두께 */
+}
+
+/* --- V4 Delft Porcelain — 코발트 타일 + 유약 흰 접시 ------------------ */
+.v4 {
+  --color-bg: #eef3f8;              /* 포슬린 */
+  --color-surface: #fbfcfe;         /* 유약 흰색 */
+  --color-surface-alt: #dce6f2;     /* 연한 유약 */
+  --color-text: #17243a;
+  --color-text-muted: #4a5f7f;
+  --color-text-invert: #fbfcfe;
+  --color-accent: #1f4e8c;          /* 코발트 안료 */
+  --color-accent-sub: #8fb0d6;
+  --color-border: #b9cbe0;
+
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 16px;
-  --v-hi: rgba(255, 255, 255, 0.50);   /* 상단 1px 하이라이트 */
-  --v-lo: rgba(0, 0, 0, 0.45);         /* 하단 1px 섀도 */
-  --v-shade: rgba(0, 0, 0, 0.40);      /* 면 위 어두운 덧칠 */
-  --v-grain-op: 0.18;                  /* 재질 노이즈 불투명도 */
+  --radius-lg: 12px;
+  --shadow-sm: 0 4px 12px rgba(23, 36, 58, 0.16);
+  --shadow-md: 0 10px 24px rgba(23, 36, 58, 0.24);
+
+  --v-tile: #1f4e8c;
+  --v-plate-lip: #b9cbe0;
 }
 
-/* --- V4 Green Felt — 펠트 카드테이블 + 월넛 레일 + 카드·칩 ----------- */
-.v4 {
-  --color-bg: #1a5037;               /* 펠트 */
-  --color-surface: #f7f2e6;          /* 카드 용지 */
-  --color-surface-alt: #4b2a18;      /* 어두운 월넛 */
-  --color-text: #14281d;
-  --color-text-muted: #45584c;
-  --color-text-invert: #f3ecd6;
-  --color-accent: #e0b84f;           /* 금 */
-  --color-accent-sub: #b3262e;       /* 칩 레드 */
-  --color-border: #c9a24a;
-
-  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.50);
-
-  --v-felt-lit: #2a7350;
-  --v-felt-deep: #123a27;
-  --v-wood: #6a3b20;
-  --v-wood-lo: #3a1f10;
-  --v-wood-tex: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0.10) 5px, rgba(0, 0, 0, 0.10) 6px, rgba(255, 255, 255, 0.04) 6px, rgba(255, 255, 255, 0.04) 9px);
-  --v-wood-tex-v: repeating-linear-gradient(90deg, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0.10) 5px, rgba(0, 0, 0, 0.10) 6px, rgba(255, 255, 255, 0.04) 6px, rgba(255, 255, 255, 0.04) 9px);
-  --v-brass: linear-gradient(180deg, #f0d98a 0%, #c9a24a 45%, #7d5f1f 100%);
-  --v-ink: #14281d;
-  --v-inlay: rgba(224, 184, 79, 0.55);
-  --v-card-face: linear-gradient(160deg, #fffaf0 0%, #f7f2e6 55%, #e9e1cc 100%);
-  --v-chip-white: #f7f2e6;
-  --v-chip-black: #1b1b1b;
-  --v-line: rgba(20, 40, 29, 0.28);
-}
-
-/* --- V5 White Marble — 대리석 + 황동 명판 + 음각 --------------------- */
+/* --- V5 Vinyl Sleeve — 차콜 바탕 + 앰버 레이블 + 크롬 ---------------- */
 .v5 {
-  --color-bg: #e9e7e2;               /* 대리석 */
-  --color-surface: #f6f4ef;          /* 밝은 석판 */
-  --color-surface-alt: #cfcac0;      /* 어두운 석판 */
-  --color-text: #25231f;
-  --color-text-muted: #4f4b44;
-  --color-text-invert: #f6f4ef;
-  --color-accent: #765818;           /* 진한 황동 */
-  --color-accent-sub: #c09a45;       /* 황동 */
-  --color-border: #b9b4aa;
+  --color-bg: #16161a;              /* 차콜 슬리브 */
+  --color-surface: #23232a;
+  --color-surface-alt: #2a2a31;
+  --color-text: #f0eee8;
+  --color-text-muted: #b4b2aa;
+  --color-text-invert: #16161a;
+  --color-accent: #e8a33d;          /* 앰버 레이블 */
+  --color-accent-sub: #c4c2bc;      /* 크롬 */
+  --color-border: #3a3a44;
 
-  --font-sans: "Noto Serif KR", Georgia, serif;
-  --shadow-sm: 0 3px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.50);
+  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.60);
 
-  --v-marble-hi: #f6f4f0;
-  --v-marble-lo: #d6d2ca;
-  --v-vein: #aaa49a;
-  --v-groove: #bdb8ad;
-  --v-brass-flat: linear-gradient(180deg, #ecd68e 0%, #c09a45 50%, #8d6e2a 100%);
-  --v-brass-brushed: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.10) 0px, rgba(255, 255, 255, 0.10) 1px, rgba(0, 0, 0, 0.06) 1px, rgba(0, 0, 0, 0.06) 3px);
-  --v-brass-rail: linear-gradient(90deg, #8d6e2a 0%, #d9bd6c 22%, #c09a45 60%, #8d6e2a 100%);
-  --v-brass-ink: #2a2113;
-  --v-screw: #dcc274;
-  --v-engrave-hi: rgba(255, 255, 255, 0.90);
-  --v-engrave-lo: rgba(0, 0, 0, 0.28);
-  --v-recess: #dfdcd4;
+  --v-disc: #0e0e11;
+  --v-groove: #2b2b33;
+  --v-chrome: #c4c2bc;
 }
 
-/* --- V6 Navy Cloth — 청색 천 하드커버 + 은박 + 펼친 책 --------------- */
+/* --- V6 Felt Table — 그린 펠트 + 나무 레일 + 황동 ---------------------- */
 .v6 {
-  --color-bg: #1c2742;               /* 네이비 천 */
-  --color-surface: #efe9da;          /* 책 속지 */
-  --color-surface-alt: #141c30;      /* 책등 */
-  --color-text: #26221a;
-  --color-text-muted: #5c5546;
-  --color-text-invert: #e6eaf2;
-  --color-accent: #c23b32;           /* 가름끈 레드 */
-  --color-accent-sub: #c9d1e0;       /* 은박 */
-  --color-border: #3b4a70;
+  --color-bg: #1e5b47;              /* 펠트 */
+  --color-surface: #0f3b2e;         /* 쿠션 안쪽 */
+  --color-surface-alt: #7a4e2d;     /* 나무 레일 */
+  --color-text: #f3eedc;
+  --color-text-muted: #b9d3c6;
+  --color-text-invert: #0f3b2e;
+  --color-accent: #d8b45a;          /* 황동 */
+  --color-accent-sub: #a7d0c4;
+  --color-border: #3c7a63;
 
-  --font-sans: "Noto Serif KR", Georgia, serif;
-  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.55);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 6px 14px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 22px rgba(0, 0, 0, 0.45);
 
-  --v-navy-lit: #2b3a62;
-  --v-weave: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0px, rgba(255, 255, 255, 0.045) 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 4px), repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.14) 0px, rgba(0, 0, 0, 0.14) 2px, rgba(0, 0, 0, 0) 2px, rgba(0, 0, 0, 0) 4px);
-  --v-foil: #c9d1e0;
-  --v-stitch: #8d9ac0;
-  --v-page-gutter-l: linear-gradient(90deg, rgba(60, 45, 20, 0) 0%, rgba(60, 45, 20, 0.30) 100%);
-  --v-page-gutter-r: linear-gradient(90deg, rgba(60, 45, 20, 0.30) 0%, rgba(60, 45, 20, 0) 100%);
-  --v-page-edge: #d9d0bb;
-  --v-groove: #d3c9b0;
-  --v-groove-fill: #e3dbc6;
+  --v-wood: #7a4e2d;
+  --v-wood-hi: #a06a3c;
+  --v-wood-lo: #4d2f18;
+  --v-pocket: #0a1f18;
+  --v-speck: #2a6e57;
 }
   </style>
   <style>
 
-    /* 대리석: 좌상단이 밝은 면 + 맥(SVG) + 미세 노이즈 */
-    .marble { position: absolute; inset: 0; background: linear-gradient(135deg, var(--v-marble-hi) 0%, var(--color-bg) 48%, var(--v-marble-lo) 100%); }
-    .veins { position: absolute; inset: 0; opacity: 0.55; }
-    .vein { fill: none; stroke: var(--v-vein); stroke-linecap: round; }
-    .vein-1 { stroke-width: 3; }
-    .vein-2 { stroke-width: 1.5; }
-    .vein-3 { stroke-width: 1; }
-    .grain { position: absolute; inset: 0; opacity: 0.10; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E"); }
-    .screw-bg { fill: var(--v-screw); }
-    .screw-ring { fill: none; stroke: var(--v-lo); stroke-width: 2; }
-    .screw-slot { stroke: var(--v-brass-ink); stroke-width: 3; stroke-linecap: round; }
-    .screw { flex: none; }
+    /* 차콜 바탕 + 오른쪽으로 밀린 LP 원반 — 오프셋 원형 분할 */
+    .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .disc { fill: var(--v-disc); stroke: var(--color-border); stroke-width: 2px; }
+    .groove { fill: none; stroke: var(--v-groove); stroke-width: 3px; }
+    .arm { stroke: var(--v-chrome); stroke-width: 12px; stroke-linecap: round; }
+    .pivot { fill: var(--v-chrome); }
+    .arm-head { fill: var(--v-chrome); }
 
-    .page { position: absolute; inset: 0; display: flex; flex-direction: column; }
-    .upper { position: relative; flex: none; height: 776px; padding: 96px; display: flex; align-items: center; gap: var(--sp-7); }
-    .frame { position: absolute; inset: 48px 48px 24px 48px; border: 2px solid var(--v-groove); border-radius: var(--radius-sm); box-shadow: 0 1px 0 var(--v-engrave-hi); }
-    .copy { position: relative; flex: 1; display: flex; flex-direction: column; gap: var(--sp-5); padding-left: var(--sp-7); }
-    .kicker { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-body-m); font-weight: var(--fw-bold); letter-spacing: var(--ls-wide); color: var(--color-accent); text-shadow: 0 1px 0 var(--v-engrave-hi); }
-    .kicker-bar { width: 64px; height: 4px; background: var(--v-brass-flat); border-radius: 2px; border-bottom: 1px solid var(--v-engrave-hi); }
-    /* 음각: 글자색은 석재보다 짙게, 아래 가장자리에 밝은 1px */
-    .cover-title { font-size: var(--fs-display); line-height: var(--lh-tight); font-weight: var(--fw-bold); letter-spacing: var(--ls-tight); color: var(--color-text-muted); text-shadow: 0 2px 0 var(--v-engrave-hi), 0 -1px 0 var(--v-engrave-lo); }
-    .cover-sub { font-size: var(--fs-body-l); color: var(--color-text-muted); text-shadow: 0 1px 0 var(--v-engrave-hi); }
-    .medal { position: relative; flex: none; width: 280px; height: 280px; margin-right: var(--sp-6); }
-    .medal-ring-a { fill: var(--color-accent-sub); }
-    .medal-ring-b { fill: none; stroke: var(--v-brass-ink); stroke-opacity: 0.45; stroke-width: 3; }
-    .medal-face { fill: var(--v-brass-ink); fill-opacity: 0.0; }
-    .medal-star { fill: var(--v-brass-ink); fill-opacity: 0.78; }
-    .medal-hi { fill: none; stroke: var(--v-engrave-hi); stroke-width: 3; }
+    .label {
+      position: absolute;
+      left: 1270px;
+      top: 310px;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      border-bottom: var(--mat-lip) solid var(--color-surface-alt);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-2);
+      color: var(--color-text-invert);
+    }
+    .label-kicker { font-size: var(--fs-caption); letter-spacing: var(--ls-wide); font-weight: 600; }
+    .label-name { font-size: var(--fs-h2); font-weight: 700; letter-spacing: var(--ls-tight); }
+    .label-no { font-size: var(--fs-caption); letter-spacing: var(--ls-wide); }
+    .hole {
+      position: absolute;
+      left: 1486px;
+      top: 526px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-bg);
+    }
 
-    /* 황동 몰딩 + 명판 */
-    .moulding { flex: none; height: 24px; background: var(--v-brass-rail); border-top: 2px solid var(--v-hi); border-bottom: 2px solid var(--v-lo); box-shadow: var(--shadow-md); position: relative; }
-    .lower { position: relative; flex: 1; display: flex; align-items: center; gap: var(--sp-6); padding: 0 var(--slide-pad); background-color: var(--color-accent-sub); background-image: var(--v-brass-brushed), var(--v-brass-flat); }
-    .field { flex: 1; display: flex; flex-direction: column; gap: var(--sp-2); color: var(--v-brass-ink); }
-    .field-label { font-size: var(--fs-caption); font-weight: var(--fw-bold); letter-spacing: var(--ls-wide); text-shadow: 0 1px 0 var(--v-hi); }
-    .field-value { font-size: var(--fs-h3); font-weight: var(--fw-bold); text-shadow: 0 1px 0 var(--v-hi); }
-    .groove { flex: none; width: 2px; height: 96px; background: var(--v-lo); border-right: 1px solid var(--v-hi); }
-    .screw-l, .screw-r { position: absolute; top: 50%; margin-top: -14px; }
-    .screw-l { left: 36px; }
-    .screw-r { right: 36px; }
+    .cover-text {
+      position: absolute;
+      left: 96px;
+      top: 180px;
+      width: 680px;
+      height: 720px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--sp-5);
+    }
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: var(--fs-caption);
+      letter-spacing: var(--ls-wide);
+      color: var(--color-accent);
+    }
+    .cover-title {
+      font-size: var(--fs-display);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: var(--ls-tight);
+      color: var(--color-text);
+    }
+    .cover-sub { font-size: var(--fs-body-l); color: var(--color-text-muted); }
+    .cover-foot { display: flex; align-items: center; gap: var(--sp-4); font-size: var(--fs-caption); color: var(--color-text-muted); }
+    .foot-bar { width: 96px; height: 3px; background: var(--color-accent); flex-shrink: 0; }
   </style>
 </head>
 <body>
   <div class="slide v5">
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" >
+<circle class="disc" cx="1500" cy="540" r="620"/>
+<circle class="groove" cx="1500" cy="540" r="580"/>
+<circle class="groove" cx="1500" cy="540" r="554"/>
+<circle class="groove" cx="1500" cy="540" r="528"/>
+<circle class="groove" cx="1500" cy="540" r="502"/>
+<circle class="groove" cx="1500" cy="540" r="476"/>
+<circle class="groove" cx="1500" cy="540" r="450"/>
+<circle class="groove" cx="1500" cy="540" r="424"/>
+<circle class="groove" cx="1500" cy="540" r="398"/>
+<circle class="groove" cx="1500" cy="540" r="372"/>
+<circle class="groove" cx="1500" cy="540" r="346"/>
+<circle class="groove" cx="1500" cy="540" r="320"/>
+<circle class="groove" cx="1500" cy="540" r="294"/>
+<circle class="groove" cx="1500" cy="540" r="268"/>
+<line class="arm" x1="1800" y1="120" x2="1420" y2="200"/>
+<circle class="pivot" cx="1800" cy="120" r="34"/>
+<circle class="arm-head" cx="1420" cy="200" r="20"/>
+</svg>
 
-    <div class="marble"></div>
-    <svg class="veins" width="1920" height="1080" viewBox="0 0 1920 1080">
-      <path class="vein vein-1" d="M-40 220 C 260 140, 420 360, 700 300 S 1180 60, 1500 190 S 1800 330, 1980 240"/>
-      <path class="vein vein-2" d="M120 -20 C 220 160, 180 300, 360 420 S 620 560, 640 700"/>
-      <path class="vein vein-2" d="M1240 -20 C 1180 120, 1320 260, 1260 380 S 1380 560, 1500 640"/>
-      <path class="vein vein-3" d="M-20 520 C 200 480, 380 620, 560 560 S 880 420, 1040 520"/>
-      <path class="vein vein-3" d="M1000 700 C 1180 620, 1340 760, 1500 700 S 1800 620, 1940 700"/>
-    </svg>
-    <div class="grain"></div>
+    <div class="label">
+      <p class="label-kicker">SIDE A</p>
+      <p class="label-name">온음 사운드</p>
+      <p class="label-no t-nums">VOL. 03</p>
+    </div>
+    <div class="hole"></div>
 
-    <div class="page">
-      <div class="upper">
-        <div class="frame"></div>
-        <div class="copy">
-          <p class="kicker"><span class="kicker-bar"></span>ANNUAL REPORT 2026</p>
-          <h1 class="cover-title">기억을 짓는 일,<br>2026 활동 보고</h1>
-          <p class="cover-sub">서울숲 문화재단이 한 해 동안 쌓은 기록</p>
-        </div>
-        <svg class="medal" width="280" height="280" viewBox="0 0 280 280">
-        <circle class="medal-ring-a" cx="140" cy="140" r="136"/>
-        <circle class="medal-ring-b" cx="140" cy="140" r="118"/>
-        <circle class="medal-ring-b" cx="140" cy="140" r="100"/>
-        <circle class="medal-hi" cx="140" cy="140" r="136" stroke-dasharray="0"/>
-        <path class="medal-star" d="M140 52 L156 112 L218 106 L168 142 L192 200 L140 166 L88 200 L112 142 L62 106 L124 112 Z"/>
-      </svg>
-      </div>
-
-      <div class="moulding"></div>
-
-      <div class="lower">
-        <span class="screw-l"><svg class="screw" width="28" height="28" viewBox="0 0 28 28"><circle class="screw-bg" cx="14" cy="14" r="12"/><circle class="screw-ring" cx="14" cy="14" r="12"/><path class="screw-slot" d="M8 14h12" transform="rotate(20 14 14)"/></svg></span>
-        <div class="field"><p class="field-label">PRESENTED BY</p><p class="field-value">사무국장 오세린</p></div>
-        <div class="groove"></div>
-        <div class="field"><p class="field-label">DATE</p><p class="field-value">2026. 12. 04</p></div>
-        <div class="groove"></div>
-        <div class="field"><p class="field-label">PLACE</p><p class="field-value">재단 본관 3층 이사회실</p></div>
-        <span class="screw-r"><svg class="screw" width="28" height="28" viewBox="0 0 28 28"><circle class="screw-bg" cx="14" cy="14" r="12"/><circle class="screw-ring" cx="14" cy="14" r="12"/><path class="screw-slot" d="M8 14h12" transform="rotate(-35 14 14)"/></svg></span>
+    <div class="cover-text">
+      <p class="kicker">SOUND BRAND GUIDE · 2026 SPRING</p>
+      <h1 class="cover-title">소리로<br>기억되는<br>브랜드</h1>
+      <p class="cover-sub">로고 사운드 5초 규칙과 사용 범위</p>
+      <div class="cover-foot">
+        <span class="foot-bar"></span>
+        <span>마케팅팀</span>
+        <span class="t-nums">2026. 04. 02</span>
       </div>
     </div>
   </div>
