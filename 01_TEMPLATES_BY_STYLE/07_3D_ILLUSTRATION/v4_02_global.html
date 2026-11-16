@@ -1,4 +1,4 @@
-<!-- @card V4 Paper Cut Forest · 전역 | 물결 종이 헤더 · 좌 KPI+종이 막대 · 우 종이 스트립 3행 | 1920x1080 -->
+<!-- @card V4 Paper Cut Forest · 전역 | 종이 탭 헤더 · 히어로 수치 패널 + 센터별 막대 카드 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -431,285 +431,232 @@ th {
 .items-start    { align-items: flex-start; }
 .justify-center { justify-content: center; }
 .justify-between{ justify-content: space-between; }
-.grow           { flex: 1; }/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
 /* ==========================================================================
    07_3D_ILLUSTRATION — 화면의 주인공이 텍스트가 아니라 오브젝트
    기획: 00_GUIDES/PLANS/07_3D_ILLUSTRATION.md
 
-   조명은 덱 전체에서 좌상단 고정. 오브젝트 아래 접지 그림자 필수, 오브젝트 1~3개.
-   V4~V6은 재질이 다르다: V4 종이 공예(레이어 컷) / V5 브러시드 브라스(금속) / V6 스튜디오 도자기.
+   V4 Paper Cut Forest  · 뉴트럴 라이트 · 종이를 오려 겹친 대각선 분할
+   V5 Brass Orbit       · 웜 다크 · 우상단 코너의 브라스 구체와 궤도
+   V6 Ceramic Shelf     · 뉴트럴 다크 · 선반에 올린 도자기 진열
+
+   조명 방향은 덱 전체에서 고정. 오브젝트 아래 접지 그림자를 넣는다.
+   슬라이드당 오브젝트는 1~3개까지.
    ========================================================================== */
 
-/* --- V4~V6 공통 -------------------------------------------------------- */
+/* 3종 공통. 컷 그림자 색만 기본으로 두고, 베리에이션이 덮어쓴다. */
 .v4, .v5, .v6 {
-  --card-border-w: 0px;
-  --spec: #ffffff;
+  --v-cut: rgba(0, 0, 0, 0.16);
 }
 
-/* --- V4 Paper Cut Forest — 종이를 겹겹이 오려 붙인 레이어, 딱딱한 오프셋 그림자 --- */
+/* --- V4 Paper Cut Forest — 종이컷 레이어, 면으로만 겹친다 ------------ */
 .v4 {
-  --color-bg: #e9f2e4;
-  --color-surface: #fbfdf9;
-  --color-surface-alt: #d3e6cb;
-  --color-text: #16301f;
-  --color-text-muted: #4a6a54;
+  --color-bg: #f1f2ee;
+  --color-surface: #ffffff;
+  --color-surface-alt: #e1e6df;
+  --color-text: #1e2a23;
+  --color-text-muted: #55645a;
   --color-text-invert: #ffffff;
-  --color-accent: #1c7c54;
-  --color-accent-sub: #f2b441;
-  --color-border: #bcd7b0;
-  --color-bg-inverse: #124f37;
-  --color-text-on-inverse: #f0f7ec;
-  --color-text-on-inverse-muted: #b9d8c3;
+  --color-accent: #3e7a5e;
+  --color-accent-sub: #a9c7b4;
+  --color-border: #cfd7cd;
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  /* 블러 0 — 종이 두께가 만드는 딱딱한 오프셋 그림자 */
-  --shadow-sm: 0 6px 0 rgba(22, 48, 31, 0.14);
-  --shadow-md: 0 8px 0 rgba(22, 48, 31, 0.18);
-
-  /* 종이 5겹: 뒤(연함) → 앞(진함) */
-  --paper-1: #c6e0bb;
-  --paper-2: #98c9a2;
-  --paper-3: #55a97c;
-  --paper-4: #1c7c54;
-  --paper-5: #124f37;
-  --paper-shadow: rgba(10, 44, 28, 0.30);
-  --sun-1: #f9dc8f;
-  --sun-3: #e39a1c;
-}
-
-/* --- V5 Brass Orbit — 브러시드 브라스, 따뜻한 다크 스튜디오 ------------- */
-.v5 {
-  --color-bg: #1c1713;
-  --color-surface: #2a231d;
-  --color-surface-alt: #3a3128;
-  --color-text: #f6ecdc;
-  --color-text-muted: #bfae95;
-  --color-text-invert: #1c1713;
-  --color-accent: #d9a441;
-  --color-accent-sub: #e2733f;
-  --color-border: #4a3e31;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --radius-lg: 16px;
-  --shadow-sm: 0 12px 24px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.50);
+  --card-border-w: 0px;
+  /* 블러 없는 단단한 오프셋 그림자 = 종이를 한 겹 덧댄 느낌 */
+  --shadow-sm: 8px 8px 0 rgba(30, 42, 35, 0.12);
+  --shadow-md: 12px 12px 0 rgba(30, 42, 35, 0.12);
 
-  /* 금속 5단: 하이라이트 → 심부. 이 띠의 배치가 금속감을 만든다 */
-  --metal-1: #fff0c4;
-  --metal-2: #e8bd5c;
-  --metal-3: #b07a25;
-  --metal-4: #6a4513;
-  --metal-5: #3a2509;
-  --glow: rgba(217, 164, 65, 0.22);
-  --floor-shadow: rgba(0, 0, 0, 0.55);
+  --v-cut: rgba(30, 42, 35, 0.16);
+  --v-paper-1: #dce5db;
+  --v-paper-2: #b9cfbf;
+  --v-paper-3: #7fa78d;
+  --v-paper-4: #3e7a5e;
+  --v-sun: #ffffff;
 }
 
-/* --- V6 Studio Porcelain — 무채색 도자기, 단 하나의 주홍 포인트 -------- */
+/* --- V5 Brass Orbit — 황동 광택 구체, 따뜻한 어둠 ----------------------- */
+.v5 {
+  --color-bg: #2a211b;
+  --color-surface: #352a22;
+  --color-surface-alt: #47392f;
+  --color-text: #f6eee4;
+  --color-text-muted: #c7b5a2;
+  --color-text-invert: #2a211b;
+  --color-accent: #d9a25e;
+  --color-accent-sub: #f6dcae;
+  --color-border: #5a4a3e;
+
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.36);
+
+  --v-cut: rgba(0, 0, 0, 0.32);
+  --v-brass-hi: #f6dcae;
+  --v-brass-mid: #d9a25e;
+  --v-brass-lo: #8e5f2f;
+  --v-ring: #c98f4a;
+  --v-podium-top: #5a4536;
+  --v-podium-mid: #47372b;
+  --v-podium-base: #3a2c23;
+}
+
+/* --- V6 Ceramic Shelf — 무광 도자기, 중성 다크 ------------------------- */
 .v6 {
-  --color-bg: #e4e4e1;
-  --color-surface: #f7f7f5;
-  --color-surface-alt: #cfcfcb;
-  --color-text: #1f1f1d;
-  --color-text-muted: #5c5c58;
-  --color-text-invert: #ffffff;
-  --color-accent: #e0432b;
-  --color-accent-sub: #8e8e88;
-  --color-border: #c4c4bf;
+  --color-bg: #1e2022;
+  --color-surface: #2a2d31;
+  --color-surface-alt: #373b41;
+  --color-text: #f2f1ee;
+  --color-text-muted: #b5b8bd;
+  --color-text-invert: #1e2022;
+  --color-accent: #f4a3b8;
+  --color-accent-sub: #ece6dc;
+  --color-border: #3d4147;
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --shadow-sm: 0 12px 24px rgba(31, 31, 29, 0.12);
-  --shadow-md: 0 20px 40px rgba(31, 31, 29, 0.16);
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.36);
 
-  /* 도자기 5단 + 주홍 3단 */
-  --por-1: #ffffff;
-  --por-2: #f0f0ec;
-  --por-3: #d9d9d4;
-  --por-4: #b4b4ad;
-  --por-5: #8e8e88;
-  --red-1: #ff8d78;
-  --red-2: #e0432b;
-  --red-3: #9c2616;
-  --cast-shadow: rgba(31, 31, 29, 0.16);
+  --v-cut: rgba(0, 0, 0, 0.36);
+  --v-porcelain: #f3f0ea;
+  --v-porcelain-shade: #c9c3b7;
+  --v-rose: #f4a3b8;
+  --v-rose-shade: #c97a92;
+  --v-rose-hi: #ffd3df;
+  --v-niche: #26292d;
+  --v-shelf: #3a3f46;
+  --v-shelf-front: #2c3036;
 }
   </style>
   <style>
-    .p2 { fill: var(--paper-2); }
-    .p3 { fill: var(--paper-3); }
-    .p4 { fill: var(--paper-4); }
-    .pshadow { fill: var(--paper-shadow); }
+    /* 장면: 우하단 종이 언덕 2겹. 본문 영역(y 904 이하) 밖에만 놓는다. */
+    .scene { position: absolute; left: 0; top: 0; }
+    .cut { fill: var(--v-cut); }
+    .hill-far { fill: var(--v-paper-2); }
+    .hill-near { fill: var(--v-paper-3); }
 
-    /* 헤더: 종이 두 장을 물결로 오려 붙인 띠 */
-    .head-art { position: absolute; left: 0; top: 0; }
-
-    .page-inner { gap: 0; }
-    .page-head {
-      height: 240px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-    .head-text { display: flex; flex-direction: column; gap: var(--sp-2); }
-    .kicker {
-      font-size: var(--fs-caption);
-      font-weight: var(--fw-bold);
-      letter-spacing: var(--ls-wide);
-      color: var(--color-text-on-inverse-muted);
-    }
-    .page-title { color: var(--color-text-on-inverse); }
-    /* 페이지 숫자는 종이 원반 위에 */
-    .page-disc {
-      display: flex;
+    .page { gap: var(--sp-6); }
+    .page-head { display: flex; align-items: center; justify-content: space-between; }
+    .tab {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--color-accent-sub);
-      color: var(--color-text);
+      height: 56px;
+      padding: 0 var(--sp-5);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface-alt);
+      color: var(--color-accent);
       font-size: var(--fs-body-m);
       font-weight: var(--fw-bold);
-      box-shadow: var(--shadow-sm);
     }
+    .page-no { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .page-title { font-weight: var(--fw-bold); color: var(--color-text); }
+    .page-body { flex: 1; display: flex; gap: var(--sp-6); min-height: 0; }
+    .page-note { font-size: var(--fs-body-m); color: var(--color-text-muted); }
 
-    .page-body { display: flex; gap: var(--sp-6); flex: 1; }
-
-    .kpi-card {
-      width: 640px;
+    /* 히어로: 종이 면 위의 큰 수치 한 개 */
+    .hero {
       flex: none;
+      width: 600px;
       display: flex;
       flex-direction: column;
-      gap: var(--sp-2);
+      gap: var(--sp-3);
       padding: var(--sp-6);
-      border-radius: var(--radius-md);
-      background: var(--color-surface);
-      box-shadow: var(--shadow-md);
+      border-radius: var(--radius-lg);
+      background: var(--v-paper-1);
     }
-    .kpi-label { font-size: var(--fs-body-m); color: var(--color-text-muted); }
-    .kpi-figure { font-size: var(--fs-display); font-weight: var(--fw-bold); color: var(--color-accent); line-height: var(--lh-tight); }
-    .kpi-delta { font-size: var(--fs-body-m); color: var(--color-text); }
+    .hero-label { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .hero-value {
+      font-size: var(--fs-display);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-tight);
+      letter-spacing: var(--ls-tight);
+      color: var(--color-accent);
+    }
+    .hero-sub { font-size: var(--fs-body-l); color: var(--color-text); }
+    .hero-foot { margin-top: auto; font-size: var(--fs-caption); color: var(--color-text-muted); }
 
-    .bars { margin-top: auto; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 var(--sp-3); }
-    .bar-col { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); }
-    .bar-val { font-size: var(--fs-body-m); font-weight: var(--fw-semibold); }
-    .bar-year { font-size: var(--fs-body-m); color: var(--color-text-muted); }
-
-    .strip-list { flex: 1; display: flex; flex-direction: column; gap: var(--sp-5); }
-    .strip {
+    /* 센터별 막대: 카드 한 장 = 센터 한 곳. 막대 채움은 배경 그라디언트로 그린다. */
+    .bar-list { flex: 1; display: flex; flex-direction: column; gap: var(--sp-3); }
+    .bar-row {
       flex: 1;
       display: flex;
       align-items: center;
       gap: var(--sp-5);
-      padding: 0 var(--sp-6);
-      border-radius: var(--radius-md);
+      padding: 0 var(--sp-5);
       background: var(--color-surface);
+      border-radius: var(--radius-md);
       box-shadow: var(--shadow-sm);
     }
-    .strip-no {
+    .bar-name { flex: none; width: 200px; font-size: var(--fs-body-l); color: var(--color-text); }
+    .track { flex: 1; height: 24px; }
+    .bar-val {
       flex: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: var(--color-surface-alt);
+      width: 112px;
+      text-align: right;
       font-size: var(--fs-h3);
       font-weight: var(--fw-bold);
-      color: var(--color-accent);
-      box-shadow: var(--shadow-sm);
+      color: var(--color-text);
     }
-    .strip-text { flex: 1; display: flex; flex-direction: column; gap: var(--sp-2); }
-    .strip-title { font-size: var(--fs-h3); font-weight: var(--fw-bold); }
-    .strip-desc { font-size: var(--fs-body-m); color: var(--color-text-muted); }
-    .strip-fig { flex: none; text-align: right; font-size: var(--fs-h2); font-weight: var(--fw-bold); }
   </style>
 </head>
 <body>
   <div class="slide v4">
-
-    <svg class="head-art" width="1920" height="320" viewBox="0 0 1920 320" fill="none">
-      <path class="p3" d="M0 0 H1920 V268 C1600 316 1280 236 960 276 S320 316 0 266 Z"/>
-      <path class="pshadow" transform="translate(0,12)" d="M0 0 H1920 V224 C1600 276 1280 192 960 232 S320 276 0 226 Z"/>
-      <path class="p4" d="M0 0 H1920 V224 C1600 276 1280 192 960 232 S320 276 0 226 Z"/>
+    <svg class="scene" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+      <path class="cut" transform="translate(12 12)" d="M1040 1080 C1180 980 1340 960 1480 1000 S1760 990 1920 940 L1920 1080 Z"/>
+      <path class="hill-far" d="M1040 1080 C1180 980 1340 960 1480 1000 S1760 990 1920 940 L1920 1080 Z"/>
+      <path class="hill-near" d="M1240 1080 C1340 1010 1460 1000 1580 1030 S1800 1020 1920 1000 L1920 1080 Z"/>
     </svg>
 
-    <div class="slide-inner page-inner">
+    <div class="slide-inner page">
       <div class="page-head">
-        <div class="head-text">
-          <p class="kicker">GREEN CITY · 사업 현황</p>
-          <h2 class="t-h1 page-title">2026년 도시 숲 조성 성과</h2>
-        </div>
-        <div class="page-disc t-nums">03</div>
+        <span class="tab">02 · 전환 진행 현황</span>
+        <span class="page-no t-nums">03 / 12</span>
       </div>
+      <h2 class="t-h2 page-title">센터 4곳 중 2곳이 목표를 넘겼다</h2>
 
       <div class="page-body">
-        <div class="kpi-card">
-          <p class="kpi-label">누적 조성 면적</p>
-          <p class="kpi-figure t-nums">38.4만㎡</p>
-          <p class="kpi-delta">전년 대비 +53%</p>
-
-          <div class="bars">
-            <div class="bar-col">
-              <span class="bar-val t-nums">12.6</span>
-              <svg width="112" height="74" viewBox="0 0 112 74" fill="none">
-                <rect class="pshadow" x="8" y="8" width="96" height="66" rx="4"/>
-                <rect class="p2" x="8" y="0" width="96" height="66" rx="4"/>
-              </svg>
-              <span class="bar-year t-nums">2024</span>
-            </div>
-            <div class="bar-col">
-              <span class="bar-val t-nums">25.1</span>
-              <svg width="112" height="139" viewBox="0 0 112 139" fill="none">
-                <rect class="pshadow" x="8" y="8" width="96" height="131" rx="4"/>
-                <rect class="p3" x="8" y="0" width="96" height="131" rx="4"/>
-              </svg>
-              <span class="bar-year t-nums">2025</span>
-            </div>
-            <div class="bar-col">
-              <span class="bar-val t-nums">38.4</span>
-              <svg width="112" height="208" viewBox="0 0 112 208" fill="none">
-                <rect class="pshadow" x="8" y="8" width="96" height="200" rx="4"/>
-                <rect class="p4" x="8" y="0" width="96" height="200" rx="4"/>
-              </svg>
-              <span class="bar-year t-nums">2026</span>
-            </div>
-          </div>
+        <div class="hero">
+          <p class="hero-label">재생 골판지 사용률 · 9~10월 평균</p>
+          <p class="hero-value t-nums">76%</p>
+          <p class="hero-sub">목표 75% · 전월 대비 +4%p</p>
+          <p class="hero-foot">진한 막대는 목표 75% 이상 · 출고 박스 기준</p>
         </div>
 
-        <div class="strip-list">
-          <div class="strip">
-            <div class="strip-no t-nums">1</div>
-            <div class="strip-text">
-              <p class="strip-title">하천변 숲길 연결</p>
-              <p class="strip-desc">도림천·안양천 12개 구간 정비</p>
-            </div>
-            <p class="strip-fig t-nums">28.4km</p>
+        <div class="bar-list">
+          <div class="bar-row">
+            <span class="bar-name">서울 1센터</span>
+            <div class="track" style="background: linear-gradient(to right, var(--color-accent) 88%, var(--color-surface-alt) 88%)"></div>
+            <span class="bar-val t-nums">88%</span>
           </div>
-          <div class="strip">
-            <div class="strip-no t-nums">2</div>
-            <div class="strip-text">
-              <p class="strip-title">생활권 소공원 조성</p>
-              <p class="strip-desc">동별 유휴부지를 녹지로 전환</p>
-            </div>
-            <p class="strip-fig t-nums">62곳</p>
+          <div class="bar-row">
+            <span class="bar-name">대전 2센터</span>
+            <div class="track" style="background: linear-gradient(to right, var(--color-accent) 79%, var(--color-surface-alt) 79%)"></div>
+            <span class="bar-val t-nums">79%</span>
           </div>
-          <div class="strip">
-            <div class="strip-no t-nums">3</div>
-            <div class="strip-text">
-              <p class="strip-title">시민 숲 관리단 운영</p>
-              <p class="strip-desc">자치구별 모집 · 월 1회 활동</p>
-            </div>
-            <p class="strip-fig t-nums">1,840명</p>
+          <div class="bar-row">
+            <span class="bar-name">광주 4센터</span>
+            <div class="track" style="background: linear-gradient(to right, var(--v-paper-3) 72%, var(--color-surface-alt) 72%)"></div>
+            <span class="bar-val t-nums">72%</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-name">부산 3센터</span>
+            <div class="track" style="background: linear-gradient(to right, var(--v-paper-3) 64%, var(--color-surface-alt) 64%)"></div>
+            <span class="bar-val t-nums">64%</span>
           </div>
         </div>
       </div>
-    </div>
 
+      <p class="page-note">다음 달 우선 과제: 부산 3센터 포장 라인 교체 · 담당 정재원 · 12월 중순</p>
+    </div>
   </div>
 </body>
 </html>

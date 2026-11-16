@@ -539,8 +539,8 @@ th {
     }
     .head-left { display: flex; align-items: center; gap: var(--sp-5); }
     .head-no {
-      width: 96px;
-      height: 96px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       background: var(--color-accent);
       color: var(--color-text-invert);
@@ -561,6 +561,7 @@ th {
     .tile { fill: var(--v-tile); stroke: var(--color-surface); stroke-width: 3px; }
     .ring { fill: none; stroke: var(--color-surface); stroke-width: 4px; }
     .dot { fill: var(--color-surface); }
+    .grout { stroke: var(--color-surface-alt); stroke-width: 2px; }
 
     .body {
       position: absolute;
@@ -627,6 +628,30 @@ th {
 </head>
 <body>
   <div class="slide v4">
+    <svg class="art" viewBox="0 0 1920 1080" aria-hidden="true" >
+<line class="grout" x1="120" y1="200" x2="120" y2="1080"/>
+<line class="grout" x1="240" y1="200" x2="240" y2="1080"/>
+<line class="grout" x1="360" y1="200" x2="360" y2="1080"/>
+<line class="grout" x1="480" y1="200" x2="480" y2="1080"/>
+<line class="grout" x1="600" y1="200" x2="600" y2="1080"/>
+<line class="grout" x1="720" y1="200" x2="720" y2="1080"/>
+<line class="grout" x1="840" y1="200" x2="840" y2="1080"/>
+<line class="grout" x1="960" y1="200" x2="960" y2="1080"/>
+<line class="grout" x1="1080" y1="200" x2="1080" y2="1080"/>
+<line class="grout" x1="1200" y1="200" x2="1200" y2="1080"/>
+<line class="grout" x1="1320" y1="200" x2="1320" y2="1080"/>
+<line class="grout" x1="1440" y1="200" x2="1440" y2="1080"/>
+<line class="grout" x1="1560" y1="200" x2="1560" y2="1080"/>
+<line class="grout" x1="1680" y1="200" x2="1680" y2="1080"/>
+<line class="grout" x1="1800" y1="200" x2="1800" y2="1080"/>
+<line class="grout" x1="0" y1="240" x2="1920" y2="240"/>
+<line class="grout" x1="0" y1="360" x2="1920" y2="360"/>
+<line class="grout" x1="0" y1="480" x2="1920" y2="480"/>
+<line class="grout" x1="0" y1="600" x2="1920" y2="600"/>
+<line class="grout" x1="0" y1="720" x2="1920" y2="720"/>
+<line class="grout" x1="0" y1="840" x2="1920" y2="840"/>
+<line class="grout" x1="0" y1="960" x2="1920" y2="960"/>
+</svg>
     <header class="head">
       <div class="head-left">
         <p class="head-no t-nums">03</p>
@@ -654,7 +679,7 @@ th {
         <div class="card hero">
           <p class="card-label">주문 건수 (전월 대비)</p>
           <p class="card-value t-nums">2.1배</p>
-          <p class="card-desc">점심 피크 3시간 주문을 오후 시간대로 나눴다.</p>
+          <p class="card-desc">점심 주문을 오후 시간대로 나눴다.</p>
         </div>
         <div class="card">
           <p class="card-label">재료 폐기율 변화</p>

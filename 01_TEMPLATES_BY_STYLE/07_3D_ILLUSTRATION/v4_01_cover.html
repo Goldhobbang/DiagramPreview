@@ -1,4 +1,4 @@
-<!-- @card V4 Paper Cut Forest · 표지 | 종이 지층 하단 풀폭 · 상단 텍스트 · 종이 해 | 1920x1080 -->
+<!-- @card V4 Paper Cut Forest · 표지 | 종이컷 숲이 대각선으로 갈라진 뉴트럴 라이트 · 좌상단 텍스트 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -431,137 +431,137 @@ th {
 .items-start    { align-items: flex-start; }
 .justify-center { justify-content: center; }
 .justify-between{ justify-content: space-between; }
-.grow           { flex: 1; }/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
 /* ==========================================================================
    07_3D_ILLUSTRATION — 화면의 주인공이 텍스트가 아니라 오브젝트
    기획: 00_GUIDES/PLANS/07_3D_ILLUSTRATION.md
 
-   조명은 덱 전체에서 좌상단 고정. 오브젝트 아래 접지 그림자 필수, 오브젝트 1~3개.
-   V4~V6은 재질이 다르다: V4 종이 공예(레이어 컷) / V5 브러시드 브라스(금속) / V6 스튜디오 도자기.
+   V4 Paper Cut Forest  · 뉴트럴 라이트 · 종이를 오려 겹친 대각선 분할
+   V5 Brass Orbit       · 웜 다크 · 우상단 코너의 브라스 구체와 궤도
+   V6 Ceramic Shelf     · 뉴트럴 다크 · 선반에 올린 도자기 진열
+
+   조명 방향은 덱 전체에서 고정. 오브젝트 아래 접지 그림자를 넣는다.
+   슬라이드당 오브젝트는 1~3개까지.
    ========================================================================== */
 
-/* --- V4~V6 공통 -------------------------------------------------------- */
+/* 3종 공통. 컷 그림자 색만 기본으로 두고, 베리에이션이 덮어쓴다. */
 .v4, .v5, .v6 {
-  --card-border-w: 0px;
-  --spec: #ffffff;
+  --v-cut: rgba(0, 0, 0, 0.16);
 }
 
-/* --- V4 Paper Cut Forest — 종이를 겹겹이 오려 붙인 레이어, 딱딱한 오프셋 그림자 --- */
+/* --- V4 Paper Cut Forest — 종이컷 레이어, 면으로만 겹친다 ------------ */
 .v4 {
-  --color-bg: #e9f2e4;
-  --color-surface: #fbfdf9;
-  --color-surface-alt: #d3e6cb;
-  --color-text: #16301f;
-  --color-text-muted: #4a6a54;
+  --color-bg: #f1f2ee;
+  --color-surface: #ffffff;
+  --color-surface-alt: #e1e6df;
+  --color-text: #1e2a23;
+  --color-text-muted: #55645a;
   --color-text-invert: #ffffff;
-  --color-accent: #1c7c54;
-  --color-accent-sub: #f2b441;
-  --color-border: #bcd7b0;
-  --color-bg-inverse: #124f37;
-  --color-text-on-inverse: #f0f7ec;
-  --color-text-on-inverse-muted: #b9d8c3;
+  --color-accent: #3e7a5e;
+  --color-accent-sub: #a9c7b4;
+  --color-border: #cfd7cd;
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  /* 블러 0 — 종이 두께가 만드는 딱딱한 오프셋 그림자 */
-  --shadow-sm: 0 6px 0 rgba(22, 48, 31, 0.14);
-  --shadow-md: 0 8px 0 rgba(22, 48, 31, 0.18);
-
-  /* 종이 5겹: 뒤(연함) → 앞(진함) */
-  --paper-1: #c6e0bb;
-  --paper-2: #98c9a2;
-  --paper-3: #55a97c;
-  --paper-4: #1c7c54;
-  --paper-5: #124f37;
-  --paper-shadow: rgba(10, 44, 28, 0.30);
-  --sun-1: #f9dc8f;
-  --sun-3: #e39a1c;
-}
-
-/* --- V5 Brass Orbit — 브러시드 브라스, 따뜻한 다크 스튜디오 ------------- */
-.v5 {
-  --color-bg: #1c1713;
-  --color-surface: #2a231d;
-  --color-surface-alt: #3a3128;
-  --color-text: #f6ecdc;
-  --color-text-muted: #bfae95;
-  --color-text-invert: #1c1713;
-  --color-accent: #d9a441;
-  --color-accent-sub: #e2733f;
-  --color-border: #4a3e31;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --radius-lg: 16px;
-  --shadow-sm: 0 12px 24px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.50);
+  --card-border-w: 0px;
+  /* 블러 없는 단단한 오프셋 그림자 = 종이를 한 겹 덧댄 느낌 */
+  --shadow-sm: 8px 8px 0 rgba(30, 42, 35, 0.12);
+  --shadow-md: 12px 12px 0 rgba(30, 42, 35, 0.12);
 
-  /* 금속 5단: 하이라이트 → 심부. 이 띠의 배치가 금속감을 만든다 */
-  --metal-1: #fff0c4;
-  --metal-2: #e8bd5c;
-  --metal-3: #b07a25;
-  --metal-4: #6a4513;
-  --metal-5: #3a2509;
-  --glow: rgba(217, 164, 65, 0.22);
-  --floor-shadow: rgba(0, 0, 0, 0.55);
+  --v-cut: rgba(30, 42, 35, 0.16);
+  --v-paper-1: #dce5db;
+  --v-paper-2: #b9cfbf;
+  --v-paper-3: #7fa78d;
+  --v-paper-4: #3e7a5e;
+  --v-sun: #ffffff;
 }
 
-/* --- V6 Studio Porcelain — 무채색 도자기, 단 하나의 주홍 포인트 -------- */
+/* --- V5 Brass Orbit — 황동 광택 구체, 따뜻한 어둠 ----------------------- */
+.v5 {
+  --color-bg: #2a211b;
+  --color-surface: #352a22;
+  --color-surface-alt: #47392f;
+  --color-text: #f6eee4;
+  --color-text-muted: #c7b5a2;
+  --color-text-invert: #2a211b;
+  --color-accent: #d9a25e;
+  --color-accent-sub: #f6dcae;
+  --color-border: #5a4a3e;
+
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.36);
+
+  --v-cut: rgba(0, 0, 0, 0.32);
+  --v-brass-hi: #f6dcae;
+  --v-brass-mid: #d9a25e;
+  --v-brass-lo: #8e5f2f;
+  --v-ring: #c98f4a;
+  --v-podium-top: #5a4536;
+  --v-podium-mid: #47372b;
+  --v-podium-base: #3a2c23;
+}
+
+/* --- V6 Ceramic Shelf — 무광 도자기, 중성 다크 ------------------------- */
 .v6 {
-  --color-bg: #e4e4e1;
-  --color-surface: #f7f7f5;
-  --color-surface-alt: #cfcfcb;
-  --color-text: #1f1f1d;
-  --color-text-muted: #5c5c58;
-  --color-text-invert: #ffffff;
-  --color-accent: #e0432b;
-  --color-accent-sub: #8e8e88;
-  --color-border: #c4c4bf;
+  --color-bg: #1e2022;
+  --color-surface: #2a2d31;
+  --color-surface-alt: #373b41;
+  --color-text: #f2f1ee;
+  --color-text-muted: #b5b8bd;
+  --color-text-invert: #1e2022;
+  --color-accent: #f4a3b8;
+  --color-accent-sub: #ece6dc;
+  --color-border: #3d4147;
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --shadow-sm: 0 12px 24px rgba(31, 31, 29, 0.12);
-  --shadow-md: 0 20px 40px rgba(31, 31, 29, 0.16);
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.36);
 
-  /* 도자기 5단 + 주홍 3단 */
-  --por-1: #ffffff;
-  --por-2: #f0f0ec;
-  --por-3: #d9d9d4;
-  --por-4: #b4b4ad;
-  --por-5: #8e8e88;
-  --red-1: #ff8d78;
-  --red-2: #e0432b;
-  --red-3: #9c2616;
-  --cast-shadow: rgba(31, 31, 29, 0.16);
+  --v-cut: rgba(0, 0, 0, 0.36);
+  --v-porcelain: #f3f0ea;
+  --v-porcelain-shade: #c9c3b7;
+  --v-rose: #f4a3b8;
+  --v-rose-shade: #c97a92;
+  --v-rose-hi: #ffd3df;
+  --v-niche: #26292d;
+  --v-shelf: #3a3f46;
+  --v-shelf-front: #2c3036;
 }
   </style>
   <style>
-    .p1 { fill: var(--paper-1); }
-    .p2 { fill: var(--paper-2); }
-    .p3 { fill: var(--paper-3); }
-    .p4 { fill: var(--paper-4); }
-    .p5 { fill: var(--paper-5); }
-    .pshadow { fill: var(--paper-shadow); }
+    /* 장면: 배경 SVG 1장(종이 면·숲·해). 텍스트는 HTML로 그 위에 얹는다. */
+    .scene { position: absolute; left: 0; top: 0; }
+    .paper-panel { fill: var(--v-paper-1); }
+    .sun { fill: var(--v-sun); }
+    .cut { fill: var(--v-cut); }
+    .tree-far { fill: var(--v-paper-2); }
+    .tree-mid { fill: var(--v-paper-3); }
+    .tree-near { fill: var(--v-paper-4); }
 
-    /* 종이 해: 겹겹의 원반 — 얼굴 쪽이 위(좌상단 광원) */
-    .sun-art { position: absolute; left: 1344px; top: 96px; }
-
-    /* 하단 전체를 덮는 종이 지층. 맨 앞(진한 층)이 푸터를 받친다. */
-    .land { position: absolute; left: 0; bottom: 0; }
-
-    .title-block {
+    /* 텍스트는 좌상단, 바닥 줄은 좌하단. 우하단은 종이 면과 숲이 차지한다. */
+    .cover-inner {
       position: absolute;
-      left: var(--slide-pad);
-      top: 112px;
+      inset: var(--slide-pad);
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+    }
+    .cover-top {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       gap: var(--sp-5);
-      z-index: 2;
     }
     .tag {
-      align-self: flex-start;
       padding: var(--sp-2) var(--sp-4);
       border-radius: var(--radius-sm);
       background: var(--color-accent);
@@ -569,77 +569,34 @@ th {
       font-size: var(--fs-caption);
       font-weight: var(--fw-bold);
       letter-spacing: var(--ls-wide);
-      box-shadow: var(--shadow-sm);
     }
-    .cover-title { font-weight: var(--fw-bold); }
+    .cover-title { font-weight: var(--fw-bold); color: var(--color-text); }
     .cover-sub { font-size: var(--fs-h3); color: var(--color-text-muted); }
-
-    .cover-foot {
-      position: absolute;
-      left: var(--slide-pad);
-      bottom: var(--slide-pad);
-      font-size: var(--fs-body-m);
-      color: var(--color-text-on-inverse);
-      z-index: 2;
-    }
+    .cover-foot { font-size: var(--fs-body-m); color: var(--color-text-muted); }
   </style>
 </head>
 <body>
   <div class="slide v4">
-
-    <!-- 종이 해: 큰 원반 위에 작은 원반을 올리고, 각 장 아래에 딱딱한 그림자를 깐다 -->
-    <svg class="sun-art" width="400" height="400" viewBox="0 0 400 400" fill="none">
-      <circle class="pshadow" cx="200" cy="212" r="184"/>
-      <circle fill="var(--sun-1)" cx="200" cy="200" r="184"/>
-      <circle class="pshadow" cx="200" cy="208" r="136"/>
-      <circle fill="var(--color-accent-sub)" cx="200" cy="200" r="136"/>
-      <circle class="pshadow" cx="200" cy="206" r="84"/>
-      <circle fill="var(--sun-3)" cx="200" cy="200" r="84"/>
+    <svg class="scene" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
+      <polygon class="paper-panel" points="560,1080 1920,180 1920,1080"/>
+      <circle class="cut" cx="1592" cy="272" r="96"/>
+      <circle class="sun" cx="1580" cy="260" r="96"/>
+      <g transform="translate(12 12)"><path class="cut" d="M1000 600 L958 726 L1042 726 Z"/><path class="cut" d="M1000 660 L946 810 L1054 810 Z"/><path class="cut" d="M1000 756 L925 900 L1075 900 Z"/><path class="cut" d="M1150 500 L1102.4 668 L1197.6 668 Z"/><path class="cut" d="M1150 580 L1088.8 780 L1211.2 780 Z"/><path class="cut" d="M1150 708 L1065 900 L1235 900 Z"/><path class="cut" d="M1310 640 L1270.8 749.2 L1349.2 749.2 Z"/><path class="cut" d="M1310 692 L1259.6 822 L1360.4 822 Z"/><path class="cut" d="M1310 775.2 L1240 900 L1380 900 Z"/><path class="cut" d="M1470 540 L1425.2 691.2 L1514.8 691.2 Z"/><path class="cut" d="M1470 612 L1412.4 792 L1527.6 792 Z"/><path class="cut" d="M1470 727.2 L1390 900 L1550 900 Z"/><path class="cut" d="M1640 600 L1598 726 L1682 726 Z"/><path class="cut" d="M1640 660 L1586 810 L1694 810 Z"/><path class="cut" d="M1640 756 L1565 900 L1715 900 Z"/><path class="cut" d="M1800 520 L1752.4 679.6 L1847.6 679.6 Z"/><path class="cut" d="M1800 596 L1738.8 786 L1861.2 786 Z"/><path class="cut" d="M1800 717.6 L1715 900 L1885 900 Z"/></g>
+      <g><path class="tree-far" d="M1000 600 L958 726 L1042 726 Z"/><path class="tree-far" d="M1000 660 L946 810 L1054 810 Z"/><path class="tree-far" d="M1000 756 L925 900 L1075 900 Z"/><path class="tree-far" d="M1150 500 L1102.4 668 L1197.6 668 Z"/><path class="tree-far" d="M1150 580 L1088.8 780 L1211.2 780 Z"/><path class="tree-far" d="M1150 708 L1065 900 L1235 900 Z"/><path class="tree-far" d="M1310 640 L1270.8 749.2 L1349.2 749.2 Z"/><path class="tree-far" d="M1310 692 L1259.6 822 L1360.4 822 Z"/><path class="tree-far" d="M1310 775.2 L1240 900 L1380 900 Z"/><path class="tree-far" d="M1470 540 L1425.2 691.2 L1514.8 691.2 Z"/><path class="tree-far" d="M1470 612 L1412.4 792 L1527.6 792 Z"/><path class="tree-far" d="M1470 727.2 L1390 900 L1550 900 Z"/><path class="tree-far" d="M1640 600 L1598 726 L1682 726 Z"/><path class="tree-far" d="M1640 660 L1586 810 L1694 810 Z"/><path class="tree-far" d="M1640 756 L1565 900 L1715 900 Z"/><path class="tree-far" d="M1800 520 L1752.4 679.6 L1847.6 679.6 Z"/><path class="tree-far" d="M1800 596 L1738.8 786 L1861.2 786 Z"/><path class="tree-far" d="M1800 717.6 L1715 900 L1885 900 Z"/></g>
+      <g transform="translate(12 12)"><path class="cut" d="M1090 650 L1042.4 792.8 L1137.6 792.8 Z"/><path class="cut" d="M1090 718 L1028.8 888 L1151.2 888 Z"/><path class="cut" d="M1090 826.8 L1005 990 L1175 990 Z"/><path class="cut" d="M1260 570 L1206.8 746.4 L1313.2 746.4 Z"/><path class="cut" d="M1260 654 L1191.6 864 L1328.4 864 Z"/><path class="cut" d="M1260 788.4 L1165 990 L1355 990 Z"/><path class="cut" d="M1450 690 L1408 816 L1492 816 Z"/><path class="cut" d="M1450 750 L1396 900 L1504 900 Z"/><path class="cut" d="M1450 846 L1375 990 L1525 990 Z"/><path class="cut" d="M1640 590 L1589.6 758 L1690.4 758 Z"/><path class="cut" d="M1640 670 L1575.2 870 L1704.8 870 Z"/><path class="cut" d="M1640 798 L1550 990 L1730 990 Z"/><path class="cut" d="M1830 710 L1788 827.6 L1872 827.6 Z"/><path class="cut" d="M1830 766 L1776 906 L1884 906 Z"/><path class="cut" d="M1830 855.6 L1755 990 L1905 990 Z"/></g>
+      <g><path class="tree-mid" d="M1090 650 L1042.4 792.8 L1137.6 792.8 Z"/><path class="tree-mid" d="M1090 718 L1028.8 888 L1151.2 888 Z"/><path class="tree-mid" d="M1090 826.8 L1005 990 L1175 990 Z"/><path class="tree-mid" d="M1260 570 L1206.8 746.4 L1313.2 746.4 Z"/><path class="tree-mid" d="M1260 654 L1191.6 864 L1328.4 864 Z"/><path class="tree-mid" d="M1260 788.4 L1165 990 L1355 990 Z"/><path class="tree-mid" d="M1450 690 L1408 816 L1492 816 Z"/><path class="tree-mid" d="M1450 750 L1396 900 L1504 900 Z"/><path class="tree-mid" d="M1450 846 L1375 990 L1525 990 Z"/><path class="tree-mid" d="M1640 590 L1589.6 758 L1690.4 758 Z"/><path class="tree-mid" d="M1640 670 L1575.2 870 L1704.8 870 Z"/><path class="tree-mid" d="M1640 798 L1550 990 L1730 990 Z"/><path class="tree-mid" d="M1830 710 L1788 827.6 L1872 827.6 Z"/><path class="tree-mid" d="M1830 766 L1776 906 L1884 906 Z"/><path class="tree-mid" d="M1830 855.6 L1755 990 L1905 990 Z"/></g>
+      <g transform="translate(12 12)"><path class="cut" d="M1220 740 L1158.4 891.2 L1281.6 891.2 Z"/><path class="cut" d="M1220 812 L1140.8 992 L1299.2 992 Z"/><path class="cut" d="M1220 927.2 L1110 1100 L1330 1100 Z"/><path class="cut" d="M1540 660 L1472.8 844.8 L1607.2 844.8 Z"/><path class="cut" d="M1540 748 L1453.6 968 L1626.4 968 Z"/><path class="cut" d="M1540 888.8 L1420 1100 L1660 1100 Z"/><path class="cut" d="M1820 800 L1766.8 926 L1873.2 926 Z"/><path class="cut" d="M1820 860 L1751.6 1010 L1888.4 1010 Z"/><path class="cut" d="M1820 956 L1725 1100 L1915 1100 Z"/></g>
+      <g><path class="tree-near" d="M1220 740 L1158.4 891.2 L1281.6 891.2 Z"/><path class="tree-near" d="M1220 812 L1140.8 992 L1299.2 992 Z"/><path class="tree-near" d="M1220 927.2 L1110 1100 L1330 1100 Z"/><path class="tree-near" d="M1540 660 L1472.8 844.8 L1607.2 844.8 Z"/><path class="tree-near" d="M1540 748 L1453.6 968 L1626.4 968 Z"/><path class="tree-near" d="M1540 888.8 L1420 1100 L1660 1100 Z"/><path class="tree-near" d="M1820 800 L1766.8 926 L1873.2 926 Z"/><path class="tree-near" d="M1820 860 L1751.6 1010 L1888.4 1010 Z"/><path class="tree-near" d="M1820 956 L1725 1100 L1915 1100 Z"/></g>
     </svg>
 
-    <!-- 종이 지층: 뒤에서 앞으로 5장. 각 장 위쪽 가장자리에 그림자를 12px 올려 두께를 만든다 -->
-    <svg class="land" width="1920" height="560" viewBox="0 0 1920 560" fill="none">
-      <path class="p1" d="M0 130 C240 50 480 50 720 120 S1200 190 1480 100 S1760 50 1920 90 L1920 560 L0 560 Z"/>
-
-      <path class="pshadow" transform="translate(0,-12)" d="M0 210 C300 140 560 260 900 190 S1440 130 1700 200 S1840 240 1920 232 L1920 560 L0 560 Z"/>
-      <path class="p2" d="M0 210 C300 140 560 260 900 190 S1440 130 1700 200 S1840 240 1920 232 L1920 560 L0 560 Z"/>
-
-      <!-- 뒤쪽 숲: 연한 층 위의 종이 소나무 -->
-      <g class="p4">
-        <polygon points="420,100 384,160 456,160"/>
-        <polygon points="420,124 372,196 468,196"/>
-        <rect x="414" y="196" width="12" height="24"/>
-      </g>
-
-      <path class="pshadow" transform="translate(0,-12)" d="M0 270 C260 230 520 310 840 260 S1380 210 1640 270 S1800 300 1920 282 L1920 560 L0 560 Z"/>
-      <path class="p3" d="M0 270 C260 230 520 310 840 260 S1380 210 1640 270 S1800 300 1920 282 L1920 560 L0 560 Z"/>
-
-      <g class="p5">
-        <polygon points="1560,126 1516,196 1604,196"/>
-        <polygon points="1560,152 1508,232 1612,232"/>
-        <rect x="1553" y="232" width="14" height="28"/>
-      </g>
-      <g class="p5">
-        <polygon points="1700,172 1668,224 1732,224"/>
-        <polygon points="1700,192 1660,254 1740,254"/>
-        <rect x="1694" y="254" width="12" height="20"/>
-      </g>
-
-      <path class="pshadow" transform="translate(0,-12)" d="M0 330 C320 290 640 360 960 320 S1520 285 1920 330 L1920 560 L0 560 Z"/>
-      <path class="p4" d="M0 330 C320 290 640 360 960 320 S1520 285 1920 330 L1920 560 L0 560 Z"/>
-
-      <path class="pshadow" transform="translate(0,-12)" d="M0 390 C400 370 800 405 1200 385 S1720 370 1920 392 L1920 560 L0 560 Z"/>
-      <path class="p5" d="M0 390 C400 370 800 405 1200 385 S1720 370 1920 392 L1920 560 L0 560 Z"/>
-    </svg>
-
-    <div class="title-block">
-      <span class="tag">GREEN CITY PLAN 2027–2029</span>
-      <h1 class="t-display cover-title">도시 숲 3개년<br>조성 계획</h1>
-      <p class="cover-sub">생활권 녹지 확충 · 하천변 숲길 연결 · 시민 참여 관리</p>
+    <div class="cover-inner">
+      <div class="cover-top">
+        <span class="tag">ECO PACKAGING · 2026</span>
+        <h1 class="t-display cover-title">포장을 줄여<br>숲을 지킨다</h1>
+        <p class="cover-sub">재생 골판지 전환 · 물류센터 4곳 · 2027년 목표 75%</p>
+      </div>
+      <p class="cover-foot">지속가능추진팀 · 박도윤 &nbsp;·&nbsp; 2026. 11. 16</p>
     </div>
-
-    <p class="cover-foot">서울시 푸른도시국 &nbsp;·&nbsp; 2026. 11. 02</p>
-
   </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!-- @card V5 Brass Orbit · 표지 | 좌 브라스 구체+궤도 링+3단 단상 · 우 텍스트 · 다크 | 1920x1080 -->
+<!-- @card V5 Brass Orbit · 표지 | 우상단 코너의 브라스 구체·궤도 + 3단 단상 · 좌하단 텍스트 · 웜 다크 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -431,234 +431,185 @@ th {
 .items-start    { align-items: flex-start; }
 .justify-center { justify-content: center; }
 .justify-between{ justify-content: space-between; }
-.grow           { flex: 1; }/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
 /* ==========================================================================
    07_3D_ILLUSTRATION — 화면의 주인공이 텍스트가 아니라 오브젝트
    기획: 00_GUIDES/PLANS/07_3D_ILLUSTRATION.md
 
-   조명은 덱 전체에서 좌상단 고정. 오브젝트 아래 접지 그림자 필수, 오브젝트 1~3개.
-   V4~V6은 재질이 다르다: V4 종이 공예(레이어 컷) / V5 브러시드 브라스(금속) / V6 스튜디오 도자기.
+   V4 Paper Cut Forest  · 뉴트럴 라이트 · 종이를 오려 겹친 대각선 분할
+   V5 Brass Orbit       · 웜 다크 · 우상단 코너의 브라스 구체와 궤도
+   V6 Ceramic Shelf     · 뉴트럴 다크 · 선반에 올린 도자기 진열
+
+   조명 방향은 덱 전체에서 고정. 오브젝트 아래 접지 그림자를 넣는다.
+   슬라이드당 오브젝트는 1~3개까지.
    ========================================================================== */
 
-/* --- V4~V6 공통 -------------------------------------------------------- */
+/* 3종 공통. 컷 그림자 색만 기본으로 두고, 베리에이션이 덮어쓴다. */
 .v4, .v5, .v6 {
-  --card-border-w: 0px;
-  --spec: #ffffff;
+  --v-cut: rgba(0, 0, 0, 0.16);
 }
 
-/* --- V4 Paper Cut Forest — 종이를 겹겹이 오려 붙인 레이어, 딱딱한 오프셋 그림자 --- */
+/* --- V4 Paper Cut Forest — 종이컷 레이어, 면으로만 겹친다 ------------ */
 .v4 {
-  --color-bg: #e9f2e4;
-  --color-surface: #fbfdf9;
-  --color-surface-alt: #d3e6cb;
-  --color-text: #16301f;
-  --color-text-muted: #4a6a54;
+  --color-bg: #f1f2ee;
+  --color-surface: #ffffff;
+  --color-surface-alt: #e1e6df;
+  --color-text: #1e2a23;
+  --color-text-muted: #55645a;
   --color-text-invert: #ffffff;
-  --color-accent: #1c7c54;
-  --color-accent-sub: #f2b441;
-  --color-border: #bcd7b0;
-  --color-bg-inverse: #124f37;
-  --color-text-on-inverse: #f0f7ec;
-  --color-text-on-inverse-muted: #b9d8c3;
+  --color-accent: #3e7a5e;
+  --color-accent-sub: #a9c7b4;
+  --color-border: #cfd7cd;
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  /* 블러 0 — 종이 두께가 만드는 딱딱한 오프셋 그림자 */
-  --shadow-sm: 0 6px 0 rgba(22, 48, 31, 0.14);
-  --shadow-md: 0 8px 0 rgba(22, 48, 31, 0.18);
-
-  /* 종이 5겹: 뒤(연함) → 앞(진함) */
-  --paper-1: #c6e0bb;
-  --paper-2: #98c9a2;
-  --paper-3: #55a97c;
-  --paper-4: #1c7c54;
-  --paper-5: #124f37;
-  --paper-shadow: rgba(10, 44, 28, 0.30);
-  --sun-1: #f9dc8f;
-  --sun-3: #e39a1c;
-}
-
-/* --- V5 Brass Orbit — 브러시드 브라스, 따뜻한 다크 스튜디오 ------------- */
-.v5 {
-  --color-bg: #1c1713;
-  --color-surface: #2a231d;
-  --color-surface-alt: #3a3128;
-  --color-text: #f6ecdc;
-  --color-text-muted: #bfae95;
-  --color-text-invert: #1c1713;
-  --color-accent: #d9a441;
-  --color-accent-sub: #e2733f;
-  --color-border: #4a3e31;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --radius-lg: 16px;
-  --shadow-sm: 0 12px 24px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.50);
+  --card-border-w: 0px;
+  /* 블러 없는 단단한 오프셋 그림자 = 종이를 한 겹 덧댄 느낌 */
+  --shadow-sm: 8px 8px 0 rgba(30, 42, 35, 0.12);
+  --shadow-md: 12px 12px 0 rgba(30, 42, 35, 0.12);
 
-  /* 금속 5단: 하이라이트 → 심부. 이 띠의 배치가 금속감을 만든다 */
-  --metal-1: #fff0c4;
-  --metal-2: #e8bd5c;
-  --metal-3: #b07a25;
-  --metal-4: #6a4513;
-  --metal-5: #3a2509;
-  --copper-1: #ffb48a;
-  --copper-2: #e2733f;
-  --copper-3: #8f3a14;
-  --glow: rgba(217, 164, 65, 0.22);
-  --floor-shadow: rgba(0, 0, 0, 0.55);
+  --v-cut: rgba(30, 42, 35, 0.16);
+  --v-paper-1: #dce5db;
+  --v-paper-2: #b9cfbf;
+  --v-paper-3: #7fa78d;
+  --v-paper-4: #3e7a5e;
+  --v-sun: #ffffff;
 }
 
-/* --- V6 Studio Porcelain — 무채색 도자기, 단 하나의 주홍 포인트 -------- */
+/* --- V5 Brass Orbit — 황동 광택 구체, 따뜻한 어둠 ----------------------- */
+.v5 {
+  --color-bg: #2a211b;
+  --color-surface: #352a22;
+  --color-surface-alt: #47392f;
+  --color-text: #f6eee4;
+  --color-text-muted: #c7b5a2;
+  --color-text-invert: #2a211b;
+  --color-accent: #d9a25e;
+  --color-accent-sub: #f6dcae;
+  --color-border: #5a4a3e;
+
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.36);
+
+  --v-cut: rgba(0, 0, 0, 0.32);
+  --v-brass-hi: #f6dcae;
+  --v-brass-mid: #d9a25e;
+  --v-brass-lo: #8e5f2f;
+  --v-ring: #c98f4a;
+  --v-podium-top: #5a4536;
+  --v-podium-mid: #47372b;
+  --v-podium-base: #3a2c23;
+}
+
+/* --- V6 Ceramic Shelf — 무광 도자기, 중성 다크 ------------------------- */
 .v6 {
-  --color-bg: #e4e4e1;
-  --color-surface: #f7f7f5;
-  --color-surface-alt: #cfcfcb;
-  --color-text: #1f1f1d;
-  --color-text-muted: #5c5c58;
-  --color-text-invert: #ffffff;
-  --color-accent: #e0432b;
-  --color-accent-sub: #8e8e88;
-  --color-border: #c4c4bf;
+  --color-bg: #1e2022;
+  --color-surface: #2a2d31;
+  --color-surface-alt: #373b41;
+  --color-text: #f2f1ee;
+  --color-text-muted: #b5b8bd;
+  --color-text-invert: #1e2022;
+  --color-accent: #f4a3b8;
+  --color-accent-sub: #ece6dc;
+  --color-border: #3d4147;
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --shadow-sm: 0 12px 24px rgba(31, 31, 29, 0.12);
-  --shadow-md: 0 20px 40px rgba(31, 31, 29, 0.16);
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.36);
 
-  /* 도자기 5단 + 주홍 3단 */
-  --por-1: #ffffff;
-  --por-2: #f0f0ec;
-  --por-3: #d9d9d4;
-  --por-4: #b4b4ad;
-  --por-5: #8e8e88;
-  --red-1: #ff8d78;
-  --red-2: #e0432b;
-  --red-3: #9c2616;
-  --cast-shadow: rgba(31, 31, 29, 0.16);
+  --v-cut: rgba(0, 0, 0, 0.36);
+  --v-porcelain: #f3f0ea;
+  --v-porcelain-shade: #c9c3b7;
+  --v-rose: #f4a3b8;
+  --v-rose-shade: #c97a92;
+  --v-rose-hi: #ffd3df;
+  --v-niche: #26292d;
+  --v-shelf: #3a3f46;
+  --v-shelf-front: #2c3036;
 }
   </style>
   <style>
-    /* 오브젝트 뒤 광원 하나 — radial-gradient로 (filter:blur 대신) */
-    .glow {
-      position: absolute;
-      left: -120px;
-      top: -140px;
-      width: 1360px;
-      height: 1360px;
-      background: radial-gradient(circle, var(--glow) 0%, transparent 62%);
-    }
-    .objects { position: absolute; left: 60px; top: 0; }
+    /* 장면: 우상단 코너의 구체·궤도, 우하단 3단 단상. 텍스트는 좌하단. */
+    .scene { position: absolute; left: 0; top: 0; }
+    .ring { fill: none; stroke: var(--v-ring); stroke-width: 14; }
+    .cut { fill: var(--v-cut); }
+    .pod-top { fill: var(--v-podium-top); }
+    .pod-mid { fill: var(--v-podium-mid); }
+    .pod-base { fill: var(--v-podium-base); }
+    .stop-hi { stop-color: var(--v-brass-hi); }
+    .stop-mid { stop-color: var(--v-brass-mid); }
+    .stop-lo { stop-color: var(--v-brass-lo); }
 
-    .title-block {
+    /* 텍스트 묶음은 바닥 쪽에 붙는다. 위쪽은 구체와 궤도에 비운다. */
+    .cover-inner {
       position: absolute;
-      left: 1056px;
-      top: 280px;
-      width: 768px;
+      inset: var(--slide-pad);
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
+      gap: var(--sp-6);
+    }
+    .cover-main {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       gap: var(--sp-5);
     }
-    .kicker {
+    .tag {
+      padding: var(--sp-2) var(--sp-4);
+      border-radius: var(--radius-full);
+      background: var(--color-accent);
+      color: var(--color-text-invert);
       font-size: var(--fs-caption);
       font-weight: var(--fw-bold);
       letter-spacing: var(--ls-wide);
-      color: var(--color-accent);
     }
-    .rule { width: 64px; height: 4px; background: var(--color-accent); }
-    .cover-title { font-weight: var(--fw-bold); }
+    .cover-title { font-weight: var(--fw-bold); color: var(--color-text); }
     .cover-sub { font-size: var(--fs-h3); color: var(--color-text-muted); }
-
-    .cover-foot {
-      position: absolute;
-      left: 1056px;
-      bottom: var(--slide-pad);
-      font-size: var(--fs-body-m);
-      color: var(--color-text-muted);
-    }
+    .cover-foot { font-size: var(--fs-body-m); color: var(--color-text-muted); }
   </style>
 </head>
 <body>
   <div class="slide v5">
-
-    <div class="glow"></div>
-
-    <!-- 브라스 구체 + 궤도 링 + 3단 단상. 광원은 좌상단, 구체 아래 접지 그림자·단상 위 접촉 그림자 -->
-    <svg class="objects" width="1000" height="1080" viewBox="0 0 1000 1080" fill="none">
+    <svg class="scene" width="1920" height="1080" viewBox="0 0 1920 1080" aria-hidden="true">
       <defs>
-        <linearGradient id="brassSphere" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0"    style="stop-color: var(--metal-1)"/>
-          <stop offset="0.34" style="stop-color: var(--metal-2)"/>
-          <stop offset="0.50" style="stop-color: var(--metal-4)"/>
-          <stop offset="0.52" style="stop-color: var(--metal-5)"/>
-          <stop offset="0.74" style="stop-color: var(--metal-3)"/>
-          <stop offset="1"    style="stop-color: var(--metal-2)"/>
-        </linearGradient>
-        <radialGradient id="sphereSpec" cx="0.3" cy="0.22" r="0.4">
-          <stop offset="0" style="stop-color: var(--spec); stop-opacity: 0.85"/>
-          <stop offset="1" style="stop-color: var(--spec); stop-opacity: 0"/>
-        </radialGradient>
-        <linearGradient id="copperRing" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0"    style="stop-color: var(--copper-3)"/>
-          <stop offset="0.3"  style="stop-color: var(--copper-1)"/>
-          <stop offset="0.65" style="stop-color: var(--copper-2)"/>
-          <stop offset="1"    style="stop-color: var(--copper-3)"/>
-        </linearGradient>
-        <linearGradient id="plinthSide" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0"   style="stop-color: var(--color-border)"/>
-          <stop offset="0.4" style="stop-color: var(--color-surface-alt)"/>
-          <stop offset="1"   style="stop-color: var(--color-bg)"/>
-        </linearGradient>
-        <radialGradient id="floorShadow" cx="0.5" cy="0.5" r="0.5">
-          <stop offset="0" style="stop-color: var(--floor-shadow)"/>
-          <stop offset="1" style="stop-color: var(--floor-shadow); stop-opacity: 0"/>
+        <radialGradient id="v5-orb" cx="36%" cy="30%" r="70%">
+          <stop class="stop-hi" offset="0%"/>
+          <stop class="stop-mid" offset="58%"/>
+          <stop class="stop-lo" offset="100%"/>
         </radialGradient>
       </defs>
-
-      <!-- 접지 그림자 -->
-      <ellipse cx="500" cy="880" rx="440" ry="80" fill="url(#floorShadow)"/>
-
-      <!-- 1단 -->
-      <path d="M200 796 V852 A300 70 0 0 0 800 852 V796 Z" fill="url(#plinthSide)"/>
-      <ellipse cx="500" cy="796" rx="300" ry="70" fill="var(--color-surface-alt)"/>
-      <ellipse cx="500" cy="796" rx="290" ry="65" stroke="var(--color-accent)" stroke-width="3" opacity="0.7"/>
-
-      <!-- 2단 -->
-      <path d="M270 744 V796 A230 54 0 0 0 730 796 V744 Z" fill="url(#plinthSide)"/>
-      <ellipse cx="500" cy="744" rx="230" ry="54" fill="var(--color-border)"/>
-
-      <!-- 3단 -->
-      <path d="M340 700 V744 A160 38 0 0 0 660 744 V700 Z" fill="url(#plinthSide)"/>
-      <ellipse cx="500" cy="700" rx="160" ry="38" fill="var(--color-surface-alt)"/>
-      <!-- 구체가 단상 위에 드리우는 접촉 그림자 -->
-      <ellipse cx="500" cy="704" rx="104" ry="22" fill="url(#floorShadow)"/>
-
-      <!-- 궤도 링: 뒤쪽 반(구체에 가림) -->
-      <g transform="rotate(-18 500 440)">
-        <ellipse cx="500" cy="440" rx="300" ry="68" stroke="url(#copperRing)" stroke-width="20"/>
-      </g>
-
-      <!-- 브라스 구체: 수평선 띠 + 좌상단 스펙큘러 -->
-      <circle cx="500" cy="440" r="190" fill="url(#brassSphere)"/>
-      <circle cx="500" cy="440" r="190" fill="url(#sphereSpec)"/>
-
-      <!-- 궤도 링: 앞쪽 반(구체 앞을 가로지름) -->
-      <g transform="rotate(-18 500 440)">
-        <path d="M200 440 A300 68 0 0 0 800 440" stroke="url(#copperRing)" stroke-width="20"/>
-      </g>
+      <!-- 뒤쪽 궤도: 구체 뒤로 숨는다 -->
+      <ellipse class="ring" cx="1540" cy="380" rx="640" ry="170" transform="rotate(-14 1540 380)"/>
+      <circle cx="1540" cy="380" r="300" fill="url(#v5-orb)"/>
+      <!-- 앞쪽 궤도: 구체 앞을 지나간다 -->
+      <path class="ring" d="M2161 225 A640 170 -14 0 1 919 535"/>
+      <!-- 위성 -->
+      <circle cx="1366" cy="588" r="56" fill="url(#v5-orb)"/>
+      <!-- 3단 단상: 구체가 맨 윗단에 놓인다 -->
+      <ellipse class="cut" cx="1540" cy="686" rx="176" ry="14"/>
+      <rect class="pod-top" x="1440" y="680" width="200" height="60"/>
+      <rect class="pod-mid" x="1340" y="740" width="400" height="80"/>
+      <rect class="pod-base" x="1200" y="820" width="680" height="180"/>
     </svg>
 
-    <div class="title-block">
-      <p class="kicker">ORBIT AUDIO · 2027 PRODUCT STRATEGY</p>
-      <div class="rule"></div>
-      <h1 class="t-display cover-title">소리를 설계하는<br>새로운 궤도</h1>
-      <p class="cover-sub">신제품 라인업 · 출시 일정 · 채널별 판매 목표</p>
+    <div class="cover-inner">
+      <div class="cover-main">
+        <span class="tag">LEADER ROAD · 2027</span>
+        <h1 class="t-display cover-title">사람을 키우는<br>3년의 궤도</h1>
+        <p class="cover-sub">직급별 리더 과정 · 멘토링 · 평가 체계 개편</p>
+      </div>
+      <p class="cover-foot">인재개발팀 · 강수연 &nbsp;·&nbsp; 2026. 11. 16</p>
     </div>
-
-    <p class="cover-foot">김하윤 · 제품전략팀 &nbsp;·&nbsp; 2026. 11. 10</p>
-
   </div>
 </body>
 </html>

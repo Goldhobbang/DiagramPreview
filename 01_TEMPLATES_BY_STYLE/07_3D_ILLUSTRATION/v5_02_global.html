@@ -1,4 +1,4 @@
-<!-- @card V5 Brass Orbit · 전역 | 황동 룰 헤더 · 좌 히어로 패널 · 우 구분선 리스트+금속 막대 | 1920x1080 -->
+<!-- @card V5 Brass Orbit · 전역 | 아이브로우 헤더 · 4단계 타임라인 노드와 카드 · 하단 수치+유의사항 · 웜 다크 | 1920x1080 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -431,311 +431,263 @@ th {
 .items-start    { align-items: flex-start; }
 .justify-center { justify-content: center; }
 .justify-between{ justify-content: space-between; }
-.grow           { flex: 1; }/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
+.grow           { flex: 1; }
+/* ===== 베리에이션 토큰 (.v4 / .v5 / .v6) ===== */
 /* ==========================================================================
    07_3D_ILLUSTRATION — 화면의 주인공이 텍스트가 아니라 오브젝트
    기획: 00_GUIDES/PLANS/07_3D_ILLUSTRATION.md
 
-   조명은 덱 전체에서 좌상단 고정. 오브젝트 아래 접지 그림자 필수, 오브젝트 1~3개.
-   V4~V6은 재질이 다르다: V4 종이 공예(레이어 컷) / V5 브러시드 브라스(금속) / V6 스튜디오 도자기.
+   V4 Paper Cut Forest  · 뉴트럴 라이트 · 종이를 오려 겹친 대각선 분할
+   V5 Brass Orbit       · 웜 다크 · 우상단 코너의 브라스 구체와 궤도
+   V6 Ceramic Shelf     · 뉴트럴 다크 · 선반에 올린 도자기 진열
+
+   조명 방향은 덱 전체에서 고정. 오브젝트 아래 접지 그림자를 넣는다.
+   슬라이드당 오브젝트는 1~3개까지.
    ========================================================================== */
 
-/* --- V4~V6 공통 -------------------------------------------------------- */
+/* 3종 공통. 컷 그림자 색만 기본으로 두고, 베리에이션이 덮어쓴다. */
 .v4, .v5, .v6 {
-  --card-border-w: 0px;
-  --spec: #ffffff;
+  --v-cut: rgba(0, 0, 0, 0.16);
 }
 
-/* --- V4 Paper Cut Forest — 종이를 겹겹이 오려 붙인 레이어, 딱딱한 오프셋 그림자 --- */
+/* --- V4 Paper Cut Forest — 종이컷 레이어, 면으로만 겹친다 ------------ */
 .v4 {
-  --color-bg: #e9f2e4;
-  --color-surface: #fbfdf9;
-  --color-surface-alt: #d3e6cb;
-  --color-text: #16301f;
-  --color-text-muted: #4a6a54;
+  --color-bg: #f1f2ee;
+  --color-surface: #ffffff;
+  --color-surface-alt: #e1e6df;
+  --color-text: #1e2a23;
+  --color-text-muted: #55645a;
   --color-text-invert: #ffffff;
-  --color-accent: #1c7c54;
-  --color-accent-sub: #f2b441;
-  --color-border: #bcd7b0;
-  --color-bg-inverse: #124f37;
-  --color-text-on-inverse: #f0f7ec;
-  --color-text-on-inverse-muted: #b9d8c3;
+  --color-accent: #3e7a5e;
+  --color-accent-sub: #a9c7b4;
+  --color-border: #cfd7cd;
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  /* 블러 0 — 종이 두께가 만드는 딱딱한 오프셋 그림자 */
-  --shadow-sm: 0 6px 0 rgba(22, 48, 31, 0.14);
-  --shadow-md: 0 8px 0 rgba(22, 48, 31, 0.18);
-
-  /* 종이 5겹: 뒤(연함) → 앞(진함) */
-  --paper-1: #c6e0bb;
-  --paper-2: #98c9a2;
-  --paper-3: #55a97c;
-  --paper-4: #1c7c54;
-  --paper-5: #124f37;
-  --paper-shadow: rgba(10, 44, 28, 0.30);
-  --sun-1: #f9dc8f;
-  --sun-3: #e39a1c;
-}
-
-/* --- V5 Brass Orbit — 브러시드 브라스, 따뜻한 다크 스튜디오 ------------- */
-.v5 {
-  --color-bg: #1c1713;
-  --color-surface: #2a231d;
-  --color-surface-alt: #3a3128;
-  --color-text: #f6ecdc;
-  --color-text-muted: #bfae95;
-  --color-text-invert: #1c1713;
-  --color-accent: #d9a441;
-  --color-accent-sub: #e2733f;
-  --color-border: #4a3e31;
-
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
   --radius-lg: 16px;
-  --shadow-sm: 0 12px 24px rgba(0, 0, 0, 0.45);
-  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.50);
+  --card-border-w: 0px;
+  /* 블러 없는 단단한 오프셋 그림자 = 종이를 한 겹 덧댄 느낌 */
+  --shadow-sm: 8px 8px 0 rgba(30, 42, 35, 0.12);
+  --shadow-md: 12px 12px 0 rgba(30, 42, 35, 0.12);
 
-  /* 금속 5단: 하이라이트 → 심부. 이 띠의 배치가 금속감을 만든다 */
-  --metal-1: #fff0c4;
-  --metal-2: #e8bd5c;
-  --metal-3: #b07a25;
-  --metal-4: #6a4513;
-  --metal-5: #3a2509;
-  --copper-1: #ffb48a;
-  --copper-2: #e2733f;
-  --copper-3: #8f3a14;
-  --glow: rgba(217, 164, 65, 0.22);
-  --floor-shadow: rgba(0, 0, 0, 0.55);
+  --v-cut: rgba(30, 42, 35, 0.16);
+  --v-paper-1: #dce5db;
+  --v-paper-2: #b9cfbf;
+  --v-paper-3: #7fa78d;
+  --v-paper-4: #3e7a5e;
+  --v-sun: #ffffff;
 }
 
-/* --- V6 Studio Porcelain — 무채색 도자기, 단 하나의 주홍 포인트 -------- */
+/* --- V5 Brass Orbit — 황동 광택 구체, 따뜻한 어둠 ----------------------- */
+.v5 {
+  --color-bg: #2a211b;
+  --color-surface: #352a22;
+  --color-surface-alt: #47392f;
+  --color-text: #f6eee4;
+  --color-text-muted: #c7b5a2;
+  --color-text-invert: #2a211b;
+  --color-accent: #d9a25e;
+  --color-accent-sub: #f6dcae;
+  --color-border: #5a4a3e;
+
+  --radius-sm: 12px;
+  --radius-md: 24px;
+  --radius-lg: 32px;
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 16px 40px rgba(0, 0, 0, 0.36);
+
+  --v-cut: rgba(0, 0, 0, 0.32);
+  --v-brass-hi: #f6dcae;
+  --v-brass-mid: #d9a25e;
+  --v-brass-lo: #8e5f2f;
+  --v-ring: #c98f4a;
+  --v-podium-top: #5a4536;
+  --v-podium-mid: #47372b;
+  --v-podium-base: #3a2c23;
+}
+
+/* --- V6 Ceramic Shelf — 무광 도자기, 중성 다크 ------------------------- */
 .v6 {
-  --color-bg: #e4e4e1;
-  --color-surface: #f7f7f5;
-  --color-surface-alt: #cfcfcb;
-  --color-text: #1f1f1d;
-  --color-text-muted: #5c5c58;
-  --color-text-invert: #ffffff;
-  --color-accent: #e0432b;
-  --color-accent-sub: #8e8e88;
-  --color-border: #c4c4bf;
+  --color-bg: #1e2022;
+  --color-surface: #2a2d31;
+  --color-surface-alt: #373b41;
+  --color-text: #f2f1ee;
+  --color-text-muted: #b5b8bd;
+  --color-text-invert: #1e2022;
+  --color-accent: #f4a3b8;
+  --color-accent-sub: #ece6dc;
+  --color-border: #3d4147;
 
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --shadow-sm: 0 12px 24px rgba(31, 31, 29, 0.12);
-  --shadow-md: 0 20px 40px rgba(31, 31, 29, 0.16);
+  --card-border-w: 0px;
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.30);
+  --shadow-md: 0 16px 32px rgba(0, 0, 0, 0.36);
 
-  /* 도자기 5단 + 주홍 3단 */
-  --por-1: #ffffff;
-  --por-2: #f0f0ec;
-  --por-3: #d9d9d4;
-  --por-4: #b4b4ad;
-  --por-5: #8e8e88;
-  --red-1: #ff8d78;
-  --red-2: #e0432b;
-  --red-3: #9c2616;
-  --cast-shadow: rgba(31, 31, 29, 0.16);
+  --v-cut: rgba(0, 0, 0, 0.36);
+  --v-porcelain: #f3f0ea;
+  --v-porcelain-shade: #c9c3b7;
+  --v-rose: #f4a3b8;
+  --v-rose-shade: #c97a92;
+  --v-rose-hi: #ffd3df;
+  --v-niche: #26292d;
+  --v-shelf: #3a3f46;
+  --v-shelf-front: #2c3036;
 }
   </style>
   <style>
-    .glow {
-      position: absolute;
-      left: -200px;
-      top: 120px;
-      width: 1200px;
-      height: 1200px;
-      background: radial-gradient(circle, var(--glow) 0%, transparent 60%);
-    }
-
-    .page-inner { gap: var(--sp-6); }
-    .page-head {
+    .page { gap: var(--sp-6); }
+    .page-head { display: flex; align-items: center; justify-content: space-between; }
+    .eyebrow {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding-bottom: var(--sp-4);
-      border-bottom: 2px solid var(--color-accent);
+      gap: var(--sp-3);
+      font-size: var(--fs-body-m);
+      font-weight: var(--fw-semibold);
+      color: var(--color-accent);
     }
-    .head-text { display: flex; flex-direction: column; gap: var(--sp-2); }
-    .kicker {
+    .orb-dot {
+      flex: none;
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background: radial-gradient(circle at 36% 30%, var(--v-brass-hi), var(--v-brass-mid) 58%, var(--v-brass-lo));
+    }
+    .page-no { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .page-title { font-weight: var(--fw-bold); color: var(--color-text); }
+
+    /* 타임라인: 노드 4개는 카드 4장의 중심선 위에 맞춘다 (카드 408 + 간격 32) */
+    .timeline { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .rail { display: block; }
+    .rail-line { stroke: var(--v-ring); stroke-width: 4; }
+    .stop-hi { stop-color: var(--v-brass-hi); }
+    .stop-mid { stop-color: var(--v-brass-mid); }
+    .stop-lo { stop-color: var(--v-brass-lo); }
+    .stages { display: flex; gap: var(--sp-5); }
+    .stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+      padding: var(--sp-4);
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+    }
+    .stage-q {
       font-size: var(--fs-caption);
       font-weight: var(--fw-bold);
       letter-spacing: var(--ls-wide);
       color: var(--color-accent);
     }
-    /* 페이지 숫자: 황동 코인 */
-    .page-coin {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(160deg, var(--metal-1) 0%, var(--metal-2) 40%, var(--metal-3) 100%);
-      color: var(--color-text-invert);
-      font-size: var(--fs-body-m);
-      font-weight: var(--fw-bold);
-    }
+    .stage-title { font-weight: var(--fw-semibold); color: var(--color-text); }
+    .stage-desc { font-size: var(--fs-body-m); color: var(--color-text-muted); word-break: keep-all; }
 
-    .page-body { display: flex; gap: var(--sp-7); flex: 1; }
-
-    .hero-panel {
-      width: 640px;
+    /* 하단: 수료 기준 수치 + 유의사항 */
+    .page-foot { display: flex; gap: var(--sp-5); align-items: stretch; margin-top: auto; }
+    .kpi {
       flex: none;
+      width: 560px;
       display: flex;
       flex-direction: column;
-      align-items: center;
       gap: var(--sp-2);
-      padding: var(--sp-5) var(--sp-6) var(--sp-6);
-      border-radius: var(--radius-md);
-      background: var(--color-surface);
-      box-shadow: var(--shadow-md);
+      padding: var(--sp-5) var(--sp-6);
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-lg);
     }
-    .hero-label { font-size: var(--fs-body-m); color: var(--color-text-muted); }
-    .hero-figure { font-size: var(--fs-display); font-weight: var(--fw-bold); color: var(--color-accent); line-height: var(--lh-tight); }
-    .hero-desc { font-size: var(--fs-body-m); color: var(--color-text); }
-
-    .lineup { flex: 1; display: flex; flex-direction: column; }
-    .lineup-head {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-5);
-      padding-bottom: var(--sp-3);
-      font-size: var(--fs-body-m);
+    .kpi-label { font-size: var(--fs-body-m); color: var(--color-text-muted); }
+    .kpi-value {
+      font-size: var(--fs-h1);
+      font-weight: var(--fw-bold);
+      line-height: var(--lh-tight);
+      color: var(--color-accent);
+    }
+    .kpi-sub { font-size: var(--fs-body-m); color: var(--color-text); }
+    .notes { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--sp-3); }
+    .note {
+      word-break: keep-all;
+      position: relative;
+      padding-left: var(--sp-5);
+      font-size: var(--fs-body-l);
       color: var(--color-text-muted);
     }
-    .lineup-row {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: var(--sp-5);
-      border-top: 1px solid var(--color-border);
+    .note::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 16px;
+      height: 16px;
+      border-radius: var(--radius-full);
+      background: radial-gradient(circle at 36% 30%, var(--v-brass-hi), var(--v-brass-mid) 58%, var(--v-brass-lo));
     }
-    .col-model { flex: 1; }
-    .col-date { width: 160px; flex: none; }
-    .col-goal { width: 320px; flex: none; }
-    .model-name { font-size: var(--fs-h3); font-weight: var(--fw-bold); }
-    .model-use { font-size: var(--fs-body-m); color: var(--color-text-muted); }
-    .date-val { font-size: var(--fs-body-m); }
-    .goal-val { font-size: var(--fs-body-m); font-weight: var(--fw-semibold); }
-    .goal-track { height: 16px; margin-top: var(--sp-2); border-radius: var(--radius-sm); background: var(--color-surface-alt); }
-    .goal-fill { height: 16px; border-radius: var(--radius-sm); background: linear-gradient(180deg, var(--metal-1) 0%, var(--metal-2) 45%, var(--metal-3) 100%); }
   </style>
 </head>
 <body>
   <div class="slide v5">
-
-    <div class="glow"></div>
-
-    <div class="slide-inner page-inner">
+    <div class="slide-inner page">
       <div class="page-head">
-        <div class="head-text">
-          <p class="kicker">PRODUCT LINEUP</p>
-          <h2 class="t-h1">2027 오르빗 라인업 3종</h2>
+        <div class="eyebrow">
+          <span class="orb-dot"></span>
+          <span>02 · 과정 구조</span>
         </div>
-        <div class="page-coin t-nums">04</div>
+        <span class="page-no t-nums">04 / 12</span>
+      </div>
+      <h2 class="t-h2 page-title">직급별 과정은 4분기에 걸쳐 한 단계씩 올라간다</h2>
+
+      <div class="timeline">
+        <svg class="rail" width="1728" height="120" viewBox="0 0 1728 120" aria-hidden="true">
+          <defs>
+            <radialGradient id="v5-node" cx="36%" cy="30%" r="70%">
+              <stop class="stop-hi" offset="0%"/>
+              <stop class="stop-mid" offset="58%"/>
+              <stop class="stop-lo" offset="100%"/>
+            </radialGradient>
+          </defs>
+          <line class="rail-line" x1="204" y1="60" x2="1524" y2="60"/>
+          <circle cx="204" cy="60" r="32" fill="url(#v5-node)"/>
+          <circle cx="644" cy="60" r="32" fill="url(#v5-node)"/>
+          <circle cx="1084" cy="60" r="32" fill="url(#v5-node)"/>
+          <circle cx="1524" cy="60" r="32" fill="url(#v5-node)"/>
+        </svg>
+        <div class="stages">
+          <div class="stage">
+            <span class="stage-q">1분기 · 1~3월</span>
+            <h3 class="t-h3 stage-title">신임 팀장</h3>
+            <p class="stage-desc">현장 코칭 주 1회, 팀 운영 실습 과제 2건</p>
+          </div>
+          <div class="stage">
+            <span class="stage-q">2분기 · 4~6월</span>
+            <h3 class="t-h3 stage-title">중간 관리자</h3>
+            <p class="stage-desc">부서 간 협업 프로젝트 리드, 성과 면담 교육</p>
+          </div>
+          <div class="stage">
+            <span class="stage-q">3분기 · 7~9월</span>
+            <h3 class="t-h3 stage-title">임원 후보</h3>
+            <p class="stage-desc">사업 손익 분석, 외부 멘토 1:1 매칭</p>
+          </div>
+          <div class="stage">
+            <span class="stage-q">4분기 · 10~12월</span>
+            <h3 class="t-h3 stage-title">역량 심사</h3>
+            <p class="stage-desc">역량 평가 발표, 다음 해 직급 후보 확정</p>
+          </div>
+        </div>
       </div>
 
-      <div class="page-body">
-        <div class="hero-panel">
-          <!-- 표지 구체의 축소판(지름 40% 이하) — 같은 광원, 같은 접지 그림자 -->
-          <svg width="520" height="340" viewBox="0 0 520 340" fill="none">
-            <defs>
-              <linearGradient id="miniSphere" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0"    style="stop-color: var(--metal-1)"/>
-                <stop offset="0.34" style="stop-color: var(--metal-2)"/>
-                <stop offset="0.50" style="stop-color: var(--metal-4)"/>
-                <stop offset="0.52" style="stop-color: var(--metal-5)"/>
-                <stop offset="0.74" style="stop-color: var(--metal-3)"/>
-                <stop offset="1"    style="stop-color: var(--metal-2)"/>
-              </linearGradient>
-              <radialGradient id="miniSpec" cx="0.3" cy="0.22" r="0.4">
-                <stop offset="0" style="stop-color: var(--spec); stop-opacity: 0.85"/>
-                <stop offset="1" style="stop-color: var(--spec); stop-opacity: 0"/>
-              </radialGradient>
-              <linearGradient id="miniRing" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0"    style="stop-color: var(--copper-3)"/>
-                <stop offset="0.3"  style="stop-color: var(--copper-1)"/>
-                <stop offset="0.65" style="stop-color: var(--copper-2)"/>
-                <stop offset="1"    style="stop-color: var(--copper-3)"/>
-              </linearGradient>
-              <linearGradient id="miniSide" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0"   style="stop-color: var(--color-border)"/>
-                <stop offset="0.4" style="stop-color: var(--color-surface-alt)"/>
-                <stop offset="1"   style="stop-color: var(--color-bg)"/>
-              </linearGradient>
-              <radialGradient id="miniShadow" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0" style="stop-color: var(--floor-shadow)"/>
-                <stop offset="1" style="stop-color: var(--floor-shadow); stop-opacity: 0"/>
-              </radialGradient>
-            </defs>
-
-            <ellipse cx="260" cy="304" rx="220" ry="32" fill="url(#miniShadow)"/>
-            <path d="M120 270 V300 A140 30 0 0 0 400 300 V270 Z" fill="url(#miniSide)"/>
-            <ellipse cx="260" cy="270" rx="140" ry="30" fill="var(--color-border)"/>
-            <path d="M170 246 V270 A90 20 0 0 0 350 270 V246 Z" fill="url(#miniSide)"/>
-            <ellipse cx="260" cy="246" rx="90" ry="20" fill="var(--color-surface-alt)"/>
-            <ellipse cx="260" cy="248" rx="56" ry="12" fill="url(#miniShadow)"/>
-
-            <g transform="rotate(-18 260 140)">
-              <ellipse cx="260" cy="140" rx="132" ry="30" stroke="url(#miniRing)" stroke-width="10"/>
-            </g>
-            <circle cx="260" cy="140" r="84" fill="url(#miniSphere)"/>
-            <circle cx="260" cy="140" r="84" fill="url(#miniSpec)"/>
-            <g transform="rotate(-18 260 140)">
-              <path d="M128 140 A132 30 0 0 0 392 140" stroke="url(#miniRing)" stroke-width="10"/>
-            </g>
-          </svg>
-          <p class="hero-label">2027년 출하 목표</p>
-          <p class="hero-figure t-nums">12.0만 대</p>
-          <p class="hero-desc">3개 라인업 합산 · 전년 대비 +46%</p>
+      <div class="page-foot">
+        <div class="kpi">
+          <span class="kpi-label">수료 기준 · 3년 누적 이수율</span>
+          <span class="kpi-value t-nums">92%</span>
+          <span class="kpi-sub">현재 84% · 2027년 말까지 달성</span>
         </div>
-
-        <div class="lineup">
-          <div class="lineup-head">
-            <span class="col-model">모델</span>
-            <span class="col-date">출시</span>
-            <span class="col-goal">목표 수량</span>
-          </div>
-          <div class="lineup-row">
-            <div class="col-model">
-              <p class="model-name">오르빗 원</p>
-              <p class="model-use">무선 스피커 · 거실·서재용</p>
-            </div>
-            <p class="col-date date-val t-nums">2027. 03</p>
-            <div class="col-goal">
-              <p class="goal-val t-nums">4.8만 대</p>
-              <div class="goal-track"><div class="goal-fill" style="width: 40%"></div></div>
-            </div>
-          </div>
-          <div class="lineup-row">
-            <div class="col-model">
-              <p class="model-name">오르빗 링</p>
-              <p class="model-use">오버이어 헤드폰 · 노이즈 캔슬링</p>
-            </div>
-            <p class="col-date date-val t-nums">2027. 06</p>
-            <div class="col-goal">
-              <p class="goal-val t-nums">4.2만 대</p>
-              <div class="goal-track"><div class="goal-fill" style="width: 35%"></div></div>
-            </div>
-          </div>
-          <div class="lineup-row">
-            <div class="col-model">
-              <p class="model-name">오르빗 팟</p>
-              <p class="model-use">무선 이어버드 · 운동용</p>
-            </div>
-            <p class="col-date date-val t-nums">2027. 09</p>
-            <div class="col-goal">
-              <p class="goal-val t-nums">3.0만 대</p>
-              <div class="goal-track"><div class="goal-fill" style="width: 25%"></div></div>
-            </div>
-          </div>
-        </div>
+        <ul class="notes">
+          <li class="note">4분기 심사를 통과한 사람만 다음 해 직급 후보에 오른다</li>
+          <li class="note">멘토링 기록은 인재개발 시스템에 월 1회 입력한다</li>
+          <li class="note">기준 변경은 2027년 1월 인사위원회에서 확정한다</li>
+        </ul>
       </div>
     </div>
-
   </div>
 </body>
 </html>

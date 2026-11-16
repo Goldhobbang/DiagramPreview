@@ -542,6 +542,10 @@ th {
       padding: var(--slide-pad) var(--slide-pad) 0;
     }
     .head-left { display: flex; align-items: center; gap: var(--sp-5); }
+    .grain { position: absolute; left: 0; top: 0; width: 1920px; height: 200px; }
+    .head-left, .page-no { position: relative; }
+    .grain-hi { stroke: var(--v-wood-hi); stroke-width: 2px; fill: none; }
+    .grain-lo { stroke: var(--v-wood-lo); stroke-width: 3px; fill: none; }
     .head-no {
       width: 96px;
       height: 96px;
@@ -869,6 +873,13 @@ th {
 </svg>
 
     <header class="head">
+      <svg class="grain" viewBox="0 0 1920 200" aria-hidden="true">
+<path class="grain-hi" d="M0,24 C480,14 960,34 1920,24"/>
+<path class="grain-lo" d="M0,60 C480,50 960,70 1920,60"/>
+<path class="grain-hi" d="M0,96 C480,86 960,106 1920,96"/>
+<path class="grain-lo" d="M0,132 C480,122 960,142 1920,132"/>
+<path class="grain-hi" d="M0,172 C480,162 960,182 1920,172"/>
+</svg>
       <div class="head-left">
         <p class="head-no t-nums">03</p>
         <h2 class="head-title">지점 대항전 현황</h2>
