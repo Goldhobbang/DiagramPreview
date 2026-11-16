@@ -28,7 +28,8 @@ let tokens = null;          // 01_variables.css에서 런타임에 추출
 let activeSection = 'ALL';
 let activeStyle = 'ALL';    // 슬라이드 템플릿 섹션 전용 — 스타일(그룹) 필터
 let thumbW = 380;
-const LIST_MAX = 190;       // 이 폭 이하("작게")면 목록 보기
+// 썸네일 크기 버튼 → 행당 카드 수. 작게 6 · 중간 3 · 크게 1.
+const COLS_BY_SIZE = { 190: 6, 260: 3, 380: 1 };
 const styleTokenCache = new Map();   // 파일 경로 → 병합된 토큰 목록
 
 init();
@@ -164,6 +165,7 @@ function onSizeClick(e) {
   if (!btn) return;
   thumbW = +btn.dataset.size;
   document.documentElement.style.setProperty('--card-w', `${thumbW}px`);
+  document.documentElement.style.setProperty('--cols', COLS_BY_SIZE[thumbW] || 1);
   for (const b of $sizer.querySelectorAll('button')) {
     b.setAttribute('aria-pressed', String(b.dataset.size === btn.dataset.size));
   }
@@ -201,9 +203,8 @@ function render() {
         ? pairByVariant(g.items).map(pairCard)
         : g.items.map(i => card(i, section.kind, section.id));
       // 이미지(media)만 고정 폭. HTML 미리보기는 넓은 트랙에서 늘려야 읽힌다.
-      const track = isSlides ? ' grid-pair' : section.kind === 'image' ? '' : ' grid-wide';
       // "작게"는 카드 격자가 아니라 한 줄짜리 목록으로 보여준다.
-      html.push(`<div class="grid${thumbW <= LIST_MAX ? ' grid-list' : track}">${cards.join('')}</div>`);
+      html.push(`<div class="grid">${cards.join('')}</div>`);
     }
   }
 
