@@ -984,3 +984,20 @@ main {
   flex-direction: column;
   gap: 8px;
 }
+
+/* --- 작게 · 슬라이드: 사진 두 장을 세로로, 텍스트는 상세에서 ------------ */
+.grid-compact .card-pair .card-body,
+.grid-compact .card-pair .card-actions { display: none; }
+
+.grid-compact .card-pair .pair-thumbs {
+  grid-template-columns: 1fr;
+  gap: 4px;
+  background: transparent;
+  border-bottom: none;
+}
+
+.grid-compact .card-pair .pair-thumbs figcaption { display: none; }
+
+.grid-compact .card-pair .pair-thumbs .shot .thumb {
+  border-bottom: 1px solid var(--line);
+}

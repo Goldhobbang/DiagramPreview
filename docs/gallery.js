@@ -204,7 +204,9 @@ function render() {
         : g.items.map(i => card(i, section.kind, section.id));
       // 이미지(media)만 고정 폭. HTML 미리보기는 넓은 트랙에서 늘려야 읽힌다.
       // "작게"는 카드 격자가 아니라 한 줄짜리 목록으로 보여준다.
-      html.push(`<div class="grid">${cards.join('')}</div>`);
+      // 작게 + 슬라이드: 사진 두 장만 세로로 쌓고, 텍스트는 카드를 눌러 상세에서 본다.
+      const compact = isSlides && thumbW <= 190;
+      html.push(`<div class="grid${compact ? ' grid-compact' : ''}">${cards.join('')}</div>`);
     }
   }
 
